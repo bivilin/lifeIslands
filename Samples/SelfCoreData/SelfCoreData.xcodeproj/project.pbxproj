@@ -93,7 +93,8 @@
 				B3E625C224509E990033A821 /* DAO */,
 				B3E625CF2450A2230033A821 /* SelfCoreData.xcdatamodeld */,
 			);
-			path = Persistence;
+			name = Persistence;
+			path = ../../LifeTree/LifeTree/Persistence;
 			sourceTree = "<group>";
 		};
 		B3E625C224509E990033A821 /* DAO */ = {
@@ -111,7 +112,8 @@
 				B3E625C524509ECE0033A821 /* CoreDataManager.swift */,
 				B3E625C424509ECE0033A821 /* QueueManager.swift */,
 			);
-			path = Mechanisms;
+			name = Mechanisms;
+			path = ../../LifeTree/LifeTree/Mechanisms;
 			sourceTree = "<group>";
 		};
 		B3E625CA24509EE90033A821 /* Model */ = {
@@ -120,7 +122,8 @@
 				B3E625C824509EE40033A821 /* SelfIsland.swift */,
 				B3E625D42450A30C0033A821 /* Errors.swift */,
 			);
-			path = Model;
+			name = Model;
+			path = ../../LifeTree/LifeTree/Model;
 			sourceTree = "<group>";
 		};
 		B3E625CB24509F0D0033A821 /* Business */ = {
@@ -128,7 +131,8 @@
 			children = (
 				B3E625BC24509E650033A821 /* SelfIslandServices.swift */,
 			);
-			path = Business;
+			name = Business;
+			path = ../../LifeTree/LifeTree/Business;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

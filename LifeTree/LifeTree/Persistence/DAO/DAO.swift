@@ -1,9 +1,9 @@
 //
 //  DAO.swift
-//  ManasPelasManas
+//  LifeTree
 //
-//  Created by Luma Gabino Vasconcelos on 27/08/19.
-//  Copyright © 2019 Luma Gabino Vasconcelos. All rights reserved.
+//  Created by Beatriz Viseu Linhares on 23/04/20.
+//  Copyright © 2020 Beatriz Viseu Linhares. All rights reserved.
 //
 
 import UIKit

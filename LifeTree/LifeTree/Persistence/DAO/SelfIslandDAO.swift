@@ -1,9 +1,9 @@
 //
-//  UserDAO.swift
-//  ManasPelasManas
+//  SelfIslandDAO.swift
+//  LifeTree
 //
-//  Created by Luma Gabino Vasconcelos on 27/08/19.
-//  Copyright © 2019 Luma Gabino Vasconcelos. All rights reserved.
+//  Created by Beatriz Viseu Linhares on 23/04/20.
+//  Copyright © 2020 Beatriz Viseu Linhares. All rights reserved.
 //
 
 import UIKit
@@ -11,9 +11,9 @@ import CoreData
 
 class SelfIslandDAO: DAO {
     
-    /// Method responsible for saving a project into database
+    /// Method responsible for saving an island into database
     /// - parameters:
-    ///     - objectToBeSaved: project to be saved on database
+    ///     - objectToBeSaved: island to be saved on database
     /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
     static func create(_ objectToBeSaved: SelfIsland) throws {
         do {
@@ -28,9 +28,9 @@ class SelfIslandDAO: DAO {
         }
     }
     
-    /// Method responsible for updating a project into database
+    /// Method responsible for updating an island into database
     /// - parameters:
-    ///     - objectToBeUpdated: project to be updated on database
+    ///     - objectToBeUpdated: island to be updated on database
     /// - throws: if an error occurs during updating an object into database (Errors.DatabaseFailure)
     static func update(_ objectToBeUpdated: SelfIsland) throws {
         do {
@@ -42,9 +42,9 @@ class SelfIslandDAO: DAO {
         }
     }
     
-    /// Method responsible for deleting a project from database
+    /// Method responsible for deleting an island from database
     /// - parameters:
-    ///     - objectToBeSaved: project to be saved on database
+    ///     - objectToBeSaved: island to be saved on database
     /// - throws: if an error occurs during deleting an object into database (Errors.DatabaseFailure)
     static func delete(_ objectToBeDeleted: SelfIsland) throws {
         do {
@@ -59,11 +59,11 @@ class SelfIslandDAO: DAO {
         }
     }
 
-    /// Method responsible for retrieving all projects from database
-    /// - returns: a list of projects from database
+    /// Method responsible for retrieving all islands from database
+    /// - returns: a list of islands from database
     /// - throws: if an error occurs during getting an object from database (Errors.DatabaseFailure)
     static func findAll() throws -> [SelfIsland] {
-        // list of projects to be returned
+        // list of islands to be returned
         var selfIslandList:[SelfIsland]
 
         do {

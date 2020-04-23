@@ -1,9 +1,9 @@
 //
-//  UserServices.swift
-//  ManasPelasManas
+//  SelfIslandServices.swift
+//  LifeTree
 //
-//  Created by Luma Gabino Vasconcelos on 27/08/19.
-//  Copyright © 2019 Luma Gabino Vasconcelos. All rights reserved.
+//  Created by Beatriz Viseu Linhares on 23/04/20.
+//  Copyright © 2020 Beatriz Viseu Linhares. All rights reserved.
 //
 
 import UIKit
@@ -11,9 +11,9 @@ import CoreData
 
 class SelfIslandServices {
     
-    /// Function responsible for creating a project
+    /// Function responsible for creating an island
     /// - parameters:
-    ///     - project: Project to be saved
+    ///     - island: Island to be saved
     ///     - completion: closure to be executed at the end of this method
     /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
     static func createSelfIsland(island: SelfIsland, _ completion: ((_ error: Error?) -> Void)?) {
@@ -43,9 +43,9 @@ class SelfIslandServices {
         QueueManager.sharedInstance.executeBlock(blockForExecutionInBackground, queueType: QueueManager.QueueType.serial)
     }
     
-    /// Function responsible for updating a project
+    /// Function responsible for updating an island
     /// - parameters:
-    ///     - project: Project to be updated
+    ///     - island: Island to be updated
     ///     - completion: closure to be executed at the end of this method
     /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
     static func updateSelfIsland(island: SelfIsland, _ completion: ((_ error: Error?) -> Void)?) {
@@ -75,9 +75,9 @@ class SelfIslandServices {
         QueueManager.sharedInstance.executeBlock(blockForExecutionInBackground, queueType: QueueManager.QueueType.serial)
     }
     
-    /// Function responsible for deleting a project
+    /// Function responsible for deleting an island
     /// - parameters:
-    ///     - project: Project to be deleted
+    ///     - island: Island to be deleted
     ///     - completion: closure to be executed at the end of this method
     /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
     static func deleteSelfIsland(island: SelfIsland, _ completion: ((_ error: Error?) -> Void)?) {
@@ -107,7 +107,7 @@ class SelfIslandServices {
         QueueManager.sharedInstance.executeBlock(blockForExecutionInBackground, queueType: QueueManager.QueueType.serial)
     }
 
-    /// Function responsible for getting all projects
+    /// Function responsible for getting all islands
     /// - parameters:
     ///     - completion: closure to be executed at the end of this method
     /// - throws: if an error occurs during getting an object from database (Errors.DatabaseFailure)
