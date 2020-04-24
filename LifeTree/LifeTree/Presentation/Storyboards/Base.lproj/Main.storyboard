@@ -14,9 +14,23 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F7G-h3-gpg">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </sceneKitView>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="F7G-h3-gpg" secondAttribute="bottom" id="IVa-cQ-uPJ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="F7G-h3-gpg" secondAttribute="trailing" id="Rhd-rq-UBm"/>
+                            <constraint firstItem="F7G-h3-gpg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YNH-1t-aWU"/>
+                            <constraint firstItem="F7G-h3-gpg" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="yg4-04-pmL"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="islandsSCNView" destination="F7G-h3-gpg" id="4FI-ie-pls"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
