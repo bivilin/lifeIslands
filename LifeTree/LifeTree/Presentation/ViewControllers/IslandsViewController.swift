@@ -19,16 +19,21 @@ class IslandsViewController: UIViewController {
         // Create the SCNScene
         let islandsScene = SCNScene(named: "AllIslandsScene.scn")!
         
+        setUpCameraControl(sceneView: self.islandsSCNView)
+        
 //        let selfIslandNode = islandsScene.rootNode.childNode(withName: "selfIslands", recursively: true)
 //        let cameraNode = islandsScene.rootNode.childNode(withName: "camera", recursively: true)
         
         // Set the scene to the view
         self.islandsSCNView.scene = islandsScene
 
-        // Allows the user to manipulate the camera
-        self.islandsSCNView.allowsCameraControl = true
-        
         // Configure the view
         self.islandsSCNView.backgroundColor = UIColor.black
+    }
+    
+    func setUpCameraControl(sceneView: SCNView) {
+        // Allows the user to manipulate the camera
+        sceneView.allowsCameraControl = true
+        sceneView.cameraControlConfiguration.rotationSensitivity = 0
     }
 }
