@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SelfIslandServices {
+class SelfIslandDataServices {
     
     /// Function responsible for creating an island
     /// - parameters:
