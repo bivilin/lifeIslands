@@ -7,16 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D687B2024528D2C00F83BB7 /* AllIslandsScene.scn in Resources */ = {isa = PBXBuildFile; fileRef = 8D687B1F24528D2C00F83BB7 /* AllIslandsScene.scn */; };
+		8D687B2224528D6D00F83BB7 /* IslandSpriteScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D687B2124528D6D00F83BB7 /* IslandSpriteScene.sks */; };
+		8D687B2524528E5500F83BB7 /* IslandsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2424528E5500F83BB7 /* IslandsViewController.swift */; };
+		8D687B2724528EEF00F83BB7 /* CreateActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2624528EEF00F83BB7 /* CreateActionViewController.swift */; };
+		8D687B2924528F6B00F83BB7 /* CreatePeriferalIslandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2824528F6B00F83BB7 /* CreatePeriferalIslandViewController.swift */; };
+		8D687B2B24528FDD00F83BB7 /* EditPeriferalIslandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2A24528FDD00F83BB7 /* EditPeriferalIslandViewController.swift */; };
+		8D687B2D2452902900F83BB7 /* EditActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2C2452902900F83BB7 /* EditActionViewController.swift */; };
+		8D687B2F2452908700F83BB7 /* EditSelfIslandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2E2452908700F83BB7 /* EditSelfIslandViewController.swift */; };
+		8D687B322452912A00F83BB7 /* LifeAreaCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B312452912A00F83BB7 /* LifeAreaCategory.swift */; };
+		8D687B342452927200F83BB7 /* UpdateIslandsHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B332452927200F83BB7 /* UpdateIslandsHealth.swift */; };
+		8D687B362452940000F83BB7 /* WateringTreeMechanics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B352452940000F83BB7 /* WateringTreeMechanics.swift */; };
+		8D687B382452944900F83BB7 /* PeriferalIsland.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B372452944900F83BB7 /* PeriferalIsland.swift */; };
+		8D687B3A2452949400F83BB7 /* Mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B392452949400F83BB7 /* Mood.swift */; };
+		8D687B3C245294BE00F83BB7 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B3B245294BE00F83BB7 /* Action.swift */; };
 		B30434EA2451EE7E007D6F3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30434E92451EE7E007D6F3C /* AppDelegate.swift */; };
 		B30434EC2451EE7E007D6F3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30434EB2451EE7E007D6F3C /* SceneDelegate.swift */; };
-		B30434EE2451EE7E007D6F3C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30434ED2451EE7E007D6F3C /* ViewController.swift */; };
+		B30434EE2451EE7E007D6F3C /* SelectActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30434ED2451EE7E007D6F3C /* SelectActionsViewController.swift */; };
 		B30434F12451EE7E007D6F3C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B30434EF2451EE7E007D6F3C /* Main.storyboard */; };
 		B30434F62451EE81007D6F3C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B30434F52451EE81007D6F3C /* Assets.xcassets */; };
 		B30434F92451EE81007D6F3C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B30434F72451EE81007D6F3C /* LaunchScreen.storyboard */; };
 		B30435162451EF6F007D6F3C /* LifeTree.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = B304350C2451EEBB007D6F3C /* LifeTree.xcdatamodeld */; };
 		B304351A2451F07F007D6F3C /* SelfIsland.swift in Sources */ = {isa = PBXBuildFile; fileRef = B304350E2451EEBB007D6F3C /* SelfIsland.swift */; };
 		B304351B2451F082007D6F3C /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B304350F2451EEBB007D6F3C /* Errors.swift */; };
-		B304351C2451F084007D6F3C /* SelfIslandServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435142451EEBC007D6F3C /* SelfIslandServices.swift */; };
+		B304351C2451F084007D6F3C /* SelfIslandDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435142451EEBC007D6F3C /* SelfIslandDataServices.swift */; };
 		B304351D2451F086007D6F3C /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435112451EEBC007D6F3C /* CoreDataManager.swift */; };
 		B304351E2451F088007D6F3C /* QueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435122451EEBC007D6F3C /* QueueManager.swift */; };
 		B304351F2451F091007D6F3C /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435082451EEBB007D6F3C /* DAO.swift */; };
@@ -24,10 +38,24 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D687B1F24528D2C00F83BB7 /* AllIslandsScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = AllIslandsScene.scn; sourceTree = "<group>"; };
+		8D687B2124528D6D00F83BB7 /* IslandSpriteScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IslandSpriteScene.sks; sourceTree = "<group>"; };
+		8D687B2424528E5500F83BB7 /* IslandsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandsViewController.swift; sourceTree = "<group>"; };
+		8D687B2624528EEF00F83BB7 /* CreateActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateActionViewController.swift; sourceTree = "<group>"; };
+		8D687B2824528F6B00F83BB7 /* CreatePeriferalIslandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePeriferalIslandViewController.swift; sourceTree = "<group>"; };
+		8D687B2A24528FDD00F83BB7 /* EditPeriferalIslandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPeriferalIslandViewController.swift; sourceTree = "<group>"; };
+		8D687B2C2452902900F83BB7 /* EditActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditActionViewController.swift; sourceTree = "<group>"; };
+		8D687B2E2452908700F83BB7 /* EditSelfIslandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditSelfIslandViewController.swift; sourceTree = "<group>"; };
+		8D687B312452912A00F83BB7 /* LifeAreaCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeAreaCategory.swift; sourceTree = "<group>"; };
+		8D687B332452927200F83BB7 /* UpdateIslandsHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateIslandsHealth.swift; sourceTree = "<group>"; };
+		8D687B352452940000F83BB7 /* WateringTreeMechanics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WateringTreeMechanics.swift; sourceTree = "<group>"; };
+		8D687B372452944900F83BB7 /* PeriferalIsland.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriferalIsland.swift; sourceTree = "<group>"; };
+		8D687B392452949400F83BB7 /* Mood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mood.swift; sourceTree = "<group>"; };
+		8D687B3B245294BE00F83BB7 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
 		B30434E62451EE7E007D6F3C /* LifeTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30434E92451EE7E007D6F3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B30434EB2451EE7E007D6F3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		B30434ED2451EE7E007D6F3C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		B30434ED2451EE7E007D6F3C /* SelectActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectActionsViewController.swift; sourceTree = "<group>"; };
 		B30434F02451EE7E007D6F3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B30434F52451EE81007D6F3C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B30434F82451EE81007D6F3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -39,7 +67,7 @@
 		B304350F2451EEBB007D6F3C /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		B30435112451EEBC007D6F3C /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B30435122451EEBC007D6F3C /* QueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueManager.swift; sourceTree = "<group>"; };
-		B30435142451EEBC007D6F3C /* SelfIslandServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfIslandServices.swift; sourceTree = "<group>"; };
+		B30435142451EEBC007D6F3C /* SelfIslandDataServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfIslandDataServices.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +81,47 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8D687B1D24528CCA00F83BB7 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				B30434F72451EE81007D6F3C /* LaunchScreen.storyboard */,
+				B30434EF2451EE7E007D6F3C /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		8D687B1E24528CE900F83BB7 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				8D687B1F24528D2C00F83BB7 /* AllIslandsScene.scn */,
+				8D687B2124528D6D00F83BB7 /* IslandSpriteScene.sks */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		8D687B2324528DBB00F83BB7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				B30434ED2451EE7E007D6F3C /* SelectActionsViewController.swift */,
+				8D687B2424528E5500F83BB7 /* IslandsViewController.swift */,
+				8D687B2624528EEF00F83BB7 /* CreateActionViewController.swift */,
+				8D687B2824528F6B00F83BB7 /* CreatePeriferalIslandViewController.swift */,
+				8D687B2A24528FDD00F83BB7 /* EditPeriferalIslandViewController.swift */,
+				8D687B2C2452902900F83BB7 /* EditActionViewController.swift */,
+				8D687B2E2452908700F83BB7 /* EditSelfIslandViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		8D687B302452911000F83BB7 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				B304350F2451EEBB007D6F3C /* Errors.swift */,
+				8D687B312452912A00F83BB7 /* LifeAreaCategory.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		B30434DD2451EE7E007D6F3C = {
 			isa = PBXGroup;
 			children = (
@@ -105,8 +174,11 @@
 		B30435102451EEBB007D6F3C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8D687B302452911000F83BB7 /* Enums */,
 				B304350E2451EEBB007D6F3C /* SelfIsland.swift */,
-				B304350F2451EEBB007D6F3C /* Errors.swift */,
+				8D687B372452944900F83BB7 /* PeriferalIsland.swift */,
+				8D687B392452949400F83BB7 /* Mood.swift */,
+				8D687B3B245294BE00F83BB7 /* Action.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -123,7 +195,9 @@
 		B30435152451EEBC007D6F3C /* Business */ = {
 			isa = PBXGroup;
 			children = (
-				B30435142451EEBC007D6F3C /* SelfIslandServices.swift */,
+				B30435142451EEBC007D6F3C /* SelfIslandDataServices.swift */,
+				8D687B332452927200F83BB7 /* UpdateIslandsHealth.swift */,
+				8D687B352452940000F83BB7 /* WateringTreeMechanics.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -131,9 +205,9 @@
 		B30435212451F47B007D6F3C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				B30434ED2451EE7E007D6F3C /* ViewController.swift */,
-				B30434EF2451EE7E007D6F3C /* Main.storyboard */,
-				B30434F72451EE81007D6F3C /* LaunchScreen.storyboard */,
+				8D687B2324528DBB00F83BB7 /* ViewControllers */,
+				8D687B1E24528CE900F83BB7 /* Scenes */,
+				8D687B1D24528CCA00F83BB7 /* Storyboards */,
 				B30434F52451EE81007D6F3C /* Assets.xcassets */,
 			);
 			path = Presentation;
@@ -199,8 +273,10 @@
 			files = (
 				B30434F92451EE81007D6F3C /* LaunchScreen.storyboard in Resources */,
 				B30435162451EF6F007D6F3C /* LifeTree.xcdatamodeld in Resources */,
+				8D687B2224528D6D00F83BB7 /* IslandSpriteScene.sks in Resources */,
 				B30434F62451EE81007D6F3C /* Assets.xcassets in Resources */,
 				B30434F12451EE7E007D6F3C /* Main.storyboard in Resources */,
+				8D687B2024528D2C00F83BB7 /* AllIslandsScene.scn in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,15 +287,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D687B362452940000F83BB7 /* WateringTreeMechanics.swift in Sources */,
+				8D687B3C245294BE00F83BB7 /* Action.swift in Sources */,
+				8D687B2924528F6B00F83BB7 /* CreatePeriferalIslandViewController.swift in Sources */,
 				B304351A2451F07F007D6F3C /* SelfIsland.swift in Sources */,
 				B304351B2451F082007D6F3C /* Errors.swift in Sources */,
-				B304351C2451F084007D6F3C /* SelfIslandServices.swift in Sources */,
+				8D687B2F2452908700F83BB7 /* EditSelfIslandViewController.swift in Sources */,
+				8D687B322452912A00F83BB7 /* LifeAreaCategory.swift in Sources */,
+				8D687B2524528E5500F83BB7 /* IslandsViewController.swift in Sources */,
+				B304351C2451F084007D6F3C /* SelfIslandDataServices.swift in Sources */,
 				B304351F2451F091007D6F3C /* DAO.swift in Sources */,
-				B30434EE2451EE7E007D6F3C /* ViewController.swift in Sources */,
+				8D687B3A2452949400F83BB7 /* Mood.swift in Sources */,
+				B30434EE2451EE7E007D6F3C /* SelectActionsViewController.swift in Sources */,
 				B30434EA2451EE7E007D6F3C /* AppDelegate.swift in Sources */,
+				8D687B2D2452902900F83BB7 /* EditActionViewController.swift in Sources */,
 				B304351E2451F088007D6F3C /* QueueManager.swift in Sources */,
+				8D687B2724528EEF00F83BB7 /* CreateActionViewController.swift in Sources */,
+				8D687B342452927200F83BB7 /* UpdateIslandsHealth.swift in Sources */,
 				B304351D2451F086007D6F3C /* CoreDataManager.swift in Sources */,
 				B30434EC2451EE7E007D6F3C /* SceneDelegate.swift in Sources */,
+				8D687B382452944900F83BB7 /* PeriferalIsland.swift in Sources */,
+				8D687B2B24528FDD00F83BB7 /* EditPeriferalIslandViewController.swift in Sources */,
 				B30435202451F093007D6F3C /* SelfIslandDAO.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

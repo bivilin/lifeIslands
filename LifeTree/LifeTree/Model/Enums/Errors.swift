@@ -8,6 +8,6 @@
 
 import Foundation
 
-enum Errors : Error , Equatable{
+enum Errors: Error, Equatable{
     case DatabaseFailure
 }

@@ -6,4 +6,12 @@
 //  Copyright © 2020 Beatriz Viseu Linhares. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+class CreatePeriferalIslandViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+
+}

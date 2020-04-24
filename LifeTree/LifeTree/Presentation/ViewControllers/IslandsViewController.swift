@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AllIslandsViewController: UIViewController {
+class IslandsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
