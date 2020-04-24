@@ -19,12 +19,12 @@ class IslandsViewController: UIViewController {
         // Create the SCNScene
         let islandsScene = SCNScene(named: "AllIslandsScene.scn")!
         
-        let selfIslandPlaneNode = islandsScene.rootNode.childNode(withName: "selfIslands", recursively: true)
-        let cameraNode = islandsScene.rootNode.childNode(withName: "camera", recursively: true)
+//        let selfIslandNode = islandsScene.rootNode.childNode(withName: "selfIslands", recursively: true)
+//        let cameraNode = islandsScene.rootNode.childNode(withName: "camera", recursively: true)
         
         // Set the scene to the view
         self.islandsSCNView.scene = islandsScene
-        
+
         // Allows the user to manipulate the camera
         self.islandsSCNView.allowsCameraControl = true
         
