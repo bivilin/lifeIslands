@@ -8,6 +8,7 @@
 
 import UIKit
 import SceneKit
+import SpriteKit
 
 class IslandsViewController: UIViewController {
     
@@ -17,18 +18,29 @@ class IslandsViewController: UIViewController {
         super.viewDidLoad()
         
         // Create the SCNScene
-        let islandsScene = SCNScene(named: "AllIslandsScene.scn")!
-        
+        let islandsSCNScene = SCNScene(named: "AllIslandsScene.scn")!
         setUpCameraControl(sceneView: self.islandsSCNView)
         
-//        let selfIslandNode = islandsScene.rootNode.childNode(withName: "selfIslands", recursively: true)
-//        let cameraNode = islandsScene.rootNode.childNode(withName: "camera", recursively: true)
+        // Create the SKScene
+        let selfIslandSKScene = SKScene(fileNamed: "IslandSpriteScene.sks")!
+        selfIslandSKScene.isPaused = false
+        selfIslandSKScene.scaleMode = .aspectFit
+        
+        // Set SpriteKit scene as the material for the SceneKit plane
+        if let selfIslandPlane = islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true),
+            let geometry = selfIslandPlane.geometry,
+            let material = geometry.firstMaterial {
+            
+            material.diffuse.contents = selfIslandSKScene
+            material.isDoubleSided = true
+        }
+        
+        // SceneKit camera
+        // let cameraNode = islandsSCNScene.rootNode.childNode(withName: "camera", recursively: true)
         
         // Set the scene to the view
-        self.islandsSCNView.scene = islandsScene
-
-        // Configure the view
-        self.islandsSCNView.backgroundColor = UIColor.black
+        self.islandsSCNView.scene = islandsSCNScene
+        
     }
     
     func setUpCameraControl(sceneView: SCNView) {
