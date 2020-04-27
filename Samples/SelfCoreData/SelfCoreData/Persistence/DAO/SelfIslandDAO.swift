@@ -59,10 +59,10 @@ class SelfIslandDAO: DAO {
         }
     }
 
-    /// Method responsible for retrieving first created island from database
-    /// - returns: the first created island from database
+    /// Method responsible for retrieving all islands from database
+    /// - returns: a list of islands from database
     /// - throws: if an error occurs during getting an object from database (Errors.DatabaseFailure)
-    static func findFirst() throws -> SelfIsland? {
+    static func findAll() throws -> [SelfIsland] {
         // list of islands to be returned
         var selfIslandList:[SelfIsland]
 
@@ -77,11 +77,6 @@ class SelfIslandDAO: DAO {
             throw Errors.DatabaseFailure
         }
 
-        if selfIslandList.count > 0 {
-            return selfIslandList[0]
-        } else {
-            return nil
-        }
+        return selfIslandList
     }
-
 }

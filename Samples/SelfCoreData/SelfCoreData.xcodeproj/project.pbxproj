@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B3B8A8242453614C00139531 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B8A8232453614C00139531 /* DAO.swift */; };
 		B3E625A824509D7D0033A821 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E625A724509D7D0033A821 /* AppDelegate.swift */; };
 		B3E625AA24509D7D0033A821 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E625A924509D7D0033A821 /* SceneDelegate.swift */; };
 		B3E625AC24509D7D0033A821 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E625AB24509D7D0033A821 /* ViewController.swift */; };
@@ -15,7 +16,6 @@
 		B3E625B424509D810033A821 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3E625B224509D810033A821 /* LaunchScreen.storyboard */; };
 		B3E625BD24509E650033A821 /* SelfIslandServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E625BC24509E650033A821 /* SelfIslandServices.swift */; };
 		B3E625C024509E950033A821 /* SelfIslandDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E625BE24509E950033A821 /* SelfIslandDAO.swift */; };
-		B3E625C124509E950033A821 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E625BF24509E950033A821 /* DAO.swift */; };
 		B3E625C624509ECE0033A821 /* QueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E625C424509ECE0033A821 /* QueueManager.swift */; };
 		B3E625C724509ECE0033A821 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E625C524509ECE0033A821 /* CoreDataManager.swift */; };
 		B3E625C924509EE40033A821 /* SelfIsland.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E625C824509EE40033A821 /* SelfIsland.swift */; };
@@ -24,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B3B8A8232453614C00139531 /* DAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DAO.swift; path = SelfCoreData/Persistence/DAO/DAO.swift; sourceTree = SOURCE_ROOT; };
 		B3E625A424509D7D0033A821 /* SelfCoreData.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SelfCoreData.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E625A724509D7D0033A821 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3E625A924509D7D0033A821 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,7 +35,6 @@
 		B3E625B524509D810033A821 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3E625BC24509E650033A821 /* SelfIslandServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfIslandServices.swift; sourceTree = "<group>"; };
 		B3E625BE24509E950033A821 /* SelfIslandDAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfIslandDAO.swift; sourceTree = "<group>"; };
-		B3E625BF24509E950033A821 /* DAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 		B3E625C424509ECE0033A821 /* QueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueManager.swift; sourceTree = "<group>"; };
 		B3E625C524509ECE0033A821 /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B3E625C824509EE40033A821 /* SelfIsland.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfIsland.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 		B3E625C224509E990033A821 /* DAO */ = {
 			isa = PBXGroup;
 			children = (
-				B3E625BF24509E950033A821 /* DAO.swift */,
+				B3B8A8232453614C00139531 /* DAO.swift */,
 				B3E625BE24509E950033A821 /* SelfIslandDAO.swift */,
 			);
 			path = DAO;
@@ -206,7 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E625C124509E950033A821 /* DAO.swift in Sources */,
+				B3B8A8242453614C00139531 /* DAO.swift in Sources */,
 				B3E625BD24509E650033A821 /* SelfIslandServices.swift in Sources */,
 				B3E625AC24509D7D0033A821 /* ViewController.swift in Sources */,
 				B3E625A824509D7D0033A821 /* AppDelegate.swift in Sources */,
