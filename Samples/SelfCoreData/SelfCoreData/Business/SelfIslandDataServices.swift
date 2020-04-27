@@ -111,16 +111,16 @@ class SelfIslandDataServices {
     /// - parameters:
     ///     - completion: closure to be executed at the end of this method
     /// - throws: if an error occurs during getting an object from database (Errors.DatabaseFailure)
-    static func getFirstSelfIsland(_ completion: ((_ error: Error?, _ selfIsland: SelfIsland?) -> Void)?) {
+    static func getAllSelfIslands(_ completion: ((_ error: Error?, _ users: [SelfIsland]?) -> Void)?) {
         // block to be executed in background
         let blockForExecutionInBackground: BlockOperation = BlockOperation(block: {
             // error to be returned in case of failure
             var raisedError: Error? = nil
-            var selfIsland: SelfIsland?
+            var selfIslands: [SelfIsland]?
 
             do {
                 // save information
-                selfIsland = try SelfIslandDAO.findFirst()
+                selfIslands = try SelfIslandDAO.findAll()
             }
             catch let error {
                 raisedError = error
@@ -128,7 +128,7 @@ class SelfIslandDataServices {
 
             // completion block execution
             if (completion != nil) {
-                let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(raisedError, selfIsland)})
+                let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(raisedError, selfIslands)})
 
                 // execute block in main
                 QueueManager.sharedInstance.executeBlock(blockForExecutionInMain, queueType: QueueManager.QueueType.main)
