@@ -35,6 +35,25 @@ class IslandsViewController: UIViewController {
             material.isDoubleSided = true
         }
         
+        // Passos para criar as outras ilhas
+        // 1: Adicionar planos ao SceneKit programaticamente correspondendo às ilhas
+        // 2: Criar cena no SpriteKit programaticamente (ou podemos reaproveitar a mesma SKScene?)
+        // 3: Associar as duas
+        // 4: Conectar com as informações persistidas do CoreData
+
+        // DICIONÁRIO: NOME DA ILHA (chave) -> SPRITEKIT
+        // Fazer array de planos, cada um com uma textura do SpriteKit
+        // SpriteKit -> podemos fazer o sks herdar de uma classe -
+        // Fazer uma SKScene para cada ilha, já que teremos um número máximo
+        
+        // CÂMERA
+        // Mover a câmera com pinch e pan
+        // Limitar o movimento dessa câmera com constraints
+        // Escrever uma função que dependendo da posição da câmera mostra um card específico
+        // OU
+        // Cordinhas: joint (articulação) -> colocar efeitos de física
+        // Colocar um corpo de física maior que a corda e transparente para a pessoa tocar
+        
         // SceneKit camera
         // let cameraNode = islandsSCNScene.rootNode.childNode(withName: "camera", recursively: true)
         
@@ -45,6 +64,7 @@ class IslandsViewController: UIViewController {
     
     func setUpCameraControl(sceneView: SCNView) {
         // Allows the user to manipulate the camera
+        // Olhar constraints de câmera
         sceneView.allowsCameraControl = true
         sceneView.cameraControlConfiguration.rotationSensitivity = 0
     }
