@@ -10,7 +10,7 @@ import UIKit
 import SceneKit
 import SpriteKit
 
-class IslandsViewController: UIViewController {
+class IslandsSceneViewController: UIViewController {
     
     @IBOutlet weak var islandsSCNView: SCNView!
     var selfIslandSKScene: SKScene?
@@ -32,14 +32,46 @@ class IslandsViewController: UIViewController {
         selfIslandSKScene?.isPaused = false
         selfIslandSKScene?.scaleMode = .aspectFit
 
+        // SceneKit camera
+        // let cameraNode = islandsSCNScene.rootNode.childNode(withName: "camera", recursively: true)
+        
         // Set SpriteKit scene as the material for the SceneKit plane
         if let selfIslandPlane = islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true),
             let geometry = selfIslandPlane.geometry,
             let material = geometry.firstMaterial {
             
+            // Rotates the plane reference frame by pi (180 degrees), otherwize the SpriteKit Scene appears mirroed
             material.diffuse.contents = selfIslandSKScene
+            // Makes the material double sided, otherwise the plane can only be seen when the camera is pointed at its +z direction
+            // In our case, the camera is pointed to the plane -z direction, so if not double sided, the plane won't even be visible
             material.isDoubleSided = true
         }
+        
+        // Set the scene to the view
+        self.islandsSCNView.scene = islandsSCNScene
+        
+        var planeGeometry: SCNGeometry
+        planeGeometry = SCNPlane(width: 1, height: 1)
+        
+        if let planeMaterial = planeGeometry.firstMaterial {
+            
+            let newSpriteKitScene = selfIslandSKScene!.copy() as! SKScene
+            planeMaterial.diffuse.contents = newSpriteKitScene
+            
+            let islandNode = newSpriteKitScene.children.first
+            let labelNode = islandNode?.childNode(withName: "nameLabelNode") as! SKLabelNode
+            labelNode.text = "CONSEGUI PORRA"
+            
+            print(newSpriteKitScene.children.count)
+            
+            planeMaterial.isDoubleSided = true
+        }
+        
+        let islandNode = SCNNode(geometry: planeGeometry)
+        islandNode.eulerAngles.x = .pi
+        
+        islandsSCNScene.rootNode.addChildNode(islandNode)
+        islandNode.position = SCNVector3(0, 1, 0)
         
         // Passos para criar as outras ilhas
         // 1: Adicionar planos ao SceneKit programaticamente correspondendo às ilhas
@@ -59,12 +91,6 @@ class IslandsViewController: UIViewController {
         // OU
         // Cordinhas: joint (articulação) -> colocar efeitos de física
         // Colocar um corpo de física maior que a corda e transparente para a pessoa tocar
-        
-        // SceneKit camera
-        // let cameraNode = islandsSCNScene.rootNode.childNode(withName: "camera", recursively: true)
-        
-        // Set the scene to the view
-        self.islandsSCNView.scene = islandsSCNScene
         
     }
     @IBAction func criarIlha(_ sender: Any) {
@@ -105,9 +131,9 @@ class IslandsViewController: UIViewController {
 
     func setUpCameraControl(sceneView: SCNView) {
         // Allows the user to manipulate the camera
-        // Olhar constraints de câmera
+        // Estudar sobre constraints de câmera
         sceneView.allowsCameraControl = true
-        sceneView.cameraControlConfiguration.rotationSensitivity = 0
+        // sceneView.cameraControlConfiguration.rotationSensitivity = 0
     }
 
     func loadingData() {
