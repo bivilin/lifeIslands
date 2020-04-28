@@ -74,7 +74,22 @@ class IslandsViewController: UIViewController {
         sceneView.allowsCameraControl = true
         sceneView.cameraControlConfiguration.rotationSensitivity = 0
     }
+
+    // MARK: Debug Buttons
+
+    @IBAction func addPeripheralIsland(_ sender: Any) {
+        self.addPeripheralIsland()
+    }
+
+    @IBAction func retrievePeripheralIslands(_ sender: Any) {
+        self.checkAllIslands()
+    }
+
+
 }
+
+
+
 
 // MARK: Data Visualization
 extension IslandsViewController {
@@ -125,5 +140,37 @@ extension IslandsViewController {
                 }
             }
         }
+    }
+
+// MARK: Tests for new version
+
+    func addPeripheralIsland() {
+        let peripheralIsland = PeripheralIsland()
+        peripheralIsland.category = "Trabalho"
+        peripheralIsland.name = "OneForma"
+        peripheralIsland.healthStatus = 30.0
+        peripheralIsland.islandId = UUID()
+
+        PeripheralIslandDataServices.createPeripheralIsland(island: peripheralIsland) { (error) in
+            if (error != nil) {
+                print(error.debugDescription)
+            } else {
+                print("Ilha criada")
+            }
+        }
+    }
+
+    func checkAllIslands() {
+        PeripheralIslandDataServices.getAllPeripheralIslands { (error, peripheralIslands) in
+            if error != nil {
+                print(error.debugDescription)
+            } else if let allIslands = peripheralIslands {
+                print("Há \(allIslands.count) ilhas.")
+                for island in allIslands {
+                    print("Ilha #\(String(describing: island.islandId))")
+                }
+            }
+        }
+
     }
 }
