@@ -15,9 +15,11 @@ class IslandsViewController: UIViewController {
     @IBOutlet weak var islandsSCNView: SCNView!
     var selfIslandSKScene: SKScene?
     var selfIsland: SelfIsland?
+    var numberOfPeripheralIslands: Int?
 
     override func viewWillAppear(_ animated: Bool) {
         self.setupWorld()
+        self.checkAllIslands()
     }
 
     override func viewDidLoad() {
@@ -88,9 +90,6 @@ class IslandsViewController: UIViewController {
 
 }
 
-
-
-
 // MARK: Data Visualization
 extension IslandsViewController {
     // After data is retrieved successfuly, its content defines the visualization
@@ -130,6 +129,7 @@ extension IslandsViewController {
                 print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.healthStatus!)%")
             }
             // After saving data, retrieving it to save on selfIsland object
+            // That might occur in another screen, so then here we would have a performSegue instead.
             SelfIslandDataServices.getFirstSelfIsland { (error, island) in
                 guard let island = island else {return}
                 if (error != nil) {
@@ -144,13 +144,18 @@ extension IslandsViewController {
 
 // MARK: Tests for new version
 
+    // Creating Peripheral Island on CoreData
     func addPeripheralIsland() {
+
         let peripheralIsland = PeripheralIsland()
+
+        // Mock Data
         peripheralIsland.category = "Trabalho"
         peripheralIsland.name = "OneForma"
         peripheralIsland.healthStatus = 30.0
         peripheralIsland.islandId = UUID()
 
+        // Method for accessing Core Data
         PeripheralIslandDataServices.createPeripheralIsland(island: peripheralIsland) { (error) in
             if (error != nil) {
                 print(error.debugDescription)
@@ -160,17 +165,19 @@ extension IslandsViewController {
         }
     }
 
+    // Retrieving all Peripheral Islands from Core Data
     func checkAllIslands() {
         PeripheralIslandDataServices.getAllPeripheralIslands { (error, peripheralIslands) in
             if error != nil {
                 print(error.debugDescription)
             } else if let allIslands = peripheralIslands {
+                // Saving number of islands in this class to be available for SpriteKit / Scene Kit implementation
+                self.numberOfPeripheralIslands = allIslands.count
                 print("Há \(allIslands.count) ilhas.")
                 for island in allIslands {
                     print("Ilha #\(String(describing: island.islandId))")
                 }
             }
         }
-
     }
 }

@@ -9,6 +9,10 @@
 import Foundation
 
 enum LifeAreaCategory {
-    
+    case Work
+    case Family
+    case Study
+    case Health
+    case Finances
 }
 
