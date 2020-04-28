@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8D3BBD07245882690057B5EB /* IslandsVisualisationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3BBD06245882690057B5EB /* IslandsVisualisationServices.swift */; };
 		8D687B2024528D2C00F83BB7 /* AllIslandsScene.scn in Resources */ = {isa = PBXBuildFile; fileRef = 8D687B1F24528D2C00F83BB7 /* AllIslandsScene.scn */; };
 		8D687B2224528D6D00F83BB7 /* IslandSpriteScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D687B2124528D6D00F83BB7 /* IslandSpriteScene.sks */; };
 		8D687B2524528E5500F83BB7 /* IslandsSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2424528E5500F83BB7 /* IslandsSceneViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8D3BBD06245882690057B5EB /* IslandsVisualisationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandsVisualisationServices.swift; sourceTree = "<group>"; };
 		8D687B1F24528D2C00F83BB7 /* AllIslandsScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = AllIslandsScene.scn; sourceTree = "<group>"; };
 		8D687B2124528D6D00F83BB7 /* IslandSpriteScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IslandSpriteScene.sks; sourceTree = "<group>"; };
 		8D687B2424528E5500F83BB7 /* IslandsSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandsSceneViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				B30435142451EEBC007D6F3C /* SelfIslandDataServices.swift */,
 				8D687B332452927200F83BB7 /* UpdateIslandsHealth.swift */,
 				8D687B352452940000F83BB7 /* WateringTreeMechanics.swift */,
+				8D3BBD06245882690057B5EB /* IslandsVisualisationServices.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				8D687B2524528E5500F83BB7 /* IslandsSceneViewController.swift in Sources */,
 				B304351C2451F084007D6F3C /* SelfIslandDataServices.swift in Sources */,
 				B304351F2451F091007D6F3C /* DAO.swift in Sources */,
+				8D3BBD07245882690057B5EB /* IslandsVisualisationServices.swift in Sources */,
 				8D687B3A2452949400F83BB7 /* Mood.swift in Sources */,
 				B30434EE2451EE7E007D6F3C /* SelectActionsViewController.swift in Sources */,
 				B30434EA2451EE7E007D6F3C /* AppDelegate.swift in Sources */,
