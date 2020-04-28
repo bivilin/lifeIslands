@@ -40,9 +40,6 @@ class IslandsViewController: UIViewController {
             material.diffuse.contents = selfIslandSKScene
             material.isDoubleSided = true
         }
-
-        // SceneKit camera
-        // let cameraNode = islandsSCNScene.rootNode.childNode(withName: "camera", recursively: true)
         
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
