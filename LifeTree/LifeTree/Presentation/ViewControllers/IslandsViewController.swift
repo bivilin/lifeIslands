@@ -17,7 +17,7 @@ class IslandsViewController: UIViewController {
     var selfIsland: SelfIsland?
 
     override func viewWillAppear(_ animated: Bool) {
-        loadingData()
+        self.setupWorld()
     }
 
     override func viewDidLoad() {
@@ -67,25 +67,19 @@ class IslandsViewController: UIViewController {
         self.islandsSCNView.scene = islandsSCNScene
         
     }
-    @IBAction func criarIlha(_ sender: Any) {
-        let island = SelfIsland()
-        island.name = "Mundo Mágico de Oz"
-        island.healthStatus = 50
-        island.islandId = UUID()
 
-        SelfIslandDataServices.createSelfIsland(island: island) { (error) in
-            if (error != nil) {
-                print(error.debugDescription)
-            } else {
-                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.healthStatus!)%")
-            }
-        }
+    func setUpCameraControl(sceneView: SCNView) {
+        // Allows the user to manipulate the camera
+        // Olhar constraints de câmera
+        sceneView.allowsCameraControl = true
+        sceneView.cameraControlConfiguration.rotationSensitivity = 0
     }
+}
 
-    // Refresh database and change text on the screen
-    @IBAction func refreshScreen(_ sender: Any) {
-        loadingData()
-
+// MARK: Data Visualization
+extension IslandsViewController {
+    // After data is retrieved successfuly, its content defines the visualization
+    func setupInterface() {
         guard let mainNode = selfIslandSKScene?.childNode(withName: "islandNode") else {return}
 
         // Accessing label node from SpriteKit to change its content
@@ -102,22 +96,33 @@ class IslandsViewController: UIViewController {
             }
         }
     }
+}
 
-    func setUpCameraControl(sceneView: SCNView) {
-        // Allows the user to manipulate the camera
-        // Olhar constraints de câmera
-        sceneView.allowsCameraControl = true
-        sceneView.cameraControlConfiguration.rotationSensitivity = 0
-    }
+// MARK: Data Handling
+extension IslandsViewController {
 
-    func loadingData() {
-        // Getting data from CoreData
-        SelfIslandDataServices.getFirstSelfIsland { (error, island) in
-            guard let island = island else {return}
+    func setupWorld() {
+        // Including default information to CoreData in case of first launch
+        let island = SelfIsland()
+        island.name = "Meu Mundo"
+        island.healthStatus = 50
+        island.islandId = UUID()
+
+        SelfIslandDataServices.createSelfIsland(island: island) { (error) in
             if (error != nil) {
                 print(error.debugDescription)
             } else {
-                self.selfIsland = island
+                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.healthStatus!)%")
+            }
+            // After saving data, retrieving it to save on selfIsland object
+            SelfIslandDataServices.getFirstSelfIsland { (error, island) in
+                guard let island = island else {return}
+                if (error != nil) {
+                    print(error.debugDescription)
+                } else {
+                    self.selfIsland = island
+                    self.setupInterface()
+                }
             }
         }
     }

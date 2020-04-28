@@ -84,4 +84,25 @@ class SelfIslandDAO: DAO {
         }
     }
 
+    /// Method responsible for retrieving all self islands from database
+    /// - returns: a list of self islands from database
+    /// - throws: if an error occurs during getting an object from database (Errors.DatabaseFailure)
+    static func findAll() throws -> [SelfIsland] {
+        // list of projects to be returned
+        var selfIslandList:[SelfIsland]
+
+        do {
+            // creating fetch request
+            let request:NSFetchRequest<SelfIsland> = fetchRequest()
+
+            // perform search
+            selfIslandList = try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(request)
+        }
+        catch {
+            throw Errors.DatabaseFailure
+        }
+
+        return selfIslandList
+    }
+
 }
