@@ -15,6 +15,14 @@ class IslandsSceneViewController: UIViewController {
     @IBOutlet weak var islandsSCNView: SCNView!
     var selfIslandSKScene: SKScene?
     var selfIsland: SelfIsland?
+    
+    // Fica esquisito para 1, 2 e 4
+    // vamos ter que aumentar o raio para números altos
+    var numberOfIslands: Int = 6
+    var a: Double = 3.5
+    var b: Double = 2.5
+    var islandPlaneNodeArray: [SCNNode] = []
+    var dictionary: [String: SCNNode] = [:]
 
     override func viewWillAppear(_ animated: Bool) {
         loadingData()
@@ -50,28 +58,67 @@ class IslandsSceneViewController: UIViewController {
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
         
-        var planeGeometry: SCNGeometry
-        planeGeometry = SCNPlane(width: 1, height: 1)
+        let separationAngle: Double = 2 * .pi / Double(self.numberOfIslands)
+        let c = sqrt(self.a * self.a - self.b * self.b)
         
-        if let planeMaterial = planeGeometry.firstMaterial {
+        for n in 1...self.numberOfIslands {
             
-            let newSpriteKitScene = selfIslandSKScene!.copy() as! SKScene
-            planeMaterial.diffuse.contents = newSpriteKitScene
+            var planeGeometry: SCNGeometry
+            planeGeometry = SCNPlane(width: 1, height: 1)
             
-            let islandNode = newSpriteKitScene.children.first
-            let labelNode = islandNode?.childNode(withName: "nameLabelNode") as! SKLabelNode
-            labelNode.text = "CONSEGUI PORRA"
+            if let planeMaterial = planeGeometry.firstMaterial {
+                
+                let newSpriteKitScene = selfIslandSKScene!.copy() as! SKScene
+                planeMaterial.diffuse.contents = newSpriteKitScene
+                
+                let islandNode = newSpriteKitScene.children.first
+                let labelNode = islandNode?.childNode(withName: "nameLabelNode") as! SKLabelNode
+                labelNode.text = "Ilha" + String(n)
+                
+                planeMaterial.isDoubleSided = true
+            }
             
-            print(newSpriteKitScene.children.count)
+            let islandNode = SCNNode(geometry: planeGeometry)
+            islandsSCNScene.rootNode.addChildNode(islandNode)
             
-            planeMaterial.isDoubleSided = true
+            self.dictionary[String(n)] = islandNode
+            
+            islandNode.eulerAngles.x = .pi - .pi/6
+            islandNode.position.y = 0
+            
+            if self.numberOfIslands % 2 == 0 {
+                islandNode.position.x = Float(self.b * sin((Double(n) + 1/2) * separationAngle))
+                islandNode.position.z = Float(self.a * cos((Double(n) + 1/2) * separationAngle) - (self.a-c))
+            } else {
+                islandNode.position.x = Float(self.b * sin(Double(n) * separationAngle))
+                islandNode.position.z = Float(self.a * cos(Double(n) * separationAngle) - (self.a-c))
+            }
         }
         
-        let islandNode = SCNNode(geometry: planeGeometry)
-        islandNode.eulerAngles.x = .pi
+        print(self.dictionary)
         
-        islandsSCNScene.rootNode.addChildNode(islandNode)
-        islandNode.position = SCNVector3(0, 1, 0)
+//        var planeGeometry: SCNGeometry
+//        planeGeometry = SCNPlane(width: 1, height: 1)
+//
+//        if let planeMaterial = planeGeometry.firstMaterial {
+//
+//            let newSpriteKitScene = selfIslandSKScene!.copy() as! SKScene
+//            planeMaterial.diffuse.contents = newSpriteKitScene
+//
+//            let islandNode = newSpriteKitScene.children.first
+//            let labelNode = islandNode?.childNode(withName: "nameLabelNode") as! SKLabelNode
+//            labelNode.text = "CONSEGUI PORRA"
+//
+//            print(newSpriteKitScene.children.count)
+//
+//            planeMaterial.isDoubleSided = true
+//        }
+        
+//        let islandNode = SCNNode(geometry: planeGeometry)
+//        islandNode.eulerAngles.x = .pi
+//
+//        islandsSCNScene.rootNode.addChildNode(islandNode)
+//        islandNode.position = SCNVector3(0, 1, 0)
         
         // Passos para criar as outras ilhas
         // 1: Adicionar planos ao SceneKit programaticamente correspondendo às ilhas
@@ -133,7 +180,7 @@ class IslandsSceneViewController: UIViewController {
         // Allows the user to manipulate the camera
         // Estudar sobre constraints de câmera
         sceneView.allowsCameraControl = true
-        // sceneView.cameraControlConfiguration.rotationSensitivity = 0
+        sceneView.cameraControlConfiguration.rotationSensitivity = 0
     }
 
     func loadingData() {
