@@ -37,6 +37,7 @@
 		B304351F2451F091007D6F3C /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435082451EEBB007D6F3C /* DAO.swift */; };
 		B30435202451F093007D6F3C /* SelfIslandDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435092451EEBB007D6F3C /* SelfIslandDAO.swift */; };
 		E2B72AE424587450001DEC21 /* FloatingPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B72AE324587450001DEC21 /* FloatingPanelViewController.swift */; };
+		E2B72AE72459B3AA001DEC21 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B72AE62459B3AA001DEC21 /* CardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		B30435142451EEBC007D6F3C /* SelfIslandDataServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfIslandDataServices.swift; sourceTree = "<group>"; };
 		D1719F49DE69D292E3DFD21C /* Pods-LifeTree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTree.debug.xcconfig"; path = "Target Support Files/Pods-LifeTree/Pods-LifeTree.debug.xcconfig"; sourceTree = "<group>"; };
 		E2B72AE324587450001DEC21 /* FloatingPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelViewController.swift; sourceTree = "<group>"; };
+		E2B72AE62459B3AA001DEC21 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				8D687B2A24528FDD00F83BB7 /* EditPeriferalIslandViewController.swift */,
 				8D687B2C2452902900F83BB7 /* EditActionViewController.swift */,
 				8D687B2E2452908700F83BB7 /* EditSelfIslandViewController.swift */,
+				E2B72AE62459B3AA001DEC21 /* CardViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				E2B72AE424587450001DEC21 /* FloatingPanelViewController.swift in Sources */,
 				B304351D2451F086007D6F3C /* CoreDataManager.swift in Sources */,
 				B30434EC2451EE7E007D6F3C /* SceneDelegate.swift in Sources */,
+				E2B72AE72459B3AA001DEC21 /* CardViewController.swift in Sources */,
 				8D687B382452944900F83BB7 /* PeriferalIsland.swift in Sources */,
 				8D687B2B24528FDD00F83BB7 /* EditPeriferalIslandViewController.swift in Sources */,
 				B30435202451F093007D6F3C /* SelfIslandDAO.swift in Sources */,

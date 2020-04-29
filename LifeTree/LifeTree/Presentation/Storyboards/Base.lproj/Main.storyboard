@@ -87,6 +87,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2Dd-zH-tD2"/>
                     </view>
+                    <connections>
+                        <outlet property="nameIsland" destination="KpB-AV-VyN" id="GJq-ap-hN5"/>
+                        <outlet property="phrase" destination="igg-P1-e6f" id="fMW-GR-WRQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZK-7S-1ph" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

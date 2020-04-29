@@ -41,12 +41,6 @@ class FloatingPanelViewController: UIViewController, FloatingPanelControllerDele
 
 }
 
-class CardViewController: UIViewController {
-    // esse é o controller do card
-    // colocar o que quisermos referente ao card
-    // sar a mesma classe mas com atributos diferentes para ilhas diferentes
-}
-
 // MARK: My custom layout
 
 class FloatingPanelCardLayout: FloatingPanelLayout {
@@ -62,10 +56,6 @@ class FloatingPanelCardLayout: FloatingPanelLayout {
         case .tip: return 85.0 + 44.0 // A bottom inset from the safe area Visible + ToolView
         default: return nil // Or `case .hidden: return nil`
         }
-    }
-
-    func backdropAlphaFor(position: FloatingPanelPosition) -> CGFloat {
-        return 0.9
     }
 }
 
