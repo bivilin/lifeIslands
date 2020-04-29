@@ -14,13 +14,27 @@ import FloatingPanel
 class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     
     @IBOutlet weak var islandsSCNView: SCNView!
+    
+    // MARK: Variables
+    
+    // COLOCAR INICIALIZADOR NESSA CLASSE!
+    
+    // Self Island Properties
     var selfIslandSKScene: SKScene?
     var selfIsland: SelfIsland?
-    var numberOfPeripheralIslands: Int?
 
+    // Peripheral Islands Properties
+    var numberOfPeripheralIslands: Int?
+    var islandsVisualizationServices: IslandsVisualisationServices? = nil
+    // Dictionary with key being the id of the island, and value its corresponding SceneKit plane node
+    var islandDictionary: [String: SCNNode] = [:]
+
+    // Card Properties
     var floatingPanel: FloatingPanelController!
     var cardView: CardViewController!
-    
+
+    // MARK: Lifecycle
+
     override func viewWillAppear(_ animated: Bool) {
         self.setupWorld()
         self.checkAllIslands()
@@ -31,6 +45,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
 
         // Create the SCNScene
         let islandsSCNScene = SCNScene(named: "AllIslandsScene.scn")!
+        islandsSCNScene.background.contents = UIImage(named: "backgroundSky")
         setUpCameraControl(sceneView: self.islandsSCNView)
         
         // Create the SKScene
@@ -38,27 +53,30 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         selfIslandSKScene?.isPaused = false
         selfIslandSKScene?.scaleMode = .aspectFit
 
-        // Set SpriteKit scene as the material for the SceneKit plane
-        if let selfIslandPlane = islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true),
-            let geometry = selfIslandPlane.geometry,
-            let material = geometry.firstMaterial {
-            
-            material.diffuse.contents = selfIslandSKScene
-            material.isDoubleSided = true
-        }
+        // SceneKit camera
+        // let cameraNode = islandsSCNScene.rootNode.childNode(withName: "camera", recursively: true)
+        
+        // Initializes island Services class with our SCNScene
+        self.islandsVisualizationServices = IslandsVisualisationServices(scnScene: islandsSCNScene)
 
         // Show Card
         setupFloatingPanel()
         cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
         showFloatingPanel()
         
-        // SceneKit camera
-        // let cameraNode = islandsSCNScene.rootNode.childNode(withName: "camera", recursively: true)
+        // Add self islando do scene
+        self.islandsVisualizationServices!.addSelfIslandToScene(islandsSCNScene: islandsSCNScene)
+        
+        // Add periferal islands to scene
+        self.islandsVisualizationServices!.addAllPeriferalIslandsToScene()
         
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
         
+        self.islandsVisualizationServices!.changePeriferalIslandLabel(islandId: "3", text: "Deu bom")
     }
+
+    // MARK: Helpers
 
     func setUpCameraControl(sceneView: SCNView) {
         // Allows the user to manipulate the camera
@@ -76,11 +94,10 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     @IBAction func retrievePeripheralIslands(_ sender: Any) {
         self.checkAllIslands()
     }
-
-
 }
 
 // MARK: Data Visualization
+// Is this working?
 extension IslandsViewController {
     // After data is retrieved successfuly, its content defines the visualization
     func setupInterface() {

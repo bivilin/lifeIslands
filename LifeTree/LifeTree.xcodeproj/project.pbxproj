@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C6A562D91CE481C3979750B /* Pods_LifeTree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B5135F91C6AFCA69DC0C8BC /* Pods_LifeTree.framework */; };
+		8D3BBD07245882690057B5EB /* IslandsVisualisationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3BBD06245882690057B5EB /* IslandsVisualisationServices.swift */; };
 		8D687B2024528D2C00F83BB7 /* AllIslandsScene.scn in Resources */ = {isa = PBXBuildFile; fileRef = 8D687B1F24528D2C00F83BB7 /* AllIslandsScene.scn */; };
 		8D687B2224528D6D00F83BB7 /* IslandSpriteScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D687B2124528D6D00F83BB7 /* IslandSpriteScene.sks */; };
 		8D687B2524528E5500F83BB7 /* IslandsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2424528E5500F83BB7 /* IslandsViewController.swift */; };
@@ -44,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		096CCE6A441B9F401E4ED645 /* Pods-LifeTree.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTree.release.xcconfig"; path = "Target Support Files/Pods-LifeTree/Pods-LifeTree.release.xcconfig"; sourceTree = "<group>"; };
+		8D3BBD06245882690057B5EB /* IslandsVisualisationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandsVisualisationServices.swift; sourceTree = "<group>"; };
 		8D687B1F24528D2C00F83BB7 /* AllIslandsScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = AllIslandsScene.scn; sourceTree = "<group>"; };
 		8D687B2124528D6D00F83BB7 /* IslandSpriteScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IslandSpriteScene.sks; sourceTree = "<group>"; };
 		8D687B2424528E5500F83BB7 /* IslandsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandsViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */,
 				8D687B332452927200F83BB7 /* UpdateIslandsHealth.swift */,
 				8D687B352452940000F83BB7 /* WateringTreeMechanics.swift */,
+				8D3BBD06245882690057B5EB /* IslandsVisualisationServices.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -386,6 +389,7 @@
 				8D687B2524528E5500F83BB7 /* IslandsViewController.swift in Sources */,
 				B304351C2451F084007D6F3C /* SelfIslandDataServices.swift in Sources */,
 				B304351F2451F091007D6F3C /* DAO.swift in Sources */,
+				8D3BBD07245882690057B5EB /* IslandsVisualisationServices.swift in Sources */,
 				8D687B3A2452949400F83BB7 /* Mood.swift in Sources */,
 				B30434EE2451EE7E007D6F3C /* SelectActionsViewController.swift in Sources */,
 				B30434EA2451EE7E007D6F3C /* AppDelegate.swift in Sources */,
