@@ -3,14 +3,15 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3C6A562D91CE481C3979750B /* Pods_LifeTree.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B5135F91C6AFCA69DC0C8BC /* Pods_LifeTree.framework */; };
 		8D3BBD07245882690057B5EB /* IslandsVisualisationServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D3BBD06245882690057B5EB /* IslandsVisualisationServices.swift */; };
 		8D687B2024528D2C00F83BB7 /* AllIslandsScene.scn in Resources */ = {isa = PBXBuildFile; fileRef = 8D687B1F24528D2C00F83BB7 /* AllIslandsScene.scn */; };
 		8D687B2224528D6D00F83BB7 /* IslandSpriteScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 8D687B2124528D6D00F83BB7 /* IslandSpriteScene.sks */; };
-		8D687B2524528E5500F83BB7 /* IslandsSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2424528E5500F83BB7 /* IslandsSceneViewController.swift */; };
+		8D687B2524528E5500F83BB7 /* IslandsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2424528E5500F83BB7 /* IslandsViewController.swift */; };
 		8D687B2724528EEF00F83BB7 /* CreateActionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2624528EEF00F83BB7 /* CreateActionViewController.swift */; };
 		8D687B2924528F6B00F83BB7 /* CreatePeriferalIslandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2824528F6B00F83BB7 /* CreatePeriferalIslandViewController.swift */; };
 		8D687B2B24528FDD00F83BB7 /* EditPeriferalIslandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B2A24528FDD00F83BB7 /* EditPeriferalIslandViewController.swift */; };
@@ -19,7 +20,7 @@
 		8D687B322452912A00F83BB7 /* LifeAreaCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B312452912A00F83BB7 /* LifeAreaCategory.swift */; };
 		8D687B342452927200F83BB7 /* UpdateIslandsHealth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B332452927200F83BB7 /* UpdateIslandsHealth.swift */; };
 		8D687B362452940000F83BB7 /* WateringTreeMechanics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B352452940000F83BB7 /* WateringTreeMechanics.swift */; };
-		8D687B382452944900F83BB7 /* PeriferalIsland.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B372452944900F83BB7 /* PeriferalIsland.swift */; };
+		8D687B382452944900F83BB7 /* PeripheralIsland.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B372452944900F83BB7 /* PeripheralIsland.swift */; };
 		8D687B3A2452949400F83BB7 /* Mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B392452949400F83BB7 /* Mood.swift */; };
 		8D687B3C245294BE00F83BB7 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B3B245294BE00F83BB7 /* Action.swift */; };
 		B30434EA2451EE7E007D6F3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30434E92451EE7E007D6F3C /* AppDelegate.swift */; };
@@ -36,13 +37,18 @@
 		B304351E2451F088007D6F3C /* QueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435122451EEBC007D6F3C /* QueueManager.swift */; };
 		B304351F2451F091007D6F3C /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435082451EEBB007D6F3C /* DAO.swift */; };
 		B30435202451F093007D6F3C /* SelfIslandDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435092451EEBB007D6F3C /* SelfIslandDAO.swift */; };
+		B3A7DC6924588384002AD059 /* PeripheralIslandDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A7DC6824588384002AD059 /* PeripheralIslandDAO.swift */; };
+		B3A7DC6B245884BB002AD059 /* PeripheralIslandDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */; };
+		E2B72AE424587450001DEC21 /* FloatingPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B72AE324587450001DEC21 /* FloatingPanelViewController.swift */; };
+		E2B72AE72459B3AA001DEC21 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B72AE62459B3AA001DEC21 /* CardViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		096CCE6A441B9F401E4ED645 /* Pods-LifeTree.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTree.release.xcconfig"; path = "Target Support Files/Pods-LifeTree/Pods-LifeTree.release.xcconfig"; sourceTree = "<group>"; };
 		8D3BBD06245882690057B5EB /* IslandsVisualisationServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandsVisualisationServices.swift; sourceTree = "<group>"; };
 		8D687B1F24528D2C00F83BB7 /* AllIslandsScene.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = AllIslandsScene.scn; sourceTree = "<group>"; };
 		8D687B2124528D6D00F83BB7 /* IslandSpriteScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = IslandSpriteScene.sks; sourceTree = "<group>"; };
-		8D687B2424528E5500F83BB7 /* IslandsSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandsSceneViewController.swift; sourceTree = "<group>"; };
+		8D687B2424528E5500F83BB7 /* IslandsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandsViewController.swift; sourceTree = "<group>"; };
 		8D687B2624528EEF00F83BB7 /* CreateActionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateActionViewController.swift; sourceTree = "<group>"; };
 		8D687B2824528F6B00F83BB7 /* CreatePeriferalIslandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePeriferalIslandViewController.swift; sourceTree = "<group>"; };
 		8D687B2A24528FDD00F83BB7 /* EditPeriferalIslandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPeriferalIslandViewController.swift; sourceTree = "<group>"; };
@@ -51,9 +57,10 @@
 		8D687B312452912A00F83BB7 /* LifeAreaCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeAreaCategory.swift; sourceTree = "<group>"; };
 		8D687B332452927200F83BB7 /* UpdateIslandsHealth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateIslandsHealth.swift; sourceTree = "<group>"; };
 		8D687B352452940000F83BB7 /* WateringTreeMechanics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WateringTreeMechanics.swift; sourceTree = "<group>"; };
-		8D687B372452944900F83BB7 /* PeriferalIsland.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriferalIsland.swift; sourceTree = "<group>"; };
+		8D687B372452944900F83BB7 /* PeripheralIsland.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIsland.swift; sourceTree = "<group>"; };
 		8D687B392452949400F83BB7 /* Mood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mood.swift; sourceTree = "<group>"; };
 		8D687B3B245294BE00F83BB7 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		9B5135F91C6AFCA69DC0C8BC /* Pods_LifeTree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30434E62451EE7E007D6F3C /* LifeTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30434E92451EE7E007D6F3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B30434EB2451EE7E007D6F3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +77,11 @@
 		B30435112451EEBC007D6F3C /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B30435122451EEBC007D6F3C /* QueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueManager.swift; sourceTree = "<group>"; };
 		B30435142451EEBC007D6F3C /* SelfIslandDataServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfIslandDataServices.swift; sourceTree = "<group>"; };
+		B3A7DC6824588384002AD059 /* PeripheralIslandDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIslandDAO.swift; sourceTree = "<group>"; };
+		B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIslandDataServices.swift; sourceTree = "<group>"; };
+		D1719F49DE69D292E3DFD21C /* Pods-LifeTree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTree.debug.xcconfig"; path = "Target Support Files/Pods-LifeTree/Pods-LifeTree.debug.xcconfig"; sourceTree = "<group>"; };
+		E2B72AE324587450001DEC21 /* FloatingPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelViewController.swift; sourceTree = "<group>"; };
+		E2B72AE62459B3AA001DEC21 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,12 +89,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C6A562D91CE481C3979750B /* Pods_LifeTree.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		75EA6E9949713BBC2D9BD439 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D1719F49DE69D292E3DFD21C /* Pods-LifeTree.debug.xcconfig */,
+				096CCE6A441B9F401E4ED645 /* Pods-LifeTree.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		8D687B1D24528CCA00F83BB7 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,13 +126,15 @@
 		8D687B2324528DBB00F83BB7 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				8D687B2424528E5500F83BB7 /* IslandsSceneViewController.swift */,
+				E2B72AE52459261A001DEC21 /* UI */,
+				8D687B2424528E5500F83BB7 /* IslandsViewController.swift */,
 				B30434ED2451EE7E007D6F3C /* SelectActionsViewController.swift */,
 				8D687B2624528EEF00F83BB7 /* CreateActionViewController.swift */,
 				8D687B2824528F6B00F83BB7 /* CreatePeriferalIslandViewController.swift */,
 				8D687B2A24528FDD00F83BB7 /* EditPeriferalIslandViewController.swift */,
 				8D687B2C2452902900F83BB7 /* EditActionViewController.swift */,
 				8D687B2E2452908700F83BB7 /* EditSelfIslandViewController.swift */,
+				E2B72AE62459B3AA001DEC21 /* CardViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -129,6 +153,8 @@
 			children = (
 				B30434E82451EE7E007D6F3C /* LifeTree */,
 				B30434E72451EE7E007D6F3C /* Products */,
+				75EA6E9949713BBC2D9BD439 /* Pods */,
+				D2E2C7124E84FEBEA0F26DFD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -160,6 +186,7 @@
 			children = (
 				B30435082451EEBB007D6F3C /* DAO.swift */,
 				B30435092451EEBB007D6F3C /* SelfIslandDAO.swift */,
+				B3A7DC6824588384002AD059 /* PeripheralIslandDAO.swift */,
 			);
 			path = DAO;
 			sourceTree = "<group>";
@@ -178,7 +205,7 @@
 			children = (
 				8D687B302452911000F83BB7 /* Enums */,
 				B304350E2451EEBB007D6F3C /* SelfIsland.swift */,
-				8D687B372452944900F83BB7 /* PeriferalIsland.swift */,
+				8D687B372452944900F83BB7 /* PeripheralIsland.swift */,
 				8D687B392452949400F83BB7 /* Mood.swift */,
 				8D687B3B245294BE00F83BB7 /* Action.swift */,
 			);
@@ -198,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				B30435142451EEBC007D6F3C /* SelfIslandDataServices.swift */,
+				B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */,
 				8D687B332452927200F83BB7 /* UpdateIslandsHealth.swift */,
 				8D687B352452940000F83BB7 /* WateringTreeMechanics.swift */,
 				8D3BBD06245882690057B5EB /* IslandsVisualisationServices.swift */,
@@ -216,6 +244,22 @@
 			path = Presentation;
 			sourceTree = "<group>";
 		};
+		D2E2C7124E84FEBEA0F26DFD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9B5135F91C6AFCA69DC0C8BC /* Pods_LifeTree.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E2B72AE52459261A001DEC21 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				E2B72AE324587450001DEC21 /* FloatingPanelViewController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -223,9 +267,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B30434FD2451EE81007D6F3C /* Build configuration list for PBXNativeTarget "LifeTree" */;
 			buildPhases = (
+				2C8106557416FA5124B74903 /* [CP] Check Pods Manifest.lock */,
 				B30434E22451EE7E007D6F3C /* Sources */,
 				B30434E32451EE7E007D6F3C /* Frameworks */,
 				B30434E42451EE7E007D6F3C /* Resources */,
+				77B61DD5ED2332811F80E83F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -285,19 +331,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2C8106557416FA5124B74903 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LifeTree-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		77B61DD5ED2332811F80E83F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LifeTree/Pods-LifeTree-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LifeTree/Pods-LifeTree-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LifeTree/Pods-LifeTree-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B30434E22451EE7E007D6F3C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				8D687B362452940000F83BB7 /* WateringTreeMechanics.swift in Sources */,
+				B3A7DC6924588384002AD059 /* PeripheralIslandDAO.swift in Sources */,
 				8D687B3C245294BE00F83BB7 /* Action.swift in Sources */,
 				8D687B2924528F6B00F83BB7 /* CreatePeriferalIslandViewController.swift in Sources */,
 				B304351A2451F07F007D6F3C /* SelfIsland.swift in Sources */,
 				B304351B2451F082007D6F3C /* Errors.swift in Sources */,
 				8D687B2F2452908700F83BB7 /* EditSelfIslandViewController.swift in Sources */,
 				8D687B322452912A00F83BB7 /* LifeAreaCategory.swift in Sources */,
-				8D687B2524528E5500F83BB7 /* IslandsSceneViewController.swift in Sources */,
+				8D687B2524528E5500F83BB7 /* IslandsViewController.swift in Sources */,
 				B304351C2451F084007D6F3C /* SelfIslandDataServices.swift in Sources */,
 				B304351F2451F091007D6F3C /* DAO.swift in Sources */,
 				8D3BBD07245882690057B5EB /* IslandsVisualisationServices.swift in Sources */,
@@ -308,9 +397,12 @@
 				B304351E2451F088007D6F3C /* QueueManager.swift in Sources */,
 				8D687B2724528EEF00F83BB7 /* CreateActionViewController.swift in Sources */,
 				8D687B342452927200F83BB7 /* UpdateIslandsHealth.swift in Sources */,
+				B3A7DC6B245884BB002AD059 /* PeripheralIslandDataServices.swift in Sources */,
+				E2B72AE424587450001DEC21 /* FloatingPanelViewController.swift in Sources */,
 				B304351D2451F086007D6F3C /* CoreDataManager.swift in Sources */,
 				B30434EC2451EE7E007D6F3C /* SceneDelegate.swift in Sources */,
-				8D687B382452944900F83BB7 /* PeriferalIsland.swift in Sources */,
+				E2B72AE72459B3AA001DEC21 /* CardViewController.swift in Sources */,
+				8D687B382452944900F83BB7 /* PeripheralIsland.swift in Sources */,
 				8D687B2B24528FDD00F83BB7 /* EditPeriferalIslandViewController.swift in Sources */,
 				B30435202451F093007D6F3C /* SelfIslandDAO.swift in Sources */,
 			);
@@ -454,6 +546,7 @@
 		};
 		B30434FE2451EE81007D6F3C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D1719F49DE69D292E3DFD21C /* Pods-LifeTree.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -473,6 +566,7 @@
 		};
 		B30434FF2451EE81007D6F3C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 096CCE6A441B9F401E4ED645 /* Pods-LifeTree.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

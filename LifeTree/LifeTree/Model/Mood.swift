@@ -9,6 +9,18 @@
 import Foundation
 import CoreData
 
-class Mood: NSObject {
-    
+class Mood: NSManagedObject {
+    @NSManaged public var moodId: UUID?
+    @NSManaged public var name: String?
+
+    convenience init() {
+        // get context
+        let managedObjectContext: NSManagedObjectContext = CoreDataManager.sharedInstance.persistentContainer.viewContext
+
+        // create entity description
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Mood", in: managedObjectContext)
+
+        // call super
+        self.init(entity: entityDescription!, insertInto: nil)
+    }
 }
