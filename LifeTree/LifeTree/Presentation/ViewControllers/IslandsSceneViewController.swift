@@ -38,6 +38,7 @@ class IslandsSceneViewController: UIViewController {
 
         // Create the SCNScene
         let islandsSCNScene = SCNScene(named: "AllIslandsScene.scn")!
+        islandsSCNScene.background.contents = UIImage(named: "backgroundSky")
         setUpCameraControl(sceneView: self.islandsSCNView)
         
         // Create the SKScene
