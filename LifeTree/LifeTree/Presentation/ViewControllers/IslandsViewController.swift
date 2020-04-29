@@ -9,17 +9,21 @@
 import UIKit
 import SceneKit
 import SpriteKit
+import FloatingPanel
 
-class IslandsViewController: UIViewController {
+class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     
     @IBOutlet weak var islandsSCNView: SCNView!
     var selfIslandSKScene: SKScene?
     var selfIsland: SelfIsland?
 
+    var floatingPanel: FloatingPanelController!
+    var cardView: CardViewController!
+    
     override func viewWillAppear(_ animated: Bool) {
         self.setupWorld()
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,7 +44,12 @@ class IslandsViewController: UIViewController {
             material.diffuse.contents = selfIslandSKScene
             material.isDoubleSided = true
         }
-        
+
+        // Show Card
+        setupFloatingPanel()
+        cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
+        showFloatingPanel()
+
         // Passos para criar as outras ilhas
         // 1: Adicionar planos ao SceneKit programaticamente correspondendo às ilhas
         // 2: Criar cena no SpriteKit programaticamente (ou podemos reaproveitar a mesma SKScene?)
@@ -126,4 +135,27 @@ extension IslandsViewController {
             }
         }
     }
+    
+// MARK: FloatingPanel - Card
+
+    func setupFloatingPanel() {
+
+        // InitializeFloatingPanelController
+        floatingPanel = FloatingPanelController()
+        floatingPanel.delegate = self
+
+        // Initialize FloatingPanelController and add the view
+        floatingPanel.surfaceView.backgroundColor = UIColor(displayP3Red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)
+        floatingPanel.surfaceView.cornerRadius = 24.0
+        floatingPanel.surfaceView.shadowHidden = false
+        floatingPanel.surfaceView.borderWidth = 1.0 / traitCollection.displayScale
+        floatingPanel.surfaceView.borderColor = UIColor.black.withAlphaComponent(0.2)
+    }
+
+    func showFloatingPanel() {
+        // Set a content view controller
+        floatingPanel.set(contentViewController: cardView)
+        floatingPanel.addPanel(toParent: self, animated: false)
+    }
+
 }
