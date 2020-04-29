@@ -50,7 +50,67 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="129.91071428571428"/>
+            <point key="canvasLocation" x="218.84057971014494" y="129.91071428571428"/>
+        </scene>
+        <!--Card View Controller-->
+        <scene sceneID="GxS-uC-Shv">
+            <objects>
+                <viewController storyboardIdentifier="Card" id="gGp-RW-7uw" customClass="CardViewController" customModule="LifeTree" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6qI-yg-Vs1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3i-Wj-Sn7">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hd4-sR-SZJ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="787"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amanda" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpB-AV-VyN">
+                                        <rect key="frame" x="15" y="20" width="384" height="33.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fico feliz quando vem aqui todos os dias!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igg-P1-e6f">
+                                        <rect key="frame" x="15" y="74" width="384" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="igg-P1-e6f" firstAttribute="leading" secondItem="Hd4-sR-SZJ" secondAttribute="leading" constant="15" id="JhY-0I-7j2"/>
+                                    <constraint firstItem="KpB-AV-VyN" firstAttribute="top" secondItem="Hd4-sR-SZJ" secondAttribute="top" constant="20" id="Xlh-Dx-skx"/>
+                                    <constraint firstItem="KpB-AV-VyN" firstAttribute="leading" secondItem="Hd4-sR-SZJ" secondAttribute="leading" constant="15" id="ea5-n6-QtY"/>
+                                    <constraint firstAttribute="trailing" secondItem="igg-P1-e6f" secondAttribute="trailing" constant="15" id="iBX-fz-raC"/>
+                                    <constraint firstAttribute="trailing" secondItem="KpB-AV-VyN" secondAttribute="trailing" constant="15" id="kwI-zE-jtL"/>
+                                    <constraint firstItem="igg-P1-e6f" firstAttribute="top" secondItem="KpB-AV-VyN" secondAttribute="bottom" constant="20.5" id="os2-8u-uSz"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="A3i-Wj-Sn7" firstAttribute="centerX" secondItem="6qI-yg-Vs1" secondAttribute="centerX" id="6Wl-Aq-DUg"/>
+                            <constraint firstItem="A3i-Wj-Sn7" firstAttribute="leading" secondItem="2Dd-zH-tD2" secondAttribute="leading" id="BPj-7p-1NW"/>
+                            <constraint firstItem="Hd4-sR-SZJ" firstAttribute="leading" secondItem="2Dd-zH-tD2" secondAttribute="leading" id="Q6Y-7S-m0a"/>
+                            <constraint firstItem="2Dd-zH-tD2" firstAttribute="bottom" secondItem="Hd4-sR-SZJ" secondAttribute="bottom" constant="31" id="YZ4-Ex-UdD"/>
+                            <constraint firstItem="Hd4-sR-SZJ" firstAttribute="trailing" secondItem="2Dd-zH-tD2" secondAttribute="trailing" id="dy2-Yg-6eH"/>
+                            <constraint firstItem="Hd4-sR-SZJ" firstAttribute="top" secondItem="2Dd-zH-tD2" secondAttribute="top" id="qZG-ev-alA"/>
+                            <constraint firstAttribute="bottom" secondItem="A3i-Wj-Sn7" secondAttribute="bottom" constant="34" id="u0A-cn-PQS"/>
+                            <constraint firstItem="A3i-Wj-Sn7" firstAttribute="top" secondItem="6qI-yg-Vs1" secondAttribute="top" constant="44" id="wd9-Ei-ZZI"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2Dd-zH-tD2"/>
+                    </view>
+                    <connections>
+                        <outlet property="nameIsland" destination="KpB-AV-VyN" id="GJq-ap-hN5"/>
+                        <outlet property="phrase" destination="igg-P1-e6f" id="fMW-GR-WRQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tZK-7S-1ph" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1105.7971014492755" y="129.91071428571428"/>
         </scene>
     </scenes>
 </document>
