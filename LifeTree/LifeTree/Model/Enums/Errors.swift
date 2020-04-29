@@ -10,4 +10,5 @@ import Foundation
 
 enum Errors: Error, Equatable{
     case DatabaseFailure
+    case CreateLimitExceeded
 }
