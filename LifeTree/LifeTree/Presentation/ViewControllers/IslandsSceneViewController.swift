@@ -22,7 +22,8 @@ class IslandsSceneViewController: UIViewController {
     var selfIslandSKScene: SKScene?
     var selfIsland: SelfIsland?
     
-    let islandsVisualizationServices = IslandsVisualisationServices()
+    var islandsVisualizationServices: IslandsVisualisationServices? = nil
+    
     // Dictionary with key being the id of the island, and value its corresponding SceneKit plane node
     var islandDictionary: [String: SCNNode] = [:]
     
@@ -47,16 +48,19 @@ class IslandsSceneViewController: UIViewController {
         // SceneKit camera
         // let cameraNode = islandsSCNScene.rootNode.childNode(withName: "camera", recursively: true)
         
+        // Initializes island Services class with our SCNScene
+        self.islandsVisualizationServices = IslandsVisualisationServices(scnScene: islandsSCNScene)
+        
         // Add self islando do scene
-        self.islandsVisualizationServices.addSelfIslandToScene(islandsSCNScene: islandsSCNScene)
+        self.islandsVisualizationServices!.addSelfIslandToScene(islandsSCNScene: islandsSCNScene)
         
         // Add periferal islands to scene
-        self.islandsVisualizationServices.addPeriferalIslandsToScene(islandsSCNScene: islandsSCNScene, numberOfIslands: 6)
+        self.islandsVisualizationServices!.addAllPeriferalIslandsToScene()
         
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
         
-        print(self.islandDictionary)
+        self.islandsVisualizationServices!.changePeriferalIslandLabel(islandId: "3", text: "Deu bom")
     }
     
     // MARK: Actions
@@ -103,7 +107,7 @@ class IslandsSceneViewController: UIViewController {
         // Allows the user to manipulate the camera
         // Estudar sobre constraints de câmera
         sceneView.allowsCameraControl = true
-        sceneView.cameraControlConfiguration.rotationSensitivity = 0
+        // sceneView.cameraControlConfiguration.rotationSensitivity = 0
     }
 
     func loadingData() {
