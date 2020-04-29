@@ -16,12 +16,14 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     @IBOutlet weak var islandsSCNView: SCNView!
     var selfIslandSKScene: SKScene?
     var selfIsland: SelfIsland?
+    var numberOfPeripheralIslands: Int?
 
     var floatingPanel: FloatingPanelController!
     var cardView: CardViewController!
     
     override func viewWillAppear(_ animated: Bool) {
         self.setupWorld()
+        self.checkAllIslands()
     }
     
     override func viewDidLoad() {
@@ -49,25 +51,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         setupFloatingPanel()
         cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
         showFloatingPanel()
-
-        // Passos para criar as outras ilhas
-        // 1: Adicionar planos ao SceneKit programaticamente correspondendo às ilhas
-        // 2: Criar cena no SpriteKit programaticamente (ou podemos reaproveitar a mesma SKScene?)
-        // 3: Associar as duas
-        // 4: Conectar com as informações persistidas do CoreData
-
-        // DICIONÁRIO: NOME DA ILHA (chave) -> SPRITEKIT
-        // Fazer array de planos, cada um com uma textura do SpriteKit
-        // SpriteKit -> podemos fazer o sks herdar de uma classe -
-        // Fazer uma SKScene para cada ilha, já que teremos um número máximo
-        
-        // CÂMERA
-        // Mover a câmera com pinch e pan
-        // Limitar o movimento dessa câmera com constraints
-        // Escrever uma função que dependendo da posição da câmera mostra um card específico
-        // OU
-        // Cordinhas: joint (articulação) -> colocar efeitos de física
-        // Colocar um corpo de física maior que a corda e transparente para a pessoa tocar
         
         // SceneKit camera
         // let cameraNode = islandsSCNScene.rootNode.childNode(withName: "camera", recursively: true)
@@ -83,6 +66,18 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         sceneView.allowsCameraControl = true
         sceneView.cameraControlConfiguration.rotationSensitivity = 0
     }
+
+    // MARK: Debug Buttons
+
+    @IBAction func addPeripheralIsland(_ sender: Any) {
+        self.addPeripheralIsland()
+    }
+
+    @IBAction func retrievePeripheralIslands(_ sender: Any) {
+        self.checkAllIslands()
+    }
+
+
 }
 
 // MARK: Data Visualization
@@ -124,6 +119,7 @@ extension IslandsViewController {
                 print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.healthStatus!)%")
             }
             // After saving data, retrieving it to save on selfIsland object
+            // That might occur in another screen, so then here we would have a performSegue instead.
             SelfIslandDataServices.getFirstSelfIsland { (error, island) in
                 guard let island = island else {return}
                 if (error != nil) {
@@ -158,4 +154,43 @@ extension IslandsViewController {
         floatingPanel.addPanel(toParent: self, animated: false)
     }
 
+
+// MARK: Tests for new version
+
+    // Creating Peripheral Island on CoreData
+    func addPeripheralIsland() {
+
+        let peripheralIsland = PeripheralIsland()
+
+        // Mock Data
+        peripheralIsland.category = "Trabalho"
+        peripheralIsland.name = "OneForma"
+        peripheralIsland.healthStatus = 30.0
+        peripheralIsland.islandId = UUID()
+
+        // Method for accessing Core Data
+        PeripheralIslandDataServices.createPeripheralIsland(island: peripheralIsland) { (error) in
+            if (error != nil) {
+                print(error.debugDescription)
+            } else {
+                print("Ilha criada")
+            }
+        }
+    }
+
+    // Retrieving all Peripheral Islands from Core Data
+    func checkAllIslands() {
+        PeripheralIslandDataServices.getAllPeripheralIslands { (error, peripheralIslands) in
+            if error != nil {
+                print(error.debugDescription)
+            } else if let allIslands = peripheralIslands {
+                // Saving number of islands in this class to be available for SpriteKit / Scene Kit implementation
+                self.numberOfPeripheralIslands = allIslands.count
+                print("Há \(allIslands.count) ilhas.")
+                for island in allIslands {
+                    print("Ilha #\(String(describing: island.islandId))")
+                }
+            }
+        }
+    }
 }
