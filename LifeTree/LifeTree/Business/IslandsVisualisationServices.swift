@@ -64,8 +64,8 @@ class IslandsVisualisationServices {
         // Append plane to the dictionary associating them with the island id
         self.islandDictionary[String(n)] = islandNode
         
-        // Defines y position and tilt angle for the plane
-        islandNode.eulerAngles.x = .pi - .pi/12 // so the plane faces the camera
+        // Rotate x 180 degrees so SpriteKitScene is not mirroed
+        islandNode.eulerAngles.x = .pi
         
         self.positionIslandInEllipse(islandNode: islandNode, n: n)
     }
@@ -83,6 +83,7 @@ class IslandsVisualisationServices {
             islandNode.position.x = Float(self.b * sin(Double(n) * self.separationAngle))
             islandNode.position.z = Float(self.a * cos(Double(n) * self.separationAngle) - (self.a - self.ellipseFocalLength))
         }
+        islandNode.position.y = islandNode.position.y - 0.4 * islandNode.position.z
     }
     
     func updateVariables() {
@@ -93,7 +94,7 @@ class IslandsVisualisationServices {
         
         // Corrects axis size based on the total number of islands
         self.a += self.a * Double(self.numberofPeriferalIslands)/50
-        self.b += self.b * Double(self.numberofPeriferalIslands)/100
+        self.b += self.b * Double(self.numberofPeriferalIslands)/70
         
         // Position of ellipse focus
         self.ellipseFocalLength = sqrt(self.a * self.a - self.b * self.b)
