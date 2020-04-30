@@ -36,7 +36,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     // MARK: Lifecycle
 
     override func viewWillAppear(_ animated: Bool) {
-        self.setupWorld()
+        self.setupWorld(name: "Meu Mundo", currentHealth: 50)
         self.checkAllIslands()
     }
     
@@ -94,60 +94,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     @IBAction func retrievePeripheralIslands(_ sender: Any) {
         self.checkAllIslands()
     }
-}
-
-// MARK: Data Visualization
-// Is this working?
-extension IslandsViewController {
-    // After data is retrieved successfuly, its content defines the visualization
-    func setupInterface() {
-        guard let mainNode = selfIslandSKScene?.childNode(withName: "islandNode") else {return}
-
-        // Accessing label node from SpriteKit to change its content
-        if let labelNode = mainNode.childNode(withName: "nameLabelNode") as? SKLabelNode {
-            labelNode.text = selfIsland?.name
-        }
-
-        // Accessing tree node from SpriteKit to change its texture depending on health
-        if let health = selfIsland?.healthStatus as? Double, let treeNode = mainNode.childNode(withName: "treeNode") as? SKSpriteNode {
-            if health > 45.0 {
-                treeNode.texture = SKTexture(imageNamed: "healthyTree")
-            } else {
-                treeNode.texture = SKTexture(imageNamed: "sickTree")
-            }
-        }
-    }
-}
-
-// MARK: Data Handling
-extension IslandsViewController {
-
-    func setupWorld() {
-        // Including default information to CoreData in case of first launch
-        let island = SelfIsland()
-        island.name = "Meu Mundo"
-        island.healthStatus = 50
-        island.islandId = UUID()
-
-        SelfIslandDataServices.createSelfIsland(island: island) { (error) in
-            if (error != nil) {
-                print(error.debugDescription)
-            } else {
-                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.healthStatus!)%")
-            }
-            // After saving data, retrieving it to save on selfIsland object
-            // That might occur in another screen, so then here we would have a performSegue instead.
-            SelfIslandDataServices.getFirstSelfIsland { (error, island) in
-                guard let island = island else {return}
-                if (error != nil) {
-                    print(error.debugDescription)
-                } else {
-                    self.selfIsland = island
-                    self.setupInterface()
-                }
-            }
-        }
-    }
     
 // MARK: FloatingPanel - Card
 
@@ -172,7 +118,8 @@ extension IslandsViewController {
     }
 
 
-// MARK: Tests for new version
+    // MARK: Data Handling
+    // Preciso passar isso pra outra classe
 
     // Creating Peripheral Island on CoreData
     func addPeripheralIsland() {
@@ -206,6 +153,33 @@ extension IslandsViewController {
                 print("Há \(allIslands.count) ilhas.")
                 for island in allIslands {
                     print("Ilha #\(String(describing: island.islandId))")
+                }
+            }
+        }
+    }
+
+    func setupWorld(name: String, currentHealth: Double) {
+        // Including default information to CoreData in case of first launch
+        let island = SelfIsland()
+        island.name = name
+        island.healthStatus = NSNumber(value: currentHealth)
+        island.islandId = UUID()
+
+        SelfIslandDataServices.createSelfIsland(island: island) { (error) in
+            if (error != nil) {
+                print(error.debugDescription)
+            } else {
+                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.healthStatus!)%")
+            }
+            // After saving data, retrieving it to save on selfIsland object
+            // That might occur in another screen, so then here we would have a performSegue instead.
+            SelfIslandDataServices.getFirstSelfIsland { (error, island) in
+                guard let island = island else {return}
+                if (error != nil) {
+                    print(error.debugDescription)
+                } else {
+                    self.selfIsland = island
+                    self.islandsVisualizationServices?.changeSelfIslandLabel(text: island.name ?? "Sem Nome")
                 }
             }
         }
