@@ -73,7 +73,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
         
-        self.islandsVisualizationServices!.changePeriferalIslandLabel(islandId: "3", text: "Deu bom")
+        //self.islandsVisualizationServices!.changePeriferalIslandLabel(islandId: "3", text: "Deu bom")
     }
 
     // MARK: Helpers
@@ -88,7 +88,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     // MARK: Debug Buttons
 
     @IBAction func addPeripheralIsland(_ sender: Any) {
-        self.addPeripheralIsland(category: "Trabalho", name: "Bepid", healthStatus: 40)
+        self.addPeripheralIsland(category: "Pessoal", name: "Amigos", healthStatus: 40)
     }
 
     @IBAction func retrievePeripheralIslands(_ sender: Any) {
@@ -144,8 +144,15 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
                 // Updating Number of Peripheral Islands
                 self.numberOfPeripheralIslands += 1
 
-                // Adding New Island to the Scene - this is not working so far
-                self.islandsVisualizationServices?.addPeriferalIslandToSCNScene(n: self.numberOfPeripheralIslands)
+                // TODO: Adding New Island to the Scene - todo
+                // append object on array
+                // self.islandsVisualizationServices?.peripheralIslands.append(peripheralIsland)
+
+                // change label
+                //self.islandsVisualizationServices?.changePeriferalIslandLabel(peripheralIsland: peripheralIsland)
+
+                // add to the scene
+                // self.islandsVisualizationServices?.addPeriferalIslandToSCNScene(n: self.numberOfPeripheralIslands)
             }
         }
     }
@@ -157,21 +164,19 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
                 // Treat Error
                 print(error.debugDescription)
             } else if let allIslands = peripheralIslands {
-                // Passing Peripheral Islands Array to Islands Visualization Services
-                self.islandsVisualizationServices!.peripheralIslands = allIslands
-
                 // Updating Number of Peripheral Islands
                 self.numberOfPeripheralIslands = allIslands.count
                 print("Há \(allIslands.count) ilhas.")
 
-                // Debug code
-                for island in allIslands {
-                    print("Ilha #\(String(describing: island.islandId))")
-                }
-
                 // If there are any island, start the process os creating scenes
                 if allIslands.count > 0 && shouldCreate {
-                    self.islandsVisualizationServices!.addAllPeriferalIslandsToScene()
+                    self.islandsVisualizationServices!.addAllPeriferalIslandsToScene(peripheralIslandArray: allIslands)
+                }
+
+                // Update labels for each peripheral island
+                for island in allIslands {
+                    print("Ilha #\(String(describing: island.islandId))")
+                    self.islandsVisualizationServices?.changePeriferalIslandLabel(peripheralIsland: island)
                 }
             }
         }
