@@ -9,12 +9,11 @@
 import Foundation
 import SceneKit
 import SpriteKit
+import UIKit
 
 class IslandsVisualisationServices {
     
-    var a: Double = 3 // bigger semi-axis of the ellipse
-    var b: Double = 2.5 // smaller semi-axis of the ellipse
-    var ellipseFocalLength: Double
+    var radius: Double = 3
     var numberofPeriferalIslands: Int = 1
     var separationAngle: Double = 1
     
@@ -26,7 +25,6 @@ class IslandsVisualisationServices {
     
     init(scnScene: SCNScene) {
         self.islandsSCNScene = scnScene
-        self.ellipseFocalLength = sqrt(self.a * self.a - self.b * self.b)
     }
     
     // Add self island to scene
@@ -77,13 +75,13 @@ class IslandsVisualisationServices {
         islandNode.position.y = 0
         // Distinguishes between even and odd number of islands so they're better distributed in the ellipse
         if self.numberofPeriferalIslands % 2 == 0 {
-            islandNode.position.x = Float(self.b * sin((Double(n) + 1/2) * self.separationAngle))
-            islandNode.position.z = Float(self.a * cos((Double(n) + 1/2) * self.separationAngle) - (self.a - self.ellipseFocalLength))
+            islandNode.position.x = Float(self.radius * sin((Double(n) + 1/2) * self.separationAngle))
+            islandNode.position.z = Float(self.radius * cos((Double(n) + 1/2) * self.separationAngle))
         } else {
-            islandNode.position.x = Float(self.b * sin(Double(n) * self.separationAngle))
-            islandNode.position.z = Float(self.a * cos(Double(n) * self.separationAngle) - (self.a - self.ellipseFocalLength))
+            islandNode.position.x = Float(self.radius * sin(Double(n) * self.separationAngle))
+            islandNode.position.z = Float(self.radius * cos(Double(n) * self.separationAngle))
         }
-        islandNode.position.y = islandNode.position.y - 0.4 * islandNode.position.z
+        islandNode.position.y = 0 //islandNode.position.y - 0.4 * islandNode.position.z
     }
     
     // Updates variables to be used when placing the periferal islands
@@ -93,12 +91,8 @@ class IslandsVisualisationServices {
         // Angle of separation between the periferal islands islands
         self.separationAngle = 2 * .pi / Double(self.numberofPeriferalIslands)
         
-        // Corrects axis size based on the total number of islands
-        self.a += self.a * Double(self.numberofPeriferalIslands)/50
-        self.b += self.b * Double(self.numberofPeriferalIslands)/70
-        
-        // Position of ellipse focus
-        self.ellipseFocalLength = sqrt(self.a * self.a - self.b * self.b)
+        // Corrects radius size based on the total number of islands
+        self.radius += self.radius * Double(self.numberofPeriferalIslands)/50
     }
     
     // Define the material for a plane as the island SpriteKit scene model
@@ -145,6 +139,27 @@ class IslandsVisualisationServices {
         guard let selfSKScene = getSelfIslandSKScene() else {return}
         guard let nameSelfIsland = selfSKScene.children.first?.childNode(withName: "nameLabelNode") as? SKLabelNode else {return}
             nameSelfIsland.text = text
+    }
+    
+    func makeRope() {
+        // Coordinate x of the ending point of the parabole, which starts at x = 0
+        let endingPoint_x = self.radius * 100
+
+        // Create a pair of connected paraboles through Bezier paths
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: 0,y: 0)) // initial point
+        path.addQuadCurve(to: CGPoint(x: endingPoint_x, y: 0), controlPoint: CGPoint(x: endingPoint_x/2, y: -(1/2) * endingPoint_x)) // parabole going forward
+        path.addLine(to: CGPoint(x: endingPoint_x * 0.99, y: 0)) // line connecting the two paraboles
+        path.addQuadCurve(to: CGPoint(x: endingPoint_x * (1 - 0.99), y: 0), controlPoint: CGPoint(x: endingPoint_x/2, y: -(1/2) * endingPoint_x + 2 * endingPoint_x * (1 - 0.99))) // parabole going backwards
+        
+        // Create 3D shape by filling the space between the paraboles
+        let shape = SCNShape(path: path, extrusionDepth: 5)
+        shape.firstMaterial?.diffuse.contents = SKColor.black
+        let shapeNode = SCNNode(geometry: shape)
+        shapeNode.scale = SCNVector3(0.01, 0.01, 0.01)
+        // shapeNode.pivot = SCNMatrix4MakeTranslation(50, 0, 0)
+        // shapeNode.eulerAngles.y = Float(self.separationAngle)
+        self.islandsSCNScene.rootNode.addChildNode(shapeNode)
     }
 }
 

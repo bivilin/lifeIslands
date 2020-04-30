@@ -74,6 +74,8 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         self.islandsSCNView.scene = islandsSCNScene
         
         self.islandsVisualizationServices!.changePeriferalIslandLabel(islandId: "3", text: "Deu bom")
+        
+        self.islandsVisualizationServices!.makeRope()
     }
 
     // MARK: Helpers
@@ -82,7 +84,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         // Allows the user to manipulate the camera
         // Olhar constraints de câmera
         sceneView.allowsCameraControl = true
-        sceneView.cameraControlConfiguration.rotationSensitivity = 0
+        // sceneView.cameraControlConfiguration.rotationSensitivity = 0
     }
 
     // MARK: Debug Buttons
