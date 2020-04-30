@@ -24,7 +24,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     var selfIsland: SelfIsland?
 
     // Peripheral Islands Properties
-    var numberOfPeripheralIslands: Int?
+    var numberOfPeripheralIslands: Int = 0
     var islandsVisualizationServices: IslandsVisualisationServices? = nil
     // Dictionary with key being the id of the island, and value its corresponding SceneKit plane node
     var islandDictionary: [String: SCNNode] = [:]
@@ -37,7 +37,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
 
     override func viewWillAppear(_ animated: Bool) {
         self.setupWorld(name: "Meu Mundo", currentHealth: 50)
-        self.checkAllIslands()
+        self.checkAllIslands(shouldCreate: true)
     }
     
     override func viewDidLoad() {
@@ -68,7 +68,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         self.islandsVisualizationServices!.addSelfIslandToScene(islandsSCNScene: islandsSCNScene)
         
         // Add periferal islands to scene
-        self.islandsVisualizationServices!.addAllPeriferalIslandsToScene()
+        //self.islandsVisualizationServices!.addAllPeriferalIslandsToScene()
         
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
@@ -88,11 +88,11 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     // MARK: Debug Buttons
 
     @IBAction func addPeripheralIsland(_ sender: Any) {
-        self.addPeripheralIsland()
+        self.addPeripheralIsland(category: "Trabalho", name: "Bepid", healthStatus: 40)
     }
 
     @IBAction func retrievePeripheralIslands(_ sender: Any) {
-        self.checkAllIslands()
+        self.checkAllIslands(shouldCreate: false)
     }
     
 // MARK: FloatingPanel - Card
@@ -120,16 +120,17 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
 
     // MARK: Data Handling
     // Preciso passar isso pra outra classe
+    // Planejar delegates
 
     // Creating Peripheral Island on CoreData
-    func addPeripheralIsland() {
+    func addPeripheralIsland(category: String, name: String, healthStatus: Double) {
 
         let peripheralIsland = PeripheralIsland()
 
         // Mock Data
-        peripheralIsland.category = "Trabalho"
-        peripheralIsland.name = "OneForma"
-        peripheralIsland.healthStatus = 30.0
+        peripheralIsland.category = category
+        peripheralIsland.name = name
+        peripheralIsland.healthStatus = NSNumber(value: healthStatus)
         peripheralIsland.islandId = UUID()
 
         // Method for accessing Core Data
@@ -137,22 +138,40 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
             if (error != nil) {
                 print(error.debugDescription)
             } else {
+                // Debug code
                 print("Ilha criada")
+
+                // Updating Number of Peripheral Islands
+                self.numberOfPeripheralIslands += 1
+
+                // Adding New Island to the Scene - this is not working so far
+                self.islandsVisualizationServices?.addPeriferalIslandToSCNScene(n: self.numberOfPeripheralIslands)
             }
         }
     }
 
     // Retrieving all Peripheral Islands from Core Data
-    func checkAllIslands() {
+    func checkAllIslands(shouldCreate: Bool) {
         PeripheralIslandDataServices.getAllPeripheralIslands { (error, peripheralIslands) in
             if error != nil {
+                // Treat Error
                 print(error.debugDescription)
             } else if let allIslands = peripheralIslands {
-                // Saving number of islands in this class to be available for SpriteKit / Scene Kit implementation
+                // Passing Peripheral Islands Array to Islands Visualization Services
+                self.islandsVisualizationServices!.peripheralIslands = allIslands
+
+                // Updating Number of Peripheral Islands
                 self.numberOfPeripheralIslands = allIslands.count
                 print("Há \(allIslands.count) ilhas.")
+
+                // Debug code
                 for island in allIslands {
                     print("Ilha #\(String(describing: island.islandId))")
+                }
+
+                // If there are any island, start the process os creating scenes
+                if allIslands.count > 0 && shouldCreate {
+                    self.islandsVisualizationServices!.addAllPeriferalIslandsToScene()
                 }
             }
         }
@@ -169,6 +188,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
             if (error != nil) {
                 print(error.debugDescription)
             } else {
+                // Debug Code
                 print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.healthStatus!)%")
             }
             // After saving data, retrieving it to save on selfIsland object

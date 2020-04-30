@@ -22,6 +22,7 @@ class IslandsVisualisationServices {
     let planeLength: CGFloat = 1
     
     let islandIndexes: [String] = ["1", "2", "3", "4", "5", "6"]
+    var peripheralIslands: [PeripheralIsland] = [PeripheralIsland]()
     var islandDictionary: [String: SCNNode] = [:]
     
     init(scnScene: SCNScene) {
@@ -88,7 +89,8 @@ class IslandsVisualisationServices {
     
     // Updates variables to be used when placing the periferal islands
     func updateVariablesForPositioningIslands() {
-        self.numberofPeriferalIslands = islandIndexes.count
+        //self.numberofPeriferalIslands = islandIndexes.count
+        self.numberofPeriferalIslands = peripheralIslands.count
         
         // Angle of separation between the periferal islands islands
         self.separationAngle = 2 * .pi / Double(self.numberofPeriferalIslands)
