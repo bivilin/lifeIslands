@@ -29,10 +29,15 @@ class IslandsVisualisationServices {
     
     // Add self island to scene
     func addSelfIslandToScene(islandsSCNScene: SCNScene) {
+        
         // Set SpriteKit scene as the material for the SceneKit plane
         if let selfIslandPlane = islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true),
             let selfIslandPlaneGeometry = selfIslandPlane.geometry {
             self.setPlaneMaterialAsIslandSKScene(planeGeometry: selfIslandPlaneGeometry)
+            
+            // Places billboard constrint so that self plane is always facing the camera
+            let constraint = SCNBillboardConstraint()
+            selfIslandPlane.constraints = [constraint]
         }
     }
     
@@ -62,9 +67,7 @@ class IslandsVisualisationServices {
         // Append plane to the dictionary associating them with the island id
         self.islandDictionary[String(n)] = islandNode
         
-        // Rotate x 180 degrees so SpriteKitScene is not mirroed
-        islandNode.eulerAngles.x = .pi
-        
+        // Positions island in the orbit circle
         self.positionIslandInCircle(islandNode: islandNode, n: n)
     }
     
@@ -82,7 +85,11 @@ class IslandsVisualisationServices {
             islandNode.position.z = Float(self.radius * cos(Double(n) * self.separationAngle))
         }
         islandNode.position.y = 0
-        makeRope(n: n)
+        makeRope(n: n) // places rope connecting it to the self island
+        
+        // Place billboard constraint so that island plane is always facing the camera
+        let constraint = SCNBillboardConstraint()
+        islandNode.constraints = [constraint]
     }
     
     // Updates variables to be used when placing the periferal islands
@@ -100,12 +107,21 @@ class IslandsVisualisationServices {
     func setPlaneMaterialAsIslandSKScene(planeGeometry: SCNGeometry) {
         // Assign a SpriteKit scene as texture to such plane
         if let planeMaterial = planeGeometry.firstMaterial {
+            
             // Creates SpriteKit scene as an independent copy of the island scene
             let newSpriteKitScene = SKScene(fileNamed: "IslandSpriteScene.sks")!.copy() as! SKScene
+            
             // Asign scene as material
             planeMaterial.diffuse.contents = newSpriteKitScene
-            // Makes the material double sided, otherwise the plane can only be seen when the camera is pointed at its +z direction (which is not our case)
+            
+            // Makes the material double sided, otherwise the plane can only be seen when the camera is pointed at its +z direction (which might not be the case unless we use the billboard constrint on the planes)
             planeMaterial.isDoubleSided = true
+            
+            // Flips the SKScene root node vertically so it has the correct orientation on the SCNScene
+            if let yScale = newSpriteKitScene.children.first?.yScale {
+                newSpriteKitScene.children.first?.yScale = -1 * yScale
+            }
+            
         }
     }
     
@@ -156,12 +172,14 @@ class IslandsVisualisationServices {
         path.addLine(to: CGPoint(x: thickness, y: 0)) // line connecting the two paraboles
         path.addQuadCurve(to: CGPoint(x: width - thickness, y: 0), controlPoint: CGPoint(x: width/2, y: -(1/2) * width + 2 * (width - thickness))) // parabole going backwards
         
-        // Create 3D shape by filling the space between the paraboles
+        // Creates 3D shape by filling the space between the paraboles
         let shape = SCNShape(path: path, extrusionDepth: 2)
         shape.firstMaterial?.diffuse.contents = SKColor.black
         let shapeNode = SCNNode(geometry: shape)
         shapeNode.scale = SCNVector3(0.01, 0.01, 0.01)
         
+        // Positions the node
+        shapeNode.position.y = -0.45
         shapeNode.eulerAngles.y = Float(Double(n) * self.separationAngle)
         self.islandsSCNScene.rootNode.addChildNode(shapeNode)
     }
