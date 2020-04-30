@@ -74,8 +74,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         self.islandsSCNView.scene = islandsSCNScene
         
         self.islandsVisualizationServices!.changePeriferalIslandLabel(islandId: "3", text: "Deu bom")
-        
-        self.islandsVisualizationServices!.makeRope()
     }
 
     // MARK: Helpers
