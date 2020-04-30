@@ -40,7 +40,7 @@ class IslandsVisualisationServices {
     
     // Add all periferal islands to scene
     func addAllPeriferalIslandsToScene() {
-        self.updateVariables()
+        self.updateVariablesForPositioningIslands()
         
         // Creates all islands
         for n in 1...self.numberofPeriferalIslands {
@@ -86,7 +86,8 @@ class IslandsVisualisationServices {
         islandNode.position.y = islandNode.position.y - 0.4 * islandNode.position.z
     }
     
-    func updateVariables() {
+    // Updates variables to be used when placing the periferal islands
+    func updateVariablesForPositioningIslands() {
         self.numberofPeriferalIslands = islandIndexes.count
         
         // Angle of separation between the periferal islands islands
@@ -104,7 +105,6 @@ class IslandsVisualisationServices {
     func setPlaneMaterialAsIslandSKScene(planeGeometry: SCNGeometry) {
         // Assign a SpriteKit scene as texture to such plane
         if let planeMaterial = planeGeometry.firstMaterial {
-            
             // Creates SpriteKit scene as an independent copy of the island scene
             let newSpriteKitScene = SKScene(fileNamed: "IslandSpriteScene.sks")!.copy() as! SKScene
             // Asign scene as material
@@ -114,14 +114,37 @@ class IslandsVisualisationServices {
         }
     }
     
+    // Get the SKScene of the self island
+    func getSelfIslandSKScene() -> SKScene? {
+        var selfIslandSKScene: SKScene? = nil
+        if let selfIslandPlane = islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true) {
+            selfIslandSKScene = selfIslandPlane.geometry!.firstMaterial!.diffuse.contents as? SKScene
+        }
+        return selfIslandSKScene
+    }
+    
+    // Get the SKScene of a periferal island from its id
+    func getPeriferalIslandSKScene(islandId: String) -> SKScene? {
+        var sceneForIsland: SKScene? = nil
+        if let nodeForIsland: SCNNode = self.islandDictionary[islandId] {
+            sceneForIsland = nodeForIsland.geometry!.firstMaterial!.diffuse.contents as? SKScene
+        }
+        return sceneForIsland
+    }
+    
     // Changes label of a periferal island
     func changePeriferalIslandLabel(islandId: String, text: String) {
         // Acessa uma scene do SpriteKit a partir do node do plano do SceneKit
-        guard let nodeForIsland: SCNNode = self.islandDictionary[islandId] else {return}
-        guard let sceneForIsland: SKScene = nodeForIsland.geometry!.firstMaterial!.diffuse.contents as? SKScene else {return}
+        guard let sceneForIsland: SKScene = getPeriferalIslandSKScene(islandId: islandId) else {return}
         guard let nameIsland = sceneForIsland.children.first?.childNode(withName: "nameLabelNode") as? SKLabelNode else {return}
         nameIsland.text = text
     }
     
+    // Changes label of self island
+    func changeSelfIslandLabel(text: String) {
+        guard let selfSKScene = getSelfIslandSKScene() else {return}
+        guard let nameSelfIsland = selfSKScene.children.first?.childNode(withName: "nameLabelNode") as? SKLabelNode else {return}
+            nameSelfIsland.text = text
+    }
 }
 
