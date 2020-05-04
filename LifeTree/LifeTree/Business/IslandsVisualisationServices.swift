@@ -168,9 +168,9 @@ class IslandsVisualisationServices {
         // Create a pair of connected paraboles through Bezier paths
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0,y: 0)) // initial point
-        path.addQuadCurve(to: CGPoint(x: width, y: 0), controlPoint: CGPoint(x: width/2, y: -(1/2) * width)) // parabole going forward
+        path.addQuadCurve(to: CGPoint(x: width, y: 0), controlPoint: CGPoint(x: width/2, y: -(1/3) * width)) // parabole going forward
         path.addLine(to: CGPoint(x: thickness, y: 0)) // line connecting the two paraboles
-        path.addQuadCurve(to: CGPoint(x: width - thickness, y: 0), controlPoint: CGPoint(x: width/2, y: -(1/2) * width + 2 * (width - thickness))) // parabole going backwards
+        path.addQuadCurve(to: CGPoint(x: width - thickness, y: 0), controlPoint: CGPoint(x: width/2, y: -(1/3) * width + 2 * (width - thickness))) // parabole going backwards
         
         // Creates 3D shape by filling the space between the paraboles
         let shape = SCNShape(path: path, extrusionDepth: 2)
@@ -179,7 +179,7 @@ class IslandsVisualisationServices {
         shapeNode.scale = SCNVector3(0.01, 0.01, 0.01)
         
         // Positions the node
-        shapeNode.position.y = -0.45
+        shapeNode.position.y = -0.4
         shapeNode.eulerAngles.y = Float(Double(n) * self.separationAngle)
         self.islandsSCNScene.rootNode.addChildNode(shapeNode)
     }
