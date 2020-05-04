@@ -23,8 +23,8 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     var selfIslandSKScene: SKScene?
     var selfIsland: SelfIsland?
 
-    // Peripheral Islands Properties
-    var numberOfPeripheralIslands: Int = 0
+    // Services
+    var infoHandler: InformationHandler?
     var islandsVisualizationServices: IslandsVisualisationServices? = nil
     // Dictionary with key being the id of the island, and value its corresponding SceneKit plane node
     var islandDictionary: [String: SCNNode] = [:]
@@ -34,11 +34,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     var cardView: CardViewController!
 
     // MARK: Lifecycle
-
-    override func viewWillAppear(_ animated: Bool) {
-        self.setupWorld(name: "Meu Mundo", currentHealth: 50)
-        self.checkAllIslands(shouldCreate: true)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +53,8 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         
         // Initializes island Services class with our SCNScene
         self.islandsVisualizationServices = IslandsVisualisationServices(scnScene: islandsSCNScene)
+        self.infoHandler = InformationHandler(sceneServices: islandsVisualizationServices!)
+        self.mockData()
 
         // Show Card
         setupFloatingPanel()
@@ -88,11 +85,11 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     // MARK: Debug Buttons
 
     @IBAction func addPeripheralIsland(_ sender: Any) {
-        self.addPeripheralIsland(category: "Pessoal", name: "Amigos", healthStatus: 40)
+        //self.infoHandler?.addPeripheralIsland(category: "Pessoal", name: "Amigos", healthStatus: 40)
     }
 
     @IBAction func retrievePeripheralIslands(_ sender: Any) {
-        self.checkAllIslands(shouldCreate: false)
+        self.infoHandler?.retrievePeripheralIslands(shouldAddToScene: false)
     }
     
 // MARK: FloatingPanel - Card
@@ -122,91 +119,20 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     // Preciso passar isso pra outra classe
     // Planejar delegates
 
-    // Creating Peripheral Island on CoreData
-    func addPeripheralIsland(category: String, name: String, healthStatus: Double) {
+    func mockData() {
+        self.infoHandler?.createSelf(name: "Meu Mundo", currentHealth: 50)
+        self.infoHandler?.retrievePeripheralIslands(shouldAddToScene: true)
 
-        let peripheralIsland = PeripheralIsland()
-
-        // Mock Data
-        peripheralIsland.category = category
-        peripheralIsland.name = name
-        peripheralIsland.healthStatus = NSNumber(value: healthStatus)
-        peripheralIsland.islandId = UUID()
-
-        // Method for accessing Core Data
-        PeripheralIslandDataServices.createPeripheralIsland(island: peripheralIsland) { (error) in
-            if (error != nil) {
-                print(error.debugDescription)
-            } else {
-                // Debug code
-                print("Ilha criada")
-
-                // Updating Number of Peripheral Islands
-                self.numberOfPeripheralIslands += 1
-
-                // TODO: Adding New Island to the Scene - todo
-                // append object on array
-                // self.islandsVisualizationServices?.peripheralIslands.append(peripheralIsland)
-
-                // change label
-                //self.islandsVisualizationServices?.changePeriferalIslandLabel(peripheralIsland: peripheralIsland)
-
-                // add to the scene
-                // self.islandsVisualizationServices?.addPeriferalIslandToSCNScene(n: self.numberOfPeripheralIslands)
-            }
-        }
+        // Uncomment and run for first use on debug
+        //self.mockPeripheral()
     }
 
-    // Retrieving all Peripheral Islands from Core Data
-    func checkAllIslands(shouldCreate: Bool) {
-        PeripheralIslandDataServices.getAllPeripheralIslands { (error, peripheralIslands) in
-            if error != nil {
-                // Treat Error
-                print(error.debugDescription)
-            } else if let allIslands = peripheralIslands {
-                // Updating Number of Peripheral Islands
-                self.numberOfPeripheralIslands = allIslands.count
-                print("Há \(allIslands.count) ilhas.")
-
-                // If there are any island, start the process os creating scenes
-                if allIslands.count > 0 && shouldCreate {
-                    self.islandsVisualizationServices!.addAllPeriferalIslandsToScene(peripheralIslandArray: allIslands)
-                }
-
-                // Update labels for each peripheral island
-                for island in allIslands {
-                    print("Ilha #\(String(describing: island.islandId))")
-                    self.islandsVisualizationServices?.changePeriferalIslandLabel(peripheralIsland: island)
-                }
-            }
-        }
+    // Debug function only to populate CoreData in first use.
+    func mockPeripheral() {
+        self.infoHandler?.addPeripheralIsland(category: "Trabalho", name: "Trabalho", healthStatus: 90)
+        self.infoHandler?.addPeripheralIsland(category: "Estudos", name: "Faculdade", healthStatus: 55)
+        self.infoHandler?.addPeripheralIsland(category: "Família", name: "Família", healthStatus: 40)
+        self.infoHandler?.addPeripheralIsland(category: "Saúde", name: "Saúde", healthStatus: 70)
     }
 
-    func setupWorld(name: String, currentHealth: Double) {
-        // Including default information to CoreData in case of first launch
-        let island = SelfIsland()
-        island.name = name
-        island.healthStatus = NSNumber(value: currentHealth)
-        island.islandId = UUID()
-
-        SelfIslandDataServices.createSelfIsland(island: island) { (error) in
-            if (error != nil) {
-                print(error.debugDescription)
-            } else {
-                // Debug Code
-                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.healthStatus!)%")
-            }
-            // After saving data, retrieving it to save on selfIsland object
-            // That might occur in another screen, so then here we would have a performSegue instead.
-            SelfIslandDataServices.getFirstSelfIsland { (error, island) in
-                guard let island = island else {return}
-                if (error != nil) {
-                    print(error.debugDescription)
-                } else {
-                    self.selfIsland = island
-                    self.islandsVisualizationServices?.changeSelfIslandLabel(text: island.name ?? "Sem Nome")
-                }
-            }
-        }
-    }
 }
