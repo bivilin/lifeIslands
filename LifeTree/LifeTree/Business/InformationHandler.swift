@@ -95,7 +95,7 @@ class InformationHandler {
                 print("Há \(allIslands.count) ilhas.")
 
                 // If there are any island, start the process os creating scenes
-                if allIslands.count > 0 && shouldCreate {
+                if allIslands.count > 0 && shouldAddToScene {
                     self.sceneServices.addAllPeriferalIslandsToScene(peripheralIslandArray: allIslands)
                 }
 
