@@ -52,9 +52,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         selfIslandSKScene = SKScene(fileNamed: "IslandSpriteScene.sks")!
         selfIslandSKScene?.isPaused = false
         selfIslandSKScene?.scaleMode = .aspectFit
-
-        // SceneKit camera
-        // let cameraNode = islandsSCNScene.rootNode.childNode(withName: "camera", recursively: true)
         
         // Initializes island Services class with our SCNScene
         self.islandsVisualizationServices = IslandsVisualisationServices(scnScene: islandsSCNScene)
@@ -82,7 +79,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         // Allows the user to manipulate the camera
         // Olhar constraints de câmera
         sceneView.allowsCameraControl = true
-        sceneView.cameraControlConfiguration.rotationSensitivity = 0
+        // sceneView.cameraControlConfiguration.rotationSensitivity = 0
     }
 
     // MARK: Debug Buttons
