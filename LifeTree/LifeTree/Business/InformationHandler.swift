@@ -11,6 +11,7 @@ import Foundation
 class InformationHandler {
     var sceneServices: IslandsVisualisationServices
     var numberOfPeripheralIslands: Int = 0
+    var peripheralIslandsToPersist: [PeripheralIsland] = []
 
     init(sceneServices: IslandsVisualisationServices) {
         self.sceneServices = sceneServices
@@ -48,7 +49,7 @@ class InformationHandler {
 
     // MARK: Single Peripheral Create
     // Creating a Single Peripheral Island on CoreData
-    func addPeripheralIsland(category: String, name: String, healthStatus: Double) {
+    func addPeripheralIslandToDatabase(category: String, name: String, healthStatus: Double) {
 
         let peripheralIsland = PeripheralIsland()
 
@@ -68,23 +69,38 @@ class InformationHandler {
 
                 // Updating Number of Peripheral Islands
                 self.numberOfPeripheralIslands += 1
-
-                // TODO: Adding New Island to the Scene - todo
-                // append object on array
-                // self.islandsVisualizationServices?.peripheralIslands.append(peripheralIsland)
-
-                // change label
-                //self.islandsVisualizationServices?.changePeriferalIslandLabel(peripheralIsland: peripheralIsland)
-
-                // add to the scene
-                // self.islandsVisualizationServices?.addPeriferalIslandToSCNScene(n: self.numberOfPeripheralIslands)
             }
         }
     }
 
-    // MARK: All Peripheral Create
+    // Cria vetor contendo todas as ilhas periféricas que serão persistidas no CoreData
+    func addPeripheralIslandToArray(category: String, name: String, healthStatus: Double) {
+        let peripheralIsland = PeripheralIsland()
+
+        peripheralIsland.category = category
+        peripheralIsland.name = name
+        peripheralIsland.healthStatus = NSNumber(value: healthStatus)
+        peripheralIsland.islandId = UUID()
+
+        peripheralIslandsToPersist.append(peripheralIsland)
+    }
+
+    // Usa vetor criado para adicionar todas as ilhas periféricas no banco de dados
+    func addAllPeripheralIslandsToDatabase() {
+        PeripheralIslandDataServices.createAllPeripheralIsland(islands: peripheralIslandsToPersist) { (error) in
+            if error != nil {
+                print(error.debugDescription)
+            } else {
+                // Adiciona
+                self.plotPeripheralIslandsOnScene(shouldAddToScene: true)
+            }
+        }
+    }
+
+
+    // MARK: Plot All Peripheral Islands
     // Retrieving all Peripheral Islands from Core Data
-    func retrievePeripheralIslands(shouldAddToScene: Bool) {
+    func plotPeripheralIslandsOnScene(shouldAddToScene: Bool) {
         PeripheralIslandDataServices.getAllPeripheralIslands { (error, peripheralIslands) in
             if error != nil {
                 // Treat Error
