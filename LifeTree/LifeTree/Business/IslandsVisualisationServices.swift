@@ -13,7 +13,7 @@ import UIKit
 
 class IslandsVisualisationServices {
     
-    var radius: Double = 3
+    var radius: Double = 2.5
     var numberofPeriferalIslands: Int = 1
     var separationAngle: Double = 1
     
@@ -77,19 +77,22 @@ class IslandsVisualisationServices {
         // Define plane for the ellipse
         islandNode.position.y = 0
         // Distinguishes between even and odd number of islands so they're better distributed in the ellipse
+        var angle = Double(n) * self.separationAngle
         if self.numberofPeriferalIslands % 2 == 0 {
-            islandNode.position.x = Float(self.radius * sin((Double(n) + 1/2) * self.separationAngle))
-            islandNode.position.z = Float(self.radius * cos((Double(n) + 1/2) * self.separationAngle))
-        } else {
-            islandNode.position.x = Float(self.radius * sin(Double(n) * self.separationAngle))
-            islandNode.position.z = Float(self.radius * cos(Double(n) * self.separationAngle))
+            angle = angle + (1/2) * self.separationAngle
         }
+        islandNode.position.x = Float(self.radius * sin(angle))
+        islandNode.position.z = Float(self.radius * cos(angle))
         islandNode.position.y = 0
-        makeRope(n: n) // places rope connecting it to the self island
+        
+        print("ILHA")
+        print(angle)
         
         // Place billboard constraint so that island plane is always facing the camera
         let constraint = SCNBillboardConstraint()
         islandNode.constraints = [constraint]
+        
+        makeRope(angle: Float(angle)) // places rope connecting it to the self island
     }
     
     // Updates variables to be used when placing the periferal islands
@@ -100,7 +103,7 @@ class IslandsVisualisationServices {
         self.separationAngle = 2 * .pi / Double(self.numberofPeriferalIslands)
         
         // Corrects radius size based on the total number of islands
-        self.radius += self.radius * Double(self.numberofPeriferalIslands)/50
+        self.radius += self.radius * Double(self.numberofPeriferalIslands)/20
     }
     
     // Define the material for a plane as the island SpriteKit scene model
@@ -158,7 +161,7 @@ class IslandsVisualisationServices {
             nameSelfIsland.text = text
     }
     
-    func makeRope(n: Int) {
+    func makeRope(angle: Float) {
         // Width of the parabole, which corresponds to the coordinate x of its ending point
         let width = self.radius * 100
         
@@ -178,10 +181,31 @@ class IslandsVisualisationServices {
         let shapeNode = SCNNode(geometry: shape)
         shapeNode.scale = SCNVector3(0.01, 0.01, 0.01)
         
+        // Corrects SceneKit angle shift bug
+        var correction: Float = 0
+        switch self.numberofPeriferalIslands {
+        case 1, 2:
+            correction = -.pi/2
+        case 3, 6:
+            correction = .pi/6
+        case 5, 10:
+            correction = -.pi/10
+        case 7:
+            correction = .pi/12
+        case 9:
+            correction = -.pi/16
+        case 11:
+            correction = .pi/24
+        default:
+            correction = 0
+        }
+        
         // Positions the node
         shapeNode.position.y = -0.4
-        shapeNode.eulerAngles.y = Float(Double(n) * self.separationAngle)
         self.islandsSCNScene.rootNode.addChildNode(shapeNode)
+        shapeNode.eulerAngles.y = angle + correction
+        print("CORDA")
+        print(shapeNode.eulerAngles.y)
     }
 }
 

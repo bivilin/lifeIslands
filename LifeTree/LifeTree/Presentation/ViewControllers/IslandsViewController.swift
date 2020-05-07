@@ -17,10 +17,11 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     
     // MARK: Variables
     
-    // COLOCAR INICIALIZADOR NESSA CLASSE!
+    // Set up the 3D scene for the islands
+    let islandsSCNScene = SCNScene(named: "AllIslandsScene.scn")!
     
     // Self Island Properties
-    var selfIslandSKScene: SKScene?
+    var islandModelSKScene: SKScene = SKScene(fileNamed: "IslandSpriteScene.sks")!
     var selfIsland: SelfIsland?
 
     // Services
@@ -32,21 +33,38 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     // Card Properties
     var floatingPanel: FloatingPanelController!
     var cardView: CardViewController!
+    
+    // Camera
+    var cameraOrbit = SCNNode()
+    var cameraNode: SCNNode? = nil
+    
+    // Handle pan camera
+    var lastWidthRatio: Float = 0
+    var lastHeightRatio: Float = 0.2
+    var WidthRatio: Float = 0
+    var HeightRatio: Float = 0.2
+    var fingersNeededToPan = 1
+    var maxWidthRatioRight: Float = 0.2
+    var maxWidthRatioLeft: Float = -0.2
+    var maxHeightRatioXDown: Float = 0.02
+    var maxHeightRatioXUp: Float = 0.4
+
+    // Handle pinch camera
+    var pinchAttenuation = 20.0  //1.0: very fast ---- 100.0 very slow
+    var lastFingersNumber = 0
 
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Create the SCNScene
-        let islandsSCNScene = SCNScene(named: "AllIslandsScene.scn")!
+        // Set up SCNScene
         islandsSCNScene.background.contents = UIImage(named: "backgroundSky")
         setUpCameraControl(sceneView: self.islandsSCNView)
         
-        // Create the SKScene
-        selfIslandSKScene = SKScene(fileNamed: "IslandSpriteScene.sks")!
-        selfIslandSKScene?.isPaused = false
-        selfIslandSKScene?.scaleMode = .aspectFit
+        // Set up model for islands SKScene
+        self.islandModelSKScene.isPaused = false
+        self.islandModelSKScene.scaleMode = .aspectFit
         
         // Initializes island Services class with our SCNScene
         self.islandsVisualizationServices = IslandsVisualisationServices(scnScene: islandsSCNScene)
@@ -61,13 +79,10 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         // Add self islando do scene
         self.islandsVisualizationServices!.addSelfIslandToScene(islandsSCNScene: islandsSCNScene)
         
-        // Add periferal islands to scene
-        //self.islandsVisualizationServices!.addAllPeriferalIslandsToScene()
-        
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
         
-        //self.islandsVisualizationServices!.changePeriferalIslandLabel(islandId: "3", text: "Deu bom")
+        
     }
 
     // MARK: Helpers
@@ -111,7 +126,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         floatingPanel.addPanel(toParent: self, animated: false)
     }
 
-
     // MARK: Data Handling
     // Preciso passar isso pra outra classe
     // Planejar delegates
@@ -121,15 +135,15 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         self.infoHandler?.retrievePeripheralIslands(shouldAddToScene: true)
 
         // Uncomment and run for first use on debug
-        //self.mockPeripheral()
+        // self.mockPeripheral()
     }
 
     // Debug function only to populate CoreData in first use.
     func mockPeripheral() {
         self.infoHandler?.addPeripheralIsland(category: "Trabalho", name: "Trabalho", healthStatus: 90)
-        self.infoHandler?.addPeripheralIsland(category: "Estudos", name: "Faculdade", healthStatus: 55)
-        self.infoHandler?.addPeripheralIsland(category: "Família", name: "Família", healthStatus: 40)
-        self.infoHandler?.addPeripheralIsland(category: "Saúde", name: "Saúde", healthStatus: 70)
+        // self.infoHandler?.addPeripheralIsland(category: "Estudos", name: "Faculdade", healthStatus: 55)
+        // self.infoHandler?.addPeripheralIsland(category: "Família", name: "Família", healthStatus: 40)
+        // self.infoHandler?.addPeripheralIsland(category: "Saúde", name: "Saúde", healthStatus: 70)
     }
 
 }
