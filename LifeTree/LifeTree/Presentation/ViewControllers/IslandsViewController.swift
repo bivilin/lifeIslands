@@ -25,7 +25,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     var selfIsland: SelfIsland?
 
     // Services
-    let vectorServices = VectorServices()
     var infoHandler: InformationHandler?
     var islandsVisualizationServices: IslandsVisualisationServices? = nil
     // Dictionary with key being the id of the island, and value its corresponding SceneKit plane node
@@ -167,8 +166,9 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         let pinchVelocity = Double.init(gestureRecognize.velocity)
         let zoomFactor = 1 - pinchVelocity/pinchAttenuation
         
-        let newPosition = self.vectorServices.multiplicationByScalar(vector: self.cameraNode.position, scalar: Float(zoomFactor))
-        let distanceFromCameraOrbit = self.vectorServices.length(vector: self.vectorServices.subtraction(vector1: self.cameraOrbit.position, vectorToSubtract: newPosition))
+        let vectorServices = VectorServices()
+        let newPosition = vectorServices.multiplicationByScalar(vector: self.cameraNode.position, scalar: Float(zoomFactor))
+        let distanceFromCameraOrbit = vectorServices.length(vector: vectorServices.subtraction(vector1: self.cameraOrbit.position, vectorToSubtract: newPosition))
         
         if distanceFromCameraOrbit < self.maxCameraDistanceFromCenter && distanceFromCameraOrbit > self.minCameraDistanceFromCenter {
             self.cameraNode.position = newPosition
