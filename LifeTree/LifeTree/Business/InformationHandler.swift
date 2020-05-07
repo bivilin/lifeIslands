@@ -106,6 +106,9 @@ class InformationHandler {
                 // Treat Error
                 print(error.debugDescription)
             } else if let allIslands = peripheralIslands {
+                if allIslands.count == 0 {
+                    self.addAllPeripheralIslandsToDatabase()
+                }
                 // Updating Number of Peripheral Islands
                 self.numberOfPeripheralIslands = allIslands.count
                 print("Há \(allIslands.count) ilhas.")
@@ -114,7 +117,6 @@ class InformationHandler {
                 if allIslands.count > 0 && shouldAddToScene {
                     self.sceneServices.addAllPeriferalIslandsToScene(peripheralIslandArray: allIslands)
                 }
-
                 // Update labels for each peripheral island
                 for island in allIslands {
                     print("Ilha #\(String(describing: island.islandId))")

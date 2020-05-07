@@ -114,6 +114,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         self.infoHandler?.addPeripheralIslandToArray(category: "Saúde", name: "Academia", healthStatus: 50)
         self.infoHandler?.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 60)
         self.infoHandler?.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 80)
+        self.infoHandler?.plotPeripheralIslandsOnScene(shouldAddToScene: true)
         self.infoHandler?.addAllPeripheralIslandsToDatabase()
     }
 
