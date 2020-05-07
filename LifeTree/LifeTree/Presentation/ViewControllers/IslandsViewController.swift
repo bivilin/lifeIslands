@@ -50,8 +50,9 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         
         // Initializes island Services class with our SCNScene
         self.islandsVisualizationServices = IslandsVisualisationServices(scnScene: islandsSCNScene)
+
+        // Inicializando classe que maneja os dados
         self.infoHandler = InformationHandler(sceneServices: islandsVisualizationServices!)
-        self.mockData()
 
         // Show Card
         setupFloatingPanel()
@@ -99,23 +100,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         // Set a content view controller
         floatingPanel.set(contentViewController: cardView)
         floatingPanel.addPanel(toParent: self, animated: false)
-    }
-
-
-    // MARK: Data Handling
-    // Preciso passar isso pra outra classe
-    // Planejar delegates
-
-    func mockData() {
-        self.infoHandler?.createSelf(name: "Meu Mundo", currentHealth: 50)
-        self.infoHandler?.addPeripheralIslandToArray(category: "Trabalho", name: "Trabalho", healthStatus: 90)
-        self.infoHandler?.addPeripheralIslandToArray(category: "Faculdade", name: "Faculdade", healthStatus: 55)
-        self.infoHandler?.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 40)
-        self.infoHandler?.addPeripheralIslandToArray(category: "Saúde", name: "Academia", healthStatus: 50)
-        self.infoHandler?.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 60)
-        self.infoHandler?.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 80)
-        self.infoHandler?.plotPeripheralIslandsOnScene(shouldAddToScene: true)
-        self.infoHandler?.addAllPeripheralIslandsToDatabase()
     }
 
 }
