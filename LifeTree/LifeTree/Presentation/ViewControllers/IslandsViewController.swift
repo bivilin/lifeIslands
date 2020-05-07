@@ -108,18 +108,13 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
 
     func mockData() {
         self.infoHandler?.createSelf(name: "Meu Mundo", currentHealth: 50)
-        self.infoHandler?.retrievePeripheralIslands(shouldAddToScene: true)
-
-        // Uncomment and run for first use on debug
-        //self.mockPeripheral()
-    }
-
-    // Debug function only to populate CoreData in first use.
-    func mockPeripheral() {
-        self.infoHandler?.addPeripheralIsland(category: "Trabalho", name: "Trabalho", healthStatus: 90)
-        self.infoHandler?.addPeripheralIsland(category: "Estudos", name: "Faculdade", healthStatus: 55)
-        self.infoHandler?.addPeripheralIsland(category: "Família", name: "Família", healthStatus: 40)
-        self.infoHandler?.addPeripheralIsland(category: "Saúde", name: "Saúde", healthStatus: 70)
+        self.infoHandler?.addPeripheralIslandToArray(category: "Trabalho", name: "Trabalho", healthStatus: 90)
+        self.infoHandler?.addPeripheralIslandToArray(category: "Faculdade", name: "Faculdade", healthStatus: 55)
+        self.infoHandler?.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 40)
+        self.infoHandler?.addPeripheralIslandToArray(category: "Saúde", name: "Academia", healthStatus: 50)
+        self.infoHandler?.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 60)
+        self.infoHandler?.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 80)
+        self.infoHandler?.addAllPeripheralIslandsToDatabase()
     }
 
 }
