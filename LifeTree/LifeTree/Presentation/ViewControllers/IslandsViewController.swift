@@ -69,8 +69,9 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         
         // Initializes island Services class with our SCNScene
         self.islandsVisualizationServices = IslandsVisualisationServices(scnScene: islandsSCNScene)
+
+        // Inicializando classe que maneja os dados
         self.infoHandler = InformationHandler(sceneServices: islandsVisualizationServices!)
-        self.mockData()
 
         // Show Card
         setupFloatingPanel()
@@ -173,16 +174,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
             self.cameraNode.position = newPosition
         }
     }
-
-    // MARK: Debug Buttons
-
-    @IBAction func addPeripheralIsland(_ sender: Any) {
-        //self.infoHandler?.addPeripheralIsland(category: "Pessoal", name: "Amigos", healthStatus: 40)
-    }
-
-    @IBAction func retrievePeripheralIslands(_ sender: Any) {
-        self.infoHandler?.retrievePeripheralIslands(shouldAddToScene: false)
-    }
     
 // MARK: FloatingPanel - Card
 
@@ -204,26 +195,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         // Set a content view controller
         floatingPanel.set(contentViewController: cardView)
         floatingPanel.addPanel(toParent: self, animated: false)
-    }
-
-    // MARK: Data Handling
-    // Preciso passar isso pra outra classe
-    // Planejar delegates
-
-    func mockData() {
-        self.infoHandler?.createSelf(name: "Meu Mundo", currentHealth: 50)
-        self.infoHandler?.retrievePeripheralIslands(shouldAddToScene: true)
-
-        // Uncomment and run for first use on debug
-        // self.mockPeripheral()
-    }
-
-    // Debug function only to populate CoreData in first use.
-    func mockPeripheral() {
-        self.infoHandler?.addPeripheralIsland(category: "Trabalho", name: "Trabalho", healthStatus: 90)
-        // self.infoHandler?.addPeripheralIsland(category: "Estudos", name: "Faculdade", healthStatus: 55)
-        // self.infoHandler?.addPeripheralIsland(category: "Família", name: "Família", healthStatus: 40)
-        // self.infoHandler?.addPeripheralIsland(category: "Saúde", name: "Saúde", healthStatus: 70)
     }
 
 }

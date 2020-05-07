@@ -84,6 +84,7 @@
 		B3A7DC6824588384002AD059 /* PeripheralIslandDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIslandDAO.swift; sourceTree = "<group>"; };
 		B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIslandDataServices.swift; sourceTree = "<group>"; };
 		D1719F49DE69D292E3DFD21C /* Pods-LifeTree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTree.debug.xcconfig"; path = "Target Support Files/Pods-LifeTree/Pods-LifeTree.debug.xcconfig"; sourceTree = "<group>"; };
+		E29C5F07246456CD002B1D7F /* LifeTree.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeTree.entitlements; sourceTree = "<group>"; };
 		E2B72AE324587450001DEC21 /* FloatingPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelViewController.swift; sourceTree = "<group>"; };
 		E2B72AE62459B3AA001DEC21 /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -173,6 +174,7 @@
 		B30434E82451EE7E007D6F3C /* LifeTree */ = {
 			isa = PBXGroup;
 			children = (
+				E29C5F07246456CD002B1D7F /* LifeTree.entitlements */,
 				B30435212451F47B007D6F3C /* Presentation */,
 				B30435152451EEBC007D6F3C /* Business */,
 				B30435132451EEBC007D6F3C /* Mechanisms */,
@@ -557,8 +559,9 @@
 			baseConfigurationReference = D1719F49DE69D292E3DFD21C /* Pods-LifeTree.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LifeTree/LifeTree.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 54KAL6GMBX;
+				DEVELOPMENT_TEAM = 76DX35F6T7;
 				INFOPLIST_FILE = LifeTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -577,8 +580,9 @@
 			baseConfigurationReference = 096CCE6A441B9F401E4ED645 /* Pods-LifeTree.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = LifeTree/LifeTree.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 54KAL6GMBX;
+				DEVELOPMENT_TEAM = 76DX35F6T7;
 				INFOPLIST_FILE = LifeTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
