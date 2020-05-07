@@ -85,9 +85,6 @@ class IslandsVisualisationServices {
         islandNode.position.z = Float(self.radius * cos(angle))
         islandNode.position.y = 0
         
-        print("ILHA")
-        print(angle)
-        
         // Place billboard constraint so that island plane is always facing the camera
         let constraint = SCNBillboardConstraint()
         islandNode.constraints = [constraint]
@@ -204,8 +201,6 @@ class IslandsVisualisationServices {
         shapeNode.position.y = -0.4
         self.islandsSCNScene.rootNode.addChildNode(shapeNode)
         shapeNode.eulerAngles.y = angle + correction
-        print("CORDA")
-        print(shapeNode.eulerAngles.y)
     }
 }
 

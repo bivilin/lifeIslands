@@ -25,6 +25,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     var selfIsland: SelfIsland?
 
     // Services
+    let vectorServices = VectorServices()
     var infoHandler: InformationHandler?
     var islandsVisualizationServices: IslandsVisualisationServices? = nil
     // Dictionary with key being the id of the island, and value its corresponding SceneKit plane node
@@ -33,6 +34,26 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     // Card Properties
     var floatingPanel: FloatingPanelController!
     var cardView: CardViewController!
+    
+    // Camera
+    var cameraOrbit = SCNNode()
+    var cameraNode = SCNNode()
+    var camera = SCNCamera()
+
+    // Handle pan camera
+    var lastWidthRatio: Float = 0
+    var lastHeightRatio: Float = 0
+    var widthRatio: Float = 0
+    var heightRatio: Float = 0
+    var fingersNeededToPan = 1
+    var maxHeightRatioXDown: Float = -0.2
+    var maxHeightRatioXUp: Float = 0
+
+    // Handle pinch camera
+    var pinchAttenuation: Double = 50  //1.0: very fast - 200.0 very slow
+    let maxCameraDistanceFromCenter: Float = 20
+    let minCameraDistanceFromCenter: Float = 2
+    var lastFingersNumber: Int = 0
 
     // MARK: Lifecycle
     
@@ -41,7 +62,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
 
         // Set up SCNScene
         islandsSCNScene.background.contents = UIImage(named: "backgroundSky")
-        setUpCameraControl(sceneView: self.islandsSCNView)
         
         // Set up model for islands SKScene
         self.islandModelSKScene.isPaused = false
@@ -62,15 +82,96 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
+        
+        // Configures camera
+        self.setUpCamera()
+
+        // add a tap gesture recognizer
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
+        self.islandsSCNView.addGestureRecognizer(panGesture)
+
+        // add a pinch gesture recognizer
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
+        self.islandsSCNView.addGestureRecognizer(pinchGesture)
     }
 
     // MARK: Helpers
+    
+    func setUpCamera() {
+        
+        if let camOrbit = self.islandsSCNScene.rootNode.childNode(withName: "cameraOrbit", recursively: true) {
+            self.cameraOrbit = camOrbit
+            print("cameraOrbit is set")
+            if let camNode = self.cameraOrbit.childNode(withName: "camera", recursively: true) {
+                self.cameraNode = camNode
+                print("cameraNode is set")
+                if let cam = self.cameraNode.camera {
+                    self.camera = cam
+                    print("camera is set")
+                }
+            }
+        }
+        self.camera.zNear = 1
+    }
+    
+    // MARK: Gestures
+    
+    @objc func handlePan(_ gestureRecognize: UIPanGestureRecognizer) {
 
-    func setUpCameraControl(sceneView: SCNView) {
-        // Allows the user to manipulate the camera
-        // Olhar constraints de câmera
-        sceneView.allowsCameraControl = true
-        // sceneView.cameraControlConfiguration.rotationSensitivity = 0
+        let numberOfTouches = gestureRecognize.numberOfTouches
+
+        let translation = gestureRecognize.translation(in: gestureRecognize.view!)
+
+        if (numberOfTouches==fingersNeededToPan) {
+
+           widthRatio = Float(translation.x) / Float(gestureRecognize.view!.frame.size.width) + lastWidthRatio
+           heightRatio = Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + lastHeightRatio
+
+            //  Height constraints
+            if (heightRatio >= maxHeightRatioXUp ) {
+                heightRatio = maxHeightRatioXUp
+            }
+            if (heightRatio <= maxHeightRatioXDown ) {
+                heightRatio = maxHeightRatioXDown
+            }
+
+            self.cameraOrbit.eulerAngles.y = -2 * .pi * widthRatio/2
+            self.cameraOrbit.eulerAngles.x = -.pi * heightRatio/2
+            
+            self.cameraOrbit.position.x += 0.01 * cos(-.pi * heightRatio/2)
+            self.cameraOrbit.position.z += 0.01 * sin(-.pi * heightRatio/2)
+            
+            let maximumDisplacement: Float = 0.1
+            if cameraOrbit.position.x > maximumDisplacement {
+                self.cameraOrbit.position.x = maximumDisplacement
+            }
+            if cameraOrbit.position.z > maximumDisplacement {
+                self.cameraOrbit.position.z = maximumDisplacement
+            }
+            
+            // Final check on fingers number
+            lastFingersNumber = fingersNeededToPan
+        }
+
+        lastFingersNumber = (numberOfTouches>0 ? numberOfTouches : lastFingersNumber)
+
+        if (gestureRecognize.state == .ended && lastFingersNumber==fingersNeededToPan) {
+            lastWidthRatio = widthRatio
+            lastHeightRatio = heightRatio
+        }
+    }
+    
+    @objc func handlePinch(_ gestureRecognize: UIPinchGestureRecognizer) {
+        
+        let pinchVelocity = Double.init(gestureRecognize.velocity)
+        let zoomFactor = 1 - pinchVelocity/pinchAttenuation
+        
+        let newPosition = self.vectorServices.multiplicationByScalar(vector: self.cameraNode.position, scalar: Float(zoomFactor))
+        let distanceFromCameraOrbit = self.vectorServices.length(vector: self.vectorServices.subtraction(vector1: self.cameraOrbit.position, vectorToSubtract: newPosition))
+        
+        if distanceFromCameraOrbit < self.maxCameraDistanceFromCenter && distanceFromCameraOrbit > self.minCameraDistanceFromCenter {
+            self.cameraNode.position = newPosition
+        }
     }
 
     // MARK: Debug Buttons

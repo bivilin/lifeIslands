@@ -23,6 +23,7 @@
 		8D687B382452944900F83BB7 /* PeripheralIsland.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B372452944900F83BB7 /* PeripheralIsland.swift */; };
 		8D687B3A2452949400F83BB7 /* Mood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B392452949400F83BB7 /* Mood.swift */; };
 		8D687B3C245294BE00F83BB7 /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D687B3B245294BE00F83BB7 /* Action.swift */; };
+		8DAE935A2464ABBC0022FE5D /* VectorServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DAE93592464ABBC0022FE5D /* VectorServices.swift */; };
 		B302B5B92460841F00CB5D99 /* InformationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B302B5B82460841F00CB5D99 /* InformationHandler.swift */; };
 		B30434EA2451EE7E007D6F3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30434E92451EE7E007D6F3C /* AppDelegate.swift */; };
 		B30434EC2451EE7E007D6F3C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30434EB2451EE7E007D6F3C /* SceneDelegate.swift */; };
@@ -61,6 +62,7 @@
 		8D687B372452944900F83BB7 /* PeripheralIsland.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIsland.swift; sourceTree = "<group>"; };
 		8D687B392452949400F83BB7 /* Mood.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mood.swift; sourceTree = "<group>"; };
 		8D687B3B245294BE00F83BB7 /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		8DAE93592464ABBC0022FE5D /* VectorServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorServices.swift; sourceTree = "<group>"; };
 		9B5135F91C6AFCA69DC0C8BC /* Pods_LifeTree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B302B5B82460841F00CB5D99 /* InformationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationHandler.swift; sourceTree = "<group>"; };
 		B30434E62451EE7E007D6F3C /* LifeTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LifeTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -232,6 +234,7 @@
 				8D687B352452940000F83BB7 /* WateringTreeMechanics.swift */,
 				8D3BBD06245882690057B5EB /* IslandsVisualisationServices.swift */,
 				B302B5B82460841F00CB5D99 /* InformationHandler.swift */,
+				8DAE93592464ABBC0022FE5D /* VectorServices.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -394,6 +397,7 @@
 				B304351C2451F084007D6F3C /* SelfIslandDataServices.swift in Sources */,
 				B304351F2451F091007D6F3C /* DAO.swift in Sources */,
 				8D3BBD07245882690057B5EB /* IslandsVisualisationServices.swift in Sources */,
+				8DAE935A2464ABBC0022FE5D /* VectorServices.swift in Sources */,
 				8D687B3A2452949400F83BB7 /* Mood.swift in Sources */,
 				B30434EE2451EE7E007D6F3C /* SelectActionsViewController.swift in Sources */,
 				B30434EA2451EE7E007D6F3C /* AppDelegate.swift in Sources */,
