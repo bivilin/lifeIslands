@@ -130,7 +130,7 @@ extension IslandsViewController {
             if (error != nil) {
                 print(error.debugDescription)
             } else {
-                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.healthStatus!)%")
+                print("Mundo criado #\(island.islandId!) - \(island.name!) | Saúde de \(island.healthStatus!)%")
             }
             // After saving data, retrieving it to save on selfIsland object
             // That might occur in another screen, so then here we would have a performSegue instead.
