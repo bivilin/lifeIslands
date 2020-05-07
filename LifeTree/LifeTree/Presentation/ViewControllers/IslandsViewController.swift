@@ -33,25 +33,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     // Card Properties
     var floatingPanel: FloatingPanelController!
     var cardView: CardViewController!
-    
-    // Camera
-    var cameraOrbit = SCNNode()
-    var cameraNode: SCNNode? = nil
-    
-    // Handle pan camera
-    var lastWidthRatio: Float = 0
-    var lastHeightRatio: Float = 0.2
-    var WidthRatio: Float = 0
-    var HeightRatio: Float = 0.2
-    var fingersNeededToPan = 1
-    var maxWidthRatioRight: Float = 0.2
-    var maxWidthRatioLeft: Float = -0.2
-    var maxHeightRatioXDown: Float = 0.02
-    var maxHeightRatioXUp: Float = 0.4
-
-    // Handle pinch camera
-    var pinchAttenuation = 20.0  //1.0: very fast ---- 100.0 very slow
-    var lastFingersNumber = 0
 
     // MARK: Lifecycle
     
@@ -81,8 +62,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
-        
-        
     }
 
     // MARK: Helpers
