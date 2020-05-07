@@ -78,16 +78,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         sceneView.allowsCameraControl = true
         // sceneView.cameraControlConfiguration.rotationSensitivity = 0
     }
-
-    // MARK: Debug Buttons
-
-    @IBAction func addPeripheralIsland(_ sender: Any) {
-        //self.infoHandler?.addPeripheralIsland(category: "Pessoal", name: "Amigos", healthStatus: 40)
-    }
-
-    @IBAction func retrievePeripheralIslands(_ sender: Any) {
-        self.infoHandler?.retrievePeripheralIslands(shouldAddToScene: false)
-    }
     
 // MARK: FloatingPanel - Card
 
