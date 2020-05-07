@@ -13,15 +13,15 @@ import UIKit
 
 class IslandsVisualisationServices {
     
-    var radius: Double = 3
+    var radius: Double = 2.5
     var numberofPeriferalIslands: Int = 1
     var separationAngle: Double = 1
     
     var islandsSCNScene: SCNScene
     let planeLength: CGFloat = 1
     
-    let islandIndexes: [String] = ["1", "2", "3", "4", "5", "6"]
-    var islandDictionary: [String: SCNNode] = [:]
+    var peripheralIslands: [PeripheralIsland] = [PeripheralIsland]()
+    var islandDictionary: [UUID: SCNNode] = [:]
     
     init(scnScene: SCNScene) {
         self.islandsSCNScene = scnScene
@@ -42,9 +42,10 @@ class IslandsVisualisationServices {
     }
     
     // Add all periferal islands to scene
-    func addAllPeriferalIslandsToScene() {
+    func addAllPeriferalIslandsToScene(peripheralIslandArray: [PeripheralIsland]) {
+        self.peripheralIslands = peripheralIslandArray
         self.updateVariablesForPositioningIslands()
-        
+
         // Creates all islands
         for n in 1...self.numberofPeriferalIslands {
             addPeriferalIslandToSCNScene(n: n)
@@ -54,7 +55,6 @@ class IslandsVisualisationServices {
     
     // Add a single periferal island with index n to the scene
     func addPeriferalIslandToSCNScene(n: Int) {
-
         // Creates plane with island
         var planeGeometry: SCNGeometry
         planeGeometry = SCNPlane(width: self.planeLength, height: self.planeLength)
@@ -65,7 +65,7 @@ class IslandsVisualisationServices {
         islandsSCNScene.rootNode.addChildNode(islandNode)
         
         // Append plane to the dictionary associating them with the island id
-        self.islandDictionary[String(n)] = islandNode
+        self.islandDictionary[self.peripheralIslands[n - 1].islandId!] = islandNode
         
         // Positions island in the orbit circle
         self.positionIslandInCircle(islandNode: islandNode, n: n)
@@ -77,30 +77,33 @@ class IslandsVisualisationServices {
         // Define plane for the ellipse
         islandNode.position.y = 0
         // Distinguishes between even and odd number of islands so they're better distributed in the ellipse
+        var angle = Double(n) * self.separationAngle
         if self.numberofPeriferalIslands % 2 == 0 {
-            islandNode.position.x = Float(self.radius * sin((Double(n) + 1/2) * self.separationAngle))
-            islandNode.position.z = Float(self.radius * cos((Double(n) + 1/2) * self.separationAngle))
-        } else {
-            islandNode.position.x = Float(self.radius * sin(Double(n) * self.separationAngle))
-            islandNode.position.z = Float(self.radius * cos(Double(n) * self.separationAngle))
+            angle = angle + (1/2) * self.separationAngle
         }
+        islandNode.position.x = Float(self.radius * sin(angle))
+        islandNode.position.z = Float(self.radius * cos(angle))
         islandNode.position.y = 0
-        makeRope(n: n) // places rope connecting it to the self island
+        
+        print("ILHA")
+        print(angle)
         
         // Place billboard constraint so that island plane is always facing the camera
         let constraint = SCNBillboardConstraint()
         islandNode.constraints = [constraint]
+        
+        makeRope(angle: Float(angle)) // places rope connecting it to the self island
     }
     
     // Updates variables to be used when placing the periferal islands
     func updateVariablesForPositioningIslands() {
-        self.numberofPeriferalIslands = islandIndexes.count
+        self.numberofPeriferalIslands = self.peripheralIslands.count
         
         // Angle of separation between the periferal islands islands
         self.separationAngle = 2 * .pi / Double(self.numberofPeriferalIslands)
         
         // Corrects radius size based on the total number of islands
-        self.radius += self.radius * Double(self.numberofPeriferalIslands)/50
+        self.radius += self.radius * Double(self.numberofPeriferalIslands)/20
     }
     
     // Define the material for a plane as the island SpriteKit scene model
@@ -135,7 +138,7 @@ class IslandsVisualisationServices {
     }
     
     // Get the SKScene of a periferal island from its id
-    func getPeriferalIslandSKScene(islandId: String) -> SKScene? {
+    func getPeriferalIslandSKScene(islandId: UUID) -> SKScene? {
         var sceneForIsland: SKScene? = nil
         if let nodeForIsland: SCNNode = self.islandDictionary[islandId] {
             sceneForIsland = nodeForIsland.geometry!.firstMaterial!.diffuse.contents as? SKScene
@@ -144,11 +147,11 @@ class IslandsVisualisationServices {
     }
     
     // Changes label of a periferal island
-    func changePeriferalIslandLabel(islandId: String, text: String) {
+    func changePeriferalIslandLabel(peripheralIsland: PeripheralIsland) {
         // Acessa uma scene do SpriteKit a partir do node do plano do SceneKit
-        guard let sceneForIsland: SKScene = getPeriferalIslandSKScene(islandId: islandId) else {return}
+        guard let sceneForIsland: SKScene = getPeriferalIslandSKScene(islandId: peripheralIsland.islandId!) else {return}
         guard let nameIsland = sceneForIsland.children.first?.childNode(withName: "nameLabelNode") as? SKLabelNode else {return}
-        nameIsland.text = text
+        nameIsland.text = peripheralIsland.name
     }
     
     // Changes label of self island
@@ -158,7 +161,7 @@ class IslandsVisualisationServices {
             nameSelfIsland.text = text
     }
     
-    func makeRope(n: Int) {
+    func makeRope(angle: Float) {
         // Width of the parabole, which corresponds to the coordinate x of its ending point
         let width = self.radius * 100
         
@@ -178,10 +181,31 @@ class IslandsVisualisationServices {
         let shapeNode = SCNNode(geometry: shape)
         shapeNode.scale = SCNVector3(0.01, 0.01, 0.01)
         
+        // Corrects SceneKit angle shift bug
+        var correction: Float = 0
+        switch self.numberofPeriferalIslands {
+        case 1, 2:
+            correction = -.pi/2
+        case 3, 6:
+            correction = .pi/6
+        case 5, 10:
+            correction = -.pi/10
+        case 7:
+            correction = .pi/12
+        case 9:
+            correction = -.pi/16
+        case 11:
+            correction = .pi/24
+        default:
+            correction = 0
+        }
+        
         // Positions the node
         shapeNode.position.y = -0.4
-        shapeNode.eulerAngles.y = Float(Double(n) * self.separationAngle)
         self.islandsSCNScene.rootNode.addChildNode(shapeNode)
+        shapeNode.eulerAngles.y = angle + correction
+        print("CORDA")
+        print(shapeNode.eulerAngles.y)
     }
 }
 
