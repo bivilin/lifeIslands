@@ -207,5 +207,31 @@ class IslandsVisualisationServices {
         print("CORDA")
         print(shapeNode.eulerAngles.y)
     }
+
+    // Acessa o objeto da ilha de um nó
+    func getIslandfromNode(inputNode: SCNNode) -> PeripheralIsland? {
+        var island: PeripheralIsland?
+
+        for (uuid, node) in islandDictionary {
+            if inputNode == node {
+                island = getPeripheralIslandFromUUID(uuid: uuid)
+                print("Found! \(uuid)")
+            }
+        }
+        return island
+    }
+
+    // Identifica ilha periférica de um dado UUID
+    func getPeripheralIslandFromUUID(uuid: UUID) -> PeripheralIsland? {
+        var peripheralIsland: PeripheralIsland?
+
+        for island in peripheralIslands {
+            if uuid == island.islandId {
+                peripheralIsland = island
+            }
+        }
+
+        return peripheralIsland
+    }
 }
 
