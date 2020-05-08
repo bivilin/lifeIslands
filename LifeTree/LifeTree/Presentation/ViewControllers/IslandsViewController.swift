@@ -140,16 +140,16 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
                 self.cameraOrbit.eulerAngles.x = -.pi * heightRatio/2
                 
                 // Rotate the position camera orbit for a more dynamic movement
-                self.cameraOrbit.position.x += 0.01 * cos(-.pi * heightRatio/2)
-                self.cameraOrbit.position.z += 0.01 * sin(-.pi * heightRatio/2)
+                self.cameraOrbit.position.x += 0.01 * cos(-.pi * widthRatio/4)
+                self.cameraOrbit.position.z += 0.01 * sin(-.pi * widthRatio/4)
                 
                 // Prohibits the camera orbit to diverge too much from center
-                let maximumDisplacement: Float = 0.1
-                if self.cameraOrbit.position.x > maximumDisplacement {
-                    self.cameraOrbit.position.x = maximumDisplacement
+                let maximumDisplacement: Float = 0.15
+                if abs(self.cameraOrbit.position.x) > maximumDisplacement {
+                    self.cameraOrbit.position.x = self.sign(self.cameraOrbit.position.x) * maximumDisplacement
                 }
-                if cameraOrbit.position.z > maximumDisplacement {
-                    self.cameraOrbit.position.z = maximumDisplacement
+                if abs(cameraOrbit.position.z) > maximumDisplacement {
+                    self.cameraOrbit.position.z = self.sign(self.cameraOrbit.position.z) * maximumDisplacement
                 }
             }
             
@@ -254,6 +254,10 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     }
     
     // MARK: Camera Helpers
+    
+    func sign(_ number: Float) -> Float  {
+        return number < 0 ? -1 : 1
+    }
     
     func moveCameraToPeripheralIsland(islandNode: SCNNode) {
         
