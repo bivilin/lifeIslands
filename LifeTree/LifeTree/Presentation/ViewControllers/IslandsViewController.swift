@@ -79,10 +79,11 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
             if let tappednode = hits.first?.node {
                 print(tappednode)
                 let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: tappednode)
-                print(islandObject?.name)
-
-                if islandObject == nil {
-                    print(tappednode.name)
+                if let name = islandObject?.name {
+                    print(name)
+                }
+                if islandObject == nil, let tappedName = tappednode.name {
+                    print(tappedName)
                 }
             }
         }
