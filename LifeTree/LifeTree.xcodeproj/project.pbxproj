@@ -41,6 +41,7 @@
 		B30435202451F093007D6F3C /* SelfIslandDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435092451EEBB007D6F3C /* SelfIslandDAO.swift */; };
 		B3A7DC6924588384002AD059 /* PeripheralIslandDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A7DC6824588384002AD059 /* PeripheralIslandDAO.swift */; };
 		B3A7DC6B245884BB002AD059 /* PeripheralIslandDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */; };
+		B3B1F90B24659CF700778E73 /* PeripheralCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1F90A24659CF700778E73 /* PeripheralCardViewController.swift */; };
 		E2B72AE424587450001DEC21 /* FloatingPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B72AE324587450001DEC21 /* FloatingPanelViewController.swift */; };
 		E2B72AE72459B3AA001DEC21 /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B72AE62459B3AA001DEC21 /* CardViewController.swift */; };
 /* End PBXBuildFile section */
@@ -83,6 +84,7 @@
 		B30435142451EEBC007D6F3C /* SelfIslandDataServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfIslandDataServices.swift; sourceTree = "<group>"; };
 		B3A7DC6824588384002AD059 /* PeripheralIslandDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIslandDAO.swift; sourceTree = "<group>"; };
 		B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIslandDataServices.swift; sourceTree = "<group>"; };
+		B3B1F90A24659CF700778E73 /* PeripheralCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralCardViewController.swift; sourceTree = "<group>"; };
 		D1719F49DE69D292E3DFD21C /* Pods-LifeTree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTree.debug.xcconfig"; path = "Target Support Files/Pods-LifeTree/Pods-LifeTree.debug.xcconfig"; sourceTree = "<group>"; };
 		E29C5F07246456CD002B1D7F /* LifeTree.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeTree.entitlements; sourceTree = "<group>"; };
 		E2B72AE324587450001DEC21 /* FloatingPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPanelViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				8D687B2C2452902900F83BB7 /* EditActionViewController.swift */,
 				8D687B2E2452908700F83BB7 /* EditSelfIslandViewController.swift */,
 				E2B72AE62459B3AA001DEC21 /* CardViewController.swift */,
+				B3B1F90A24659CF700778E73 /* PeripheralCardViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				8D687B2D2452902900F83BB7 /* EditActionViewController.swift in Sources */,
 				B304351E2451F088007D6F3C /* QueueManager.swift in Sources */,
 				8D687B2724528EEF00F83BB7 /* CreateActionViewController.swift in Sources */,
+				B3B1F90B24659CF700778E73 /* PeripheralCardViewController.swift in Sources */,
 				8D687B342452927200F83BB7 /* UpdateIslandsHealth.swift in Sources */,
 				B3A7DC6B245884BB002AD059 /* PeripheralIslandDataServices.swift in Sources */,
 				E2B72AE424587450001DEC21 /* FloatingPanelViewController.swift in Sources */,
@@ -562,7 +566,7 @@
 				CODE_SIGN_ENTITLEMENTS = LifeTree/LifeTree.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 54KAL6GMBX;
+				DEVELOPMENT_TEAM = 2M7ZQ8AZ57;
 				INFOPLIST_FILE = LifeTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -585,7 +589,7 @@
 				CODE_SIGN_ENTITLEMENTS = LifeTree/LifeTree.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 54KAL6GMBX;
+				DEVELOPMENT_TEAM = 2M7ZQ8AZ57;
 				INFOPLIST_FILE = LifeTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (

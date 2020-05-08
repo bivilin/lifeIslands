@@ -32,6 +32,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
 
     // Card Properties
     var floatingPanel: FloatingPanelController!
+    var peripheralCardView: PeripheralCardViewController!
     var cardView: CardViewController!
     
     // Camera
@@ -75,6 +76,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         // Show Card
         setupFloatingPanel()
         cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
+        peripheralCardView = storyboard?.instantiateViewController(withIdentifier: "PeripheralCard") as? PeripheralCardViewController
         showFloatingPanel()
         
         // Add self islando do scene
@@ -111,9 +113,13 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
                 let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: tappednode)
                 if let name = islandObject?.name {
                     print(name)
+                    peripheralCardView.peripheralIsland = islandObject
+                    floatingPanel.set(contentViewController: peripheralCardView)
+
                 }
                 if islandObject == nil, let tappedName = tappednode.name {
                     print(tappedName)
+                    floatingPanel.set(contentViewController: cardView)
                 }
             }
         }
