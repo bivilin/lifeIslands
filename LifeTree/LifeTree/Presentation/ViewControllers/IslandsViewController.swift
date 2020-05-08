@@ -93,7 +93,32 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         // Add a pinch gesture recognizer
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
         self.islandsSCNView.addGestureRecognizer(pinchGesture)
+
+        // Gesture - Tap
+        let tapRec = UITapGestureRecognizer(target: self, action: #selector(IslandsViewController.handleTap(rec:)))
+        self.view.addGestureRecognizer(tapRec)
     }
+
+    // Handle Tap
+
+    @objc func handleTap(rec: UITapGestureRecognizer){
+        print("tap")
+        if rec.state == .ended {
+            let location: CGPoint = rec.location(in: islandsSCNView)
+            let hits = self.islandsSCNView.hitTest(location, options: nil)
+            if let tappednode = hits.first?.node {
+                print(tappednode)
+                let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: tappednode)
+                if let name = islandObject?.name {
+                    print(name)
+                }
+                if islandObject == nil, let tappedName = tappednode.name {
+                    print(tappedName)
+                }
+            }
+        }
+    }
+
 
     // MARK: Helpers
     
