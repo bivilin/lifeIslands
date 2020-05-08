@@ -59,7 +59,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Set up SCNScene
+        // Set up SCNScene background
         islandsSCNScene.background.contents = UIImage(named: "backgroundSky")
         
         // Set up model for islands SKScene
@@ -86,11 +86,11 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         // Configures camera
         self.setUpCamera()
 
-        // add a tap gesture recognizer
+        // Add a tap gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         self.islandsSCNView.addGestureRecognizer(panGesture)
 
-        // add a pinch gesture recognizer
+        // Add a pinch gesture recognizer
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
         self.islandsSCNView.addGestureRecognizer(pinchGesture)
     }
@@ -119,20 +119,19 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     @objc func handlePan(_ gestureRecognize: UIPanGestureRecognizer) {
 
         let numberOfTouches = gestureRecognize.numberOfTouches
-
         let translation = gestureRecognize.translation(in: gestureRecognize.view!)
 
-        if (numberOfTouches==fingersNeededToPan) {
+        if (numberOfTouches == fingersNeededToPan) {
 
-           widthRatio = Float(translation.x) / Float(gestureRecognize.view!.frame.size.width) + lastWidthRatio
-           heightRatio = Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + lastHeightRatio
+            widthRatio = Float(translation.x) / Float(gestureRecognize.view!.frame.size.width) + self.lastWidthRatio
+            heightRatio = Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + self.lastHeightRatio
 
             //  Height constraints
-            if (heightRatio >= maxHeightRatioXUp ) {
-                heightRatio = maxHeightRatioXUp
+            if (heightRatio >= self.maxHeightRatioXUp ) {
+                heightRatio = self.maxHeightRatioXUp
             }
-            if (heightRatio <= maxHeightRatioXDown ) {
-                heightRatio = maxHeightRatioXDown
+            if (heightRatio <= self.maxHeightRatioXDown ) {
+                heightRatio = self.maxHeightRatioXDown
             }
 
             self.cameraOrbit.eulerAngles.y = -2 * .pi * widthRatio/2
@@ -142,7 +141,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
             self.cameraOrbit.position.z += 0.01 * sin(-.pi * heightRatio/2)
             
             let maximumDisplacement: Float = 0.1
-            if cameraOrbit.position.x > maximumDisplacement {
+            if self.cameraOrbit.position.x > maximumDisplacement {
                 self.cameraOrbit.position.x = maximumDisplacement
             }
             if cameraOrbit.position.z > maximumDisplacement {
@@ -150,21 +149,21 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
             }
             
             // Final check on fingers number
-            lastFingersNumber = fingersNeededToPan
+            lastFingersNumber = self.fingersNeededToPan
         }
 
-        lastFingersNumber = (numberOfTouches>0 ? numberOfTouches : lastFingersNumber)
+        lastFingersNumber = (numberOfTouches > 0 ? numberOfTouches : lastFingersNumber)
 
-        if (gestureRecognize.state == .ended && lastFingersNumber==fingersNeededToPan) {
-            lastWidthRatio = widthRatio
-            lastHeightRatio = heightRatio
+        if (gestureRecognize.state == .ended && lastFingersNumber == self.fingersNeededToPan) {
+            self.lastWidthRatio = self.widthRatio
+            self.lastHeightRatio = self.heightRatio
         }
     }
     
     @objc func handlePinch(_ gestureRecognize: UIPinchGestureRecognizer) {
         
         let pinchVelocity = Double.init(gestureRecognize.velocity)
-        let zoomFactor = 1 - pinchVelocity/pinchAttenuation
+        let zoomFactor = 1 - pinchVelocity/self.pinchAttenuation
         
         let vectorServices = VectorServices()
         let newPosition = vectorServices.multiplicationByScalar(vector: self.cameraNode.position, scalar: Float(zoomFactor))

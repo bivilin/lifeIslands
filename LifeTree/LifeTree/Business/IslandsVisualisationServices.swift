@@ -74,8 +74,6 @@ class IslandsVisualisationServices {
     // Position a periferal islands in the ellipse with focus in the self island
     func positionIslandInCircle(islandNode: SCNNode, n: Int) {
         
-        // Define plane for the ellipse
-        islandNode.position.y = 0
         // Distinguishes between even and odd number of islands so they're better distributed in the ellipse
         var angle = Double(n) * self.separationAngle
         if self.numberofPeriferalIslands % 2 == 0 {
@@ -89,7 +87,7 @@ class IslandsVisualisationServices {
         let constraint = SCNBillboardConstraint()
         islandNode.constraints = [constraint]
         
-        makeRope(angle: Float(angle)) // places rope connecting it to the self island
+        self.makeRope(angle: Float(angle)) // places rope connecting it to the self island
     }
     
     // Updates variables to be used when placing the periferal islands
@@ -121,7 +119,6 @@ class IslandsVisualisationServices {
             if let yScale = newSpriteKitScene.children.first?.yScale {
                 newSpriteKitScene.children.first?.yScale = -1 * yScale
             }
-            
         }
     }
     
