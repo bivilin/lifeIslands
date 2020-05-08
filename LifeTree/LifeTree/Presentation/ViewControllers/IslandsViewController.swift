@@ -122,7 +122,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
             widthRatio = Float(translation.x) / Float(gesture.view!.frame.size.width) + self.lastWidthRatio
             
             // Rotate camera horizontally
-            self.cameraOrbit.eulerAngles.y = -2 * .pi * widthRatio/2
+            self.cameraOrbit.eulerAngles.y = -.pi * widthRatio
             
             if self.isMainCamera {
                 // Vertical displacement relative to screen size
@@ -161,7 +161,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         
         // Update variables at the end of the gesture
         if (gesture.state == .ended && lastFingersNumber == self.fingersNeededToPan) {
-            
             self.lastWidthRatio = self.widthRatio
             if self.isMainCamera {
                 self.lastHeightRatio = self.heightRatio
@@ -173,21 +172,31 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     // Zooms in and out from the center in the SCNScene
     @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
         
+        // Get pinch velocity
+        let pinchVelocity = Double.init(gesture.velocity)
+        
         // Zoom only allowed when main camera is on
         if self.isMainCamera {
             let vectorServices = VectorServices()
             
-            // Calculate zoom factor
-            let pinchVelocity = Double.init(gesture.velocity)
+            // Increase/decrease camera distance from center by a zoomFactor
             let zoomFactor = 1 - pinchVelocity/self.pinchAttenuation
-            
-            // Increases camera distance from center by the zoomFactor
             let newPosition = vectorServices.multiplicationByScalar(vector: self.mainCameraNode.position, scalar: Float(zoomFactor))
             
             // Apply change only if the new distance from the center is whithin the boundaries we've set
             let distanceFromCameraOrbit = vectorServices.length(vector: vectorServices.subtraction(vector1: self.cameraOrbit.position, vectorToSubtract: newPosition))
             if distanceFromCameraOrbit < self.maxCameraDistanceFromCenter && distanceFromCameraOrbit > self.minCameraDistanceFromCenter {
                 self.mainCameraNode.position = newPosition
+            }
+        }
+        else {
+            // Rotate camera horizontally
+            self.cameraOrbit.eulerAngles.y += Float(pinchVelocity)*(-1/80)
+            
+            // Update variables for camera rotation with pan
+            if gesture.state == .ended {
+                self.lastWidthRatio = self.cameraOrbit.eulerAngles.y/(-.pi)
+                self.lastHeightRatio = self.cameraOrbit.eulerAngles.x/(-.pi/2)
             }
         }
     }
@@ -203,12 +212,17 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
             
             // Get node from hit test
             if let tappednode = hits.first?.node {
-                print(tappednode)
                 
                 // Only change camera visualization if node tapped is not selfIsland
-                if tappednode.position.x != 0 {
+                if tappednode.position.x != 0 && self.isMainCamera {
                     // Moves camera to better show the island which was tapped
                     self.moveCameraToPeripheralIsland(islandNode: tappednode)
+                    
+                    // Update variables for camera rotation with pan
+                    if gesture.state == .ended {
+                        self.lastWidthRatio = self.cameraOrbit.eulerAngles.y/(-.pi)
+                        self.lastHeightRatio = self.cameraOrbit.eulerAngles.x/(-.pi/2)
+                    }
                 }
                 
                 // Get island information from CoreData
@@ -239,7 +253,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         }
     }
     
-    // MARK: Camera Movement
+    // MARK: Camera Helpers
     
     func moveCameraToPeripheralIsland(islandNode: SCNNode) {
         
