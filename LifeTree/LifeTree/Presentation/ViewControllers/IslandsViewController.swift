@@ -96,30 +96,37 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
         self.islandsSCNView.addGestureRecognizer(pinchGesture)
 
-        // Gesture - Tap
-        let tapRec = UITapGestureRecognizer(target: self, action: #selector(IslandsViewController.handleTap(rec:)))
-        self.view.addGestureRecognizer(tapRec)
+        // Add a single tap gesture recognizer
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        singleTap.numberOfTapsRequired = 1
+        self.islandsSCNView.addGestureRecognizer(singleTap)
+        
+        // Add a double tap gesture recognizer
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTap.numberOfTapsRequired = 2
+        self.islandsSCNView.addGestureRecognizer(doubleTap)
     }
     
     // MARK: Gestures
     
     // Pan
-    @objc func handlePan(_ gestureRecognize: UIPanGestureRecognizer) {
+    // Rotates camera around center in the SCNScene
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
 
-        let numberOfTouches = gestureRecognize.numberOfTouches
-        let translation = gestureRecognize.translation(in: gestureRecognize.view!)
+        let numberOfTouches = gesture.numberOfTouches
+        let translation = gesture.translation(in: gesture.view!)
 
         if (numberOfTouches == fingersNeededToPan) {
 
             // Horizontal displacement relative to screen size
-            widthRatio = Float(translation.x) / Float(gestureRecognize.view!.frame.size.width) + self.lastWidthRatio
+            widthRatio = Float(translation.x) / Float(gesture.view!.frame.size.width) + self.lastWidthRatio
             
             // Rotate camera horizontally
             self.cameraOrbit.eulerAngles.y = -2 * .pi * widthRatio/2
             
             if self.isMainCamera {
                 // Vertical displacement relative to screen size
-                heightRatio = Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + self.lastHeightRatio
+                heightRatio = Float(translation.y) / Float(gesture.view!.frame.size.height) + self.lastHeightRatio
                 
                 //  Apply height constraints
                 if (heightRatio >= self.maxHeightRatioXUp ) {
@@ -153,7 +160,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         lastFingersNumber = (numberOfTouches > 0 ? numberOfTouches : lastFingersNumber)
         
         // Update variables at the end of the gesture
-        if (gestureRecognize.state == .ended && lastFingersNumber == self.fingersNeededToPan) {
+        if (gesture.state == .ended && lastFingersNumber == self.fingersNeededToPan) {
             
             self.lastWidthRatio = self.widthRatio
             if self.isMainCamera {
@@ -163,14 +170,15 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     }
     
     // Pinch
-    @objc func handlePinch(_ gestureRecognize: UIPinchGestureRecognizer) {
+    // Zooms in and out from the center in the SCNScene
+    @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
         
         // Zoom only allowed when main camera is on
         if self.isMainCamera {
             let vectorServices = VectorServices()
             
             // Calculate zoom factor
-            let pinchVelocity = Double.init(gestureRecognize.velocity)
+            let pinchVelocity = Double.init(gesture.velocity)
             let zoomFactor = 1 - pinchVelocity/self.pinchAttenuation
             
             // Increases camera distance from center by the zoomFactor
@@ -184,20 +192,24 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         }
     }
     
-    // Tap
-    @objc func handleTap(rec: UITapGestureRecognizer){
-        print("tap")
-        if rec.state == .ended {
+    // Single tap
+    // Moves camera to tapped island node and get its information from CoreData
+    @objc func handleTap(_ gesture: UITapGestureRecognizer){
+
+        if gesture.state == .ended {
             // Make hit test for the tap
-            let location: CGPoint = rec.location(in: islandsSCNView)
+            let location: CGPoint = gesture.location(in: islandsSCNView)
             let hits = self.islandsSCNView.hitTest(location, options: nil)
             
             // Get node from hit test
             if let tappednode = hits.first?.node {
                 print(tappednode)
                 
-                // Moves camera to better show the island which was tapped
-                self.moveCameraToPeripheralIsland(islandNode: tappednode)
+                // Only change camera visualization if node tapped is not selfIsland
+                if tappednode.position.x != 0 {
+                    // Moves camera to better show the island which was tapped
+                    self.moveCameraToPeripheralIsland(islandNode: tappednode)
+                }
                 
                 // Get island information from CoreData
                 let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: tappednode)
@@ -211,7 +223,23 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         }
     }
     
-    // MARK: Helpers
+    // Double tap
+    // Goes back to the main camera visualization of the SCNScene
+    @objc func handleDoubleTap(_ gesture: UITapGestureRecognizer){
+        
+        if !self.isMainCamera {
+            // Positions main camera
+            let vectorServices = VectorServices()
+            let cameraPositionUnitVector = vectorServices.normalize(vector: self.mainCameraNode.position)
+            self.mainCameraNode.position = vectorServices.multiplicationByScalar(vector: cameraPositionUnitVector, scalar: Float((self.islandsVisualizationServices!.radius + 8)))
+            
+            // Set mainCamera as pointOfView for the scene
+            self.islandsSCNView.pointOfView = self.mainCameraNode
+            self.isMainCamera = true
+        }
+    }
+    
+    // MARK: Camera Movement
     
     func moveCameraToPeripheralIsland(islandNode: SCNNode) {
         
