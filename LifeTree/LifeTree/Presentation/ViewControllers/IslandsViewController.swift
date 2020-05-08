@@ -29,6 +29,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     var islandsVisualizationServices: IslandsVisualisationServices? = nil
     // Dictionary with key being the id of the island, and value its corresponding SceneKit plane node
     var islandDictionary: [String: SCNNode] = [:]
+    let vectorServices = VectorServices()
 
     // Card Properties
     var floatingPanel: FloatingPanelController!
@@ -86,7 +87,8 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         self.islandsSCNView.scene = islandsSCNScene
         
         // Configures camera
-        self.setUpCamera()
+        self.instantiateCameras()
+        self.mainCamera.zNear = 1.5
 
         // Add a tap gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
@@ -119,38 +121,20 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         if (numberOfTouches == fingersNeededToPan) {
 
             // Horizontal displacement relative to screen size
-            widthRatio = Float(translation.x) / Float(gesture.view!.frame.size.width) + self.lastWidthRatio
+            self.widthRatio = Float(translation.x) / Float(gesture.view!.frame.size.width) + self.lastWidthRatio
             
             // Rotate camera horizontally
             self.cameraOrbit.eulerAngles.y = -.pi * widthRatio
             
             if self.isMainCamera {
-                // Vertical displacement relative to screen size
-                heightRatio = Float(translation.y) / Float(gesture.view!.frame.size.height) + self.lastHeightRatio
                 
-                //  Apply height constraints
-                if (heightRatio >= self.maxHeightRatioXUp ) {
-                    heightRatio = self.maxHeightRatioXUp
-                }
-                if (heightRatio <= self.maxHeightRatioXDown ) {
-                    heightRatio = self.maxHeightRatioXDown
-                }
+                // Update vertical displacement relative to screen size
+                self.heightRatio = Float(translation.y) / Float(gesture.view!.frame.size.height) + self.lastHeightRatio
+                // Vertical rotation for the main camera
+                self.makeVerticalRotationWithConstraints()
                 
-                // Rotates camera vertically
-                self.cameraOrbit.eulerAngles.x = -.pi * heightRatio/2
-                
-                // Rotate the position camera orbit for a more dynamic movement
-                self.cameraOrbit.position.x += 0.01 * cos(-.pi * widthRatio/4)
-                self.cameraOrbit.position.z += 0.01 * sin(-.pi * widthRatio/4)
-                
-                // Prohibits the camera orbit to diverge too much from center
-                let maximumDisplacement: Float = 0.15
-                if abs(self.cameraOrbit.position.x) > maximumDisplacement {
-                    self.cameraOrbit.position.x = self.sign(self.cameraOrbit.position.x) * maximumDisplacement
-                }
-                if abs(cameraOrbit.position.z) > maximumDisplacement {
-                    self.cameraOrbit.position.z = self.sign(self.cameraOrbit.position.z) * maximumDisplacement
-                }
+                // Moves camera orbit center in circle along with the horizontal rotation for a more organic feel
+                self.moveCenterPositionAlongWithRotation()
             }
             
             // Final check on fingers number
@@ -161,10 +145,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         
         // Update variables at the end of the gesture
         if (gesture.state == .ended && lastFingersNumber == self.fingersNeededToPan) {
-            self.lastWidthRatio = self.widthRatio
-            if self.isMainCamera {
-                self.lastHeightRatio = self.heightRatio
-            }
+            self.updateLastWidthAndHeight()
         }
     }
     
@@ -177,14 +158,12 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         
         // Zoom only allowed when main camera is on
         if self.isMainCamera {
-            let vectorServices = VectorServices()
-            
             // Increase/decrease camera distance from center by a zoomFactor
             let zoomFactor = 1 - pinchVelocity/self.pinchAttenuation
-            let newPosition = vectorServices.multiplicationByScalar(vector: self.mainCameraNode.position, scalar: Float(zoomFactor))
+            let newPosition = self.vectorServices.multiplicationByScalar(vector: self.mainCameraNode.position, scalar: Float(zoomFactor))
             
             // Apply change only if the new distance from the center is whithin the boundaries we've set
-            let distanceFromCameraOrbit = vectorServices.length(vector: vectorServices.subtraction(vector1: self.cameraOrbit.position, vectorToSubtract: newPosition))
+            let distanceFromCameraOrbit = self.vectorServices.length(vector: self.vectorServices.subtraction(vector1: self.cameraOrbit.position, vectorToSubtract: newPosition))
             if distanceFromCameraOrbit < self.maxCameraDistanceFromCenter && distanceFromCameraOrbit > self.minCameraDistanceFromCenter {
                 self.mainCameraNode.position = newPosition
             }
@@ -195,8 +174,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
             
             // Update variables for camera rotation with pan
             if gesture.state == .ended {
-                self.lastWidthRatio = self.cameraOrbit.eulerAngles.y/(-.pi)
-                self.lastHeightRatio = self.cameraOrbit.eulerAngles.x/(-.pi/2)
+                self.updateLastWidthAndHeight()
             }
         }
     }
@@ -213,15 +191,20 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
             // Get node from hit test
             if let tappednode = hits.first?.node {
                 
-                // Only change camera visualization if node tapped is not selfIsland
-                if tappednode.position.x != 0 && self.isMainCamera {
-                    // Moves camera to better show the island which was tapped
-                    self.moveCameraToPeripheralIsland(islandNode: tappednode)
-                    
-                    // Update variables for camera rotation with pan
-                    if gesture.state == .ended {
-                        self.lastWidthRatio = self.cameraOrbit.eulerAngles.y/(-.pi)
-                        self.lastHeightRatio = self.cameraOrbit.eulerAngles.x/(-.pi/2)
+                // Zooms into self island
+                if self.isMainCamera {
+                    if tappednode.position.x == 0 {
+                        self.zoomMainCameraIntoSelfIsland()
+                    }
+                        // Change camera visualization if node tapped is a peripheral island
+                    else {
+                        // Moves camera to better show the island which was tapped
+                        self.zoomSecundaryCameraToPeripheralIsland(islandNode: tappednode)
+                        
+                        // Update variables for camera rotation with pan
+                        if gesture.state == .ended {
+                            self.updateLastWidthAndHeight()
+                        }
                     }
                 }
                 
@@ -241,13 +224,12 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     // Goes back to the main camera visualization of the SCNScene
     @objc func handleDoubleTap(_ gesture: UITapGestureRecognizer){
         
+        // Position main camera
+        let cameraPositionUnitVector = self.vectorServices.normalize(vector: self.mainCameraNode.position)
+        self.mainCameraNode.position = self.vectorServices.multiplicationByScalar(vector: cameraPositionUnitVector, scalar: Float((self.islandsVisualizationServices!.radius + 8)))
+        
+        // Set mainCamera as pointOfView for the scene
         if !self.isMainCamera {
-            // Positions main camera
-            let vectorServices = VectorServices()
-            let cameraPositionUnitVector = vectorServices.normalize(vector: self.mainCameraNode.position)
-            self.mainCameraNode.position = vectorServices.multiplicationByScalar(vector: cameraPositionUnitVector, scalar: Float((self.islandsVisualizationServices!.radius + 8)))
-            
-            // Set mainCamera as pointOfView for the scene
             self.islandsSCNView.pointOfView = self.mainCameraNode
             self.isMainCamera = true
         }
@@ -255,15 +237,63 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     
     // MARK: Camera Helpers
     
+    // Get number sign
     func sign(_ number: Float) -> Float  {
         return number < 0 ? -1 : 1
     }
     
-    func moveCameraToPeripheralIsland(islandNode: SCNNode) {
-        
-        // Return cameraOrbit node to center of scene
+    // Update lastWidthRation and lastHeightRatio to match the eulerAngles of the cameraOrbit
+    func updateLastWidthAndHeight() {
+        self.lastWidthRatio = self.cameraOrbit.eulerAngles.y/(-.pi)
+        self.lastHeightRatio = self.cameraOrbit.eulerAngles.x/(-.pi/2)
+    }
+    
+    // Return cameraOrbit node to center of scene
+    func recenterCameraOrbit() {
         self.cameraOrbit.position.x = 0
         self.cameraOrbit.position.y = 0
+    }
+    
+    // Rotate the position camera orbit for a more dynamic camera rotation movement
+    func moveCenterPositionAlongWithRotation() {
+        self.cameraOrbit.position.x += 0.01 * cos(-.pi * self.widthRatio/4)
+        self.cameraOrbit.position.z += 0.01 * sin(-.pi * self.widthRatio/4)
+        
+        // Prohibits the camera orbit to diverge too much from center
+        let maximumDisplacementFromCenter: Float = 0.15
+        if abs(self.cameraOrbit.position.x) > maximumDisplacementFromCenter {
+            self.cameraOrbit.position.x = self.sign(self.cameraOrbit.position.x) * maximumDisplacementFromCenter
+        }
+        if abs(self.cameraOrbit.position.z) > maximumDisplacementFromCenter {
+            self.cameraOrbit.position.z = self.sign(self.cameraOrbit.position.z) * maximumDisplacementFromCenter
+        }
+    }
+    
+    // Rotate camera vertically whithin given constraints
+    func makeVerticalRotationWithConstraints() {
+        
+        //  Apply height constraints
+        if (self.heightRatio >= self.maxHeightRatioXUp ) {
+            self.heightRatio = self.maxHeightRatioXUp
+        }
+        if (self.heightRatio <= self.maxHeightRatioXDown ) {
+            self.heightRatio = self.maxHeightRatioXDown
+        }
+        // Rotates camera vertically
+        self.cameraOrbit.eulerAngles.x = -.pi * self.heightRatio/2
+    }
+    
+    // Positions main camera zoomed into selfIsland
+    func zoomMainCameraIntoSelfIsland() {
+        self.recenterCameraOrbit()
+        
+        self.mainCameraNode.position = self.vectorServices.normalize(vector: self.mainCameraNode.position)
+        self.mainCameraNode.position = self.vectorServices.multiplicationByScalar(vector: self.mainCameraNode.position, scalar: 5)
+    }
+    
+    // Set secundary camera as point of view and have it look at a given peripheral island
+    func zoomSecundaryCameraToPeripheralIsland(islandNode: SCNNode) {
+        self.recenterCameraOrbit()
         
         // Set euler angles of cameraOrbit based on the islandNode's position
         self.cameraOrbit.eulerAngles.x = 0
@@ -280,7 +310,8 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         self.isMainCamera = false
     }
     
-    func setUpCamera() {
+    // Instantiate the cameras from the .scn files
+    func instantiateCameras() {
         
         if let camOrbit = self.islandsSCNScene.rootNode.childNode(withName: "cameraOrbit", recursively: true) {
             self.cameraOrbit = camOrbit
@@ -300,7 +331,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
                 }
             }
         }
-        self.mainCamera.zNear = 1.5
     }
     
 // MARK: FloatingPanel - Card
