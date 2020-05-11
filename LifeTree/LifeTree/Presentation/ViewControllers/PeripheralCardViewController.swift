@@ -62,4 +62,49 @@ class Actions {
     init(name: String) {
         self.name = name
     }
+
+
+    // MARK: Debug Buttons
+
+    @IBAction func newAction(_ sender: Any) {
+        let action = Action()
+
+        action.actionId = UUID()
+        action.name = "Ação teste"
+        action.impactLevel = 50
+
+        if let relatedIsland = self.peripheralIsland {
+            ActionDataServices.createAction(action: action, relatedIsland: relatedIsland) { (error) in
+                if error != nil {
+                    print(error.debugDescription)
+                } else {
+                    print("Ação criada com sucesso.")
+                }
+            }
+        }
+    }
+
+    @IBAction func checkIslandActions(_ sender: Any) {
+        ActionDataServices.getIslandActions(island: peripheralIsland!) { (error, actions) in
+            if (error != nil) {
+                print(error.debugDescription)
+            } else {
+                if let islandActions = actions {
+                    print("Há \(islandActions.count) ações na ilha \(self.peripheralIsland!.name!).")
+                    for action in islandActions {
+                        print("Ação \(action.name!) - Nível de impacto: \(action.impactLevel!)")
+                    }
+                }
+            }
+        }
+    }
+
+    // MARK: Table View - List of Actions
+    // Deve ser populada utilizando o método
+    // ActionDataServices.getIslandActions() conforme
+    // exemplificado no botão de debug
+
+    // MARK: Add New Action Button
+    // Deve levar o usuário a uma nova tela (CreateActionViewController)
+    // Informações que devem ser passadas: PeripheralIsland
 }
