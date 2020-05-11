@@ -28,33 +28,22 @@ class FloatingPanelViewController: UIViewController, FloatingPanelControllerDele
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
-    
-// MARK: FloatingPanelControllerDelegate
-    
-    func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
-        return FloatingPanelCardLayout()
-    }
-
-    func floatingPanel(_ vc: FloatingPanelController, behaviorFor newCollection: UITraitCollection) -> FloatingPanelBehavior? {
-        return FloatingPanelCardBehavior()
-    }
-
 }
 
 // MARK: My custom layout
 
 class FloatingPanelCardLayout: FloatingPanelLayout {
     
-    public var initialPosition: FloatingPanelPosition {
-        return .tip
+    var initialPosition: FloatingPanelPosition {
+        return .half
     }
-    
-    public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
+
+    func insetFor(position: FloatingPanelPosition) -> CGFloat? {
         switch position {
-        case .full: return 16.0 // A top inset from safe area
-        case .half: return 262.0 // A bottom inset from the safe area
-        case .tip: return 85.0 + 44.0 // A bottom inset from the safe area Visible + ToolView
-        default: return nil // Or `case .hidden: return nil`
+        case .full: return 16.0
+        case .half: return 85.0 + 45.0
+        case .tip: return 85.0 + 44.0 // Visible + ToolView
+        default: return nil
         }
     }
 }

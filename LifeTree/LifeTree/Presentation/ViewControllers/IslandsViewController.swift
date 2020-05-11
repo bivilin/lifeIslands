@@ -11,7 +11,7 @@ import SceneKit
 import SpriteKit
 import FloatingPanel
 
-class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
+class IslandsViewController: UIViewController{
     
     @IBOutlet weak var islandsSCNView: SCNView!
     
@@ -220,5 +220,15 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         floatingPanel.set(contentViewController: cardView)
         floatingPanel.addPanel(toParent: self, animated: false)
     }
+}
 
+extension IslandsViewController: FloatingPanelControllerDelegate {
+    
+    func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
+         return FloatingPanelCardLayout()
+    }
+
+    func floatingPanel(_ vc: FloatingPanelController, behaviorFor newCollection: UITraitCollection) -> FloatingPanelBehavior? {
+        return FloatingPanelCardBehavior()
+    }
 }
