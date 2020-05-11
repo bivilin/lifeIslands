@@ -32,6 +32,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
 
     // Card Properties
     var floatingPanel: FloatingPanelController!
+    var peripheralCardView: PeripheralCardViewController!
     var cardView: CardViewController!
     
     // Camera
@@ -75,6 +76,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         // Show Card
         setupFloatingPanel()
         cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
+        peripheralCardView = storyboard?.instantiateViewController(withIdentifier: "PeripheralCard") as? PeripheralCardViewController
         showFloatingPanel()
         
         // Add self islando do scene
@@ -99,26 +101,36 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         self.view.addGestureRecognizer(tapRec)
     }
 
-    // Handle Tap
+    // MARK: Gestures
 
     @objc func handleTap(rec: UITapGestureRecognizer){
-        print("tap")
         if rec.state == .ended {
+            // Reconhece tap no Scene Kit
             let location: CGPoint = rec.location(in: islandsSCNView)
             let hits = self.islandsSCNView.hitTest(location, options: nil)
+
+            // Recupera primeiro nó reconhecido pelo toque
             if let tappednode = hits.first?.node {
-                print(tappednode)
-                let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: tappednode)
-                if let name = islandObject?.name {
-                    print(name)
-                }
-                if islandObject == nil, let tappedName = tappednode.name {
-                    print(tappedName)
-                }
+                // Altera conteúdo do card
+                setCardForNode(node: tappednode)
             }
         }
     }
 
+    func setCardForNode(node: SCNNode) {
+        // Ilhas Periféricas
+        // Utiliza o nó para obter o objeto referente àquela ilha
+        if let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: node) {
+            // Atualiza as informações da VC
+            peripheralCardView.peripheralIsland = islandObject
+            // Atualiza o conteúdo do Floating Panel para a nova VC
+            floatingPanel.set(contentViewController: peripheralCardView)
+        } else {
+            // Ilha Central
+            // Solução temporária
+            floatingPanel.set(contentViewController: cardView)
+        }
+    }
 
     // MARK: Helpers
     
