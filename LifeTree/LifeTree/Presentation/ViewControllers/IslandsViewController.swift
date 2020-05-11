@@ -29,6 +29,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     var islandsVisualizationServices: IslandsVisualisationServices? = nil
     // Dictionary with key being the id of the island, and value its corresponding SceneKit plane node
     var islandDictionary: [String: SCNNode] = [:]
+    let vectorServices = VectorServices()
 
     // Card Properties
     var floatingPanel: FloatingPanelController!
@@ -37,8 +38,10 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     
     // Camera
     var cameraOrbit = SCNNode()
-    var cameraNode = SCNNode()
-    var camera = SCNCamera()
+    var mainCameraNode = SCNNode()
+    var mainCamera = SCNCamera()
+    var secundaryCameraNode = SCNNode()
+    var isMainCamera = true
 
     // Handle pan camera
     var lastWidthRatio: Float = 0
@@ -46,11 +49,11 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     var widthRatio: Float = 0
     var heightRatio: Float = 0
     var fingersNeededToPan = 1
-    var maxHeightRatioXDown: Float = -0.2
+    var maxHeightRatioXDown: Float = -0.22
     var maxHeightRatioXUp: Float = 0
 
     // Handle pinch camera
-    var pinchAttenuation: Double = 50  //1.0: very fast - 200.0 very slow
+    var pinchAttenuation: Double = 40  //1.0: very fast - 100.0 slow
     let maxCameraDistanceFromCenter: Float = 20
     let minCameraDistanceFromCenter: Float = 2
     var lastFingersNumber: Int = 0
@@ -86,7 +89,8 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         self.islandsSCNView.scene = islandsSCNScene
         
         // Configures camera
-        self.setUpCamera()
+        self.instantiateCameras()
+        self.mainCamera.zNear = 1.5
 
         // Add a tap gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
@@ -96,21 +100,116 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(handlePinch(_:)))
         self.islandsSCNView.addGestureRecognizer(pinchGesture)
 
-        // Gesture - Tap
-        let tapRec = UITapGestureRecognizer(target: self, action: #selector(IslandsViewController.handleTap(rec:)))
-        self.view.addGestureRecognizer(tapRec)
+        // Add a single tap gesture recognizer
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        singleTap.numberOfTapsRequired = 1
+        self.islandsSCNView.addGestureRecognizer(singleTap)
+        
+        // Add a double tap gesture recognizer
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(_:)))
+        doubleTap.numberOfTapsRequired = 2
+        self.islandsSCNView.addGestureRecognizer(doubleTap)
     }
-
+    
     // MARK: Gestures
+    
+    // Pan
+    // Rotates camera around center in the SCNScene
+    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
 
-    @objc func handleTap(rec: UITapGestureRecognizer){
-        if rec.state == .ended {
-            // Reconhece tap no Scene Kit
-            let location: CGPoint = rec.location(in: islandsSCNView)
+        let numberOfTouches = gesture.numberOfTouches
+        let translation = gesture.translation(in: gesture.view!)
+
+        if (numberOfTouches == fingersNeededToPan) {
+
+            // Horizontal displacement relative to screen size
+            self.widthRatio = Float(translation.x) / Float(gesture.view!.frame.size.width) + self.lastWidthRatio
+            
+            // Rotate camera horizontally
+            self.cameraOrbit.eulerAngles.y = -.pi * widthRatio
+            
+            if self.isMainCamera {
+                
+                // Update vertical displacement relative to screen size
+                self.heightRatio = Float(translation.y) / Float(gesture.view!.frame.size.height) + self.lastHeightRatio
+                // Vertical rotation for the main camera
+                self.makeVerticalRotationWithConstraints()
+                
+                // Moves camera orbit center in circle along with the horizontal rotation for a more organic feel
+                self.moveCenterPositionAlongWithRotation()
+            }
+            
+            // Final check on fingers number
+            lastFingersNumber = self.fingersNeededToPan
+        }
+        
+        lastFingersNumber = (numberOfTouches > 0 ? numberOfTouches : lastFingersNumber)
+        
+        // Update variables at the end of the gesture
+        if (gesture.state == .ended && lastFingersNumber == self.fingersNeededToPan) {
+            self.updateLastWidthAndHeight()
+        }
+    }
+    
+    // Pinch
+    // Zooms in and out from the center in the SCNScene
+    @objc func handlePinch(_ gesture: UIPinchGestureRecognizer) {
+        
+        // Get pinch velocity
+        let pinchVelocity = Double.init(gesture.velocity)
+        
+        // Zoom only allowed when main camera is on
+        if self.isMainCamera {
+            // Increase/decrease camera distance from center by a zoomFactor
+            let zoomFactor = 1 - pinchVelocity/self.pinchAttenuation
+            let newPosition = self.vectorServices.multiplicationByScalar(vector: self.mainCameraNode.position, scalar: Float(zoomFactor))
+            
+            // Apply change only if the new distance from the center is whithin the boundaries we've set
+            let distanceFromCameraOrbit = self.vectorServices.length(vector: self.vectorServices.subtraction(vector1: self.cameraOrbit.position, vectorToSubtract: newPosition))
+            if distanceFromCameraOrbit < self.maxCameraDistanceFromCenter && distanceFromCameraOrbit > self.minCameraDistanceFromCenter {
+                self.mainCameraNode.position = newPosition
+            }
+        }
+        else {
+            // Rotate camera horizontally
+            self.cameraOrbit.eulerAngles.y += Float(pinchVelocity)*(-1/80)
+            
+            // Update variables for camera rotation with pan
+            if gesture.state == .ended {
+                self.updateLastWidthAndHeight()
+            }
+        }
+    }
+    
+    // Single tap
+    // Moves camera to tapped island node and get its information from CoreData
+    @objc func handleTap(_ gesture: UITapGestureRecognizer){
+
+        if gesture.state == .ended {
+            // Make hit test for the tap
+            let location: CGPoint = gesture.location(in: islandsSCNView)
             let hits = self.islandsSCNView.hitTest(location, options: nil)
-
-            // Recupera primeiro nó reconhecido pelo toque
+            
+            // Get node from hit test
             if let tappednode = hits.first?.node {
+                
+                // Zooms into self island
+                if self.isMainCamera {
+                    if tappednode.position.x == 0 {
+                        self.zoomMainCameraIntoSelfIsland()
+                    }
+                        // Change camera visualization if node tapped is a peripheral island
+                    else {
+                        // Moves camera to better show the island which was tapped
+                        self.zoomSecundaryCameraToPeripheralIsland(islandNode: tappednode)
+                        
+                        // Update variables for camera rotation with pan
+                        if gesture.state == .ended {
+                            self.updateLastWidthAndHeight()
+                        }
+                    }
+                }
+                
                 // Altera conteúdo do card
                 setCardForNode(node: tappednode)
             }
@@ -132,82 +231,117 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
         }
     }
 
-    // MARK: Helpers
     
-    func setUpCamera() {
+    // Double tap
+    // Goes back to the main camera visualization of the SCNScene
+    @objc func handleDoubleTap(_ gesture: UITapGestureRecognizer){
+        
+        // Position main camera
+        let cameraPositionUnitVector = self.vectorServices.normalize(vector: self.mainCameraNode.position)
+        self.mainCameraNode.position = self.vectorServices.multiplicationByScalar(vector: cameraPositionUnitVector, scalar: Float((self.islandsVisualizationServices!.radius + 8)))
+        
+        // Set mainCamera as pointOfView for the scene
+        if !self.isMainCamera {
+            self.islandsSCNView.pointOfView = self.mainCameraNode
+            self.isMainCamera = true
+        }
+    }
+    
+    // MARK: Camera Helpers
+    
+    // Get number sign
+    func sign(_ number: Float) -> Float  {
+        return number < 0 ? -1 : 1
+    }
+    
+    // Update lastWidthRation and lastHeightRatio to match the eulerAngles of the cameraOrbit
+    func updateLastWidthAndHeight() {
+        self.lastWidthRatio = self.cameraOrbit.eulerAngles.y/(-.pi)
+        self.lastHeightRatio = self.cameraOrbit.eulerAngles.x/(-.pi/2)
+    }
+    
+    // Return cameraOrbit node to center of scene
+    func recenterCameraOrbit() {
+        self.cameraOrbit.position.x = 0
+        self.cameraOrbit.position.y = 0
+    }
+    
+    // Rotate the position camera orbit for a more dynamic camera rotation movement
+    func moveCenterPositionAlongWithRotation() {
+        self.cameraOrbit.position.x += 0.01 * cos(-.pi * self.widthRatio/4)
+        self.cameraOrbit.position.z += 0.01 * sin(-.pi * self.widthRatio/4)
+        
+        // Prohibits the camera orbit to diverge too much from center
+        let maximumDisplacementFromCenter: Float = 0.15
+        if abs(self.cameraOrbit.position.x) > maximumDisplacementFromCenter {
+            self.cameraOrbit.position.x = self.sign(self.cameraOrbit.position.x) * maximumDisplacementFromCenter
+        }
+        if abs(self.cameraOrbit.position.z) > maximumDisplacementFromCenter {
+            self.cameraOrbit.position.z = self.sign(self.cameraOrbit.position.z) * maximumDisplacementFromCenter
+        }
+    }
+    
+    // Rotate camera vertically whithin given constraints
+    func makeVerticalRotationWithConstraints() {
+        
+        //  Apply height constraints
+        if (self.heightRatio >= self.maxHeightRatioXUp ) {
+            self.heightRatio = self.maxHeightRatioXUp
+        }
+        if (self.heightRatio <= self.maxHeightRatioXDown ) {
+            self.heightRatio = self.maxHeightRatioXDown
+        }
+        // Rotates camera vertically
+        self.cameraOrbit.eulerAngles.x = -.pi * self.heightRatio/2
+    }
+    
+    // Positions main camera zoomed into selfIsland
+    func zoomMainCameraIntoSelfIsland() {
+        self.recenterCameraOrbit()
+        
+        self.mainCameraNode.position = self.vectorServices.normalize(vector: self.mainCameraNode.position)
+        self.mainCameraNode.position = self.vectorServices.multiplicationByScalar(vector: self.mainCameraNode.position, scalar: 5)
+    }
+    
+    // Set secundary camera as point of view and have it look at a given peripheral island
+    func zoomSecundaryCameraToPeripheralIsland(islandNode: SCNNode) {
+        self.recenterCameraOrbit()
+        
+        // Set euler angles of cameraOrbit based on the islandNode's position
+        self.cameraOrbit.eulerAngles.x = 0
+        let tanOfIslandAngle = islandNode.position.x/islandNode.position.z
+        self.cameraOrbit.eulerAngles.y = atan(tanOfIslandAngle)
+        
+        // Places main camera in front of the selected islandNode
+        let vectorServices = VectorServices()
+        let cameraPositionUnitVector = vectorServices.normalize(vector: self.mainCameraNode.position)
+        self.mainCameraNode.position = vectorServices.multiplicationByScalar(vector: cameraPositionUnitVector, scalar: Float((self.islandsVisualizationServices!.radius + 2)))
+        
+        // Set secundaryCamera as pointOfView so that we have better vision of a single island
+        self.islandsSCNView.pointOfView = self.secundaryCameraNode
+        self.isMainCamera = false
+    }
+    
+    // Instantiate the cameras from the .scn files
+    func instantiateCameras() {
         
         if let camOrbit = self.islandsSCNScene.rootNode.childNode(withName: "cameraOrbit", recursively: true) {
             self.cameraOrbit = camOrbit
             print("cameraOrbit is set")
+            
             if let camNode = self.cameraOrbit.childNode(withName: "camera", recursively: true) {
-                self.cameraNode = camNode
+                self.mainCameraNode = camNode
                 print("cameraNode is set")
-                if let cam = self.cameraNode.camera {
-                    self.camera = cam
+                
+                if let cam = self.mainCameraNode.camera {
+                    self.mainCamera = cam
                     print("camera is set")
                 }
+                if let cam2 = self.mainCameraNode.childNode(withName: "secundaryCamera", recursively: true) {
+                    self.secundaryCameraNode = cam2
+                    print("secundaryCameraNode is set")
+                }
             }
-        }
-        self.camera.zNear = 1
-    }
-    
-    // MARK: Gestures
-    
-    @objc func handlePan(_ gestureRecognize: UIPanGestureRecognizer) {
-
-        let numberOfTouches = gestureRecognize.numberOfTouches
-        let translation = gestureRecognize.translation(in: gestureRecognize.view!)
-
-        if (numberOfTouches == fingersNeededToPan) {
-
-            widthRatio = Float(translation.x) / Float(gestureRecognize.view!.frame.size.width) + self.lastWidthRatio
-            heightRatio = Float(translation.y) / Float(gestureRecognize.view!.frame.size.height) + self.lastHeightRatio
-
-            //  Height constraints
-            if (heightRatio >= self.maxHeightRatioXUp ) {
-                heightRatio = self.maxHeightRatioXUp
-            }
-            if (heightRatio <= self.maxHeightRatioXDown ) {
-                heightRatio = self.maxHeightRatioXDown
-            }
-
-            self.cameraOrbit.eulerAngles.y = -2 * .pi * widthRatio/2
-            self.cameraOrbit.eulerAngles.x = -.pi * heightRatio/2
-            
-            self.cameraOrbit.position.x += 0.01 * cos(-.pi * heightRatio/2)
-            self.cameraOrbit.position.z += 0.01 * sin(-.pi * heightRatio/2)
-            
-            let maximumDisplacement: Float = 0.1
-            if self.cameraOrbit.position.x > maximumDisplacement {
-                self.cameraOrbit.position.x = maximumDisplacement
-            }
-            if cameraOrbit.position.z > maximumDisplacement {
-                self.cameraOrbit.position.z = maximumDisplacement
-            }
-            
-            // Final check on fingers number
-            lastFingersNumber = self.fingersNeededToPan
-        }
-
-        lastFingersNumber = (numberOfTouches > 0 ? numberOfTouches : lastFingersNumber)
-
-        if (gestureRecognize.state == .ended && lastFingersNumber == self.fingersNeededToPan) {
-            self.lastWidthRatio = self.widthRatio
-            self.lastHeightRatio = self.heightRatio
-        }
-    }
-    
-    @objc func handlePinch(_ gestureRecognize: UIPinchGestureRecognizer) {
-        
-        let pinchVelocity = Double.init(gestureRecognize.velocity)
-        let zoomFactor = 1 - pinchVelocity/self.pinchAttenuation
-        
-        let vectorServices = VectorServices()
-        let newPosition = vectorServices.multiplicationByScalar(vector: self.cameraNode.position, scalar: Float(zoomFactor))
-        let distanceFromCameraOrbit = vectorServices.length(vector: vectorServices.subtraction(vector1: self.cameraOrbit.position, vectorToSubtract: newPosition))
-        
-        if distanceFromCameraOrbit < self.maxCameraDistanceFromCenter && distanceFromCameraOrbit > self.minCameraDistanceFromCenter {
-            self.cameraNode.position = newPosition
         }
     }
     

@@ -31,4 +31,9 @@ class VectorServices {
         let vector2 = self.multiplicationByScalar(vector: vectorToSubtract, scalar: -1)
         return self.sum(vector1: vector1, vector2: vector2)
     }
+    
+    func normalize(vector: SCNVector3) -> SCNVector3 {
+        let norm = length(vector: vector)
+        return multiplicationByScalar(vector: vector, scalar: (1/norm))
+    }
 }
