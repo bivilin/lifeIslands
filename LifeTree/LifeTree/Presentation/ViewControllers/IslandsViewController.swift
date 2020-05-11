@@ -193,6 +193,7 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
             // Get node from hit test
             if let tappednode = hits.first?.node {
                 
+                // Hapitic feedback
                 let generator = UIImpactFeedbackGenerator(style: .light)
                 generator.impactOccurred()
                 
@@ -212,7 +213,6 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
                         }
                     }
                 }
-                
                 // Altera conteúdo do card
                 setCardForNode(node: tappednode)
             }
@@ -238,6 +238,10 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
     // Double tap
     // Goes back to the main camera visualization of the SCNScene
     @objc func handleDoubleTap(_ gesture: UITapGestureRecognizer){
+        
+        // Hapitic feedback
+        let generator = UIImpactFeedbackGenerator(style: .light)
+        generator.impactOccurred()
         
         // Position main camera
         let cameraPositionUnitVector = self.vectorServices.normalize(vector: self.mainCameraNode.position)
