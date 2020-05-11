@@ -123,31 +123,51 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aok-v6-kBv">
-                                        <rect key="frame" x="15" y="152" width="220" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aok-v6-kBv">
+                                        <rect key="frame" x="97" y="152" width="220" height="30"/>
                                         <state key="normal" title="Ver ações existentes no console"/>
                                         <connections>
                                             <action selector="checkIslandActions:" destination="TwD-va-l50" eventType="touchUpInside" id="W3n-AD-qoh"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPU-Cr-OYb">
-                                        <rect key="frame" x="15" y="114" width="107" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPU-Cr-OYb">
+                                        <rect key="frame" x="153.5" y="114" width="107" height="30"/>
                                         <state key="normal" title="Criar nova ação"/>
                                         <connections>
                                             <action selector="newAction:" destination="TwD-va-l50" eventType="touchUpInside" id="8O4-Sm-dBo"/>
                                         </connections>
                                     </button>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PJ7-YZ-Lav">
+                                        <rect key="frame" x="16" y="232" width="382" height="535"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="actionCell" id="RBY-F5-pC9">
+                                                <rect key="frame" x="0.0" y="28" width="382" height="43.5"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RBY-F5-pC9" id="4SX-La-Te9">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                    </tableView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="MLX-U9-79p" secondAttribute="trailing" constant="15" id="089-ms-dBn"/>
                                     <constraint firstItem="V8b-5F-bIf" firstAttribute="top" secondItem="MLX-U9-79p" secondAttribute="bottom" constant="20.5" id="1jk-Sl-FMZ"/>
                                     <constraint firstItem="V8b-5F-bIf" firstAttribute="leading" secondItem="qaq-kA-Vxn" secondAttribute="leading" constant="15" id="3Gc-Oh-gkM"/>
+                                    <constraint firstAttribute="bottom" secondItem="PJ7-YZ-Lav" secondAttribute="bottom" constant="20" id="3Uv-ig-nOP"/>
+                                    <constraint firstItem="Aok-v6-kBv" firstAttribute="centerX" secondItem="qaq-kA-Vxn" secondAttribute="centerX" id="7J3-26-sYW"/>
+                                    <constraint firstItem="xPU-Cr-OYb" firstAttribute="centerX" secondItem="qaq-kA-Vxn" secondAttribute="centerX" id="DL1-25-h8F"/>
                                     <constraint firstItem="MLX-U9-79p" firstAttribute="leading" secondItem="qaq-kA-Vxn" secondAttribute="leading" constant="15" id="Ija-El-2rC"/>
+                                    <constraint firstItem="Aok-v6-kBv" firstAttribute="top" secondItem="xPU-Cr-OYb" secondAttribute="bottom" constant="8" id="NRW-zI-EYo"/>
+                                    <constraint firstItem="PJ7-YZ-Lav" firstAttribute="top" secondItem="Aok-v6-kBv" secondAttribute="bottom" constant="50" id="QZw-l5-kXN"/>
                                     <constraint firstItem="MLX-U9-79p" firstAttribute="top" secondItem="qaq-kA-Vxn" secondAttribute="top" constant="20" id="Rhd-cz-Gp8"/>
+                                    <constraint firstAttribute="trailing" secondItem="PJ7-YZ-Lav" secondAttribute="trailing" constant="16" id="UZE-08-YKa"/>
                                     <constraint firstAttribute="trailing" secondItem="V8b-5F-bIf" secondAttribute="trailing" constant="15" id="c72-ar-6hv"/>
+                                    <constraint firstItem="PJ7-YZ-Lav" firstAttribute="leading" secondItem="qaq-kA-Vxn" secondAttribute="leading" constant="16" id="rlH-WC-yzr"/>
+                                    <constraint firstItem="xPU-Cr-OYb" firstAttribute="top" secondItem="V8b-5F-bIf" secondAttribute="bottom" constant="19.5" id="sDD-Xa-wlg"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -165,6 +185,7 @@
                         <viewLayoutGuide key="safeArea" id="2jl-GS-PBI"/>
                     </view>
                     <connections>
+                        <outlet property="actionsTableView" destination="PJ7-YZ-Lav" id="vfW-wu-nLA"/>
                         <outlet property="nameIsland" destination="MLX-U9-79p" id="Zpr-95-AeF"/>
                         <outlet property="phrase" destination="V8b-5F-bIf" id="Ma3-FC-MG8"/>
                     </connections>

@@ -42,6 +42,7 @@
 		B3A7DC6924588384002AD059 /* PeripheralIslandDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A7DC6824588384002AD059 /* PeripheralIslandDAO.swift */; };
 		B3A7DC6B245884BB002AD059 /* PeripheralIslandDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */; };
 		B3B1F90B24659CF700778E73 /* PeripheralCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1F90A24659CF700778E73 /* PeripheralCardViewController.swift */; };
+		B3E1050C2469D77B0055E39C /* ActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1050B2469D77B0055E39C /* ActionTableViewCell.swift */; };
 		B3E10505246997230055E39C /* ActionDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E10504246997230055E39C /* ActionDAO.swift */; };
 		B3E10507246998B90055E39C /* ActionDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E10506246998B90055E39C /* ActionDataServices.swift */; };
 		E2B72AE424587450001DEC21 /* FloatingPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2B72AE324587450001DEC21 /* FloatingPanelViewController.swift */; };
@@ -87,6 +88,7 @@
 		B3A7DC6824588384002AD059 /* PeripheralIslandDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIslandDAO.swift; sourceTree = "<group>"; };
 		B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIslandDataServices.swift; sourceTree = "<group>"; };
 		B3B1F90A24659CF700778E73 /* PeripheralCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralCardViewController.swift; sourceTree = "<group>"; };
+		B3E1050B2469D77B0055E39C /* ActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTableViewCell.swift; sourceTree = "<group>"; };
 		B3E10504246997230055E39C /* ActionDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDAO.swift; sourceTree = "<group>"; };
 		B3E10506246998B90055E39C /* ActionDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDataServices.swift; sourceTree = "<group>"; };
 		D1719F49DE69D292E3DFD21C /* Pods-LifeTree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTree.debug.xcconfig"; path = "Target Support Files/Pods-LifeTree/Pods-LifeTree.debug.xcconfig"; sourceTree = "<group>"; };
@@ -253,12 +255,21 @@
 		B30435212451F47B007D6F3C /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B3E1050A2469D7400055E39C /* Cells */,
 				8D687B2324528DBB00F83BB7 /* ViewControllers */,
 				8D687B1E24528CE900F83BB7 /* Scenes */,
 				8D687B1D24528CCA00F83BB7 /* Storyboards */,
 				B30434F52451EE81007D6F3C /* Assets.xcassets */,
 			);
 			path = Presentation;
+			sourceTree = "<group>";
+		};
+		B3E1050A2469D7400055E39C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B3E1050B2469D77B0055E39C /* ActionTableViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		D2E2C7124E84FEBEA0F26DFD /* Frameworks */ = {
@@ -395,6 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3E1050C2469D77B0055E39C /* ActionTableViewCell.swift in Sources */,
 				8D687B362452940000F83BB7 /* WateringTreeMechanics.swift in Sources */,
 				B3A7DC6924588384002AD059 /* PeripheralIslandDAO.swift in Sources */,
 				8D687B3C245294BE00F83BB7 /* Action.swift in Sources */,
