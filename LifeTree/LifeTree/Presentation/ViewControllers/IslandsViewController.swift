@@ -193,6 +193,9 @@ class IslandsViewController: UIViewController, FloatingPanelControllerDelegate{
             // Get node from hit test
             if let tappednode = hits.first?.node {
                 
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+                
                 // Zooms into self island
                 if self.isMainCamera {
                     if tappednode.position.x == 0 {
