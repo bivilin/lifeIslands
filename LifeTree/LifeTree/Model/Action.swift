@@ -12,7 +12,7 @@ import Foundation
 class Action: NSManagedObject {
     @NSManaged public var actionId: UUID?
     @NSManaged public var name: String?
-    @NSManaged public var effectLevel: NSNumber?
+    @NSManaged public var impactLevel: NSNumber?
     @NSManaged public var has_peripheralIsland: PeripheralIsland?
 
     convenience init() {

@@ -21,6 +21,7 @@ class ActionDAO: DAO {
 
             // includes relationship between action and peripheral island
             relatedIsland.managedObjectContext?.insert(objectToBeSaved)
+            objectToBeSaved.has_peripheralIsland = relatedIsland
 
             // persist changes at the context
             try CoreDataManager.sharedInstance.persistentContainer.viewContext.save()

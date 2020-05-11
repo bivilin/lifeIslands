@@ -2,7 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Action" representedClassName=".Action" syncable="YES">
         <attribute name="actionId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="effectLevel" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="impactLevel" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="has_peripheralIsland" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PeripheralIsland"/>
     </entity>
