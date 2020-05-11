@@ -16,7 +16,7 @@ class PeripheralCardViewController: UIViewController {
     @IBOutlet weak var actionsTableView: UITableView!
 
     var peripheralIsland: PeripheralIsland?
-    var islandActions: [Actions] = []
+    var islandActions: [Action] = []
     var numberOfActions: Int = 0
 
     override func viewWillAppear(_ animated: Bool) {
@@ -28,41 +28,32 @@ class PeripheralCardViewController: UIViewController {
             phrase.text = "Sua saúde ainda não foi definida"
         }
 
-        // Table View
-        islandActions = [Actions(name: "Regar as plantas"), Actions(name: "Varrer a calçada"), Actions(name: "Lavar a roupa")]
-        numberOfActions = islandActions.count
-
+        // TableView Setup
         actionsTableView.delegate = self
         actionsTableView.dataSource = self
-        actionsTableView.reloadData()
 
-
+        // Populando TableView
+        self.updateDataFromDatabase()
     }
 
+    func updateDataFromDatabase() {
+        ActionDataServices.getIslandActions(island: peripheralIsland!) { (error, actions) in
+            if (error != nil) {
+                print(error.debugDescription)
+            } else {
+                if let islandActions = actions {
+                    self.islandActions = islandActions
+                    self.actionsTableView.reloadData()
 
-}
-
-extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfActions
+                    // Debug Prints
+                    print("Há \(islandActions.count) ações na ilha \(self.peripheralIsland!.name!).")
+                    for action in islandActions {
+                        print("Ação \(action.name!) - Nível de impacto: \(action.impactLevel!)")
+                    }
+                }
+            }
+        }
     }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = actionsTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath)
-        cell.textLabel?.text = islandActions[indexPath.row].name
-        return cell
-    }
-
-
-}
-
-class Actions {
-    var name: String
-
-    init(name: String) {
-        self.name = name
-    }
-
 
     // MARK: Debug Buttons
 
@@ -79,6 +70,7 @@ class Actions {
                     print(error.debugDescription)
                 } else {
                     print("Ação criada com sucesso.")
+                    self.updateDataFromDatabase()
                 }
             }
         }
@@ -99,12 +91,33 @@ class Actions {
         }
     }
 
-    // MARK: Table View - List of Actions
-    // Deve ser populada utilizando o método
-    // ActionDataServices.getIslandActions() conforme
-    // exemplificado no botão de debug
-
     // MARK: Add New Action Button
     // Deve levar o usuário a uma nova tela (CreateActionViewController)
     // Informações que devem ser passadas: PeripheralIsland
 }
+
+// MARK: Table View - List of Actions
+// Deve ser populada utilizando o método
+// ActionDataServices.getIslandActions() conforme
+// exemplificado no botão de debug
+
+
+extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return islandActions.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = actionsTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath)
+        cell.textLabel?.text = islandActions[indexPath.row].name
+        return cell
+    }
+}
+
+//class Actions {
+//    var name: String
+//
+//    init(name: String) {
+//        self.name = name
+//    }
+//}
