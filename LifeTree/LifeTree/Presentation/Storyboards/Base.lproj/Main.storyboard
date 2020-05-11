@@ -134,7 +134,8 @@
                                         <rect key="frame" x="153.5" y="114" width="107" height="30"/>
                                         <state key="normal" title="Criar nova ação"/>
                                         <connections>
-                                            <action selector="newAction:" destination="TwD-va-l50" eventType="touchUpInside" id="8O4-Sm-dBo"/>
+                                            <action selector="newAction:" destination="TwD-va-l50" eventType="touchUpInside" id="jM4-oD-on5"/>
+                                            <segue destination="1de-Dz-avu" kind="presentation" identifier="NewAction" id="gIS-Lp-UeA"/>
                                         </connections>
                                     </button>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PJ7-YZ-Lav">
@@ -184,6 +185,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2jl-GS-PBI"/>
                     </view>
+                    <navigationItem key="navigationItem" id="hjW-8g-arw"/>
                     <connections>
                         <outlet property="actionsTableView" destination="PJ7-YZ-Lav" id="vfW-wu-nLA"/>
                         <outlet property="nameIsland" destination="MLX-U9-79p" id="Zpr-95-AeF"/>
@@ -192,7 +194,98 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dvd-Bu-cD8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="968" y="583"/>
+            <point key="canvasLocation" x="1819" y="583"/>
+        </scene>
+        <!--Create Action View Controller-->
+        <scene sceneID="Ogb-cH-jl3">
+            <objects>
+                <viewController id="1de-Dz-avu" customClass="CreateActionViewController" customModule="LifeTree" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mIC-eO-zFF">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TLP-T8-Ofa">
+                                <rect key="frame" x="16" y="16" width="382" height="361.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Atividade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRJ-9i-cVm">
+                                        <rect key="frame" x="0.0" y="0.0" width="382" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dê um nome para a atividade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QN-rr-uW4">
+                                        <rect key="frame" x="0.0" y="56" width="382" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-sH-w1U">
+                                        <rect key="frame" x="0.0" y="96.5" width="382" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Como se sente ao fazer essa atividade?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGN-QG-1NA">
+                                        <rect key="frame" x="0.0" y="150.5" width="382" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="HNY-xu-LwH">
+                                        <rect key="frame" x="-2" y="191" width="386" height="31"/>
+                                        <connections>
+                                            <action selector="impactLevelChanged:" destination="1de-Dz-avu" eventType="valueChanged" id="2C1-7x-gOe"/>
+                                        </connections>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUS-La-OAX">
+                                        <rect key="frame" x="0.0" y="241" width="382" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9x2-xn-6tM">
+                                        <rect key="frame" x="0.0" y="281.5" width="382" height="30"/>
+                                        <color key="backgroundColor" red="0.62427575829266846" green="0.7693973183631897" blue="0.39078134058733849" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Confirmar">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="confirmButton:" destination="1de-Dz-avu" eventType="touchUpInside" id="SNB-qq-8Uo"/>
+                                            <segue destination="ljH-3K-eXP" kind="unwind" identifier="unwindToPeriphalIsland" unwindAction="unwindToPeriphalIsland:" id="fwl-Mo-GbK"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUl-uh-BBo">
+                                        <rect key="frame" x="0.0" y="331.5" width="382" height="30"/>
+                                        <color key="backgroundColor" red="0.91980725526809692" green="0.55087359643631051" blue="0.53055260540987903" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <state key="normal" title="Descartar">
+                                            <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        </state>
+                                        <connections>
+                                            <segue destination="ljH-3K-eXP" kind="unwind" identifier="unwindToPeriphalIsland" unwindAction="unwindToPeriphalIsland:" id="zYZ-qu-jw5"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="pqS-wn-cYw" firstAttribute="trailing" secondItem="TLP-T8-Ofa" secondAttribute="trailing" constant="16" id="MuN-iG-YaH"/>
+                            <constraint firstItem="TLP-T8-Ofa" firstAttribute="top" secondItem="pqS-wn-cYw" secondAttribute="top" constant="16" id="v0r-HG-Kb1"/>
+                            <constraint firstItem="TLP-T8-Ofa" firstAttribute="leading" secondItem="pqS-wn-cYw" secondAttribute="leading" constant="16" id="xD4-Z4-GOG"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="pqS-wn-cYw"/>
+                    </view>
+                    <toolbarItems/>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="actionNameTextField" destination="jfL-sH-w1U" id="MrB-ec-LHO"/>
+                        <outlet property="impactLevelLabel" destination="VUS-La-OAX" id="d12-Oc-em9"/>
+                        <outlet property="impactLevelSlider" destination="HNY-xu-LwH" id="r0J-x1-zhf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sXp-i6-K4m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="ljH-3K-eXP" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="2618.840579710145" y="582.58928571428567"/>
         </scene>
     </scenes>
 </document>
