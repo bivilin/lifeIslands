@@ -132,11 +132,9 @@ class IslandsViewController: UIViewController{
                 
                 // Update vertical displacement relative to screen size
                 self.heightRatio = Float(translation.y) / Float(gesture.view!.frame.size.height) + self.lastHeightRatio
+                
                 // Vertical rotation for the main camera
                 self.makeVerticalRotationWithConstraints()
-                
-                // Moves camera orbit center in circle along with the horizontal rotation for a more organic feel
-                self.moveCenterPositionAlongWithRotation()
             }
             
             // Final check on fingers number
@@ -267,27 +265,6 @@ class IslandsViewController: UIViewController{
         self.lastHeightRatio = self.cameraOrbit.eulerAngles.x/(-.pi/2)
     }
     
-    // Return cameraOrbit node to center of scene
-    func recenterCameraOrbit() {
-        self.cameraOrbit.position.x = 0
-        self.cameraOrbit.position.y = 0
-    }
-    
-    // Rotate the position camera orbit for a more dynamic camera rotation movement
-    func moveCenterPositionAlongWithRotation() {
-        self.cameraOrbit.position.x += 0.01 * cos(-.pi * self.widthRatio/4)
-        self.cameraOrbit.position.z += 0.01 * sin(-.pi * self.widthRatio/4)
-        
-        // Prohibits the camera orbit to diverge too much from center
-        let maximumDisplacementFromCenter: Float = 0.15
-        if abs(self.cameraOrbit.position.x) > maximumDisplacementFromCenter {
-            self.cameraOrbit.position.x = self.sign(self.cameraOrbit.position.x) * maximumDisplacementFromCenter
-        }
-        if abs(self.cameraOrbit.position.z) > maximumDisplacementFromCenter {
-            self.cameraOrbit.position.z = self.sign(self.cameraOrbit.position.z) * maximumDisplacementFromCenter
-        }
-    }
-    
     // Rotate camera vertically whithin given constraints
     func makeVerticalRotationWithConstraints() {
         
@@ -304,7 +281,6 @@ class IslandsViewController: UIViewController{
     
     // Positions main camera zoomed into selfIsland
     func zoomMainCameraIntoSelfIsland() {
-        self.recenterCameraOrbit()
         
         self.mainCameraNode.position = self.vectorServices.normalize(vector: self.mainCameraNode.position)
         self.mainCameraNode.position = self.vectorServices.multiplicationByScalar(vector: self.mainCameraNode.position, scalar: 5)
@@ -312,7 +288,6 @@ class IslandsViewController: UIViewController{
     
     // Set secundary camera as point of view and have it look at a given peripheral island
     func zoomSecundaryCameraToPeripheralIsland(islandNode: SCNNode) {
-        self.recenterCameraOrbit()
         
         // Set euler angles of cameraOrbit based on the islandNode's position
         self.cameraOrbit.eulerAngles.x = 0
