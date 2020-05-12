@@ -13,12 +13,13 @@ import UIKit
 
 class IslandsVisualisationServices {
     
-    var radius: Double = 2.5
+    var radius: Double = 1.5
     var numberofPeriferalIslands: Int = 1
     var separationAngle: Double = 1
     
     var islandsSCNScene: SCNScene
     let planeLength: CGFloat = 1
+    let yPositionForPeripheralIsland: Double = -2
     
     var peripheralIslands: [PeripheralIsland] = [PeripheralIsland]()
     var islandDictionary: [UUID: SCNNode] = [:]
@@ -50,7 +51,7 @@ class IslandsVisualisationServices {
         for n in 1...self.numberofPeriferalIslands {
             addPeriferalIslandToSCNScene(n: n)
         }
-        print(self.islandDictionary)
+        // print(self.islandDictionary)
     }
     
     // Add a single periferal island with index n to the scene
@@ -81,7 +82,7 @@ class IslandsVisualisationServices {
         }
         islandNode.position.x = Float(self.radius * sin(angle))
         islandNode.position.z = Float(self.radius * cos(angle))
-        islandNode.position.y = 0
+        islandNode.position.y = Float(self.yPositionForPeripheralIsland)
         
         // Place billboard constraint so that island plane is always facing the camera
         let constraint = SCNBillboardConstraint()
@@ -164,10 +165,10 @@ class IslandsVisualisationServices {
 
         // Create a pair of connected paraboles through Bezier paths
         let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0,y: 0)) // initial point
-        path.addQuadCurve(to: CGPoint(x: width, y: 0), controlPoint: CGPoint(x: width/2, y: -(1/3) * width)) // parabole going forward
-        path.addLine(to: CGPoint(x: thickness, y: 0)) // line connecting the two paraboles
-        path.addQuadCurve(to: CGPoint(x: width - thickness, y: 0), controlPoint: CGPoint(x: width/2, y: -(1/3) * width + 2 * (width - thickness))) // parabole going backwards
+        path.move(to: CGPoint(x: 0, y: 0)) // initial point
+        path.addQuadCurve(to: CGPoint(x: width, y: 90 * self.yPositionForPeripheralIsland), controlPoint: CGPoint(x: width/2, y: -(4/3) * width)) // parabole going forward
+        path.addLine(to: CGPoint(x: thickness, y: 90 * self.yPositionForPeripheralIsland)) // line connecting the two paraboles
+        path.addQuadCurve(to: CGPoint(x: width - thickness, y: 0), controlPoint: CGPoint(x: width/2, y: -(4/3) * width + 2 * (width - thickness))) // parabole going backwards
         
         // Creates 3D shape by filling the space between the paraboles
         let shape = SCNShape(path: path, extrusionDepth: 2)
@@ -195,7 +196,7 @@ class IslandsVisualisationServices {
         }
         
         // Positions the node
-        shapeNode.position.y = -0.4
+        shapeNode.position.y = -0.6
         self.islandsSCNScene.rootNode.addChildNode(shapeNode)
         shapeNode.eulerAngles.y = angle + correction
     }
@@ -222,7 +223,6 @@ class IslandsVisualisationServices {
                 peripheralIsland = island
             }
         }
-
         return peripheralIsland
     }
 }

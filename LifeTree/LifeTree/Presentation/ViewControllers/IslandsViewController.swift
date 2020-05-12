@@ -49,8 +49,8 @@ class IslandsViewController: UIViewController{
     var widthRatio: Float = 0
     var heightRatio: Float = 0
     var fingersNeededToPan = 1
-    var maxHeightRatioXDown: Float = -0.22
-    var maxHeightRatioXUp: Float = 0
+    var maxHeightRatioXDown: Float = 0 // menor
+    var maxHeightRatioXUp: Float = 0.1 // maior
 
     // Handle pinch camera
     var pinchAttenuation: Double = 40  //1.0: very fast - 100.0 slow
@@ -134,7 +134,7 @@ class IslandsViewController: UIViewController{
                 self.heightRatio = Float(translation.y) / Float(gesture.view!.frame.size.height) + self.lastHeightRatio
                 
                 // Vertical rotation for the main camera
-                self.makeVerticalRotationWithConstraints()
+                // self.makeVerticalRotationWithConstraints()
             }
             
             // Final check on fingers number
@@ -309,20 +309,22 @@ class IslandsViewController: UIViewController{
         
         if let camOrbit = self.islandsSCNScene.rootNode.childNode(withName: "cameraOrbit", recursively: true) {
             self.cameraOrbit = camOrbit
-            print("cameraOrbit is set")
             
             if let camNode = self.cameraOrbit.childNode(withName: "camera", recursively: true) {
                 self.mainCameraNode = camNode
-                print("cameraNode is set")
+                
+                // Put constraint so that main camera is always facing the center of its orbit
+                let constraint = SCNLookAtConstraint(target: self.cameraOrbit)
+                self.mainCameraNode.constraints = [constraint]
                 
                 if let cam = self.mainCameraNode.camera {
                     self.mainCamera = cam
                     print("camera is set")
                 }
-                if let cam2 = self.mainCameraNode.childNode(withName: "secundaryCamera", recursively: true) {
-                    self.secundaryCameraNode = cam2
-                    print("secundaryCameraNode is set")
-                }
+            }
+            
+            if let cam2 = self.cameraOrbit.childNode(withName: "secundaryCamera", recursively: true) {
+                self.secundaryCameraNode = cam2
             }
         }
     }
