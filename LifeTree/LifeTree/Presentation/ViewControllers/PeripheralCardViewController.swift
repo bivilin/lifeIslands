@@ -17,7 +17,6 @@ class PeripheralCardViewController: UIViewController {
 
     var peripheralIsland: PeripheralIsland?
     var islandActions: [Action] = []
-    var numberOfActions: Int = 0
 
     override func viewWillAppear(_ animated: Bool) {
         nameIsland.text = peripheralIsland?.name
@@ -28,13 +27,15 @@ class PeripheralCardViewController: UIViewController {
             phrase.text = "Sua saúde ainda não foi definida"
         }
 
-        // TableView Setup
+        // TableView Delegates Setup
         actionsTableView.delegate = self
         actionsTableView.dataSource = self
 
-        // Populando TableView
+        // Populando TableView com dados persistidos
         self.updateDataFromDatabase()
     }
+
+    // MARK: Info Handling
 
     func updateDataFromDatabase() {
         ActionDataServices.getIslandActions(island: peripheralIsland!) { (error, actions) in
@@ -55,27 +56,29 @@ class PeripheralCardViewController: UIViewController {
         }
     }
 
-    // MARK: Debug Buttons
+    // MARK: Segue Flow
 
-    @IBAction func newAction(_ sender: Any) {
-        let action = Action()
+    // Passando objeto da ilha periférica para a criação de uma ação
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-        action.actionId = UUID()
-        action.name = "Ação teste"
-        action.impactLevel = 50
-
-        if let relatedIsland = self.peripheralIsland {
-            ActionDataServices.createAction(action: action, relatedIsland: relatedIsland) { (error) in
-                if error != nil {
-                    print(error.debugDescription)
-                } else {
-                    print("Ação criada com sucesso.")
-                    self.updateDataFromDatabase()
-                }
+        if segue.identifier == "NewAction" {
+            if let destination = segue.destination as? CreateActionViewController {
+                destination.island = self.peripheralIsland
             }
         }
     }
 
+    // Segue para CreateActionViewController
+    @IBAction func newAction(_ sender: Any) {
+        self.performSegue(withIdentifier: "NewAction", sender: sender)
+    }
+
+    // Atualiza dados quando o usuário sai da CreateActionViewController
+    @IBAction func unwindToPeriphalIsland(_ unwindSegue: UIStoryboardSegue) {
+        self.updateDataFromDatabase()
+    }
+
+    // Botão de Debug
     @IBAction func checkIslandActions(_ sender: Any) {
         ActionDataServices.getIslandActions(island: peripheralIsland!) { (error, actions) in
             if (error != nil) {
@@ -90,17 +93,9 @@ class PeripheralCardViewController: UIViewController {
             }
         }
     }
-
-    // MARK: Add New Action Button
-    // Deve levar o usuário a uma nova tela (CreateActionViewController)
-    // Informações que devem ser passadas: PeripheralIsland
 }
 
 // MARK: Table View - List of Actions
-// Deve ser populada utilizando o método
-// ActionDataServices.getIslandActions() conforme
-// exemplificado no botão de debug
-
 
 extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -113,11 +108,3 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
         return cell
     }
 }
-
-//class Actions {
-//    var name: String
-//
-//    init(name: String) {
-//        self.name = name
-//    }
-//}
