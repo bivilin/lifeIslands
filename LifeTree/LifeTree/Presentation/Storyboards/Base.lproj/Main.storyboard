@@ -208,10 +208,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UqV-E0-g5a">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="590"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TLP-T8-Ofa">
-                                                <rect key="frame" x="24" y="24" width="366" height="952"/>
+                                                <rect key="frame" x="24" y="24" width="366" height="542"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="rY5-J5-lB4">
                                                         <rect key="frame" x="0.0" y="0.0" width="366" height="30"/>
@@ -251,29 +251,43 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-sH-w1U">
-                                                        <rect key="frame" x="0.0" y="146.5" width="366" height="674.5"/>
+                                                        <rect key="frame" x="0.0" y="146.5" width="366" height="34"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Como se sentiu ao fazer essa atividade?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGN-QG-1NA">
-                                                        <rect key="frame" x="0.0" y="841" width="366" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="200.5" width="366" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="HNY-xu-LwH">
-                                                        <rect key="frame" x="-2" y="881.5" width="370" height="31"/>
+                                                        <rect key="frame" x="-2" y="241" width="370" height="31"/>
                                                         <connections>
                                                             <action selector="impactLevelChanged:" destination="1de-Dz-avu" eventType="valueChanged" id="2C1-7x-gOe"/>
                                                         </connections>
                                                     </slider>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUS-La-OAX">
-                                                        <rect key="frame" x="0.0" y="931.5" width="366" height="20.5"/>
+                                                        <rect key="frame" x="0.0" y="291" width="366" height="20.5"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Me conte o motivo de se sentir assim" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5i-zK-xyD">
+                                                        <rect key="frame" x="0.0" y="331.5" width="366" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cIc-hl-Q0i">
+                                                        <rect key="frame" x="0.0" y="372" width="366" height="170"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="cIc-hl-Q0i" firstAttribute="height" secondItem="jfL-sH-w1U" secondAttribute="height" multiplier="5" id="LYR-vS-OVu"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -281,7 +295,6 @@
                                             <constraint firstAttribute="bottom" secondItem="TLP-T8-Ofa" secondAttribute="bottom" constant="24" id="8Js-zV-tky"/>
                                             <constraint firstItem="TLP-T8-Ofa" firstAttribute="leading" secondItem="UqV-E0-g5a" secondAttribute="leading" constant="24" id="MTF-bh-nk3"/>
                                             <constraint firstAttribute="trailing" secondItem="TLP-T8-Ofa" secondAttribute="trailing" constant="24" id="UHQ-P3-nbC"/>
-                                            <constraint firstAttribute="height" constant="1000" id="a3S-Ie-dyZ"/>
                                             <constraint firstItem="TLP-T8-Ofa" firstAttribute="top" secondItem="UqV-E0-g5a" secondAttribute="top" constant="24" id="qQa-SD-HiK"/>
                                         </constraints>
                                     </view>
