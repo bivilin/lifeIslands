@@ -279,7 +279,7 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cIc-hl-Q0i">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cIc-hl-Q0i">
                                                         <rect key="frame" x="0.0" y="372" width="366" height="170"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
@@ -325,6 +325,8 @@
                         <outlet property="actionNameTextField" destination="jfL-sH-w1U" id="MrB-ec-LHO"/>
                         <outlet property="impactLevelLabel" destination="VUS-La-OAX" id="d12-Oc-em9"/>
                         <outlet property="impactLevelSlider" destination="HNY-xu-LwH" id="r0J-x1-zhf"/>
+                        <outlet property="impactReasonTextField" destination="cIc-hl-Q0i" id="LqG-Br-TVi"/>
+                        <outlet property="scrollView" destination="0Yu-rS-Qvp" id="b7g-uH-r6o"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sXp-i6-K4m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
