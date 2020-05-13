@@ -13,7 +13,7 @@ import UIKit
 
 class IslandsVisualisationServices {
     
-    var radius: Double = 1.5
+    var radius: Double = 2
     var numberofPeriferalIslands: Int = 1
     var separationAngle: Double = 1
     
