@@ -21,7 +21,7 @@ class PeripheralCardViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         nameIsland.text = peripheralIsland?.name
 
-        if let healthStatus = peripheralIsland?.healthStatus {
+        if let healthStatus = peripheralIsland?.currentHealthStatus {
             phrase.text = "Sua saúde é de \(healthStatus)%"
         } else {
             phrase.text = "Sua saúde ainda não foi definida"

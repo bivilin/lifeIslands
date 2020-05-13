@@ -9,19 +9,21 @@
     </entity>
     <entity name="PeripheralIsland" representedClassName=".PeripheralIsland" syncable="YES">
         <attribute name="category" optional="YES" attributeType="String"/>
-        <attribute name="healthStatus" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="currentHealthStatus" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="islandId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="lastActionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="lastHealthStatus" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <entity name="SelfIsland" representedClassName=".SelfIsland" syncable="YES">
-        <attribute name="healthStatus" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="currentHealthStatus" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="islandId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="lastHealthStatus" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
     </entity>
     <elements>
         <element name="Action" positionX="-18" positionY="81" width="128" height="118"/>
-        <element name="PeripheralIsland" positionX="0" positionY="72" width="128" height="118"/>
-        <element name="SelfIsland" positionX="-36" positionY="9" width="128" height="88"/>
+        <element name="PeripheralIsland" positionX="0" positionY="72" width="128" height="133"/>
+        <element name="SelfIsland" positionX="-36" positionY="9" width="128" height="103"/>
     </elements>
 </model>
