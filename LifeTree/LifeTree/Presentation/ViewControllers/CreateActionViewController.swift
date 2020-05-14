@@ -22,6 +22,12 @@ class CreateActionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Slider customization
+
+        let happyDropImage = UIImage(named: "happyDropIcon")
+        impactLevelSlider.setThumbImage(happyDropImage
+            , for: .normal)
+
         // Configura delegate para os TextField
         self.actionNameTextField.delegate = self
         self.impactReasonTextField.delegate = self
@@ -81,12 +87,15 @@ class CreateActionViewController: UIViewController {
         self.view.endEditing(true)
     }
 
-    // MARK: Buttons
+    // MARK: Slider
 
     // Altera label quando há movimentação do slider
-    @IBAction func impactLevelChanged(_ sender: Any) {
-        impactLevelLabel.text = String(format: "%.2f", impactLevelSlider.value * 100) + "%"
+    @IBAction func impactLevelChanged(_ sender: UISlider) {
+        impactLevelSlider.value = roundf(impactLevelSlider.value)
+        impactLevelLabel.text = String(impactLevelSlider.value)
     }
+
+    // MARK: Buttons
 
     @IBAction func confirmButton(_ sender: Any) {
 
