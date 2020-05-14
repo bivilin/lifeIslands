@@ -16,14 +16,22 @@ class CreateActionViewController: UIViewController {
     @IBOutlet weak var impactLevelSlider: UISlider!
     @IBOutlet weak var impactLevelLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var deleteActionButton: UIButton!
     var currentTextField: UITextField?
     var scrolledByKeyboard: Bool = false
+
+    // Tratamento para caso a tela seja de edição, em vez de criação
+    var isViewForEditingAction: Bool = false
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Slider customization
+        if isViewForEditingAction {
+            deleteActionButton.isHidden = false
+        }
 
+        // Slider customization
         let happyDropImage = UIImage(named: "happyDropIcon")
         impactLevelSlider.setThumbImage(happyDropImage
             , for: .normal)
