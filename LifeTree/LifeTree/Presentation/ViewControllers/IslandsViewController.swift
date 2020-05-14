@@ -47,13 +47,13 @@ class IslandsViewController: UIViewController{
     var widthRatio: Float = 0
     var heightRatio: Float = 0
     var fingersNeededToPan = 1
-    var minHeight: Float = -4
-    var maxHeight: Float = 0 // to be updated in setUpCameras function
     var panDirection: PanDirection = .unknown
     var hasReachedVerticalLimit = false
     var isSelfIslandVisualization = true
     var peripheralIslandInCard: SCNNode? = nil
-
+    var minHeight: Float = -10 // to be updated in setUpCameras function
+    var maxHeight: Float = 10 // to be updated in setUpCameras function
+    
     // MARK: Lifecycle
     
     override func viewDidLoad() {
@@ -220,6 +220,7 @@ class IslandsViewController: UIViewController{
         if let camOrbit = self.islandsSCNScene.rootNode.childNode(withName: "cameraOrbit", recursively: true) {
             self.cameraOrbit = camOrbit
             self.maxHeight = self.cameraOrbit.position.y
+            self.minHeight = self.maxHeight + Float(self.islandsVisualizationServices!.yPositionForPeripheralIsland) + Float(self.islandsVisualizationServices!.planeLength/4) // second term (yPositionForPeripheralIsland) is already negative
             
             if let camNode = self.cameraOrbit.childNode(withName: "camera", recursively: true) {
                 self.cameraNode = camNode
@@ -232,6 +233,7 @@ class IslandsViewController: UIViewController{
                 if let cam = self.cameraNode.camera {
                     self.camera = cam
                     self.camera.zNear = 1.5
+                    self.camera.focusDistance = 5
                 }
             }
         }

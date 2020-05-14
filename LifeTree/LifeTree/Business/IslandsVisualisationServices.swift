@@ -19,7 +19,7 @@ class IslandsVisualisationServices {
     
     var islandsSCNScene: SCNScene
     let planeLength: CGFloat = 1
-    let yPositionForPeripheralIsland: Double = -2
+    let yPositionForPeripheralIsland: Double = -1.7
     
     var peripheralIslands: [PeripheralIsland] = [PeripheralIsland]()
     var islandDictionary: [UUID: SCNNode] = [:]
@@ -166,13 +166,15 @@ class IslandsVisualisationServices {
         // Create a pair of connected paraboles through Bezier paths
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0, y: 0)) // initial point
-        path.addQuadCurve(to: CGPoint(x: width, y: 90 * self.yPositionForPeripheralIsland), controlPoint: CGPoint(x: width/2, y: -(4/3) * width)) // parabole going forward
+        path.addQuadCurve(to: CGPoint(x: width, y: 90 * self.yPositionForPeripheralIsland), controlPoint: CGPoint(x: width/2, y: -(7/6) * width)) // parabole going forward
         path.addLine(to: CGPoint(x: thickness, y: 90 * self.yPositionForPeripheralIsland)) // line connecting the two paraboles
-        path.addQuadCurve(to: CGPoint(x: width - thickness, y: 0), controlPoint: CGPoint(x: width/2, y: -(4/3) * width + 2 * (width - thickness))) // parabole going backwards
+        path.addQuadCurve(to: CGPoint(x: width - thickness, y: 0), controlPoint: CGPoint(x: width/2, y: -(7/6) * width + 2 * (width - thickness))) // parabole going backwards
         
         // Creates 3D shape by filling the space between the paraboles
         let shape = SCNShape(path: path, extrusionDepth: 2)
-        shape.firstMaterial?.diffuse.contents = SKColor.black
+        shape.firstMaterial?.diffuse.contents = UIColor(red: 0.37, green: 0.18, blue: 0.03, alpha: 1.00)
+        
+        // Put geometry into node
         let shapeNode = SCNNode(geometry: shape)
         shapeNode.scale = SCNVector3(0.01, 0.01, 0.01)
         
