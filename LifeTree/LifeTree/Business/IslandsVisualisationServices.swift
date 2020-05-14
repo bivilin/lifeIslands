@@ -208,7 +208,6 @@ class IslandsVisualisationServices {
         for (uuid, node) in islandDictionary {
             if inputNode == node {
                 island = getPeripheralIslandFromUUID(uuid: uuid)
-                print("Found! \(uuid)")
             }
         }
         return island

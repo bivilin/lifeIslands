@@ -38,8 +38,8 @@ class IslandsViewController: UIViewController{
     
     // Camera
     var cameraOrbit = SCNNode()
-    var mainCameraNode = SCNNode()
-    var mainCamera = SCNCamera()
+    var cameraNode = SCNNode()
+    var camera = SCNCamera()
 
     // Handle pan camera
     var lastWidthRatio: Float = 0
@@ -50,14 +50,19 @@ class IslandsViewController: UIViewController{
     var minHeight: Float = -5
     var maxHeight: Float = -3
     var panDirection: PanDirection = .unknown
+    var hasReachedVerticalLimit = false
+    var isSelfIslandVisualization = true
+    var peripheralIslandInCard: SCNNode? = nil
 
     // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.islandsSCNView.delegate = self
 
         // Set up SCNScene background
-        islandsSCNScene.background.contents = UIImage(named: "backgroundSky")
+        islandsSCNScene.background.contents = UIImage(named: "background")
         
         // Set up model for islands SKScene
         self.islandModelSKScene.isPaused = false
@@ -83,7 +88,6 @@ class IslandsViewController: UIViewController{
         
         // Configures camera
         self.setUpCameras()
-        self.mainCamera.zNear = 1.5
 
         // Add a tap gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
@@ -101,6 +105,11 @@ class IslandsViewController: UIViewController{
     // Pan
     // Rotates camera around center in the SCNScene
     @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+        
+        if gesture.state == .began {
+            self.hasReachedVerticalLimit = false
+        }
+        
         if gesture.numberOfTouches == 1 {
             
             // Get horizontal and vertical displacement relative to screen size
@@ -113,21 +122,53 @@ class IslandsViewController: UIViewController{
                 self.panDirection = (abs(translation.y) + 0.01 > abs(translation.x)) ? .vertical : .horizontal
             }
             
-            if self.panDirection == .vertical {
-                // Vertical displacement of camera
-                let newYPosition = self.cameraOrbit.position.y + 5 * (self.heightRatio - self.lastHeightRatio)
+            // colocar a camera definitivamente em alguma das posições
+            
+            if self.panDirection == .vertical && !self.hasReachedVerticalLimit {
                 
-                if newYPosition < self.maxHeight && newYPosition > self.minHeight {
-                    self.cameraOrbit.position.y = newYPosition
+                // Vertical displacement of camera
+                let newCameraOrbitYPosition = self.cameraOrbit.position.y + 50 * (self.heightRatio - self.lastHeightRatio)
+                
+                if !(newCameraOrbitYPosition > self.maxHeight) && !(newCameraOrbitYPosition < self.minHeight) {
+                    self.cameraOrbit.position.y = newCameraOrbitYPosition
                     self.lastHeightRatio = self.heightRatio
                 }
-                else {
-                    // Hapitic feedback
+                else if !self.hasReachedVerticalLimit {
+                    
+                    if !(newCameraOrbitYPosition < self.maxHeight) {
+                        self.cameraOrbit.position.y = self.maxHeight
+                    }
+                    else if !(newCameraOrbitYPosition > self.minHeight) {
+                        self.cameraOrbit.position.y = self.minHeight
+                        
+                        self.displayClosestIslandNodeInCard()
+                    }
+                    
+                    // Gives hapitic feedback when user reaches the camera limit
                     let generator = UIImpactFeedbackGenerator(style: .light)
                     generator.impactOccurred()
+                    self.hasReachedVerticalLimit = true
                 }
+                
+                let midpoint = (self.maxHeight + self.minHeight)/2
+                
+                if self.cameraOrbit.position.y > midpoint {
+                    self.setCardForNode(node: self.islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true)!)
+                    
+                    if self.isSelfIslandVisualization == false {
+                        self.isSelfIslandVisualization = true
+                    }
+                }
+                else {
+                    self.displayClosestIslandNodeInCard()
+                    
+                    if self.isSelfIslandVisualization == true {
+                        self.isSelfIslandVisualization = false
+                    }
+                }
+                
             }
-            else if self.panDirection == .horizontal {
+            else if self.panDirection == .horizontal && !self.isSelfIslandVisualization {
                 // Rotate camera horizontally
                 self.cameraOrbit.eulerAngles.y = -.pi * widthRatio
             }
@@ -139,6 +180,28 @@ class IslandsViewController: UIViewController{
             self.lastHeightRatio = 0
             panDirection = .unknown
         }
+    }
+    
+    func displayClosestIslandNodeInCard() {
+        
+        // QUE RAIO DE BUG É ESSE, SENHOR?
+        print(self.cameraNode.position)
+        print(self.cameraNode.worldPosition)
+        print(self.cameraOrbit.eulerAngles)
+        
+        if self.peripheralIslandInCard == nil {
+            let reference = SCNVector3(x: 0, y: Float(self.islandsVisualizationServices!.yPositionForPeripheralIsland), z: 8)
+            
+            var optimalDistance: Float = 100
+            for (_, node) in self.islandsVisualizationServices!.islandDictionary {
+                let distanceFromReference = self.vectorServices.length(self.vectorServices.subtraction(of: reference, from: node.position))
+                if distanceFromReference < optimalDistance {
+                    optimalDistance = distanceFromReference
+                    self.peripheralIslandInCard = node
+                }
+            }
+        }
+        setCardForNode(node: self.peripheralIslandInCard!)
     }
     
     // Single tap
@@ -158,6 +221,9 @@ class IslandsViewController: UIViewController{
                 generator.impactOccurred()
                 
                 // Altera conteúdo do card
+                if tappednode.position.x != 0 {
+                    self.peripheralIslandInCard = tappednode
+                }
                 setCardForNode(node: tappednode)
             }
         }
@@ -192,15 +258,16 @@ class IslandsViewController: UIViewController{
             self.cameraOrbit = camOrbit
             
             if let camNode = self.cameraOrbit.childNode(withName: "camera", recursively: true) {
-                self.mainCameraNode = camNode
+                self.cameraNode = camNode
+                self.islandsSCNView.pointOfView = self.cameraNode
                 
                 // Put constraint so that main camera is always facing the center of its orbit
                 let constraint = SCNLookAtConstraint(target: self.cameraOrbit)
-                self.mainCameraNode.constraints = [constraint]
+                self.cameraNode.constraints = [constraint]
                 
-                if let cam = self.mainCameraNode.camera {
-                    self.mainCamera = cam
-                    print("camera is set")
+                if let cam = self.cameraNode.camera {
+                    self.camera = cam
+                    self.camera.zNear = 1.5
                 }
             }
         }
@@ -237,5 +304,16 @@ extension IslandsViewController: FloatingPanelControllerDelegate {
 
     func floatingPanel(_ vc: FloatingPanelController, behaviorFor newCollection: UITraitCollection) -> FloatingPanelBehavior? {
         return FloatingPanelCardBehavior()
+    }
+}
+
+
+extension IslandsViewController: SCNSceneRendererDelegate {
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        
+       // print(self.cameraNode.position)
+        print(self.cameraOrbit.worldPosition)
+        print(self.cameraOrbit.eulerAngles)
     }
 }
