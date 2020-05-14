@@ -182,6 +182,13 @@ class IslandsViewController: UIViewController{
         if let centerNode = hits.first?.node {
             
             if centerNode != self.peripheralIslandInCard {
+                
+                let blurRadius = 5
+                guard let gaussianBlurFilter = CIFilter(name: "CIGaussianBlur") else {return}
+                gaussianBlurFilter.setValue(blurRadius, forKey: kCIInputRadiusKey)
+                self.peripheralIslandInCard?.filters = [gaussianBlurFilter]
+                centerNode.filters = []
+                
                 self.peripheralIslandInCard = centerNode
                 setCardForNode(node: centerNode)
                 
@@ -193,6 +200,7 @@ class IslandsViewController: UIViewController{
     }
 
     func setCardForNode(node: SCNNode) {
+        
         // Ilhas Periféricas
         // Utiliza o nó para obter o objeto referente àquela ilha
         if let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: node) {
@@ -233,7 +241,6 @@ class IslandsViewController: UIViewController{
                 if let cam = self.cameraNode.camera {
                     self.camera = cam
                     self.camera.zNear = 1.5
-                    self.camera.focusDistance = 5
                 }
             }
         }
