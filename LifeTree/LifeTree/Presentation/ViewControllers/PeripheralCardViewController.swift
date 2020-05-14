@@ -28,8 +28,11 @@ class PeripheralCardViewController: UIViewController {
         }
 
         // TableView Delegates Setup
-        actionsTableView.delegate = self
-        actionsTableView.dataSource = self
+        self.actionsTableView.delegate = self
+        self.actionsTableView.dataSource = self
+
+        // Table View Design
+        self.actionsTableView.separatorStyle = .none
 
         // Populando TableView com dados persistidos
         self.updateDataFromDatabase()
@@ -99,12 +102,32 @@ class PeripheralCardViewController: UIViewController {
 
 extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return islandActions.count
+        return islandActions.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = actionsTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath)
-        cell.textLabel?.text = islandActions[indexPath.row].name
+        let cell = actionsTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath) as! ActionTableViewCell
+
+        if indexPath.row < islandActions.count {
+            cell.actionName?.text = islandActions[indexPath.row].name
+            cell.dropImage.image = UIImage(named: "happyDropIcon")
+        } else {
+            cell.actionName.text = "+ Criar nova ação"
+            cell.actionName.textColor = UIColor.lightGray
+            cell.dropImage = nil
+        }
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 44.0
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        actionsTableView.deselectRow(at: indexPath, animated: true)
     }
 }
