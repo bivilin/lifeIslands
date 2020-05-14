@@ -41,8 +41,8 @@ class FloatingPanelCardLayout: FloatingPanelLayout {
     func insetFor(position: FloatingPanelPosition) -> CGFloat? {
         switch position {
         case .full: return 16.0
-        case .half: return 85.0 + 45.0
-        case .tip: return 85.0 + 44.0 // Visible + ToolView
+        case .half: return 85.0
+        case .tip: return 84.0 // Visible + ToolView
         default: return nil
         }
     }
