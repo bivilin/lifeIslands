@@ -10,15 +10,15 @@ import UIKit
 
 class ActionTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var actionName: UILabel!
+    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var dropImage: UIImageView!
     @IBOutlet weak var contourView: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        self.actionName.numberOfLines = 0
-        self.actionName.lineBreakMode = .byWordWrapping
+        self.label.numberOfLines = 0
+        self.label.lineBreakMode = .byWordWrapping
 
 
         // Definindo borda e estilo arredondado

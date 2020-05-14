@@ -109,12 +109,12 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
         let cell = actionsTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath) as! ActionTableViewCell
 
         if indexPath.row < islandActions.count {
-            cell.actionName?.text = islandActions[indexPath.row].name
+            cell.label?.text = islandActions[indexPath.row].name
             cell.dropImage.image = UIImage(named: "happyDropIcon")
         } else {
-            cell.actionName.text = "+ Criar nova ação"
-            cell.actionName.textColor = UIColor.lightGray
-            cell.dropImage = nil
+            cell.label.text = "+ Adicionar nova"
+            cell.label.textColor = UIColor.lightGray
+            cell.dropImage.image = nil
         }
         return cell
     }
@@ -128,6 +128,12 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row < islandActions.count {
+            // Futuro: abrir actionSheet para definir se é para confirmar ou editar
+            // colocar o segue para receber as gotas
+        } else {
+            self.performSegue(withIdentifier: "NewAction", sender: nil)
+        }
         actionsTableView.deselectRow(at: indexPath, animated: true)
     }
 }
