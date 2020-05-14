@@ -47,8 +47,8 @@ class IslandsViewController: UIViewController{
     var widthRatio: Float = 0
     var heightRatio: Float = 0
     var fingersNeededToPan = 1
-    var minHeight: Float = -5
-    var maxHeight: Float = -3
+    var minHeight: Float = -4
+    var maxHeight: Float = 0 // to be updated in setUpCameras function
     var panDirection: PanDirection = .unknown
     var hasReachedVerticalLimit = false
     var isSelfIslandVisualization = true
@@ -58,8 +58,6 @@ class IslandsViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.islandsSCNView.delegate = self
 
         // Set up SCNScene background
         islandsSCNScene.background.contents = UIImage(named: "background")
@@ -89,15 +87,9 @@ class IslandsViewController: UIViewController{
         // Configures camera
         self.setUpCameras()
 
-        // Add a tap gesture recognizer
+        // Add a pan gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         self.islandsSCNView.addGestureRecognizer(panGesture)
-
-        // Add a single tap gesture recognizer
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        singleTap.numberOfTapsRequired = 1
-        self.islandsSCNView.addGestureRecognizer(singleTap)
-        
     }
     
     // MARK: Gestures
@@ -118,7 +110,8 @@ class IslandsViewController: UIViewController{
             self.heightRatio = Float(translation.y) / Float(gesture.view!.frame.size.height)
             
             // Get pan direction
-            if self.panDirection == .unknown {
+            let error: CGFloat = 0.01
+            if self.panDirection == .unknown && abs(translation.x) > error && abs(translation.y) > error {
                 self.panDirection = (abs(translation.y) + 0.01 > abs(translation.x)) ? .vertical : .horizontal
             }
             
@@ -140,8 +133,6 @@ class IslandsViewController: UIViewController{
                     }
                     else if !(newCameraOrbitYPosition > self.minHeight) {
                         self.cameraOrbit.position.y = self.minHeight
-                        
-                        self.displayClosestIslandNodeInCard()
                     }
                     
                     // Gives hapitic feedback when user reaches the camera limit
@@ -160,8 +151,6 @@ class IslandsViewController: UIViewController{
                     }
                 }
                 else {
-                    self.displayClosestIslandNodeInCard()
-                    
                     if self.isSelfIslandVisualization == true {
                         self.isSelfIslandVisualization = false
                     }
@@ -170,6 +159,8 @@ class IslandsViewController: UIViewController{
             }
             else if self.panDirection == .horizontal && !self.isSelfIslandVisualization {
                 // Rotate camera horizontally
+                
+                self.displayClosestIslandNodeInCard()
                 self.cameraOrbit.eulerAngles.y = -.pi * widthRatio
             }
         }
@@ -184,47 +175,19 @@ class IslandsViewController: UIViewController{
     
     func displayClosestIslandNodeInCard() {
         
-        // QUE RAIO DE BUG É ESSE, SENHOR?
-        print(self.cameraNode.position)
-        print(self.cameraNode.worldPosition)
-        print(self.cameraOrbit.eulerAngles)
+        let centerOfScreen = CGPoint(x: self.islandsSCNView.frame.width/2, y: self.islandsSCNView.frame.height/2)
+        let hits = self.islandsSCNView.hitTest(centerOfScreen, options: nil)
         
-        if self.peripheralIslandInCard == nil {
-            let reference = SCNVector3(x: 0, y: Float(self.islandsVisualizationServices!.yPositionForPeripheralIsland), z: 8)
+        // Get node from hit test
+        if let centerNode = hits.first?.node {
             
-            var optimalDistance: Float = 100
-            for (_, node) in self.islandsVisualizationServices!.islandDictionary {
-                let distanceFromReference = self.vectorServices.length(self.vectorServices.subtraction(of: reference, from: node.position))
-                if distanceFromReference < optimalDistance {
-                    optimalDistance = distanceFromReference
-                    self.peripheralIslandInCard = node
-                }
-            }
-        }
-        setCardForNode(node: self.peripheralIslandInCard!)
-    }
-    
-    // Single tap
-    // Moves camera to tapped island node and get its information from CoreData
-    @objc func handleTap(_ gesture: UITapGestureRecognizer) {
-
-        if gesture.state == .ended {
-            // Make hit test for the tap
-            let location: CGPoint = gesture.location(in: islandsSCNView)
-            let hits = self.islandsSCNView.hitTest(location, options: nil)
-            
-            // Get node from hit test
-            if let tappednode = hits.first?.node {
+            if centerNode != self.peripheralIslandInCard {
+                self.peripheralIslandInCard = centerNode
+                setCardForNode(node: centerNode)
                 
                 // Hapitic feedback
                 let generator = UIImpactFeedbackGenerator(style: .light)
                 generator.impactOccurred()
-                
-                // Altera conteúdo do card
-                if tappednode.position.x != 0 {
-                    self.peripheralIslandInCard = tappednode
-                }
-                setCardForNode(node: tappednode)
             }
         }
     }
@@ -256,6 +219,7 @@ class IslandsViewController: UIViewController{
         
         if let camOrbit = self.islandsSCNScene.rootNode.childNode(withName: "cameraOrbit", recursively: true) {
             self.cameraOrbit = camOrbit
+            self.maxHeight = self.cameraOrbit.position.y
             
             if let camNode = self.cameraOrbit.childNode(withName: "camera", recursively: true) {
                 self.cameraNode = camNode
@@ -304,16 +268,5 @@ extension IslandsViewController: FloatingPanelControllerDelegate {
 
     func floatingPanel(_ vc: FloatingPanelController, behaviorFor newCollection: UITraitCollection) -> FloatingPanelBehavior? {
         return FloatingPanelCardBehavior()
-    }
-}
-
-
-extension IslandsViewController: SCNSceneRendererDelegate {
-    
-    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
-        
-       // print(self.cameraNode.position)
-        print(self.cameraOrbit.worldPosition)
-        print(self.cameraOrbit.eulerAngles)
     }
 }
