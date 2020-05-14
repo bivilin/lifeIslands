@@ -50,7 +50,7 @@ class IslandsViewController: UIViewController{
     var panDirection: PanDirection = .unknown
     var hasReachedVerticalLimit = false
     var isSelfIslandVisualization = true
-    var peripheralIslandInCard: SCNNode? = nil
+    var islandInCard: SCNNode? = nil
     var minHeight: Float = -10 // to be updated in setUpCameras function
     var maxHeight: Float = 10 // to be updated in setUpCameras function
     
@@ -126,6 +126,7 @@ class IslandsViewController: UIViewController{
                     self.cameraOrbit.position.y = newCameraOrbitYPosition
                     self.lastHeightRatio = self.heightRatio
                 }
+                    
                 else if !self.hasReachedVerticalLimit {
                     
                     if !(newCameraOrbitYPosition < self.maxHeight) {
@@ -144,14 +145,24 @@ class IslandsViewController: UIViewController{
                 let midpoint = (self.maxHeight + self.minHeight)/2
                 
                 if self.cameraOrbit.position.y > midpoint {
-                    self.setCardForNode(node: self.islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true)!)
+                    
+                    if let selfIsland = self.islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true),
+                        let blur = self.islandsVisualizationServices!.gaussianBlur {
+                        
+                        self.islandInCard?.filters = [blur]
+                        selfIsland.filters = []
+                        self.setCardForNode(node: selfIsland)
+                    }
                     
                     if self.isSelfIslandVisualization == false {
                         self.isSelfIslandVisualization = true
                     }
                 }
+                
                 else {
                     if self.isSelfIslandVisualization == true {
+                        
+                        self.displayClosestIslandNodeInCard()
                         self.isSelfIslandVisualization = false
                     }
                 }
@@ -179,18 +190,17 @@ class IslandsViewController: UIViewController{
         let hits = self.islandsSCNView.hitTest(centerOfScreen, options: nil)
         
         // Get node from hit test
-        if let centerNode = hits.first?.node {
+        if let nodeHit = hits.first?.node {
             
-            if centerNode != self.peripheralIslandInCard {
+            if nodeHit != self.islandInCard {
                 
-                let blurRadius = 5
-                guard let gaussianBlurFilter = CIFilter(name: "CIGaussianBlur") else {return}
-                gaussianBlurFilter.setValue(blurRadius, forKey: kCIInputRadiusKey)
-                self.peripheralIslandInCard?.filters = [gaussianBlurFilter]
-                centerNode.filters = []
+                if let blur = self.islandsVisualizationServices!.gaussianBlur {
+                    self.islandInCard?.filters = [blur]
+                }
+                nodeHit.filters = []
                 
-                self.peripheralIslandInCard = centerNode
-                setCardForNode(node: centerNode)
+                self.islandInCard = nodeHit
+                setCardForNode(node: nodeHit)
                 
                 // Hapitic feedback
                 let generator = UIImpactFeedbackGenerator(style: .light)
@@ -200,6 +210,7 @@ class IslandsViewController: UIViewController{
     }
 
     func setCardForNode(node: SCNNode) {
+        self.islandInCard = node
         
         // Ilhas Periféricas
         // Utiliza o nó para obter o objeto referente àquela ilha

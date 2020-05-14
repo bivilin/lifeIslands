@@ -24,8 +24,13 @@ class IslandsVisualisationServices {
     var peripheralIslands: [PeripheralIsland] = [PeripheralIsland]()
     var islandDictionary: [UUID: SCNNode] = [:]
     
+    var gaussianBlur = CIFilter(name: "CIGaussianBlur")
+    
     init(scnScene: SCNScene) {
         self.islandsSCNScene = scnScene
+        
+        let blurRadius = 3
+        gaussianBlur?.setValue(blurRadius, forKey: kCIInputRadiusKey)
     }
     
     // Add self island to scene
@@ -51,7 +56,6 @@ class IslandsVisualisationServices {
         for n in 1...self.numberofPeriferalIslands {
             addPeriferalIslandToSCNScene(n: n)
         }
-        // print(self.islandDictionary)
     }
     
     // Add a single periferal island with index n to the scene
@@ -88,7 +92,13 @@ class IslandsVisualisationServices {
         let constraint = SCNBillboardConstraint()
         islandNode.constraints = [constraint]
         
-        self.makeRope(angle: Float(angle)) // places rope connecting it to the self island
+        // Put gaussian filter
+        if let blur = self.gaussianBlur {
+            islandNode.filters = [blur]
+        }
+        
+        // Add rope connecting it to the self island
+        self.makeRope(angle: Float(angle))
     }
     
     // Updates variables to be used when placing the periferal islands
