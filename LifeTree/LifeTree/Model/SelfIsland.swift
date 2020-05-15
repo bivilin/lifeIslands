@@ -12,7 +12,8 @@ import CoreData
 class SelfIsland: NSManagedObject {
     @NSManaged public var islandId: UUID?
     @NSManaged public var name: String?
-    @NSManaged public var healthStatus: NSNumber?
+    @NSManaged public var currentHealthStatus: NSNumber?
+    @NSManaged public var lastHealthStatus: NSNumber?
     
     convenience init() {
         // get context
