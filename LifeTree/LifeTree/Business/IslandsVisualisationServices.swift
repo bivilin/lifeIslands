@@ -80,10 +80,7 @@ class IslandsVisualisationServices {
     func positionIslandInCircle(islandNode: SCNNode, n: Int) {
         
         // Distinguishes between even and odd number of islands so they're better distributed in the ellipse
-        var angle = Double(n) * self.separationAngle
-        if self.numberofPeriferalIslands % 2 == 0 {
-            // angle = angle + (1/2) * self.separationAngle
-        }
+        let angle = Double(n) * self.separationAngle
         islandNode.position.x = Float(self.radius * sin(angle))
         islandNode.position.z = Float(self.radius * cos(angle))
         islandNode.position.y = Float(self.yPositionForPeripheralIsland)
