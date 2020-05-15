@@ -32,18 +32,28 @@
                             <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F7G-h3-gpg">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </sceneKitView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verticalPan" translatesAutoresizingMaskIntoConstraints="NO" id="r9q-Cy-eQL">
+                                <rect key="frame" x="20" y="64" width="80" height="80"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="r9q-Cy-eQL" secondAttribute="height" multiplier="1:1" id="Zfi-U0-LqE"/>
+                                    <constraint firstAttribute="height" constant="80" id="eM7-yu-rT6"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="F7G-h3-gpg" secondAttribute="bottom" id="IVa-cQ-uPJ"/>
+                            <constraint firstItem="r9q-Cy-eQL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="QVs-E6-EP4"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="F7G-h3-gpg" secondAttribute="trailing" id="Rhd-rq-UBm"/>
                             <constraint firstItem="F7G-h3-gpg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YNH-1t-aWU"/>
+                            <constraint firstItem="r9q-Cy-eQL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="cbF-Sp-SiO"/>
                             <constraint firstItem="F7G-h3-gpg" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="yg4-04-pmL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="islandsSCNView" destination="F7G-h3-gpg" id="4FI-ie-pls"/>
+                        <outlet property="navigationInstructionsImageView" destination="r9q-Cy-eQL" id="7uk-7z-Mgm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -479,5 +489,6 @@
     </scenes>
     <resources>
         <image name="modelIsland" width="2835" height="2835"/>
+        <image name="verticalPan" width="120" height="120"/>
     </resources>
 </document>
