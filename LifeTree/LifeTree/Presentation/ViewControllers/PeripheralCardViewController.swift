@@ -71,30 +71,9 @@ class PeripheralCardViewController: UIViewController {
         }
     }
 
-    // Segue para CreateActionViewController
-    @IBAction func newAction(_ sender: Any) {
-        self.performSegue(withIdentifier: "NewAction", sender: sender)
-    }
-
     // Atualiza dados quando o usuário sai da CreateActionViewController
     @IBAction func unwindToPeriphalIsland(_ unwindSegue: UIStoryboardSegue) {
         self.updateDataFromDatabase()
-    }
-
-    // Botão de Debug
-    @IBAction func checkIslandActions(_ sender: Any) {
-        ActionDataServices.getIslandActions(island: peripheralIsland!) { (error, actions) in
-            if (error != nil) {
-                print(error.debugDescription)
-            } else {
-                if let islandActions = actions {
-                    print("Há \(islandActions.count) ações na ilha \(self.peripheralIsland!.name!).")
-                    for action in islandActions {
-                        print("Ação \(action.name!) - Nível de impacto: \(action.impactLevel!)")
-                    }
-                }
-            }
-        }
     }
 }
 
@@ -130,13 +109,16 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
         return 44.0
     }
 
+    // Permitindo altura variável da célula da Table View
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
+
+    // Navegação para a próxima tela de acordo com célula clicada
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < islandActions.count {
             // Futuro: abrir actionSheet para definir se é para confirmar ou editar
-            // colocar o segue para receber as gotas
+            // TODO Agora: colocar o segue para receber as gotas
         } else {
             self.performSegue(withIdentifier: "NewAction", sender: nil)
         }
