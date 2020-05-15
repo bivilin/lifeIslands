@@ -14,6 +14,7 @@ import FloatingPanel
 class IslandsViewController: UIViewController{
     
     @IBOutlet weak var islandsSCNView: SCNView!
+    @IBOutlet weak var navigationInstructionsImageView: UIImageView!
     
     // MARK: Variables
     
@@ -190,11 +191,13 @@ class IslandsViewController: UIViewController{
         if self.cameraOrbit.position.y > midpoint {
             if self.isSelfIslandVisualization == false {
                 self.isSelfIslandVisualization = true
+                self.navigationInstructionsImageView.image = UIImage(named: "verticalPan")
             }
         }
         else {
             if self.isSelfIslandVisualization == true {
                 self.isSelfIslandVisualization = false
+                self.navigationInstructionsImageView.image = UIImage(named: "horizontalPan")
             }
         }
     }
@@ -219,15 +222,12 @@ class IslandsViewController: UIViewController{
             else if !(newCameraOrbitYPosition > self.minHeight) {
                 self.cameraOrbit.position.y = self.minHeight
             }
-            
-            // Gives hapitic feedback when user reaches the camera limit
-            let generator = UIImpactFeedbackGenerator(style: .light)
-            generator.impactOccurred()
             self.hasReachedVerticalLimit = true
         }
     }
     
     func displaySelfIslandInCard() {
+        
         if let selfIsland = self.islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true) {
             
             // Unblur self island and blur the previous island in display
@@ -238,6 +238,10 @@ class IslandsViewController: UIViewController{
             // Change card information
             self.setCardForNode(node: selfIsland)
             self.islandInCard = selfIsland
+            
+            // Gives hapitic feedback
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
         }
     }
     
