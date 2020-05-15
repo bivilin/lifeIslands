@@ -82,7 +82,7 @@ class IslandsVisualisationServices {
         // Distinguishes between even and odd number of islands so they're better distributed in the ellipse
         var angle = Double(n) * self.separationAngle
         if self.numberofPeriferalIslands % 2 == 0 {
-            angle = angle + (1/2) * self.separationAngle
+            // angle = angle + (1/2) * self.separationAngle
         }
         islandNode.position.x = Float(self.radius * sin(angle))
         islandNode.position.z = Float(self.radius * cos(angle))
