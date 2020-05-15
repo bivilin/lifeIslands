@@ -31,11 +31,6 @@ class CreateActionViewController: UIViewController {
             deleteActionButton.isHidden = false
         }
 
-        // Slider customization
-        let happyDropImage = UIImage(named: "happyDropIcon")
-        impactLevelSlider.setThumbImage(happyDropImage
-            , for: .normal)
-
         // Configura delegate para os TextField
         self.actionNameTextField.delegate = self
         self.impactReasonTextField.delegate = self
@@ -49,6 +44,9 @@ class CreateActionViewController: UIViewController {
         // Adiciona gestos na interface
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         self.view.addGestureRecognizer(singleTap)
+
+        // Imagem inicial do slider
+        customizeSliderThumb()
     }
 
     // MARK: Keyboard Handling
@@ -101,6 +99,14 @@ class CreateActionViewController: UIViewController {
     @IBAction func impactLevelChanged(_ sender: UISlider) {
         impactLevelSlider.value = roundf(impactLevelSlider.value)
         impactLevelLabel.text = String(impactLevelSlider.value)
+        customizeSliderThumb()
+    }
+
+    // Emoji do slider muda conforme o usuário altera a posição
+    func customizeSliderThumb() {
+        let imageName = "emoji" + String(impactLevelSlider.value)
+        let dropImage = UIImage(named: imageName)
+        impactLevelSlider.setThumbImage(dropImage, for: .normal)
     }
 
     // MARK: Buttons
