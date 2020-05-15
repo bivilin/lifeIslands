@@ -12,28 +12,44 @@ import SceneKit
 
 class VectorServices {
     
-    func length(vector: SCNVector3) -> Float {
-        let lengthSquared = vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
-        return sqrt(lengthSquared)
+    // |a|
+    func length(_ vector: SCNVector3) -> Float {
+        return sqrt(dotProduct(vector, vector))
     }
     
+    // a . b
+    func dotProduct(_ a: SCNVector3,_ b: SCNVector3) -> Float {
+        return a.x * b.x + a.y * b.y + a.z * b.z
+    }
+    
+    // a * b
     func multiplicationByScalar(vector: SCNVector3, scalar: Float) -> SCNVector3 {
         return SCNVector3(x: scalar * vector.x, y: scalar * vector.y, z: scalar * vector.z)
     }
     
-    func sum(vector1: SCNVector3, vector2: SCNVector3) -> SCNVector3 {
-        return SCNVector3(x: vector1.x + vector2.x,
-                          y: vector1.y + vector2.y,
-                          z: vector1.z + vector2.z)
+    // a + b
+    func sum(_ a: SCNVector3,_ b: SCNVector3) -> SCNVector3 {
+        return SCNVector3(x: a.x + b.x,
+                          y: a.y + b.y,
+                          z: a.z + b.z)
     }
     
-    func subtraction(vector1: SCNVector3, vectorToSubtract: SCNVector3) -> SCNVector3 {
-        let vector2 = self.multiplicationByScalar(vector: vectorToSubtract, scalar: -1)
-        return self.sum(vector1: vector1, vector2: vector2)
+    // a - b
+    func subtraction(of b: SCNVector3, from a: SCNVector3) -> SCNVector3 {
+        let c = self.multiplicationByScalar(vector: b, scalar: -1)
+        return self.sum(a, c)
     }
     
-    func normalize(vector: SCNVector3) -> SCNVector3 {
-        let norm = length(vector: vector)
-        return multiplicationByScalar(vector: vector, scalar: (1/norm))
+    // â = a/|a|
+    func normalize(_ a: SCNVector3) -> SCNVector3 {
+        let norm = length(a)
+        return multiplicationByScalar(vector: a, scalar: (1/norm))
+    }
+    
+    // (b . â) * â
+    func projection(of b: SCNVector3, in a: SCNVector3) -> SCNVector3 {
+        let aUnitVector = normalize(a)
+        let scalarProduct = dotProduct(aUnitVector, b)
+        return multiplicationByScalar(vector: aUnitVector, scalar: scalarProduct)
     }
 }
