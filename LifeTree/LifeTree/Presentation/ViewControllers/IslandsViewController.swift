@@ -165,7 +165,7 @@ class IslandsViewController: UIViewController{
         if let camOrbit = self.islandsSCNScene.rootNode.childNode(withName: "cameraOrbit", recursively: true) {
             self.cameraOrbit = camOrbit
             self.maxHeight = self.cameraOrbit.position.y
-            self.minHeight = self.maxHeight + Float(self.islandsVisualizationServices!.yPositionForPeripheralIsland) + Float(self.islandsVisualizationServices!.planeLength/4) // second term (yPositionForPeripheralIsland) is already negative
+            self.minHeight = self.maxHeight + Float(self.islandsVisualizationServices!.yPositionForPeripheralIsland) - Float(self.islandsVisualizationServices!.planeLength/3) // second term (yPositionForPeripheralIsland) is already negative
             
             if let camNode = self.cameraOrbit.childNode(withName: "camera", recursively: true) {
                 self.cameraNode = camNode
