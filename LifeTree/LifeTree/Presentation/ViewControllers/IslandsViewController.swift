@@ -48,11 +48,15 @@ class IslandsViewController: UIViewController{
     var heightRatio: Float = 0
     var fingersNeededToPan = 1
     var panDirection: PanDirection = .unknown
+    
+    // Controls the two visualization modes
+    // 1. Self Island visualization: only self island can be displayed in card
+    // 2. Peripheral island visualization: we may rotate among the peripheral islands to display the desired one
+    var islandInCard: SCNNode? = nil
     var hasReachedVerticalLimit = false
     var isSelfIslandVisualization = true
-    var islandInCard: SCNNode? = nil
-    var minHeight: Float = -10 // to be updated in setUpCameras function
-    var maxHeight: Float = 10 // to be updated in setUpCameras function
+    var maxHeight: Float = 10 // cameraOrbitHeight for visualization 1 (to be updated in setUpCameras function)
+    var minHeight: Float = -10 // cameraOrbit height for visualization 2 (to be updated in setUpCameras function)
     
     // MARK: Lifecycle
     
@@ -115,118 +119,40 @@ class IslandsViewController: UIViewController{
                 self.panDirection = (abs(translation.y) + 0.01 > abs(translation.x)) ? .vertical : .horizontal
             }
             
-            // colocar a camera definitivamente em alguma das posições
-            
+            // Vertical pan that switches between self and peripheral island visualizations
             if self.panDirection == .vertical && !self.hasReachedVerticalLimit {
                 
-                // Vertical displacement of camera
-                let newCameraOrbitYPosition = self.cameraOrbit.position.y + 50 * (self.heightRatio - self.lastHeightRatio)
-                
-                if !(newCameraOrbitYPosition > self.maxHeight) && !(newCameraOrbitYPosition < self.minHeight) {
-                    self.cameraOrbit.position.y = newCameraOrbitYPosition
-                    self.lastHeightRatio = self.heightRatio
-                }
-                    
-                else if !self.hasReachedVerticalLimit {
-                    
-                    if !(newCameraOrbitYPosition < self.maxHeight) {
-                        self.cameraOrbit.position.y = self.maxHeight
-                    }
-                    else if !(newCameraOrbitYPosition > self.minHeight) {
-                        self.cameraOrbit.position.y = self.minHeight
-                    }
-                    
-                    // Gives hapitic feedback when user reaches the camera limit
-                    let generator = UIImpactFeedbackGenerator(style: .light)
-                    generator.impactOccurred()
-                    self.hasReachedVerticalLimit = true
-                }
-                
-                let midpoint = (self.maxHeight + self.minHeight)/2
-                
-                if self.cameraOrbit.position.y > midpoint {
-                    
-                    if let selfIsland = self.islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true),
-                        let blur = self.islandsVisualizationServices!.gaussianBlur {
-                        
-                        self.islandInCard?.filters = [blur]
-                        selfIsland.filters = []
-                        self.setCardForNode(node: selfIsland)
-                    }
-                    
-                    if self.isSelfIslandVisualization == false {
-                        self.isSelfIslandVisualization = true
-                    }
-                }
-                
-                else {
-                    if self.isSelfIslandVisualization == true {
-                        
-                        self.displayClosestIslandNodeInCard()
-                        self.isSelfIslandVisualization = false
-                    }
-                }
-                
+                self.makeCameraVerticalDisplacement()
+                self.updateVisualizationMode()
             }
+                
+            // Horizontal pan to rotate around the islands
             else if self.panDirection == .horizontal && !self.isSelfIslandVisualization {
                 // Rotate camera horizontally
                 
-                self.displayClosestIslandNodeInCard()
+                self.displayClosestPeripheralIslandInCard()
                 self.cameraOrbit.eulerAngles.y = -.pi * widthRatio
             }
         }
         
-        // Update variables at the end of the gesture
+        // End of gesture
         if gesture.state == .ended {
+            
+            // Update motion variable
             self.lastWidthRatio = self.cameraOrbit.eulerAngles.y/(-.pi)
             self.lastHeightRatio = 0
             panDirection = .unknown
-        }
-    }
-    
-    func displayClosestIslandNodeInCard() {
-        
-        let centerOfScreen = CGPoint(x: self.islandsSCNView.frame.width/2, y: self.islandsSCNView.frame.height/2)
-        let hits = self.islandsSCNView.hitTest(centerOfScreen, options: nil)
-        
-        // Get node from hit test
-        if let nodeHit = hits.first?.node {
             
-            if nodeHit != self.islandInCard {
-                
-                if let blur = self.islandsVisualizationServices!.gaussianBlur {
-                    self.islandInCard?.filters = [blur]
-                }
-                nodeHit.filters = []
-                
-                self.islandInCard = nodeHit
-                setCardForNode(node: nodeHit)
-                
-                // Hapitic feedback
-                let generator = UIImpactFeedbackGenerator(style: .light)
-                generator.impactOccurred()
+            // Updates card
+            if self.isSelfIslandVisualization {
+                self.displaySelfIslandInCard()
+            } else {
+                self.displayClosestPeripheralIslandInCard()
             }
         }
     }
-
-    func setCardForNode(node: SCNNode) {
-        self.islandInCard = node
-        
-        // Ilhas Periféricas
-        // Utiliza o nó para obter o objeto referente àquela ilha
-        if let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: node) {
-            // Atualiza as informações da VC
-            peripheralCardView.peripheralIsland = islandObject
-            // Atualiza o conteúdo do Floating Panel para a nova VC
-            floatingPanel.set(contentViewController: peripheralCardView)
-        } else {
-            // Ilha Central
-            // Solução temporária
-            floatingPanel.set(contentViewController: cardView)
-        }
-    }
     
-    // MARK: Camera Helpers
+    // MARK: Camera Navigation functions
     
     // Get number sign
     func sign(_ number: Float) -> Float  {
@@ -257,7 +183,111 @@ class IslandsViewController: UIViewController{
         }
     }
     
+    func updateVisualizationMode() {
+        // Midpoint (in y direction) between the vertical position of both visualization modes
+        let midpoint = (self.maxHeight + self.minHeight)/2
+        
+        if self.cameraOrbit.position.y > midpoint {
+            if self.isSelfIslandVisualization == false {
+                self.isSelfIslandVisualization = true
+            }
+        }
+        else {
+            if self.isSelfIslandVisualization == true {
+                self.isSelfIslandVisualization = false
+            }
+        }
+    }
+    
+    func makeCameraVerticalDisplacement() {
+        // Vertical displacement of camera
+        let newCameraOrbitYPosition = self.cameraOrbit.position.y + 50 * (self.heightRatio - self.lastHeightRatio)
+        
+        // If the new position is within boundaries, translate the camera there
+        if !(newCameraOrbitYPosition > self.maxHeight) && !(newCameraOrbitYPosition < self.minHeight) {
+            self.cameraOrbit.position.y = newCameraOrbitYPosition
+            self.lastHeightRatio = self.heightRatio
+        }
+        
+        // Places camera at the maximum vertical distance
+        // Otherwize, if the new newCameraOrbitYposition surpasses the limit, the camera will stop at its previous position, which might not be the maximum and therefore is not what we want
+        else if !self.hasReachedVerticalLimit {
+            
+            if !(newCameraOrbitYPosition < self.maxHeight) {
+                self.cameraOrbit.position.y = self.maxHeight
+            }
+            else if !(newCameraOrbitYPosition > self.minHeight) {
+                self.cameraOrbit.position.y = self.minHeight
+            }
+            
+            // Gives hapitic feedback when user reaches the camera limit
+            let generator = UIImpactFeedbackGenerator(style: .light)
+            generator.impactOccurred()
+            self.hasReachedVerticalLimit = true
+        }
+    }
+    
+    func displaySelfIslandInCard() {
+        if let selfIsland = self.islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true) {
+            
+            // Unblur self island and blur the previous island in display
+            if let blur = self.islandsVisualizationServices!.gaussianBlur {
+                self.islandInCard?.filters = [blur]
+                selfIsland.filters = []
+            }
+            // Change card information
+            self.setCardForNode(node: selfIsland)
+            self.islandInCard = selfIsland
+        }
+    }
+    
+    func displayClosestPeripheralIslandInCard() {
+        
+        // Hit test for the center of the screen
+        let centerOfScreen = CGPoint(x: self.islandsSCNView.frame.width/2, y: self.islandsSCNView.frame.height/2)
+        let hits = self.islandsSCNView.hitTest(centerOfScreen, options: nil)
+        
+        // Get node from hit test
+        if let nodeHit = hits.first?.node {
+            
+            // Test whether the central node has changed from the previous hit
+            if nodeHit != self.islandInCard {
+                
+                // Blur the previous node and unblur the one currently hit
+                if let blur = self.islandsVisualizationServices!.gaussianBlur {
+                    self.islandInCard?.filters = [blur]
+                }
+                nodeHit.filters = []
+                
+                // Change card do it displays the information of the hit node
+                self.islandInCard = nodeHit
+                setCardForNode(node: nodeHit)
+                
+                // Hapitic feedback
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+            }
+        }
+    }
+    
 // MARK: FloatingPanel - Card
+
+    func setCardForNode(node: SCNNode) {
+        self.islandInCard = node
+        
+        // Ilhas Periféricas
+        // Utiliza o nó para obter o objeto referente àquela ilha
+        if let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: node) {
+            // Atualiza as informações da VC
+            peripheralCardView.peripheralIsland = islandObject
+            // Atualiza o conteúdo do Floating Panel para a nova VC
+            floatingPanel.set(contentViewController: peripheralCardView)
+        } else {
+            // Ilha Central
+            // Solução temporária
+            floatingPanel.set(contentViewController: cardView)
+        }
+    }
 
     func setupFloatingPanel() {
 
