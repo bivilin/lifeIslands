@@ -39,7 +39,7 @@ class InformationHandler {
         // Including default information to CoreData in case of first launch
         let island = SelfIsland()
         island.name = name
-        island.healthStatus = NSNumber(value: currentHealth)
+        island.currentHealthStatus = NSNumber(value: currentHealth)
         island.islandId = UUID()
 
         SelfIslandDataServices.createSelfIsland(island: island) { (error) in
@@ -47,7 +47,7 @@ class InformationHandler {
                 print(error.debugDescription)
             } else {
                 // Debug Code
-                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.healthStatus!)%")
+                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.currentHealthStatus!)%")
             }
             // After saving data, retrieving it to save on selfIsland object
             // That might occur in another screen, so then here we would have a performSegue instead.
@@ -74,7 +74,7 @@ class InformationHandler {
         // Mock Data
         peripheralIsland.category = category
         peripheralIsland.name = name
-        peripheralIsland.healthStatus = NSNumber(value: healthStatus)
+        peripheralIsland.currentHealthStatus = NSNumber(value: healthStatus)
         peripheralIsland.islandId = UUID()
 
         // Method for accessing Core Data
@@ -100,7 +100,7 @@ class InformationHandler {
 
         peripheralIsland.category = category
         peripheralIsland.name = name
-        peripheralIsland.healthStatus = NSNumber(value: healthStatus)
+        peripheralIsland.currentHealthStatus = NSNumber(value: healthStatus)
         peripheralIsland.islandId = UUID()
 
         peripheralIslandsToPersist.append(peripheralIsland)
