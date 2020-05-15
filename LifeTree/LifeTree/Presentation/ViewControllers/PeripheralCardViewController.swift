@@ -106,17 +106,24 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = actionsTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath) as! ActionTableViewCell
-
         if indexPath.row < islandActions.count {
-            cell.label?.text = islandActions[indexPath.row].name
-            cell.dropImage.image = UIImage(named: "happyDropIcon")
+            let action = islandActions[indexPath.row]
+            let actionCell = actionsTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath) as! ActionTableViewCell
+            actionCell.label?.text = action.name
+
+            // Altera imagem de acordo com o nível de impacto da ação
+            do {
+                try actionCell.setDropImage(impactLevel: action.impactLevel as! Double)
+            }
+            catch let error {
+                print(error.localizedDescription)
+            }
+            
+            return actionCell
         } else {
-            cell.label.text = "+ Adicionar nova"
-            cell.label.textColor = UIColor.lightGray
-            cell.dropImage.image = nil
+            let newActionCell = actionsTableView.dequeueReusableCell(withIdentifier: "createActionCell", for: indexPath) as! CreateActionTableViewCell
+            return newActionCell
         }
-        return cell
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -126,7 +133,6 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < islandActions.count {
             // Futuro: abrir actionSheet para definir se é para confirmar ou editar

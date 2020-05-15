@@ -21,16 +21,30 @@ class ActionTableViewCell: UITableViewCell {
         self.label.lineBreakMode = .byWordWrapping
 
 
-        // Definindo borda e estilo arredondado
-        self.contourView.layer.borderWidth = 1
-        self.contourView.backgroundColor = UIColor.white
+        // Definindo estilo arredondado e sombreamento
         self.contourView.layer.cornerRadius = 6
-        self.contourView.layer.borderColor = UIColor.white.cgColor
-
         self.contourView.layer.masksToBounds = false
         self.contourView.layer.shadowOffset = CGSize(width: 0, height: 0)
         self.contourView.layer.shadowColor = UIColor.black.cgColor
         self.contourView.layer.shadowOpacity = 0.10
         self.contourView.layer.shadowRadius = 4
+    }
+
+    func setDropImage(impactLevel: Double) throws {
+        switch impactLevel {
+        case 1:
+            dropImage.image = UIImage(named: "drop1")
+        case 2:
+            dropImage.image = UIImage(named: "drop2")
+        case 3:
+            dropImage.image = UIImage(named: "drop3")
+        case 4:
+            dropImage.image = UIImage(named: "drop4")
+        case 5:
+            dropImage.image = UIImage(named: "drop5")
+        default:
+            dropImage.image = nil
+            throw Errors.InvalidImpactLevel
+        }
     }
 }

@@ -214,6 +214,59 @@
                                                     <outlet property="label" destination="KoP-eK-rmC" id="xhB-pS-Rku"/>
                                                 </connections>
                                             </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="createActionCell" id="1nb-Vs-fIu" userLabel="createActionCell" customClass="CreateActionTableViewCell" customModule="LifeTree" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="90.5" width="382" height="62.5"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1nb-Vs-fIu" id="KQV-iu-tJo">
+                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="62.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J5w-S1-onq" userLabel="Base View">
+                                                            <rect key="frame" x="0.0" y="0.0" width="382" height="62.5"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I4m-t1-EMR">
+                                                                    <rect key="frame" x="8" y="8" width="366" height="46.5"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Sr-J0-mbv">
+                                                                            <rect key="frame" x="8" y="8" width="350" height="30.5"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="30" id="BRX-se-uFN"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="trailing" secondItem="7Sr-J0-mbv" secondAttribute="trailing" constant="8" id="3Gs-qE-8tC"/>
+                                                                        <constraint firstItem="7Sr-J0-mbv" firstAttribute="leading" secondItem="I4m-t1-EMR" secondAttribute="leading" constant="8" id="GXh-n3-Etn"/>
+                                                                        <constraint firstItem="7Sr-J0-mbv" firstAttribute="top" secondItem="I4m-t1-EMR" secondAttribute="top" constant="8" id="J5y-Rr-Yu2"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="7Sr-J0-mbv" secondAttribute="bottom" constant="8" id="YGq-o2-WRB"/>
+                                                                    </constraints>
+                                                                </view>
+                                                            </subviews>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                            <constraints>
+                                                                <constraint firstItem="I4m-t1-EMR" firstAttribute="leading" secondItem="J5w-S1-onq" secondAttribute="leading" constant="8" id="csa-Cy-kBi"/>
+                                                                <constraint firstAttribute="trailing" secondItem="I4m-t1-EMR" secondAttribute="trailing" constant="8" id="j0l-Zr-0wr"/>
+                                                                <constraint firstItem="I4m-t1-EMR" firstAttribute="top" secondItem="J5w-S1-onq" secondAttribute="top" constant="8" id="mF1-nU-ThM"/>
+                                                                <constraint firstAttribute="bottom" secondItem="I4m-t1-EMR" secondAttribute="bottom" constant="8" id="otD-IP-ijm"/>
+                                                            </constraints>
+                                                        </view>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="J5w-S1-onq" firstAttribute="top" secondItem="KQV-iu-tJo" secondAttribute="top" id="0hC-DY-LSs"/>
+                                                        <constraint firstAttribute="bottom" secondItem="J5w-S1-onq" secondAttribute="bottom" id="Iw6-Rh-38b"/>
+                                                        <constraint firstAttribute="trailing" secondItem="J5w-S1-onq" secondAttribute="trailing" id="cL5-8C-lIB"/>
+                                                        <constraint firstItem="J5w-S1-onq" firstAttribute="leading" secondItem="KQV-iu-tJo" secondAttribute="leading" id="nDz-wj-Hjm"/>
+                                                    </constraints>
+                                                </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="contourView" destination="I4m-t1-EMR" id="eJX-PZ-fYV"/>
+                                                    <outlet property="label" destination="7Sr-J0-mbv" id="cEO-53-sM9"/>
+                                                </connections>
+                                            </tableViewCell>
                                         </prototypes>
                                     </tableView>
                                 </subviews>
