@@ -18,7 +18,7 @@ class CreateActionTableViewCell: UITableViewCell {
         super.awakeFromNib()
 
         // Label design
-        // Mudar para cor da identidade visual
+        // TODO: Mudar para cor da identidade visual
         self.label.textColor = UIColor.lightGray
         self.label.text = "+ Adicionar nova"
 

@@ -21,12 +21,14 @@ class CreateActionViewController: UIViewController {
     var scrolledByKeyboard: Bool = false
 
     // Tratamento para caso a tela seja de edição, em vez de criação
+    // Talvez substitua EditActionViewController
     var isViewForEditingAction: Bool = false
 
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Exibe botão de deletar ação caso o usuário esteja no modo de edição
         if isViewForEditingAction {
             deleteActionButton.isHidden = false
         }
@@ -99,6 +101,7 @@ class CreateActionViewController: UIViewController {
     @IBAction func impactLevelChanged(_ sender: UISlider) {
         impactLevelSlider.value = roundf(impactLevelSlider.value)
         impactLevelLabel.text = String(impactLevelSlider.value)
+        // Altera thumb do slider quando há movimentação
         customizeSliderThumb()
     }
 

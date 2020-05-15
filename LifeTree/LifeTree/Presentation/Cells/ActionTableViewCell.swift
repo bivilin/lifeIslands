@@ -17,6 +17,7 @@ class ActionTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
 
+        // Permitindo múltiplas linhas na célula da TableView
         self.label.numberOfLines = 0
         self.label.lineBreakMode = .byWordWrapping
 
@@ -30,6 +31,7 @@ class ActionTableViewCell: UITableViewCell {
         self.contourView.layer.shadowRadius = 4
     }
 
+    // Altera a imagem da gota na célula de acordo com o nível de impacto da ação
     func setDropImage(impactLevel: Double) throws {
         switch impactLevel {
         case 1:
