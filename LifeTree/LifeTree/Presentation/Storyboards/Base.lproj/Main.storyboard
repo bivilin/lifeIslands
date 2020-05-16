@@ -331,8 +331,10 @@
                     <navigationItem key="navigationItem" id="hjW-8g-arw"/>
                     <connections>
                         <outlet property="actionsTableView" destination="PJ7-YZ-Lav" id="vfW-wu-nLA"/>
+                        <outlet property="lastActivityMessageLabel" destination="V8b-5F-bIf" id="kz5-S5-aOI"/>
                         <outlet property="nameIsland" destination="MLX-U9-79p" id="Zpr-95-AeF"/>
-                        <outlet property="phrase" destination="V8b-5F-bIf" id="Ma3-FC-MG8"/>
+                        <outlet property="seasonLabel" destination="dOf-Sk-K2t" id="kel-R7-Vrm"/>
+                        <outlet property="statusDescriptionLabel" destination="guG-eQ-nrz" id="9BQ-ek-yBs"/>
                         <segue destination="1de-Dz-avu" kind="presentation" identifier="NewAction" id="MGx-m6-X9K"/>
                     </connections>
                 </viewController>
