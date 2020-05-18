@@ -42,6 +42,7 @@
 		B30435202451F093007D6F3C /* SelfIslandDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435092451EEBB007D6F3C /* SelfIslandDAO.swift */; };
 		B3A7DC6924588384002AD059 /* PeripheralIslandDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A7DC6824588384002AD059 /* PeripheralIslandDAO.swift */; };
 		B3A7DC6B245884BB002AD059 /* PeripheralIslandDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */; };
+		B3AE914D2473213300D47129 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE914C2473213300D47129 /* Colors.swift */; };
 		B3B1F90B24659CF700778E73 /* PeripheralCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3B1F90A24659CF700778E73 /* PeripheralCardViewController.swift */; };
 		B3E10505246997230055E39C /* ActionDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E10504246997230055E39C /* ActionDAO.swift */; };
 		B3E10507246998B90055E39C /* ActionDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E10506246998B90055E39C /* ActionDataServices.swift */; };
@@ -103,6 +104,7 @@
 		B30435142451EEBC007D6F3C /* SelfIslandDataServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfIslandDataServices.swift; sourceTree = "<group>"; };
 		B3A7DC6824588384002AD059 /* PeripheralIslandDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIslandDAO.swift; sourceTree = "<group>"; };
 		B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIslandDataServices.swift; sourceTree = "<group>"; };
+		B3AE914C2473213300D47129 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		B3B1F90A24659CF700778E73 /* PeripheralCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralCardViewController.swift; sourceTree = "<group>"; };
 		B3E10504246997230055E39C /* ActionDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDAO.swift; sourceTree = "<group>"; };
 		B3E10506246998B90055E39C /* ActionDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDataServices.swift; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				E2B72AE324587450001DEC21 /* FloatingPanelViewController.swift */,
+				B3AE914C2473213300D47129 /* Colors.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				8D687B342452927200F83BB7 /* UpdateIslandsHealth.swift in Sources */,
 				B3A7DC6B245884BB002AD059 /* PeripheralIslandDataServices.swift in Sources */,
 				B3E10505246997230055E39C /* ActionDAO.swift in Sources */,
+				B3AE914D2473213300D47129 /* Colors.swift in Sources */,
 				E2B72AE424587450001DEC21 /* FloatingPanelViewController.swift in Sources */,
 				B3E1051C246F47D20055E39C /* Season.swift in Sources */,
 				B304351D2451F086007D6F3C /* CoreDataManager.swift in Sources */,
