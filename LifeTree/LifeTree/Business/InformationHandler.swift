@@ -141,13 +141,13 @@ class InformationHandler {
 
                 // Se há alguma ilha no banco de dados, cria os elementos visuais para cada uma
                 if allIslands.count > 0 && shouldAddToScene {
-                    self.sceneServices.addAllPeriferalIslandsToScene(peripheralIslandArray: allIslands)
+                    self.sceneServices.addAllPeripheralIslandsToScene(peripheralIslandArray: allIslands)
                 }
 
                 // Atualiza os rótulos de cada ilha para o texto existente no banco de dados
                 for island in allIslands {
                     print("Ilha #\(String(describing: island.islandId))")
-                    self.sceneServices.changePeriferalIslandLabel(peripheralIsland: island)
+                    self.sceneServices.changePeripheralIslandLabel(peripheralIsland: island)
                 }
             }
         }

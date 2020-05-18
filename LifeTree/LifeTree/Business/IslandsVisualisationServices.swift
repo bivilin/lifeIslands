@@ -14,7 +14,7 @@ import UIKit
 class IslandsVisualisationServices {
     
     var radius: Double = 1.75
-    var numberofPeriferalIslands: Int = 1
+    var numberofPeripheralIslands: Int = 1
     var separationAngle: Double = 1
     
     var islandsSCNScene: SCNScene
@@ -47,19 +47,19 @@ class IslandsVisualisationServices {
         }
     }
     
-    // Add all periferal islands to scene
-    func addAllPeriferalIslandsToScene(peripheralIslandArray: [PeripheralIsland]) {
+    // Add all peripheral islands to scene
+    func addAllPeripheralIslandsToScene(peripheralIslandArray: [PeripheralIsland]) {
         self.peripheralIslands = peripheralIslandArray
         self.updateVariablesForPositioningIslands()
 
         // Creates all islands
-        for n in 1...self.numberofPeriferalIslands {
-            addPeriferalIslandToSCNScene(n: n)
+        for n in 1...self.numberofPeripheralIslands {
+            addPeripheralIslandToSCNScene(n: n)
         }
     }
     
-    // Add a single periferal island with index n to the scene
-    func addPeriferalIslandToSCNScene(n: Int) {
+    // Add a single peripheral island with index n to the scene
+    func addPeripheralIslandToSCNScene(n: Int) {
         // Creates plane with island
         var planeGeometry: SCNGeometry
         planeGeometry = SCNPlane(width: self.planeLength, height: self.planeLength)
@@ -76,7 +76,7 @@ class IslandsVisualisationServices {
         self.positionIslandInCircle(islandNode: islandNode, n: n)
     }
     
-    // Position a periferal islands in the ellipse with focus in the self island
+    // Position a peripheral islands in the ellipse with focus in the self island
     func positionIslandInCircle(islandNode: SCNNode, n: Int) {
         
         // Distinguishes between even and odd number of islands so they're better distributed in the ellipse
@@ -98,15 +98,15 @@ class IslandsVisualisationServices {
         self.makeRope(angle: Float(angle))
     }
     
-    // Updates variables to be used when placing the periferal islands
+    // Updates variables to be used when placing the peripheral islands
     func updateVariablesForPositioningIslands() {
-        self.numberofPeriferalIslands = self.peripheralIslands.count
+        self.numberofPeripheralIslands = self.peripheralIslands.count
         
-        // Angle of separation between the periferal islands islands
-        self.separationAngle = 2 * .pi / Double(self.numberofPeriferalIslands)
+        // Angle of separation between the peripheral islands islands
+        self.separationAngle = 2 * .pi / Double(self.numberofPeripheralIslands)
         
         // Corrects radius size based on the total number of islands
-        self.radius += self.radius * Double(self.numberofPeriferalIslands)/20
+        self.radius += self.radius * Double(self.numberofPeripheralIslands)/20
     }
     
     // Define the material for a plane as the island SpriteKit scene model
@@ -139,8 +139,8 @@ class IslandsVisualisationServices {
         return selfIslandSKScene
     }
     
-    // Get the SKScene of a periferal island from its id
-    func getPeriferalIslandSKScene(islandId: UUID) -> SKScene? {
+    // Get the SKScene of a peripheral island from its id
+    func getPeripheralIslandSKScene(islandId: UUID) -> SKScene? {
         var sceneForIsland: SKScene? = nil
         if let nodeForIsland: SCNNode = self.islandDictionary[islandId] {
             sceneForIsland = nodeForIsland.geometry!.firstMaterial!.diffuse.contents as? SKScene
@@ -148,10 +148,10 @@ class IslandsVisualisationServices {
         return sceneForIsland
     }
     
-    // Changes label of a periferal island
-    func changePeriferalIslandLabel(peripheralIsland: PeripheralIsland) {
+    // Changes label of a peripheral island
+    func changePeripheralIslandLabel(peripheralIsland: PeripheralIsland) {
         // Acessa uma scene do SpriteKit a partir do node do plano do SceneKit
-        guard let sceneForIsland: SKScene = getPeriferalIslandSKScene(islandId: peripheralIsland.islandId!) else {return}
+        guard let sceneForIsland: SKScene = getPeripheralIslandSKScene(islandId: peripheralIsland.islandId!) else {return}
         guard let nameIsland = sceneForIsland.children.first?.childNode(withName: "nameLabelNode") as? SKLabelNode else {return}
         nameIsland.text = peripheralIsland.name
     }
@@ -187,7 +187,7 @@ class IslandsVisualisationServices {
         
         // Corrects SceneKit angle shift bug
         var correction: Float = 0
-        switch self.numberofPeriferalIslands {
+        switch self.numberofPeripheralIslands {
         case 1, 2:
             correction = -.pi/2
         case 3, 6:
