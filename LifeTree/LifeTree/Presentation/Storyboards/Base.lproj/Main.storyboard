@@ -33,10 +33,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </sceneKitView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verticalPan" translatesAutoresizingMaskIntoConstraints="NO" id="r9q-Cy-eQL">
-                                <rect key="frame" x="20" y="64" width="80" height="80"/>
+                                <rect key="frame" x="20" y="64" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="r9q-Cy-eQL" secondAttribute="height" multiplier="1:1" id="Zfi-U0-LqE"/>
-                                    <constraint firstAttribute="height" constant="80" id="eM7-yu-rT6"/>
+                                    <constraint firstAttribute="height" constant="60" id="eM7-yu-rT6"/>
                                 </constraints>
                             </imageView>
                         </subviews>
