@@ -149,7 +149,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="auA-YS-SDY">
-                                <rect key="frame" x="0.0" y="158" width="414" height="704"/>
+                                <rect key="frame" x="0.0" y="182" width="414" height="680"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qaq-kA-Vxn">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="1000"/>
@@ -373,7 +373,7 @@
                             <constraint firstItem="Clh-Kz-790" firstAttribute="centerX" secondItem="2jl-GS-PBI" secondAttribute="centerX" id="Ift-co-xFl"/>
                             <constraint firstItem="auA-YS-SDY" firstAttribute="bottom" secondItem="2jl-GS-PBI" secondAttribute="bottom" id="J34-uB-UIZ"/>
                             <constraint firstItem="Clh-Kz-790" firstAttribute="width" secondItem="MLX-U9-79p" secondAttribute="width" multiplier="0.8" id="WDV-AS-r7u"/>
-                            <constraint firstItem="auA-YS-SDY" firstAttribute="top" secondItem="V8b-5F-bIf" secondAttribute="bottom" id="cJc-Yf-AjA"/>
+                            <constraint firstItem="auA-YS-SDY" firstAttribute="top" secondItem="V8b-5F-bIf" secondAttribute="bottom" constant="24" id="cJc-Yf-AjA"/>
                             <constraint firstItem="MLX-U9-79p" firstAttribute="top" secondItem="2jl-GS-PBI" secondAttribute="top" constant="16" id="mJx-tz-8eo"/>
                             <constraint firstItem="MLX-U9-79p" firstAttribute="centerX" secondItem="2jl-GS-PBI" secondAttribute="centerX" id="sEf-AW-Xse"/>
                             <constraint firstItem="V8b-5F-bIf" firstAttribute="width" secondItem="cx6-qD-uZa" secondAttribute="width" multiplier="0.8" id="twT-Ab-BBe"/>
