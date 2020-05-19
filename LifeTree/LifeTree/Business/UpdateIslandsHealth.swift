@@ -14,14 +14,8 @@ class UpdateIslandsHealth {
 
 
     // MARK: Season Definition
-    enum Season : String {
-        case winter = "Inverno"
-        case spring = "Primavera"
-        case summer = "Verão"
-        case autumn = "Outono"
-    }
 
-    func getSeason(currentHealth: Double, lastHealth: Double) -> Season? {
+    static func getSeason(currentHealth: Double, lastHealth: Double) -> Season? {
 
         switch currentHealth {
         case 0...33:

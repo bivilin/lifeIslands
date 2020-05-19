@@ -14,7 +14,7 @@ class SelfIsland: NSManagedObject {
     @NSManaged public var name: String?
     @NSManaged public var currentHealthStatus: NSNumber?
     @NSManaged public var lastHealthStatus: NSNumber?
-    
+
     convenience init() {
         // get context
         let managedObjectContext: NSManagedObjectContext = CoreDataManager.sharedInstance.persistentContainer.viewContext

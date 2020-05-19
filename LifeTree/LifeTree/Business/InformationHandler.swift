@@ -26,7 +26,7 @@ class InformationHandler {
         self.createSelf(name: "Meu Mundo", currentHealth: 50)
         self.addPeripheralIslandToArray(category: "Trabalho", name: "Trabalho", healthStatus: 90)
         self.addPeripheralIslandToArray(category: "Faculdade", name: "Faculdade", healthStatus: 55)
-        self.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 40)
+        self.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 20)
         self.addPeripheralIslandToArray(category: "Saúde", name: "Academia", healthStatus: 50)
         self.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 60)
         self.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 80)
@@ -41,6 +41,7 @@ class InformationHandler {
         island.name = name
         island.currentHealthStatus = NSNumber(value: currentHealth)
         island.islandId = UUID()
+        island.lastHealthStatus = 0
 
         SelfIslandDataServices.createSelfIsland(island: island) { (error) in
             if (error != nil) {
@@ -76,6 +77,8 @@ class InformationHandler {
         peripheralIsland.name = name
         peripheralIsland.currentHealthStatus = NSNumber(value: healthStatus)
         peripheralIsland.islandId = UUID()
+        peripheralIsland.lastHealthStatus = 0
+        peripheralIsland.lastActionDate = Date()
 
         // Method for accessing Core Data
         PeripheralIslandDataServices.createPeripheralIsland(island: peripheralIsland) { (error) in
@@ -102,6 +105,8 @@ class InformationHandler {
         peripheralIsland.name = name
         peripheralIsland.currentHealthStatus = NSNumber(value: healthStatus)
         peripheralIsland.islandId = UUID()
+        peripheralIsland.lastHealthStatus = 0
+        peripheralIsland.lastActionDate = Date()
 
         peripheralIslandsToPersist.append(peripheralIsland)
     }
