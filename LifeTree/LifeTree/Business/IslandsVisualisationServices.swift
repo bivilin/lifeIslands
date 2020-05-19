@@ -155,21 +155,6 @@ class IslandsVisualisationServices {
         return scene
     }
     
-    // Changes label of a peripheral island
-    func changePeripheralIslandLabel(peripheralIsland: PeripheralIsland) {
-        // Acessa uma scene do SpriteKit a partir do node do plano do SceneKit
-        guard let sceneForIsland: SKScene = getPeripheralIslandSKScene(islandId: peripheralIsland.islandId!) else {return}
-        guard let nameIsland = sceneForIsland.children.first?.childNode(withName: "nameLabelNode") as? SKLabelNode else {return}
-        nameIsland.text = peripheralIsland.name
-    }
-    
-    // Changes label of self island
-    func changeSelfIslandLabel(text: String) {
-        guard let selfSKScene = getSelfIslandSKScene() else {return}
-        guard let nameSelfIsland = selfSKScene.children.first?.childNode(withName: "nameLabelNode") as? SKLabelNode else {return}
-            nameSelfIsland.text = text
-    }
-    
     func makeRope(angle: Float) {
         // Width of the parabole, which corresponds to the coordinate x of its ending point
         let width = self.radius * 100

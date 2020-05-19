@@ -50,17 +50,6 @@ class InformationHandler {
                 // Debug Code
                 print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.currentHealthStatus!)%")
             }
-            // After saving data, retrieving it to save on selfIsland object
-            // That might occur in another screen, so then here we would have a performSegue instead.
-            SelfIslandDataServices.getFirstSelfIsland { (error, island) in
-                guard let island = island else {return}
-                if (error != nil) {
-                    print(error.debugDescription)
-                } else {
-                    //self.selfIsland = island
-                    self.sceneServices.changeSelfIslandLabel(text: island.name ?? "Sem Nome")
-                }
-            }
         }
     }
 
@@ -152,7 +141,7 @@ class InformationHandler {
                 // Atualiza os rótulos de cada ilha para o texto existente no banco de dados
                 for island in allIslands {
                     print("Ilha #\(String(describing: island.islandId))")
-                    self.sceneServices.changePeripheralIslandLabel(peripheralIsland: island)
+//                    self.sceneServices.changePeripheralIslandLabel(peripheralIsland: island)
                 }
             }
         }
