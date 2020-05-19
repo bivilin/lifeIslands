@@ -129,33 +129,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lJj-dh-okm">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                            </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profissional" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLX-U9-79p">
+                                <rect key="frame" x="128" y="60" width="158.5" height="39.5"/>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clh-Kz-790" userLabel="StyleLine">
+                                <rect key="frame" x="143.5" y="104.5" width="127" height="3"/>
+                                <color key="backgroundColor" red="0.62865293030000002" green="0.71221178770000004" blue="0.81962937120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="3" id="ZkP-vt-Mhh"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sua última ação na ilha foi ontem. Fico feliz quando vem aqui todos os dias!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8b-5F-bIf">
+                                <rect key="frame" x="41.5" y="123.5" width="331" height="34.5"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qaq-kA-Vxn">
-                                <rect key="frame" x="0.0" y="44" width="414" height="787"/>
+                                <rect key="frame" x="0.0" y="174" width="414" height="672"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profissional" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLX-U9-79p">
-                                        <rect key="frame" x="128" y="8" width="158.5" height="39.5"/>
-                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="28"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clh-Kz-790" userLabel="StyleLine">
-                                        <rect key="frame" x="143.5" y="47.5" width="127" height="3"/>
-                                        <color key="backgroundColor" red="0.62865293030000002" green="0.71221178770000004" blue="0.81962937120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="3" id="ZkP-vt-Mhh"/>
-                                        </constraints>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sua última ação na ilha foi ontem. Fico feliz quando vem aqui todos os dias!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8b-5F-bIf">
-                                        <rect key="frame" x="41.5" y="74.5" width="331" height="34.5"/>
-                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="qxl-SR-s5X">
-                                        <rect key="frame" x="16" y="133" width="382" height="466.5"/>
+                                        <rect key="frame" x="16" y="8" width="382" height="466.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h14-ow-bTm" userLabel="Island Scene Stack View">
                                                 <rect key="frame" x="0.0" y="0.0" width="382" height="250"/>
@@ -219,7 +216,7 @@
                                         <color key="backgroundColor" red="0.58583492039999996" green="0.65648895500000004" blue="0.81571298839999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PJ7-YZ-Lav">
-                                        <rect key="frame" x="16" y="607.5" width="382" height="163.5"/>
+                                        <rect key="frame" x="16" y="482.5" width="382" height="173.5"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFit" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="actionCell" id="RBY-F5-pC9" customClass="ActionTableViewCell" customModule="LifeTree" customModuleProvider="target">
@@ -341,35 +338,31 @@
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstItem="qxl-SR-s5X" firstAttribute="top" secondItem="qaq-kA-Vxn" secondAttribute="top" constant="8" id="1mc-cD-2ws"/>
                                     <constraint firstAttribute="bottom" secondItem="PJ7-YZ-Lav" secondAttribute="bottom" constant="16" id="3Uv-ig-nOP"/>
                                     <constraint firstItem="qxl-SR-s5X" firstAttribute="leading" secondItem="qaq-kA-Vxn" secondAttribute="leading" constant="16" id="8th-1v-fNx"/>
-                                    <constraint firstItem="Clh-Kz-790" firstAttribute="top" secondItem="MLX-U9-79p" secondAttribute="bottom" id="8vc-PS-AC9"/>
                                     <constraint firstItem="PJ7-YZ-Lav" firstAttribute="top" secondItem="qxl-SR-s5X" secondAttribute="bottom" constant="8" id="9ME-c7-0WF"/>
-                                    <constraint firstItem="Clh-Kz-790" firstAttribute="centerX" secondItem="qaq-kA-Vxn" secondAttribute="centerX" id="BDl-rn-2Sk"/>
-                                    <constraint firstItem="V8b-5F-bIf" firstAttribute="top" secondItem="Clh-Kz-790" secondAttribute="bottom" constant="24" id="FZU-5P-yB6"/>
-                                    <constraint firstItem="V8b-5F-bIf" firstAttribute="centerX" secondItem="Clh-Kz-790" secondAttribute="centerX" id="GZf-fy-1cJ"/>
-                                    <constraint firstItem="Clh-Kz-790" firstAttribute="width" secondItem="MLX-U9-79p" secondAttribute="width" multiplier="0.801262" id="LXz-7S-uK2"/>
                                     <constraint firstItem="oaT-t3-YYC" firstAttribute="centerX" secondItem="qaq-kA-Vxn" secondAttribute="centerX" id="THD-kf-WWg"/>
                                     <constraint firstAttribute="trailing" secondItem="PJ7-YZ-Lav" secondAttribute="trailing" constant="16" id="UZE-08-YKa"/>
-                                    <constraint firstItem="V8b-5F-bIf" firstAttribute="width" secondItem="qaq-kA-Vxn" secondAttribute="width" multiplier="0.8" id="j6L-8v-3pn"/>
-                                    <constraint firstItem="MLX-U9-79p" firstAttribute="top" secondItem="qaq-kA-Vxn" secondAttribute="top" constant="8" id="jog-dq-cip"/>
-                                    <constraint firstItem="qxl-SR-s5X" firstAttribute="top" secondItem="V8b-5F-bIf" secondAttribute="bottom" constant="24" id="o0p-bt-9fV"/>
                                     <constraint firstItem="PJ7-YZ-Lav" firstAttribute="leading" secondItem="qaq-kA-Vxn" secondAttribute="leading" constant="16" id="rlH-WC-yzr"/>
                                     <constraint firstAttribute="trailing" secondItem="qxl-SR-s5X" secondAttribute="trailing" constant="16" id="vCk-Nf-ma0"/>
-                                    <constraint firstItem="MLX-U9-79p" firstAttribute="centerX" secondItem="qaq-kA-Vxn" secondAttribute="centerX" id="wJa-Ie-nBZ"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="2jl-GS-PBI" firstAttribute="bottom" secondItem="qaq-kA-Vxn" secondAttribute="bottom" constant="31" id="0gr-GA-okg"/>
-                            <constraint firstItem="qaq-kA-Vxn" firstAttribute="top" secondItem="2jl-GS-PBI" secondAttribute="top" id="X1U-Q3-atC"/>
-                            <constraint firstItem="lJj-dh-okm" firstAttribute="leading" secondItem="2jl-GS-PBI" secondAttribute="leading" id="bQi-rc-Nfb"/>
+                            <constraint firstItem="Clh-Kz-790" firstAttribute="top" secondItem="MLX-U9-79p" secondAttribute="bottom" constant="5" id="5Ld-gS-Ish"/>
+                            <constraint firstItem="V8b-5F-bIf" firstAttribute="centerX" secondItem="2jl-GS-PBI" secondAttribute="centerX" id="CC3-6v-cDM"/>
+                            <constraint firstItem="Clh-Kz-790" firstAttribute="centerX" secondItem="2jl-GS-PBI" secondAttribute="centerX" id="Ift-co-xFl"/>
+                            <constraint firstItem="qaq-kA-Vxn" firstAttribute="top" secondItem="V8b-5F-bIf" secondAttribute="bottom" constant="16" id="NRZ-3I-oXh"/>
+                            <constraint firstItem="Clh-Kz-790" firstAttribute="width" secondItem="MLX-U9-79p" secondAttribute="width" multiplier="0.8" id="WDV-AS-r7u"/>
                             <constraint firstItem="qaq-kA-Vxn" firstAttribute="leading" secondItem="2jl-GS-PBI" secondAttribute="leading" id="cFi-4G-X9e"/>
-                            <constraint firstItem="lJj-dh-okm" firstAttribute="centerX" secondItem="cx6-qD-uZa" secondAttribute="centerX" id="nGF-9v-ots"/>
-                            <constraint firstItem="lJj-dh-okm" firstAttribute="top" secondItem="cx6-qD-uZa" secondAttribute="top" constant="44" id="nv0-dy-pgn"/>
+                            <constraint firstItem="2jl-GS-PBI" firstAttribute="bottom" secondItem="qaq-kA-Vxn" secondAttribute="bottom" constant="16" id="eHr-Ca-h3S"/>
+                            <constraint firstItem="MLX-U9-79p" firstAttribute="top" secondItem="2jl-GS-PBI" secondAttribute="top" constant="16" id="mJx-tz-8eo"/>
+                            <constraint firstItem="MLX-U9-79p" firstAttribute="centerX" secondItem="2jl-GS-PBI" secondAttribute="centerX" id="sEf-AW-Xse"/>
                             <constraint firstItem="qaq-kA-Vxn" firstAttribute="trailing" secondItem="2jl-GS-PBI" secondAttribute="trailing" id="t40-I1-5mS"/>
-                            <constraint firstAttribute="bottom" secondItem="lJj-dh-okm" secondAttribute="bottom" constant="34" id="vfO-nR-8vu"/>
+                            <constraint firstItem="V8b-5F-bIf" firstAttribute="width" secondItem="cx6-qD-uZa" secondAttribute="width" multiplier="0.8" id="twT-Ab-BBe"/>
+                            <constraint firstItem="V8b-5F-bIf" firstAttribute="top" secondItem="Clh-Kz-790" secondAttribute="bottom" constant="16" id="yV0-eM-q3f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2jl-GS-PBI"/>
                     </view>
