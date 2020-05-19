@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import UICircularProgressRing
 
-class CardViewController: UIViewController {
-
+class CardViewController: UIViewController{
+    
     @IBOutlet weak var nameIsland: UILabel!
     @IBOutlet weak var phrase: UILabel!
     
@@ -30,3 +31,4 @@ class CardViewController: UIViewController {
         }
     }
 }
+
