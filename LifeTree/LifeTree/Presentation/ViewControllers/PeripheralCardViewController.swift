@@ -8,13 +8,15 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 class PeripheralCardViewController: UIViewController {
 
     @IBOutlet weak var nameIsland: UILabel!
     @IBOutlet weak var phrase: UILabel!
     @IBOutlet weak var actionsTableView: UITableView!
-
+    @IBOutlet weak var islandSKView: SKView!
+    
     var peripheralIsland: PeripheralIsland?
     var islandActions: [Action] = []
 
@@ -26,6 +28,9 @@ class PeripheralCardViewController: UIViewController {
         } else {
             phrase.text = "Sua saúde ainda não foi definida"
         }
+        
+        // Set up the SKView for the island
+        islandSKView.allowsTransparency = true
 
         // TableView Delegates Setup
         self.actionsTableView.delegate = self

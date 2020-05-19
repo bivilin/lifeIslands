@@ -286,6 +286,11 @@ class IslandsViewController: UIViewController{
             peripheralCardView.peripheralIsland = islandObject
             // Atualiza o conteúdo do Floating Panel para a nova VC
             floatingPanel.set(contentViewController: peripheralCardView)
+            // Atualiza SKScene do card
+            if let scene = self.islandsVisualizationServices?.getIslandSKSceneFromNode(node: node) {
+                scene.scaleMode = .aspectFit
+                peripheralCardView.islandSKView.presentScene(scene)
+            }
         } else {
             // Ilha Central
             // Solução temporária

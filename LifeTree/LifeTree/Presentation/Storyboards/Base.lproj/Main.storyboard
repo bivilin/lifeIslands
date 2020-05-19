@@ -150,12 +150,12 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modelIsland" translatesAutoresizingMaskIntoConstraints="NO" id="Q17-Dr-T9g">
+                                            <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oaT-t3-YYC">
                                                 <rect key="frame" x="0.0" y="115.5" width="382" height="250"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="250" id="dF7-UX-KPg"/>
+                                                    <constraint firstAttribute="height" constant="250" id="iSg-0a-rP6"/>
                                                 </constraints>
-                                            </imageView>
+                                            </skView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAÚDE DA ILHA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mB0-a9-wcw">
                                                 <rect key="frame" x="0.0" y="385.5" width="382" height="22"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
@@ -331,6 +331,7 @@
                     <navigationItem key="navigationItem" id="hjW-8g-arw"/>
                     <connections>
                         <outlet property="actionsTableView" destination="PJ7-YZ-Lav" id="vfW-wu-nLA"/>
+                        <outlet property="islandSKView" destination="oaT-t3-YYC" id="lxW-wa-rKh"/>
                         <outlet property="nameIsland" destination="MLX-U9-79p" id="Zpr-95-AeF"/>
                         <outlet property="phrase" destination="V8b-5F-bIf" id="Ma3-FC-MG8"/>
                         <segue destination="1de-Dz-avu" kind="presentation" identifier="NewAction" id="MGx-m6-X9K"/>
@@ -338,7 +339,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dvd-Bu-cD8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965" y="599"/>
+            <point key="canvasLocation" x="963.76811594202911" y="598.66071428571422"/>
         </scene>
         <!--Create Action View Controller-->
         <scene sceneID="Ogb-cH-jl3">
@@ -488,7 +489,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="modelIsland" width="2835" height="2835"/>
         <image name="verticalPan" width="120" height="120"/>
     </resources>
 </document>

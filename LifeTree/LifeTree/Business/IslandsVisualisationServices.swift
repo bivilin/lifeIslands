@@ -123,10 +123,8 @@ class IslandsVisualisationServices {
             // Makes the material double sided, otherwise the plane can only be seen when the camera is pointed at its +z direction (which might not be the case unless we use the billboard constrint on the planes)
             planeMaterial.isDoubleSided = true
             
-            // Flips the SKScene root node vertically so it has the correct orientation on the SCNScene
-            if let yScale = newSpriteKitScene.children.first?.yScale {
-                newSpriteKitScene.children.first?.yScale = -1 * yScale
-            }
+            // Flips plane material vertically so SKScene is displayed correctly
+            planeMaterial.diffuse.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, -1, 1), 0, 1, 0)
         }
     }
     
@@ -146,6 +144,15 @@ class IslandsVisualisationServices {
             sceneForIsland = nodeForIsland.geometry!.firstMaterial!.diffuse.contents as? SKScene
         }
         return sceneForIsland
+    }
+    
+    // Get SKScene of given node
+    func getIslandSKSceneFromNode(node: SCNNode) -> SKScene? {
+        var scene: SKScene? = nil
+        if let material = node.geometry!.firstMaterial {
+            scene = material.diffuse.contents as? SKScene
+        }
+        return scene
     }
     
     // Changes label of a peripheral island
