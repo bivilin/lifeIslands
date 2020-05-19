@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SpriteKit
 
 class PeripheralCardViewController: UIViewController {
 
@@ -16,11 +17,15 @@ class PeripheralCardViewController: UIViewController {
     @IBOutlet weak var seasonLabel: UILabel!
     @IBOutlet weak var statusDescriptionLabel: UILabel!
     @IBOutlet weak var lastActivityMessageLabel: UILabel!
-
+    @IBOutlet weak var islandSKView: SKView!
+    
     var peripheralIsland: PeripheralIsland?
     var islandActions: [Action] = []
 
     override func viewWillAppear(_ animated: Bool) {
+
+        // Set up the SKView for the island
+        islandSKView.allowsTransparency = true
 
         // TableView Delegates Setup
         self.actionsTableView.delegate = self

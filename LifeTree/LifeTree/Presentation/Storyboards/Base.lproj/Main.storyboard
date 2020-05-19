@@ -33,10 +33,10 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </sceneKitView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="verticalPan" translatesAutoresizingMaskIntoConstraints="NO" id="r9q-Cy-eQL">
-                                <rect key="frame" x="20" y="64" width="80" height="80"/>
+                                <rect key="frame" x="20" y="64" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="r9q-Cy-eQL" secondAttribute="height" multiplier="1:1" id="Zfi-U0-LqE"/>
-                                    <constraint firstAttribute="height" constant="80" id="eM7-yu-rT6"/>
+                                    <constraint firstAttribute="height" constant="60" id="eM7-yu-rT6"/>
                                 </constraints>
                             </imageView>
                         </subviews>
@@ -164,22 +164,29 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zhy-4n-Aeo">
-                                                <rect key="frame" x="0.0" y="94" width="382" height="20"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="20" id="cIT-pD-qIM"/>
-                                                </constraints>
-                                            </view>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="modelIsland" translatesAutoresizingMaskIntoConstraints="NO" id="Q17-Dr-T9g">
-                                                <rect key="frame" x="0.0" y="114" width="382" height="250"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="250" id="dF7-UX-KPg"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saúde da Ilha" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mB0-a9-wcw">
-                                                <rect key="frame" x="0.0" y="364" width="382" height="16"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="13"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h14-ow-bTm" userLabel="Island Scene Stack View">
+                                                <rect key="frame" x="0.0" y="115.5" width="382" height="250"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xt-3g-Ahv">
+                                                        <rect key="frame" x="0.0" y="0.0" width="66" height="250"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oaT-t3-YYC">
+                                                        <rect key="frame" x="66" y="0.0" width="250" height="250"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="oaT-t3-YYC" secondAttribute="height" id="gnp-2N-p7Z"/>
+                                                            <constraint firstAttribute="height" constant="250" id="iSg-0a-rP6"/>
+                                                        </constraints>
+                                                    </skView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Se9-Jh-tFb">
+                                                        <rect key="frame" x="316" y="0.0" width="66" height="250"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAÚDE DA ILHA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mB0-a9-wcw">
+                                                <rect key="frame" x="0.0" y="385.5" width="382" height="22"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -348,6 +355,7 @@
                                     <constraint firstItem="PJ7-YZ-Lav" firstAttribute="top" secondItem="qxl-SR-s5X" secondAttribute="bottom" constant="8" id="9ME-c7-0WF"/>
                                     <constraint firstItem="Clh-Kz-790" firstAttribute="centerX" secondItem="MLX-U9-79p" secondAttribute="centerX" id="Fmu-As-MrJ"/>
                                     <constraint firstItem="qxl-SR-s5X" firstAttribute="top" secondItem="qaq-kA-Vxn" secondAttribute="top" constant="16" id="RcM-Tq-FxE"/>
+                                    <constraint firstItem="oaT-t3-YYC" firstAttribute="centerX" secondItem="qaq-kA-Vxn" secondAttribute="centerX" id="THD-kf-WWg"/>
                                     <constraint firstAttribute="trailing" secondItem="PJ7-YZ-Lav" secondAttribute="trailing" constant="16" id="UZE-08-YKa"/>
                                     <constraint firstItem="PJ7-YZ-Lav" firstAttribute="leading" secondItem="qaq-kA-Vxn" secondAttribute="leading" constant="16" id="rlH-WC-yzr"/>
                                     <constraint firstAttribute="trailing" secondItem="qxl-SR-s5X" secondAttribute="trailing" constant="16" id="vCk-Nf-ma0"/>
@@ -370,6 +378,7 @@
                     <navigationItem key="navigationItem" id="hjW-8g-arw"/>
                     <connections>
                         <outlet property="actionsTableView" destination="PJ7-YZ-Lav" id="vfW-wu-nLA"/>
+                        <outlet property="islandSKView" destination="oaT-t3-YYC" id="lxW-wa-rKh"/>
                         <outlet property="lastActivityMessageLabel" destination="V8b-5F-bIf" id="kz5-S5-aOI"/>
                         <outlet property="nameIsland" destination="MLX-U9-79p" id="Zpr-95-AeF"/>
                         <outlet property="seasonLabel" destination="dOf-Sk-K2t" id="kel-R7-Vrm"/>
@@ -379,7 +388,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dvd-Bu-cD8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="965" y="599"/>
+            <point key="canvasLocation" x="963.76811594202911" y="598.66071428571422"/>
         </scene>
         <!--Create Action View Controller-->
         <scene sceneID="Ogb-cH-jl3">
@@ -533,7 +542,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="modelIsland" width="2835" height="2835"/>
         <image name="verticalPan" width="120" height="120"/>
     </resources>
 </document>
