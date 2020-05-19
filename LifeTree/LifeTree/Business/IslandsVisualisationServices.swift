@@ -41,7 +41,7 @@ class IslandsVisualisationServices {
             let selfIslandPlaneGeometry = selfIslandPlane.geometry {
             self.setPlaneMaterialAsIslandSKScene(planeGeometry: selfIslandPlaneGeometry)
             
-            // Places billboard constrint so that self plane is always facing the camera
+            // Places billboard constraint so that self plane is always facing the camera
             let constraint = SCNBillboardConstraint()
             selfIslandPlane.constraints = [constraint]
         }
