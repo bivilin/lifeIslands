@@ -26,7 +26,7 @@ class InformationHandler {
         self.createSelf(name: "Meu Mundo", currentHealth: 50)
         self.addPeripheralIslandToArray(category: "Trabalho", name: "Trabalho", healthStatus: 90)
         self.addPeripheralIslandToArray(category: "Faculdade", name: "Faculdade", healthStatus: 55)
-        self.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 40)
+        self.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 20)
         self.addPeripheralIslandToArray(category: "Saúde", name: "Academia", healthStatus: 50)
         self.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 60)
         self.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 80)
@@ -41,6 +41,7 @@ class InformationHandler {
         island.name = name
         island.currentHealthStatus = NSNumber(value: currentHealth)
         island.islandId = UUID()
+        island.lastHealthStatus = 0
 
         SelfIslandDataServices.createSelfIsland(island: island) { (error) in
             if (error != nil) {
@@ -48,17 +49,6 @@ class InformationHandler {
             } else {
                 // Debug Code
                 print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.currentHealthStatus!)%")
-            }
-            // After saving data, retrieving it to save on selfIsland object
-            // That might occur in another screen, so then here we would have a performSegue instead.
-            SelfIslandDataServices.getFirstSelfIsland { (error, island) in
-                guard let island = island else {return}
-                if (error != nil) {
-                    print(error.debugDescription)
-                } else {
-                    //self.selfIsland = island
-                    self.sceneServices.changeSelfIslandLabel(text: island.name ?? "Sem Nome")
-                }
             }
         }
     }
@@ -76,6 +66,8 @@ class InformationHandler {
         peripheralIsland.name = name
         peripheralIsland.currentHealthStatus = NSNumber(value: healthStatus)
         peripheralIsland.islandId = UUID()
+        peripheralIsland.lastHealthStatus = 0
+        peripheralIsland.lastActionDate = Date()
 
         // Method for accessing Core Data
         PeripheralIslandDataServices.createPeripheralIsland(island: peripheralIsland) { (error) in
@@ -102,6 +94,8 @@ class InformationHandler {
         peripheralIsland.name = name
         peripheralIsland.currentHealthStatus = NSNumber(value: healthStatus)
         peripheralIsland.islandId = UUID()
+        peripheralIsland.lastHealthStatus = 0
+        peripheralIsland.lastActionDate = Date()
 
         peripheralIslandsToPersist.append(peripheralIsland)
     }
@@ -141,13 +135,13 @@ class InformationHandler {
 
                 // Se há alguma ilha no banco de dados, cria os elementos visuais para cada uma
                 if allIslands.count > 0 && shouldAddToScene {
-                    self.sceneServices.addAllPeriferalIslandsToScene(peripheralIslandArray: allIslands)
+                    self.sceneServices.addAllPeripheralIslandsToScene(peripheralIslandArray: allIslands)
                 }
 
                 // Atualiza os rótulos de cada ilha para o texto existente no banco de dados
                 for island in allIslands {
                     print("Ilha #\(String(describing: island.islandId))")
-                    self.sceneServices.changePeriferalIslandLabel(peripheralIsland: island)
+//                    self.sceneServices.changePeripheralIslandLabel(peripheralIsland: island)
                 }
             }
         }
