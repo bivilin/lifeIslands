@@ -13,22 +13,17 @@ import SpriteKit
 class PeripheralCardViewController: UIViewController {
 
     @IBOutlet weak var nameIsland: UILabel!
-    @IBOutlet weak var phrase: UILabel!
     @IBOutlet weak var actionsTableView: UITableView!
+    @IBOutlet weak var seasonLabel: UILabel!
+    @IBOutlet weak var statusDescriptionLabel: UILabel!
+    @IBOutlet weak var lastActivityMessageLabel: UILabel!
     @IBOutlet weak var islandSKView: SKView!
     
     var peripheralIsland: PeripheralIsland?
     var islandActions: [Action] = []
 
     override func viewWillAppear(_ animated: Bool) {
-        nameIsland.text = peripheralIsland?.name
 
-        if let healthStatus = peripheralIsland?.currentHealthStatus {
-            phrase.text = "Sua saúde é de \(healthStatus)%"
-        } else {
-            phrase.text = "Sua saúde ainda não foi definida"
-        }
-        
         // Set up the SKView for the island
         islandSKView.allowsTransparency = true
 
@@ -41,6 +36,50 @@ class PeripheralCardViewController: UIViewController {
 
         // Populando TableView com dados persistidos
         self.updateDataFromDatabase()
+
+        // Labels
+        updateLabels()
+    }
+
+    // Atualiza labels de acordo com dados persistidos
+    func updateLabels() {
+        // Definindo nome da ilha
+        nameIsland.text = peripheralIsland?.name
+
+        // Definindo estação
+        let currentHealth = peripheralIsland?.currentHealthStatus as! Double
+        let lastHeath = peripheralIsland?.lastHealthStatus as! Double
+        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
+        self.seasonLabel.text = season?.name
+
+        // Definindo texto da estação
+        self.statusDescriptionLabel.text = season?.description
+
+        // Texto com último dia de entrada
+        let relativeDate = self.getRelativeDate(lastDate: peripheralIsland?.lastActionDate ?? Date())
+        self.lastActivityMessageLabel.text = "Sua última atividade aqui foi \(relativeDate). Fico feliz quando me rega todos os dias!"
+    }
+
+    // TODO: Transferir método para outra classe. Qual classe?
+    func getRelativeDate(lastDate: Date) -> String {
+        let periodInSeconds = lastDate.distance(to: Date())
+        let periodInMinutes = Int(periodInSeconds / 60)
+        if periodInMinutes < 60 {
+            return "há \(periodInMinutes) minutos"
+        } else {
+            let periodInHours = Int(periodInMinutes / 60)
+            if periodInHours < 24 {
+                return "há \(periodInHours) horas"
+            } else {
+                let periodInDays = Int(periodInHours / 24)
+                if periodInDays < 7 {
+                    return "há \(periodInDays) dias"
+                } else {
+                    let periodInWeeks = Int(periodInDays / 7)
+                    return "há \(periodInWeeks) semanas"
+                }
+            }
+        }
     }
 
     // MARK: Info Handling

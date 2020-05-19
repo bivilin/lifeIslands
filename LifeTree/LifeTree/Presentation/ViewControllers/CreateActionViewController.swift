@@ -100,7 +100,6 @@ class CreateActionViewController: UIViewController {
     // Altera label quando há movimentação do slider
     @IBAction func impactLevelChanged(_ sender: UISlider) {
         impactLevelSlider.value = roundf(impactLevelSlider.value)
-        impactLevelLabel.text = String(impactLevelSlider.value)
         // Altera thumb do slider quando há movimentação
         customizeSliderThumb()
     }
@@ -109,7 +108,17 @@ class CreateActionViewController: UIViewController {
     func customizeSliderThumb() {
         let imageName = "emoji" + String(impactLevelSlider.value)
         let dropImage = UIImage(named: imageName)
-        impactLevelSlider.setThumbImage(dropImage, for: .normal)
+        let size = dropImage?.size
+        let resizedDropImage = imageWithImage(image: dropImage ?? UIImage(), scaledToSize: CGSize(width: size!.width/2, height: size!.height/2))
+        impactLevelSlider.setThumbImage(resizedDropImage, for: .normal)
+    }
+
+    func imageWithImage(image:UIImage, scaledToSize newSize:CGSize) -> UIImage{
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0);
+        image.draw(in: CGRect(origin: CGPoint.zero, size: CGSize(width: newSize.width, height: newSize.height)))
+        let newImage:UIImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+        return newImage
     }
 
     // MARK: Buttons
