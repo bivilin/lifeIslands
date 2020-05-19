@@ -150,12 +150,26 @@
                                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oaT-t3-YYC">
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h14-ow-bTm" userLabel="Island Scene Stack View">
                                                 <rect key="frame" x="0.0" y="115.5" width="382" height="250"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="250" id="iSg-0a-rP6"/>
-                                                </constraints>
-                                            </skView>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4xt-3g-Ahv">
+                                                        <rect key="frame" x="0.0" y="0.0" width="66" height="250"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <skView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oaT-t3-YYC">
+                                                        <rect key="frame" x="66" y="0.0" width="250" height="250"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="oaT-t3-YYC" secondAttribute="height" id="gnp-2N-p7Z"/>
+                                                            <constraint firstAttribute="height" constant="250" id="iSg-0a-rP6"/>
+                                                        </constraints>
+                                                    </skView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Se9-Jh-tFb">
+                                                        <rect key="frame" x="316" y="0.0" width="66" height="250"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SAÚDE DA ILHA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mB0-a9-wcw">
                                                 <rect key="frame" x="0.0" y="385.5" width="382" height="22"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
@@ -309,6 +323,7 @@
                                     <constraint firstItem="qxl-SR-s5X" firstAttribute="leading" secondItem="qaq-kA-Vxn" secondAttribute="leading" constant="16" id="8th-1v-fNx"/>
                                     <constraint firstItem="PJ7-YZ-Lav" firstAttribute="top" secondItem="qxl-SR-s5X" secondAttribute="bottom" constant="8" id="9ME-c7-0WF"/>
                                     <constraint firstItem="qxl-SR-s5X" firstAttribute="top" secondItem="qaq-kA-Vxn" secondAttribute="top" constant="16" id="RcM-Tq-FxE"/>
+                                    <constraint firstItem="oaT-t3-YYC" firstAttribute="centerX" secondItem="qaq-kA-Vxn" secondAttribute="centerX" id="THD-kf-WWg"/>
                                     <constraint firstAttribute="trailing" secondItem="PJ7-YZ-Lav" secondAttribute="trailing" constant="16" id="UZE-08-YKa"/>
                                     <constraint firstItem="PJ7-YZ-Lav" firstAttribute="leading" secondItem="qaq-kA-Vxn" secondAttribute="leading" constant="16" id="rlH-WC-yzr"/>
                                     <constraint firstAttribute="trailing" secondItem="qxl-SR-s5X" secondAttribute="trailing" constant="16" id="vCk-Nf-ma0"/>
