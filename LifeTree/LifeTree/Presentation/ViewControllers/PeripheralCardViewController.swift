@@ -142,40 +142,20 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
         switch indexPath.section {
         case 0:
             let newFixedContentCell = actionsTableView.dequeueReusableCell(withIdentifier: "fixedContentCell", for: indexPath) as! FixedContentCell
-
-            // Set up the SKView for the island
-            newFixedContentCell.islandSKView?.presentScene(islandScene)
-            newFixedContentCell.islandSKView?.allowsTransparency = true
-
-            // Definindo estação
-            let currentHealth = peripheralIsland?.currentHealthStatus as! Double
-            let lastHeath = peripheralIsland?.lastHealthStatus as! Double
-            let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
-            newFixedContentCell.seasonLabel.text = season?.name
-
-            // Definindo texto da estação
-            newFixedContentCell.statusDescriptionLabel.text = season?.description
-
+            if let scene = self.islandScene, let island = self.peripheralIsland {
+                newFixedContentCell.loadContents(island: island, scene: scene)
+            }
             return newFixedContentCell
         case 1:
             if indexPath.row < islandActions.count {
-               let action = islandActions[indexPath.row]
-               let actionCell = actionsTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath) as! ActionTableViewCell
-               actionCell.label?.text = action.name
-
-               // Altera imagem de acordo com o nível de impacto da ação
-               do {
-                   try actionCell.setDropImage(impactLevel: action.impactLevel as! Double)
-               }
-               catch let error {
-                   print(error.localizedDescription)
-               }
-
-               return actionCell
+                let actionCell = actionsTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath) as! ActionTableViewCell
+                let action = islandActions[indexPath.row]
+                actionCell.loadContents(action: action)
+                return actionCell
             }
             else {
-               let newActionCell = actionsTableView.dequeueReusableCell(withIdentifier: "createActionCell", for: indexPath) as! CreateActionTableViewCell
-               return newActionCell
+                let newActionCell = actionsTableView.dequeueReusableCell(withIdentifier: "createActionCell", for: indexPath) as! CreateActionTableViewCell
+                return newActionCell
             }
         default:
             return UITableViewCell()
@@ -194,6 +174,7 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
     // Navegação para a próxima tela de acordo com célula clicada
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < islandActions.count {
+            print("oi")
             // Futuro: abrir actionSheet para definir se é para confirmar ou editar
             // TODO Agora: colocar o segue para receber as gotas
         } else {
