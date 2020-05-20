@@ -297,6 +297,12 @@ class IslandsViewController: UIViewController{
             floatingPanel.set(contentViewController: cardView)
         }
     }
+    
+    func floatingPanelDidEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetPosition: FloatingPanelPosition) {
+        
+        cardView.loadProgress()
+        
+    }
 
     func setupFloatingPanel() {
 
