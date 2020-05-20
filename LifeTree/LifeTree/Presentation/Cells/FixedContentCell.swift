@@ -20,6 +20,7 @@ class FixedContentCell: UITableViewCell {
         super.awakeFromNib()
     }
 
+    // Carrega SKScene e infos das labels
     func loadContents(island: PeripheralIsland, scene: SKScene) {
 
         // Set up the SKView for the island

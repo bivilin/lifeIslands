@@ -31,7 +31,7 @@ class ActionTableViewCell: UITableViewCell {
         self.contourView.layer.shadowRadius = 4
     }
 
-
+    // Método para popular conteúdos da célula (texto e imagem)
     func loadContents(action: Action) {
         self.label?.text = action.name
         // Altera imagem de acordo com o nível de impacto da ação

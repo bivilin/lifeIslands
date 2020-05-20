@@ -149,7 +149,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PJ7-YZ-Lav">
-                                <rect key="frame" x="16" y="174" width="382" height="672"/>
+                                <rect key="frame" x="16" y="182" width="382" height="664"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="fixedContentCell" id="J6y-NZ-1Cv" customClass="FixedContentCell" customModule="LifeTree" customModuleProvider="target">
@@ -336,7 +336,7 @@
                             <constraint firstItem="V8b-5F-bIf" firstAttribute="centerX" secondItem="2jl-GS-PBI" secondAttribute="centerX" id="CC3-6v-cDM"/>
                             <constraint firstItem="Clh-Kz-790" firstAttribute="centerX" secondItem="2jl-GS-PBI" secondAttribute="centerX" id="Ift-co-xFl"/>
                             <constraint firstItem="2jl-GS-PBI" firstAttribute="trailing" secondItem="PJ7-YZ-Lav" secondAttribute="trailing" constant="16" id="Kyh-JX-8iW"/>
-                            <constraint firstItem="PJ7-YZ-Lav" firstAttribute="top" secondItem="V8b-5F-bIf" secondAttribute="bottom" constant="16" id="R6T-fY-vm5"/>
+                            <constraint firstItem="PJ7-YZ-Lav" firstAttribute="top" secondItem="V8b-5F-bIf" secondAttribute="bottom" constant="24" id="R6T-fY-vm5"/>
                             <constraint firstItem="Clh-Kz-790" firstAttribute="width" secondItem="MLX-U9-79p" secondAttribute="width" multiplier="0.8" id="WDV-AS-r7u"/>
                             <constraint firstItem="2jl-GS-PBI" firstAttribute="bottom" secondItem="PJ7-YZ-Lav" secondAttribute="bottom" constant="16" id="bDX-dW-6Hu"/>
                             <constraint firstItem="MLX-U9-79p" firstAttribute="top" secondItem="2jl-GS-PBI" secondAttribute="top" constant="16" id="mJx-tz-8eo"/>

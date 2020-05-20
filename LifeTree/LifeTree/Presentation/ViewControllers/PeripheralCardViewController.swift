@@ -140,6 +140,7 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
+        // Célula única de conteúdo fixo acima da lista de ações
         case 0:
             let newFixedContentCell = actionsTableView.dequeueReusableCell(withIdentifier: "fixedContentCell", for: indexPath) as! FixedContentCell
             if let scene = self.islandScene, let island = self.peripheralIsland {
@@ -147,12 +148,14 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
             }
             return newFixedContentCell
         case 1:
+            // Lista de ações
             if indexPath.row < islandActions.count {
                 let actionCell = actionsTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath) as! ActionTableViewCell
                 let action = islandActions[indexPath.row]
                 actionCell.loadContents(action: action)
                 return actionCell
             }
+            // Células para adicionar uma nova ação
             else {
                 let newActionCell = actionsTableView.dequeueReusableCell(withIdentifier: "createActionCell", for: indexPath) as! CreateActionTableViewCell
                 return newActionCell
@@ -173,6 +176,10 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
 
     // Navegação para a próxima tela de acordo com célula clicada
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section != 1 {
+            return
+        }
+
         if indexPath.row < islandActions.count {
             print("oi")
             // Futuro: abrir actionSheet para definir se é para confirmar ou editar
