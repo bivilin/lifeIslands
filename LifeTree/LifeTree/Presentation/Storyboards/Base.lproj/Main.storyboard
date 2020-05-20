@@ -89,8 +89,9 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJC-dn-sRN">
                                         <rect key="frame" x="32" y="120" width="350" height="350"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="circle" translatesAutoresizingMaskIntoConstraints="NO" id="Bz6-Wu-6Qh">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ring" translatesAutoresizingMaskIntoConstraints="NO" id="Bz6-Wu-6Qh">
                                                 <rect key="frame" x="17.5" y="17.5" width="315" height="315"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VH7-kn-29u" customClass="UICircularProgressRing" customModule="UICircularProgressRing">
                                                 <rect key="frame" x="-14" y="-14" width="378" height="378"/>
@@ -125,16 +126,32 @@
                                             <constraint firstItem="Bz6-Wu-6Qh" firstAttribute="width" secondItem="YJC-dn-sRN" secondAttribute="width" multiplier="0.9" id="xdf-BL-aBx"/>
                                         </constraints>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Primavera" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ycs-SD-ZyJ">
+                                        <rect key="frame" x="20" y="510" width="374" height="36.5"/>
+                                        <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="26"/>
+                                        <color key="textColor" red="0.94117647059999998" green="0.63921568630000003" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saúde da Ilha" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9p-fp-KNA">
+                                        <rect key="frame" x="146" y="482" width="122.5" height="22"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
+                                    <constraint firstItem="Ycs-SD-ZyJ" firstAttribute="top" secondItem="z9p-fp-KNA" secondAttribute="bottom" constant="6" id="3yC-js-0l8"/>
                                     <constraint firstItem="igg-P1-e6f" firstAttribute="leading" secondItem="Hd4-sR-SZJ" secondAttribute="leading" constant="15" id="JhY-0I-7j2"/>
                                     <constraint firstItem="KpB-AV-VyN" firstAttribute="top" secondItem="Hd4-sR-SZJ" secondAttribute="top" constant="20" id="Xlh-Dx-skx"/>
+                                    <constraint firstAttribute="trailing" secondItem="Ycs-SD-ZyJ" secondAttribute="trailing" constant="20" id="aBU-8I-jA4"/>
+                                    <constraint firstItem="Ycs-SD-ZyJ" firstAttribute="leading" secondItem="Hd4-sR-SZJ" secondAttribute="leading" constant="20" id="cGM-Eg-qId"/>
                                     <constraint firstItem="KpB-AV-VyN" firstAttribute="leading" secondItem="Hd4-sR-SZJ" secondAttribute="leading" constant="15" id="ea5-n6-QtY"/>
                                     <constraint firstItem="YJC-dn-sRN" firstAttribute="top" secondItem="igg-P1-e6f" secondAttribute="bottom" constant="17.5" id="i5d-Lz-Dhx"/>
                                     <constraint firstAttribute="trailing" secondItem="igg-P1-e6f" secondAttribute="trailing" constant="15" id="iBX-fz-raC"/>
                                     <constraint firstAttribute="trailing" secondItem="KpB-AV-VyN" secondAttribute="trailing" constant="15" id="kwI-zE-jtL"/>
                                     <constraint firstItem="igg-P1-e6f" firstAttribute="top" secondItem="KpB-AV-VyN" secondAttribute="bottom" constant="20.5" id="os2-8u-uSz"/>
+                                    <constraint firstItem="z9p-fp-KNA" firstAttribute="top" secondItem="YJC-dn-sRN" secondAttribute="bottom" constant="12" id="siD-Be-aIT"/>
                                     <constraint firstItem="YJC-dn-sRN" firstAttribute="centerX" secondItem="Hd4-sR-SZJ" secondAttribute="centerX" id="t3C-yt-EO2"/>
                                 </constraints>
                             </view>
@@ -142,6 +159,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="A3i-Wj-Sn7" firstAttribute="centerX" secondItem="6qI-yg-Vs1" secondAttribute="centerX" id="6Wl-Aq-DUg"/>
+                            <constraint firstItem="z9p-fp-KNA" firstAttribute="centerX" secondItem="2Dd-zH-tD2" secondAttribute="centerX" id="8RJ-Kh-lXX"/>
                             <constraint firstItem="A3i-Wj-Sn7" firstAttribute="leading" secondItem="2Dd-zH-tD2" secondAttribute="leading" id="BPj-7p-1NW"/>
                             <constraint firstItem="Hd4-sR-SZJ" firstAttribute="leading" secondItem="2Dd-zH-tD2" secondAttribute="leading" id="Q6Y-7S-m0a"/>
                             <constraint firstItem="2Dd-zH-tD2" firstAttribute="bottom" secondItem="Hd4-sR-SZJ" secondAttribute="bottom" constant="31" id="YZ4-Ex-UdD"/>
@@ -235,7 +253,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Primavera" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOf-Sk-K2t">
                                                 <rect key="frame" x="0.0" y="366" width="382" height="36.5"/>
                                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="26"/>
-                                                <color key="textColor" red="0.94055992359999996" green="0.64077860119999996" blue="0.81570893529999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <color key="textColor" red="0.94117647058823528" green="0.63921568627450975" blue="0.81568627450980391" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QoH-yK-1nb">
@@ -584,7 +602,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="circle" width="184" height="184"/>
+        <image name="ring" width="722" height="722"/>
         <image name="verticalPan" width="120" height="120"/>
     </resources>
 </document>

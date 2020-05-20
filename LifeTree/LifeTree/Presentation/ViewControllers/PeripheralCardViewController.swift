@@ -58,6 +58,7 @@ class PeripheralCardViewController: UIViewController {
         // Texto com último dia de entrada
         let relativeDate = self.getRelativeDate(lastDate: peripheralIsland?.lastActionDate ?? Date())
         self.lastActivityMessageLabel.text = "Sua última atividade aqui foi \(relativeDate). Fico feliz quando me rega todos os dias!"
+
     }
 
     // TODO: Transferir método para outra classe. Qual classe?
@@ -83,7 +84,6 @@ class PeripheralCardViewController: UIViewController {
     }
 
     // MARK: Info Handling
-
     func updateDataFromDatabase() {
         ActionDataServices.getIslandActions(island: peripheralIsland!) { (error, actions) in
             if (error != nil) {

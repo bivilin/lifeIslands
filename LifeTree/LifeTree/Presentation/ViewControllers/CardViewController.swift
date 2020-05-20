@@ -16,8 +16,6 @@ class CardViewController: UIViewController{
     
     @IBOutlet weak var progressSeason: UICircularProgressRing!
     
-//    let dropsMock = CGFloat(Int.random(in: 0...100))/100
-    
     var selfIsland: SelfIsland?
     
     override func viewDidLoad() {
@@ -40,23 +38,22 @@ class CardViewController: UIViewController{
     
     func loadProgress() {
         
-        let dropsMock = CGFloat(Int.random(in: 0...100))/100
+        //carrega dados da saude e define as estaçoes.
+        let currentHealth = selfIsland?.currentHealthStatus as! Double
+        let lastHeath = selfIsland?.lastHealthStatus as! Double
+        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
         
-        let moodPercentuation = dropsMock
-    
+        //  random para testar os circulos, substituir o season por : CGFloat(Int.random(in: 0...100))/100
+        
         var progress: CGFloat = 0
         var indicatorImageName = ""
-        
-        if moodPercentuation >= 0.0 && moodPercentuation <= 0.2 {
-            progress = CGFloat(Int.random(in: 70...80))
-            indicatorImageName = "winter"
-        } else if moodPercentuation >= 0.21 && moodPercentuation <= 0.5 {
+
+        // swift para saber em que ponto do circulo o calculo irá cair
+        switch season {
+        case .autumn:
             progress = CGFloat(Int.random(in: 45...55))
             indicatorImageName = "autumn"
-        } else if moodPercentuation >= 0.51 && moodPercentuation <= 0.7 {
-            progress = CGFloat(Int.random(in: 17...25))
-            indicatorImageName = "summer"
-        } else if moodPercentuation >= 0.71 && moodPercentuation <= 1.0 {
+        case .spring:
             let i = Int.random(in: 1...10)
             if i % 2 == 0 {
                 progress = CGFloat(Int.random(in: 1...6))
@@ -64,32 +61,23 @@ class CardViewController: UIViewController{
                 progress = CGFloat(Int.random(in: 94...100))
             }
             indicatorImageName = "spring"
+            break
+        case .summer:
+            progress = CGFloat(Int.random(in: 17...25))
+            indicatorImageName = "summer"
+            break
+        case .winter:
+            progress = CGFloat(Int.random(in: 70...80))
+            indicatorImageName = "winter"
+        case .none:
+            break
         }
         
-//        switch moodPercentuation {
-//        case 0.2:
-//            progress = 75
-//            indicatorImageName = "winter"
-//        case 0.4:
-//            progress = 50
-//            indicatorImageName = "autumn"
-//        case 0.6:
-//            progress = 22
-//            indicatorImageName = "summer"
-//        case 0.8:
-//            progress = 17
-//            indicatorImageName = "summer"
-//        default:
-//            progress = 100
-//            indicatorImageName = "spring"
-//        }
-        
+        // troca de imagem do indicador de acordo com a estação e roda a animação.
         let indicatorSeason = UICircularRingValueKnobStyle(size: 60, color: .clear, image: UIImage(named: indicatorImageName))
         progressSeason.valueKnobStyle = indicatorSeason
         progressSeason.startProgress(to: progress, duration: 3)
         print(progress)
     }
-    
-    
-} // end class
+}
 
