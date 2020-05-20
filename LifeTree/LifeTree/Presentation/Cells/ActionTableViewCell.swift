@@ -31,6 +31,18 @@ class ActionTableViewCell: UITableViewCell {
         self.contourView.layer.shadowRadius = 4
     }
 
+    // Método para popular conteúdos da célula (texto e imagem)
+    func loadContents(action: Action) {
+        self.label?.text = action.name
+        // Altera imagem de acordo com o nível de impacto da ação
+        do {
+            try self.setDropImage(impactLevel: action.impactLevel as! Double)
+        }
+        catch let error {
+            print(error.localizedDescription)
+        }
+    }
+
     // Altera a imagem da gota na célula de acordo com o nível de impacto da ação
     func setDropImage(impactLevel: Double) throws {
         switch impactLevel {
