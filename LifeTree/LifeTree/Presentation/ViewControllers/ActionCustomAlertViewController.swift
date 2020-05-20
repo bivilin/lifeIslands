@@ -52,6 +52,10 @@ class ActionCustomAlertViewController: UIViewController {
         }
     }
     
+    @IBAction func confirmAction(_ sender: Any) {
+        performSegue(withIdentifier: "toCultivateIsland", sender: self)
+    }
+    
     @IBAction func dismissActionAlert(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
     }
@@ -66,8 +70,9 @@ class ActionCustomAlertViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toCultivateIsland" {
-            let destination = segue.destination as CultivateIslandViewController
-            print(action.impactLevel as Any)
+            let destination = segue.destination as! CultivateIslandViewController
+            guard let numberOfDrops = self.action.impactLevel else {return}
+            destination.numberOfDrops = Int(truncating: numberOfDrops)
         }
     }
 }

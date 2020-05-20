@@ -167,14 +167,14 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
         }
         // Adicionar nova ação
         else {
-            self.performSegue(withIdentifier: "NewAction", sender: nil)
+            self.performSegue(withIdentifier: "NewAction", sender: self)
         }
         actionsTableView.deselectRow(at: indexPath, animated: true)
     }
     
     func presentConfirmActionCustomAlert(action: Action) {
         
-        let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "ConfirmAction") as! ConfirmActionCustomAlert
+        let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "ConfirmAction") as! ActionCustomAlertViewController
         
         customAlert.delegate = self
         
