@@ -14,6 +14,7 @@ class CardViewController: UIViewController{
     @IBOutlet weak var nameIsland: UILabel!
     @IBOutlet weak var phrase: UILabel!
     
+    @IBOutlet weak var seasonLabel: UILabel!
     @IBOutlet weak var progressSeason: UICircularProgressRing!
     
     var selfIsland: SelfIsland?
@@ -42,8 +43,9 @@ class CardViewController: UIViewController{
         let currentHealth = selfIsland?.currentHealthStatus as! Double
         let lastHeath = selfIsland?.lastHealthStatus as! Double
         let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
+        seasonLabel.text = season?.name
         
-        //  random para testar os circulos, substituir o season por : CGFloat(Int.random(in: 0...100))/100
+        //random para testar os circulos, substituir o season por : CGFloat(Int.random(in: 0...100))/100
         
         var progress: CGFloat = 0
         var indicatorImageName = ""

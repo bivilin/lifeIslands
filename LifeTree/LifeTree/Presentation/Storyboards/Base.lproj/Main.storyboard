@@ -175,6 +175,7 @@
                         <outlet property="nameIsland" destination="KpB-AV-VyN" id="GJq-ap-hN5"/>
                         <outlet property="phrase" destination="igg-P1-e6f" id="fMW-GR-WRQ"/>
                         <outlet property="progressSeason" destination="VH7-kn-29u" id="h3F-Ct-xCv"/>
+                        <outlet property="seasonLabel" destination="Ycs-SD-ZyJ" id="0ne-EE-2pQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZK-7S-1ph" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
