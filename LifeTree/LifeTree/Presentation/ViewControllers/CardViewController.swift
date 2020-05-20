@@ -8,6 +8,7 @@
 
 import UIKit
 import UICircularProgressRing
+import SpriteKit
 
 class CardViewController: UIViewController{
     
@@ -16,12 +17,15 @@ class CardViewController: UIViewController{
     
     @IBOutlet weak var seasonLabel: UILabel!
     @IBOutlet weak var progressSeason: UICircularProgressRing!
+    @IBOutlet weak var statusDescriptionLabel: UILabel!
+    @IBOutlet weak var islandSKView: SKView!
     
     var selfIsland: SelfIsland?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        islandSKView.allowsTransparency = true
         // colocando a linha do pod em cima do circulo imagem
         progressSeason.style = .ontop
         
@@ -44,6 +48,7 @@ class CardViewController: UIViewController{
         let lastHeath = selfIsland?.lastHealthStatus as! Double
         let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
         seasonLabel.text = season?.name
+        statusDescriptionLabel.text = season?.description
         
         //random para testar os circulos, substituir o season por : CGFloat(Int.random(in: 0...100))/100
         

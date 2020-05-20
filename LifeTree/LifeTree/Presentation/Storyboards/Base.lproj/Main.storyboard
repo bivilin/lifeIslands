@@ -89,12 +89,16 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJC-dn-sRN">
                                         <rect key="frame" x="32" y="120" width="350" height="350"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ring" translatesAutoresizingMaskIntoConstraints="NO" id="Bz6-Wu-6Qh">
-                                                <rect key="frame" x="17.5" y="17.5" width="315" height="315"/>
+                                            <skView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xO3-X7-OVk">
+                                                <rect key="frame" x="55" y="45" width="250" height="250"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </skView>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ring" translatesAutoresizingMaskIntoConstraints="NO" id="Bz6-Wu-6Qh">
+                                                <rect key="frame" x="9" y="17.5" width="332.5" height="315"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VH7-kn-29u" customClass="UICircularProgressRing" customModule="UICircularProgressRing">
-                                                <rect key="frame" x="-14" y="-14" width="378" height="378"/>
+                                                <rect key="frame" x="-24.5" y="-14" width="399" height="378"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="value">
@@ -107,6 +111,9 @@
                                                         <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="innerRingColor">
+                                                        <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="fontColor">
                                                         <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
@@ -123,7 +130,7 @@
                                             <constraint firstAttribute="width" constant="350" id="ahT-Hd-Kts"/>
                                             <constraint firstItem="VH7-kn-29u" firstAttribute="centerY" secondItem="YJC-dn-sRN" secondAttribute="centerY" id="erU-zG-W7f"/>
                                             <constraint firstItem="Bz6-Wu-6Qh" firstAttribute="centerY" secondItem="YJC-dn-sRN" secondAttribute="centerY" id="jwe-Ny-6cO"/>
-                                            <constraint firstItem="Bz6-Wu-6Qh" firstAttribute="width" secondItem="YJC-dn-sRN" secondAttribute="width" multiplier="0.9" id="xdf-BL-aBx"/>
+                                            <constraint firstItem="Bz6-Wu-6Qh" firstAttribute="width" secondItem="YJC-dn-sRN" secondAttribute="width" multiplier="0.95" id="xdf-BL-aBx"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Primavera" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ycs-SD-ZyJ">
@@ -138,19 +145,47 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você se sente razoavelmente satisfeito de maneira geral, porém em algumas áreas gostaria que melhorasse." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cz-zO-3Iu">
+                                        <rect key="frame" x="28" y="554" width="357" height="51.5"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="nai-gt-7ua">
+                                        <rect key="frame" x="26" y="681" width="362" height="31"/>
+                                        <color key="tintColor" red="0.62865293030000002" green="0.71221178770000004" blue="0.81962937120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <connections>
+                                            <action selector="impactLevelChanged:" destination="1de-Dz-avu" eventType="valueChanged" id="ccj-Qq-1Ww"/>
+                                        </connections>
+                                    </slider>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Como está seu humor?" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bNT-Js-75U">
+                                        <rect key="frame" x="28" y="641" width="358" height="27.5"/>
+                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="20"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstItem="Ycs-SD-ZyJ" firstAttribute="top" secondItem="z9p-fp-KNA" secondAttribute="bottom" constant="6" id="3yC-js-0l8"/>
+                                    <constraint firstItem="2cz-zO-3Iu" firstAttribute="leading" secondItem="Hd4-sR-SZJ" secondAttribute="leading" constant="28" id="ALs-o7-9Uc"/>
+                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="2cz-zO-3Iu" secondAttribute="trailing" constant="20" symbolic="YES" id="FmE-Tc-Jxa"/>
+                                    <constraint firstItem="bNT-Js-75U" firstAttribute="leading" secondItem="Hd4-sR-SZJ" secondAttribute="leading" constant="28" id="J5P-za-l2Q"/>
                                     <constraint firstItem="igg-P1-e6f" firstAttribute="leading" secondItem="Hd4-sR-SZJ" secondAttribute="leading" constant="15" id="JhY-0I-7j2"/>
+                                    <constraint firstAttribute="trailing" secondItem="bNT-Js-75U" secondAttribute="trailing" constant="28" id="KJe-mK-Gou"/>
                                     <constraint firstItem="KpB-AV-VyN" firstAttribute="top" secondItem="Hd4-sR-SZJ" secondAttribute="top" constant="20" id="Xlh-Dx-skx"/>
                                     <constraint firstAttribute="trailing" secondItem="Ycs-SD-ZyJ" secondAttribute="trailing" constant="20" id="aBU-8I-jA4"/>
                                     <constraint firstItem="Ycs-SD-ZyJ" firstAttribute="leading" secondItem="Hd4-sR-SZJ" secondAttribute="leading" constant="20" id="cGM-Eg-qId"/>
+                                    <constraint firstAttribute="trailing" secondItem="nai-gt-7ua" secondAttribute="trailing" constant="28" id="dAu-hP-8sJ"/>
                                     <constraint firstItem="KpB-AV-VyN" firstAttribute="leading" secondItem="Hd4-sR-SZJ" secondAttribute="leading" constant="15" id="ea5-n6-QtY"/>
+                                    <constraint firstItem="nai-gt-7ua" firstAttribute="leading" secondItem="Hd4-sR-SZJ" secondAttribute="leading" constant="28" id="gXO-HM-BCD"/>
                                     <constraint firstItem="YJC-dn-sRN" firstAttribute="top" secondItem="igg-P1-e6f" secondAttribute="bottom" constant="17.5" id="i5d-Lz-Dhx"/>
                                     <constraint firstAttribute="trailing" secondItem="igg-P1-e6f" secondAttribute="trailing" constant="15" id="iBX-fz-raC"/>
+                                    <constraint firstItem="2cz-zO-3Iu" firstAttribute="top" secondItem="Ycs-SD-ZyJ" secondAttribute="bottom" constant="7.5" id="id1-dd-4tD"/>
                                     <constraint firstAttribute="trailing" secondItem="KpB-AV-VyN" secondAttribute="trailing" constant="15" id="kwI-zE-jtL"/>
                                     <constraint firstItem="igg-P1-e6f" firstAttribute="top" secondItem="KpB-AV-VyN" secondAttribute="bottom" constant="20.5" id="os2-8u-uSz"/>
+                                    <constraint firstItem="nai-gt-7ua" firstAttribute="top" secondItem="bNT-Js-75U" secondAttribute="bottom" constant="12.5" id="ry5-24-ac0"/>
+                                    <constraint firstItem="bNT-Js-75U" firstAttribute="top" secondItem="2cz-zO-3Iu" secondAttribute="bottom" constant="35.5" id="sg0-0n-Wh6"/>
                                     <constraint firstItem="z9p-fp-KNA" firstAttribute="top" secondItem="YJC-dn-sRN" secondAttribute="bottom" constant="12" id="siD-Be-aIT"/>
                                     <constraint firstItem="YJC-dn-sRN" firstAttribute="centerX" secondItem="Hd4-sR-SZJ" secondAttribute="centerX" id="t3C-yt-EO2"/>
                                 </constraints>
@@ -172,10 +207,12 @@
                     </view>
                     <size key="freeformSize" width="414" height="896"/>
                     <connections>
+                        <outlet property="islandSKView" destination="xO3-X7-OVk" id="yjF-bQ-pvn"/>
                         <outlet property="nameIsland" destination="KpB-AV-VyN" id="GJq-ap-hN5"/>
                         <outlet property="phrase" destination="igg-P1-e6f" id="fMW-GR-WRQ"/>
                         <outlet property="progressSeason" destination="VH7-kn-29u" id="h3F-Ct-xCv"/>
                         <outlet property="seasonLabel" destination="Ycs-SD-ZyJ" id="0ne-EE-2pQ"/>
+                        <outlet property="statusDescriptionLabel" destination="2cz-zO-3Iu" id="4CK-ZC-Y8V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZK-7S-1ph" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
