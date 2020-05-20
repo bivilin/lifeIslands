@@ -7,6 +7,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Montserrat-Bold.ttf">
+            <string>Montserrat-Bold</string>
+        </array>
         <array key="Montserrat-Regular.ttf">
             <string>Montserrat-Regular</string>
         </array>
@@ -39,18 +42,6 @@
                                     <constraint firstAttribute="height" constant="60" id="eM7-yu-rT6"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b8p-NU-lwr">
-                                <rect key="frame" x="149" y="318" width="121" height="48"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.46274509800000002" green="0.1764705882" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <state key="normal" title="XABLAU">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="onTapCustomAlertButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wUr-WC-gsD"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -64,7 +55,6 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="XABLAU" destination="b8p-NU-lwr" id="SMk-GO-M10"/>
                         <outlet property="islandsSCNView" destination="F7G-h3-gpg" id="4FI-ie-pls"/>
                         <outlet property="navigationInstructionsImageView" destination="r9q-Cy-eQL" id="7uk-7z-Mgm"/>
                     </connections>
@@ -562,47 +552,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGs-Kx-XCg" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="241" width="414" height="333"/>
+                                <rect key="frame" x="0.0" y="239.5" width="414" height="336.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3V6-q3-ngJ" userLabel="MessageView">
-                                        <rect key="frame" x="25" y="51" width="364" height="158"/>
+                                        <rect key="frame" x="25" y="51" width="364" height="161.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título da ação" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVY-1o-1FM">
-                                                <rect key="frame" x="25" y="25" width="314" height="25"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="18"/>
+                                                <rect key="frame" x="25" y="25" width="314" height="26"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="21"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCm-G1-BQ9">
-                                                <rect key="frame" x="25" y="58" width="314" height="17"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="12"/>
+                                                <rect key="frame" x="25" y="59" width="314" height="17.5"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RECOMPENSA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNW-od-gis">
-                                                <rect key="frame" x="25" y="95" width="314" height="13"/>
-                                                <fontDescription key="fontDescription" name="Avenir-Roman" family="Avenir" pointSize="9"/>
+                                                <rect key="frame" x="25" y="96.5" width="314" height="15"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simple-drop" translatesAutoresizingMaskIntoConstraints="NO" id="G3f-dy-ZOh" userLabel="drop1">
-                                                <rect key="frame" x="25" y="113" width="20" height="20"/>
+                                                <rect key="frame" x="25" y="116.5" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="Q7t-zg-CuW"/>
                                                     <constraint firstAttribute="width" secondItem="G3f-dy-ZOh" secondAttribute="height" id="y6M-kt-CPF"/>
                                                 </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simple-drop" translatesAutoresizingMaskIntoConstraints="NO" id="7qn-gC-ufN" userLabel="drop2">
-                                                <rect key="frame" x="45" y="113" width="20" height="20"/>
+                                                <rect key="frame" x="45" y="116.5" width="20" height="20"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simple-drop" translatesAutoresizingMaskIntoConstraints="NO" id="XyF-Or-grs" userLabel="drop3">
-                                                <rect key="frame" x="65" y="113" width="20" height="20"/>
+                                                <rect key="frame" x="65" y="116.5" width="20" height="20"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simple-drop" translatesAutoresizingMaskIntoConstraints="NO" id="THP-wT-ghO" userLabel="drop4">
-                                                <rect key="frame" x="84" y="113" width="20" height="20"/>
+                                                <rect key="frame" x="84" y="116.5" width="20" height="20"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simple-drop" translatesAutoresizingMaskIntoConstraints="NO" id="wYd-dR-b1P" userLabel="drop5">
-                                                <rect key="frame" x="103" y="113" width="20" height="20"/>
+                                                <rect key="frame" x="103" y="116.5" width="20" height="20"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -638,13 +628,16 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QOt-MQ-uy4">
-                                        <rect key="frame" x="25" y="217" width="364" height="50"/>
+                                        <rect key="frame" x="25" y="220.5" width="364" height="50"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="LBl-Pw-x96"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
                                         <state key="normal" title="Confirmar"/>
+                                        <connections>
+                                            <action selector="confirmActionWasDone:" destination="9gp-xG-Mop" eventType="touchUpInside" id="mgp-nl-VKL"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XE-fu-ih8">
                                         <rect key="frame" x="354" y="8" width="35" height="35"/>
@@ -655,14 +648,20 @@
                                         </constraints>
                                         <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" image="multiply" catalog="system"/>
+                                        <connections>
+                                            <action selector="dismissActionAlert:" destination="9gp-xG-Mop" eventType="touchUpInside" id="Jtt-FG-G5m"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EgE-Dc-lba">
-                                        <rect key="frame" x="25" y="275" width="364" height="50"/>
+                                        <rect key="frame" x="25" y="278.5" width="364" height="50"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                         <state key="normal" title="Deletar ação">
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="deleteAction:" destination="9gp-xG-Mop" eventType="touchUpInside" id="OTh-eK-hfM"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

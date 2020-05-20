@@ -16,18 +16,6 @@ class IslandsViewController: UIViewController{
     @IBOutlet weak var islandsSCNView: SCNView!
     @IBOutlet weak var navigationInstructionsImageView: UIImageView!
     
-    @IBOutlet weak var XABLAU: UIButton!
-    
-    @IBAction func onTapCustomAlertButton(_ sender: Any) {
-        let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "ConfirmAction") as! ConfirmActionCustomAlert
-        customAlert.providesPresentationContextTransitionStyle = true
-        customAlert.definesPresentationContext = true
-        customAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        // customAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        // customAlert.delegate = self
-        self.present(customAlert, animated: true, completion: nil)
-    }
-    
     // MARK: Variables
     
     // Set up the 3D scene for the islands

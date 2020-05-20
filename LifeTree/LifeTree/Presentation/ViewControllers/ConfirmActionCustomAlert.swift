@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol CustomAlertViewDelegate: class {
+    func reloadActionsTableView()
+}
+
 class ConfirmActionCustomAlert: UIViewController {
     
     @IBOutlet weak var closeButton: UIButton!
@@ -19,14 +23,48 @@ class ConfirmActionCustomAlert: UIViewController {
     @IBOutlet weak var confirmButton: UIButton!
     @IBOutlet weak var deleteActionButton: UIButton!
     
+    var action = Action()
+    var delegate: CustomAlertViewDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        // Set up background to mimic the iOS native Alert
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        
+        // Change corner Radius of major visual elements
         let cornerRadius: CGFloat = 10
         self.actionDetailsView.layer.cornerRadius = cornerRadius
         self.confirmButton.layer.cornerRadius = cornerRadius
         self.deleteActionButton.layer.cornerRadius = cornerRadius
         self.closeButton.layer.cornerRadius = self.closeButton.frame.width/2
+        
+        // Change the labels do it displays the information for the selected action
+        self.actionTitle.text = self.action.name
+        self.actionDescription.text = self.action.impactReason
+        
+        // Display the correct number of drops given by that action
+        guard let numberOfDrops = self.action.impactLevel else {return}
+        for i in 0...(dropImages.count - 1) {
+            if i >= Int(truncating: numberOfDrops) {
+                self.dropImages[i].isHidden = true
+            }
+        }
     }
+    
+    @IBAction func dismissActionAlert(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func confirmActionWasDone(_ sender: Any) {
+    }
+    
+    @IBAction func deleteAction(_ sender: Any) {
+        ActionDataServices.deleteAction(action: self.action) { (error) in
+            print(error as Any)
+        }
+        self.delegate?.reloadActionsTableView()
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
