@@ -294,13 +294,6 @@ class IslandsViewController: UIViewController{
         } else {
             // Ilha Central
             floatingPanel.set(contentViewController: cardView)
-            
-            // tentativa de colocar a scena da ilha no card da ilha central
-//            if let scene = self.islandsVisualizationServices?.getIslandSKSceneFromNode(node: node) {
-//                print("Entrou no if let")
-//                scene.scaleMode = .aspectFit
-//                cardView.islandSKView.presentScene(scene)
-//            }
         }
     }
     

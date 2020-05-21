@@ -9,6 +9,7 @@
 import UIKit
 import UICircularProgressRing
 import SpriteKit
+import SceneKit
 
 class CardViewController: UIViewController{
     
@@ -25,7 +26,11 @@ class CardViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        islandSKView.allowsTransparency = true
+        // Set up self island SKScene
+        self.islandSKView.allowsTransparency = true
+        self.getSKScene()
+        self.islandSKView.isHidden = true
+        
         // colocando a linha do pod em cima do circulo imagem
         progressSeason.style = .ontop
         
@@ -38,6 +43,16 @@ class CardViewController: UIViewController{
                     self.nameIsland.text = selfIsland.name
                 }
             }
+        }
+    }
+    
+    func getSKScene() {
+        
+        let islandsScene = SCNScene(named: "AllIslandsScene.scn")!
+        let islandsVisualizationServices = IslandsVisualisationServices(scnScene: islandsScene)
+        if let scene = islandsVisualizationServices.getSelfIslandSKScene() {
+            scene.scaleMode = .aspectFit
+            self.islandSKView.presentScene(scene)
         }
     }
     
