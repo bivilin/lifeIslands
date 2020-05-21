@@ -29,7 +29,7 @@ class CardViewController: UIViewController{
 
         // Set up self island SKScene
         self.islandSKView.allowsTransparency = true
-        self.updateSKScene()
+        self.islandSKView.presentScene(islandSKScene)
         
         // colocando a linha do pod em cima do circulo imagem
         progressSeason.style = .ontop
@@ -44,10 +44,6 @@ class CardViewController: UIViewController{
                 }
             }
         }
-    }
-    
-    func updateSKScene() {
-        self.islandSKView.presentScene(islandSKScene)
     }
     
     func loadProgress() {
