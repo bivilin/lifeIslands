@@ -76,12 +76,6 @@ class IslandsViewController: UIViewController{
 
         // Inicializando classe que maneja os dados
         self.infoHandler = InformationHandler(sceneServices: islandsVisualizationServices!)
-
-        // Show Card
-        setupFloatingPanel()
-        cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
-        peripheralCardView = storyboard?.instantiateViewController(withIdentifier: "PeripheralCard") as? PeripheralCardViewController
-        showFloatingPanel()
         
         // Add self islando do scene
         self.islandsVisualizationServices!.addSelfIslandToScene(islandsSCNScene: islandsSCNScene)
@@ -91,6 +85,21 @@ class IslandsViewController: UIViewController{
         
         // Configures camera
         self.setUpCameras()
+        
+        // Set up card for self island
+        self.cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
+        let selfIslandSKScene = self.islandsVisualizationServices?.getSelfIslandSKScene()
+        if selfIslandSKScene != nil {
+            self.cardView.islandSKScene = selfIslandSKScene!
+            self.cardView.islandSKScene.scaleMode = .aspectFit
+        }
+        
+        // Set up card for peripheral islands
+        self.peripheralCardView = storyboard?.instantiateViewController(withIdentifier: "PeripheralCard") as? PeripheralCardViewController
+        
+        // Set up floating panel (card)
+        self.setupFloatingPanel()
+        self.showFloatingPanel()
 
         // Add a pan gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
@@ -283,43 +292,43 @@ class IslandsViewController: UIViewController{
         // Utiliza o nó para obter o objeto referente àquela ilha
         if let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: node) {
             // Atualiza as informações da VC
-            peripheralCardView.peripheralIsland = islandObject
+            self.peripheralCardView.peripheralIsland = islandObject
             // Atualiza o conteúdo do Floating Panel para a nova VC
-            floatingPanel.set(contentViewController: peripheralCardView)
+            self.floatingPanel.set(contentViewController: self.peripheralCardView)
             // Atualiza SKScene do card
             if let scene = self.islandsVisualizationServices?.getIslandSKSceneFromNode(node: node) {
                 scene.scaleMode = .aspectFit
-                peripheralCardView.islandScene = scene
+                self.peripheralCardView.islandScene = scene
             }
         } else {
             // Ilha Central
-            floatingPanel.set(contentViewController: cardView)
+            self.floatingPanel.set(contentViewController: self.cardView)
         }
     }
     
     func floatingPanelDidEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetPosition: FloatingPanelPosition) {
         // animação do circulo funciona só quando termina de arrastar o card.
-        cardView.loadProgress()
+        self.cardView.loadProgress()
     }
 
     func setupFloatingPanel() {
 
         // InitializeFloatingPanelController
-        floatingPanel = FloatingPanelController()
-        floatingPanel.delegate = self
+        self.floatingPanel = FloatingPanelController()
+        self.floatingPanel.delegate = self
 
         // Initialize FloatingPanelController and add the view
-        floatingPanel.surfaceView.backgroundColor = UIColor(displayP3Red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)
-        floatingPanel.surfaceView.cornerRadius = 24.0
-        floatingPanel.surfaceView.shadowHidden = false
-        floatingPanel.surfaceView.borderWidth = 1.0 / traitCollection.displayScale
-        floatingPanel.surfaceView.borderColor = UIColor.black.withAlphaComponent(0.2)
+        self.floatingPanel.surfaceView.backgroundColor = UIColor(displayP3Red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)
+        self.floatingPanel.surfaceView.cornerRadius = 24.0
+        self.floatingPanel.surfaceView.shadowHidden = false
+        self.floatingPanel.surfaceView.borderWidth = 1.0 / traitCollection.displayScale
+        self.floatingPanel.surfaceView.borderColor = UIColor.black.withAlphaComponent(0.2)
     }
 
     func showFloatingPanel() {
         // Set a content view controller
-        floatingPanel.set(contentViewController: cardView)
-        floatingPanel.addPanel(toParent: self, animated: false)
+        self.floatingPanel.set(contentViewController: cardView)
+        self.floatingPanel.addPanel(toParent: self, animated: false)
     }
 }
 

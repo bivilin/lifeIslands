@@ -14,8 +14,6 @@ class PeripheralCardViewController: UIViewController {
 
     @IBOutlet weak var nameIsland: UILabel!
     @IBOutlet weak var actionsTableView: UITableView!
-    @IBOutlet weak var seasonLabel: UILabel!
-    @IBOutlet weak var statusDescriptionLabel: UILabel!
     @IBOutlet weak var lastActivityMessageLabel: UILabel!
     var islandScene: SKScene?
     
@@ -136,7 +134,6 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {

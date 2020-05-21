@@ -95,7 +95,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJC-dn-sRN">
                                         <rect key="frame" x="32" y="120" width="350" height="350"/>
                                         <subviews>
-                                            <skView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xO3-X7-OVk">
+                                            <skView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xO3-X7-OVk" userLabel="IslandSKView">
                                                 <rect key="frame" x="55" y="45" width="250" height="250"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             </skView>
@@ -124,10 +124,6 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="modelIsland" translatesAutoresizingMaskIntoConstraints="NO" id="3gu-CJ-w15">
-                                                <rect key="frame" x="55" y="45" width="250" height="250"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
@@ -217,7 +213,7 @@
                     </view>
                     <size key="freeformSize" width="414" height="896"/>
                     <connections>
-                        <outlet property="islandSKView" destination="xO3-X7-OVk" id="yjF-bQ-pvn"/>
+                        <outlet property="islandSKView" destination="xO3-X7-OVk" id="UC8-0r-WVU"/>
                         <outlet property="nameIsland" destination="KpB-AV-VyN" id="GJq-ap-hN5"/>
                         <outlet property="phrase" destination="igg-P1-e6f" id="fMW-GR-WRQ"/>
                         <outlet property="progressSeason" destination="VH7-kn-29u" id="h3F-Ct-xCv"/>
@@ -878,9 +874,8 @@
     <resources>
         <image name="5drops" width="956" height="266"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
-        <image name="simple-drop" width="33.5" height="41"/>
-        <image name="modelIsland" width="2835" height="2835"/>
         <image name="ring" width="722" height="722"/>
+        <image name="simple-drop" width="33.5" height="41"/>
         <image name="verticalPan" width="120" height="120"/>
     </resources>
 </document>
