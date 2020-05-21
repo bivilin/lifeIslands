@@ -22,14 +22,14 @@ class CardViewController: UIViewController{
     @IBOutlet weak var islandSKView: SKView!
     
     var selfIsland: SelfIsland?
+    var islandSKScene = SKScene()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Set up self island SKScene
         self.islandSKView.allowsTransparency = true
-        self.getSKScene()
-        self.islandSKView.isHidden = true
+        self.islandSKView.presentScene(islandSKScene)
         
         // colocando a linha do pod em cima do circulo imagem
         progressSeason.style = .ontop
@@ -43,16 +43,6 @@ class CardViewController: UIViewController{
                     self.nameIsland.text = selfIsland.name
                 }
             }
-        }
-    }
-    
-    func getSKScene() {
-        
-        let islandsScene = SCNScene(named: "AllIslandsScene.scn")!
-        let islandsVisualizationServices = IslandsVisualisationServices(scnScene: islandsScene)
-        if let scene = islandsVisualizationServices.getSelfIslandSKScene() {
-            scene.scaleMode = .aspectFit
-            self.islandSKView.presentScene(scene)
         }
     }
     
