@@ -293,9 +293,13 @@ class IslandsViewController: UIViewController{
             }
         } else {
             // Ilha Central
-            // Solução temporária
             floatingPanel.set(contentViewController: cardView)
         }
+    }
+    
+    func floatingPanelDidEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetPosition: FloatingPanelPosition) {
+        // animação do circulo funciona só quando termina de arrastar o card.
+        cardView.loadProgress()
     }
 
     func setupFloatingPanel() {
