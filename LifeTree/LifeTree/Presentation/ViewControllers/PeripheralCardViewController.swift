@@ -17,15 +17,12 @@ class PeripheralCardViewController: UIViewController {
     @IBOutlet weak var seasonLabel: UILabel!
     @IBOutlet weak var statusDescriptionLabel: UILabel!
     @IBOutlet weak var lastActivityMessageLabel: UILabel!
-    @IBOutlet weak var islandSKView: SKView!
+    var islandScene: SKScene?
     
     var peripheralIsland: PeripheralIsland?
     var islandActions: [Action] = []
 
     override func viewWillAppear(_ animated: Bool) {
-
-        // Set up the SKView for the island
-        islandSKView.allowsTransparency = true
 
         // TableView Delegates Setup
         self.actionsTableView.delegate = self
@@ -46,14 +43,14 @@ class PeripheralCardViewController: UIViewController {
         // Definindo nome da ilha
         nameIsland.text = peripheralIsland?.name
 
-        // Definindo estação
-        let currentHealth = peripheralIsland?.currentHealthStatus as! Double
-        let lastHeath = peripheralIsland?.lastHealthStatus as! Double
-        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
-        self.seasonLabel.text = season?.name
-
-        // Definindo texto da estação
-        self.statusDescriptionLabel.text = season?.description
+//        // Definindo estação
+//        let currentHealth = peripheralIsland?.currentHealthStatus as! Double
+//        let lastHeath = peripheralIsland?.lastHealthStatus as! Double
+//        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
+//        self.seasonLabel.text = season?.name
+//
+//        // Definindo texto da estação
+//        self.statusDescriptionLabel.text = season?.description
 
         // Texto com último dia de entrada
         let relativeDate = self.getRelativeDate(lastDate: peripheralIsland?.lastActionDate ?? Date())
@@ -124,28 +121,47 @@ class PeripheralCardViewController: UIViewController {
 // MARK: Table View - List of Actions
 
 extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return islandActions.count + 1
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return islandActions.count + 1
+        default:
+            return 1
+        }
     }
 
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row < islandActions.count {
-            let action = islandActions[indexPath.row]
-            let actionCell = actionsTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath) as! ActionTableViewCell
-            actionCell.label?.text = action.name
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
 
-            // Altera imagem de acordo com o nível de impacto da ação
-            do {
-                try actionCell.setDropImage(impactLevel: action.impactLevel as! Double)
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        switch indexPath.section {
+        // Célula única de conteúdo fixo acima da lista de ações
+        case 0:
+            let newFixedContentCell = actionsTableView.dequeueReusableCell(withIdentifier: "fixedContentCell", for: indexPath) as! FixedContentCell
+            if let scene = self.islandScene, let island = self.peripheralIsland {
+                newFixedContentCell.loadContents(island: island, scene: scene)
             }
-            catch let error {
-                print(error.localizedDescription)
+            return newFixedContentCell
+        case 1:
+            // Lista de ações
+            if indexPath.row < islandActions.count {
+                let actionCell = actionsTableView.dequeueReusableCell(withIdentifier: "actionCell", for: indexPath) as! ActionTableViewCell
+                let action = islandActions[indexPath.row]
+                actionCell.loadContents(action: action)
+                return actionCell
             }
-            
-            return actionCell
-        } else {
-            let newActionCell = actionsTableView.dequeueReusableCell(withIdentifier: "createActionCell", for: indexPath) as! CreateActionTableViewCell
-            return newActionCell
+            // Células para adicionar uma nova ação
+            else {
+                let newActionCell = actionsTableView.dequeueReusableCell(withIdentifier: "createActionCell", for: indexPath) as! CreateActionTableViewCell
+                return newActionCell
+            }
+        default:
+            return UITableViewCell()
         }
     }
 
@@ -160,7 +176,10 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
 
     // Navegação para a próxima tela de acordo com célula clicada
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        if indexPath.section != 1 {
+            return
+        }
+
         // Ação selecionada
         if indexPath.row < islandActions.count {
             self.presentConfirmActionCustomAlert(action: islandActions[indexPath.row])
