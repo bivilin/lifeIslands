@@ -180,13 +180,36 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
             return
         }
 
+        // Ação selecionada
         if indexPath.row < islandActions.count {
-            print("oi")
-            // Futuro: abrir actionSheet para definir se é para confirmar ou editar
-            // TODO Agora: colocar o segue para receber as gotas
-        } else {
-            self.performSegue(withIdentifier: "NewAction", sender: nil)
+            self.presentConfirmActionCustomAlert(action: islandActions[indexPath.row])
+        }
+        // Adicionar nova ação
+        else {
+            self.performSegue(withIdentifier: "NewAction", sender: self)
         }
         actionsTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func presentConfirmActionCustomAlert(action: Action) {
+        
+        let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "ConfirmAction") as! ActionCustomAlertViewController
+        
+        customAlert.delegate = self
+        
+        customAlert.action = action
+        customAlert.providesPresentationContextTransitionStyle = true
+        customAlert.definesPresentationContext = true
+        customAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        customAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+        self.present(customAlert, animated: true, completion: nil)
+    }
+}
+
+extension PeripheralCardViewController: CustomAlertViewDelegate {
+    
+    func reloadActionsTableView() {
+        self.updateDataFromDatabase()
+        self.actionsTableView.reloadData()
     }
 }
