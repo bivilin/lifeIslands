@@ -28,8 +28,6 @@ class IslandsViewController: UIViewController{
     // Services
     var infoHandler: InformationHandler?
     var islandsVisualizationServices: IslandsVisualisationServices? = nil
-    // Dictionary with key being the id of the island, and value its corresponding SceneKit plane node
-    var islandDictionary: [String: SCNNode] = [:]
     let vectorServices = VectorServices()
 
     // Card Properties
@@ -235,6 +233,8 @@ class IslandsViewController: UIViewController{
         }
     }
     
+    // MARK: FloatingPanel - Card
+    
     func displaySelfIslandInCard() {
         
         if let selfIsland = self.islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true) {
@@ -282,8 +282,6 @@ class IslandsViewController: UIViewController{
             }
         }
     }
-    
-// MARK: FloatingPanel - Card
 
     func setCardForNode(node: SCNNode) {
         self.islandInCard = node

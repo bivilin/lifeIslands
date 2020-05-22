@@ -24,6 +24,7 @@ class ActionCustomAlertViewController: UIViewController {
     @IBOutlet weak var deleteActionButton: UIButton!
     
     var action = Action()
+    var island = PeripheralIsland()
     var delegate: CustomAlertViewDelegate?
     
     override func viewDidLoad() {
@@ -73,6 +74,7 @@ class ActionCustomAlertViewController: UIViewController {
             let destination = segue.destination as! CultivateIslandViewController
             guard let numberOfDrops = self.action.impactLevel else {return}
             destination.numberOfDrops = Int(truncating: numberOfDrops)
+            destination.island = self.island
         }
     }
 }

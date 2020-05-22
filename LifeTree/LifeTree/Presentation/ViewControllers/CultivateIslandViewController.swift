@@ -17,13 +17,29 @@ class CultivateIslandViewController: UIViewController {
     @IBOutlet weak var phraseLabel: UILabel!
     
     var numberOfDrops: Int = 1
+    var island = PeripheralIsland()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set up interface
         cultivateButton.layer.cornerRadius = 10
         self.displayDrops()
         self.phraseLabel.text = "Ao fazer essa atividade, você ganhou \(self.numberOfDrops) gotas para cultivar essa área"
+        
+        self.updateHealth()
+    }
+    
+    @IBAction func cultivateButtonAction(_ sender: Any) {
+        performSegue(withIdentifier: "unwindToPeriphalIslandAfterActionIsDone", sender: self)
+    }
+    
+    func updateHealth() {
+        self.island.currentHealthStatus = 58
+        
+        PeripheralIslandDataServices.updatePeripheralIsland(island: island) { (error) in
+            print(error as Any)
+        }
     }
     
     func displayDrops() {
@@ -42,9 +58,5 @@ class CultivateIslandViewController: UIViewController {
             image = UIImage(named: "5drops")
         }
         self.dropsImageView.image = image
-    }
-    
-    @IBAction func cultivateButtonAction(_ sender: Any) {
-        performSegue(withIdentifier: "unwindToPeriphalIslandAfterActionIsDone", sender: self)
     }
 }
