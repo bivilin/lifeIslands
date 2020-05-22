@@ -238,19 +238,22 @@ class IslandsViewController: UIViewController{
     func displaySelfIslandInCard() {
         
         if let selfIsland = self.islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true) {
-            
-            // Unblur self island and blur the previous island in display
-            if let blur = self.islandsVisualizationServices!.gaussianBlur {
-                self.islandInCard?.filters = [blur]
-                selfIsland.filters = []
+            if self.islandInCard != selfIsland {
+                
+                // Unblur self island and blur the previous island in display
+                if let blur = self.islandsVisualizationServices!.gaussianBlur {
+                    self.islandInCard?.filters = [blur]
+                    selfIsland.filters = []
+                }
+                
+                // Change card information
+                self.setCardForNode(node: selfIsland)
+                self.islandInCard = selfIsland
+                
+                // Gives hapitic feedback
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
             }
-            // Change card information
-            self.setCardForNode(node: selfIsland)
-            self.islandInCard = selfIsland
-            
-            // Gives hapitic feedback
-            let generator = UIImpactFeedbackGenerator(style: .light)
-            generator.impactOccurred()
         }
     }
     
