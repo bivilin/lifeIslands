@@ -9,11 +9,8 @@
 import Foundation
 
 class UpdateIslandsHealth {
-
-    // MARK: Health Definition
-
-
-    // MARK: Season Definition
+    
+    let dropToHealthConversionFactor: Double = 0.5
 
     static func getSeason(currentHealth: Double, lastHealth: Double) -> Season? {
 
@@ -34,11 +31,18 @@ class UpdateIslandsHealth {
         }
     }
     
-    func maximumNumberOfDrops(island: PeripheralIsland) -> Int {
+    func getNewHealthFromDrops(island: PeripheralIsland, drops: Int) -> Int {
         
-        // let currentDate = Date()
-        // island.lastActionDate
+        let currentHealth = Int(truncating: island.currentHealthStatus ?? 50)
+        var newHealth: Int = 50
+            
+        newHealth = currentHealth + Int(Double(drops) * self.dropToHealthConversionFactor)
         
-        return 3
+        if newHealth > 100 {
+            newHealth = 100
+        } else if newHealth < 0 {
+            newHealth = 0
+        }
+        return newHealth
     }
 }

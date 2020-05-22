@@ -55,19 +55,56 @@ class DateServices {
             }
         }
     }
-    
-    func subtractDays(days: Int, date: Date) -> Date? {
-        return Calendar.current.date(byAdding: .day, value: -days, to: date)
-    }
 
-    func daysSinceDate(date: Date) -> Int {
-        let timeInterval: Double = date.timeIntervalSinceNow
-        return Int(-timeInterval/(60.0*60.0*24.0)) // timeInterval is given in seconds
+    func timeDistanceFromDate(date: Date, timeUnit: TimeUnit) -> Int {
+        
+        var timeInterval = Int(date.timeIntervalSinceNow) // given in seconds
+        
+        switch timeUnit {
+        case .week:
+            timeInterval = Int(timeInterval/(60 * 60 * 24 * 7))
+        case .day:
+            timeInterval = Int(timeInterval/(60 * 60 * 24))
+        case .hour:
+            timeInterval = Int(timeInterval/(60 * 60 * 24))
+        case .minute:
+            timeInterval = Int(timeInterval/60)
+        default:
+            timeInterval = Int(timeInterval)
+        }
+         
+        return timeInterval
     }
     
-    func daysUntillDate(date: Date) -> Int {
-        let timeInterval: Double = date.timeIntervalSinceNow
-        return Int(timeInterval/(60.0*60.0*24.0)) // timeInterval is given in seconds
+    func sumTimeInterval(time: Int, inUnitsOf unit: TimeUnit, toDate date: Date) -> Date? {
+        
+        var endDate = Date()
+        
+        if unit == .week  {
+            endDate = Calendar.current.date(byAdding: .day, value: 7*time, to: date)!
+        } else {
+            let calendarComponent = self.timeUnitToCalendarComponent(timeUnit: unit)
+            endDate = Calendar.current.date(byAdding: calendarComponent, value: time, to: date)!
+        }
+        
+        return endDate
+    }
+    
+    func timeUnitToCalendarComponent(timeUnit: TimeUnit) -> Calendar.Component {
+        var dateComponent = Calendar.Component.day
+        
+        switch timeUnit {
+        case .day:
+            dateComponent = Calendar.Component.day
+        case .hour:
+            dateComponent = Calendar.Component.hour
+        case .minute:
+            dateComponent = Calendar.Component.minute
+        default:
+            dateComponent = Calendar.Component.second
+        }
+        
+        return dateComponent
     }
     
     func stringToDate(dateString: String) -> Date? {
