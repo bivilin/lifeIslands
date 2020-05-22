@@ -554,12 +554,6 @@
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fML-u6-TDU">
-                                                        <rect key="frame" x="0.0" y="499.5" width="366" height="0.0"/>
-                                                        <state key="normal" title="Apagar atividade">
-                                                            <color key="titleColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </state>
-                                                    </button>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="cIc-hl-Q0i" firstAttribute="height" secondItem="jfL-sH-w1U" secondAttribute="height" multiplier="5" id="LYR-vS-OVu"/>
@@ -602,7 +596,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="actionNameTextField" destination="jfL-sH-w1U" id="MrB-ec-LHO"/>
-                        <outlet property="deleteActionButton" destination="fML-u6-TDU" id="4L5-aV-kMy"/>
                         <outlet property="impactLevelSlider" destination="HNY-xu-LwH" id="r0J-x1-zhf"/>
                         <outlet property="impactReasonTextField" destination="cIc-hl-Q0i" id="LqG-Br-TVi"/>
                         <outlet property="scrollView" destination="0Yu-rS-Qvp" id="b7g-uH-r6o"/>

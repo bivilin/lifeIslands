@@ -16,7 +16,7 @@ class PeripheralCardViewController: UIViewController {
     @IBOutlet weak var actionsTableView: UITableView!
     @IBOutlet weak var lastActivityMessageLabel: UILabel!
     var islandScene: SKScene?
-    
+
     var peripheralIsland: PeripheralIsland?
     var islandActions: [Action] = []
 
@@ -41,19 +41,9 @@ class PeripheralCardViewController: UIViewController {
         // Definindo nome da ilha
         nameIsland.text = peripheralIsland?.name
 
-//        // Definindo estação
-//        let currentHealth = peripheralIsland?.currentHealthStatus as! Double
-//        let lastHeath = peripheralIsland?.lastHealthStatus as! Double
-//        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
-//        self.seasonLabel.text = season?.name
-//
-//        // Definindo texto da estação
-//        self.statusDescriptionLabel.text = season?.description
-
         // Texto com último dia de entrada
         let relativeDate = self.getRelativeDate(lastDate: peripheralIsland?.lastActionDate ?? Date())
         self.lastActivityMessageLabel.text = "Sua última atividade aqui foi \(relativeDate). Fico feliz quando me rega todos os dias!"
-
     }
 
     // TODO: Transferir método para outra classe. Qual classe?
