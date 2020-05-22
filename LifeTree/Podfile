@@ -9,5 +9,6 @@ target 'LifeTree' do
 	
   pod 'FloatingPanel'
 
+  pod 'UICircularProgressRing'
 
 end
