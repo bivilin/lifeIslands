@@ -104,4 +104,29 @@ class PeripheralIslandDAO: DAO {
         return peripheralIslandList
     }
 
+    static func findById(objectID: UUID) throws -> PeripheralIsland? {
+        // list of projects to be returned
+        var island: [PeripheralIsland]
+
+        do {
+            // creating fetch request
+            let request:NSFetchRequest<PeripheralIsland> = fetchRequest()
+
+            request.predicate = NSPredicate(format: "islandId == %@", objectID as CVarArg)
+
+            // perform search
+            island = try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(request)
+        }
+        catch {
+            throw Errors.DatabaseFailure
+        }
+
+        switch island.count {
+        case 1:
+            return island[0]
+        default:
+            throw Errors.DatabaseFailure
+        }
+    }
+
 }
