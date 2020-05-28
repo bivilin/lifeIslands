@@ -15,13 +15,14 @@ class CultivateIslandViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var cultivateButton: UIButton!
     @IBOutlet weak var phraseLabel: UILabel!
-    
+    var islandID: UUID?
+
     var numberOfDrops: Int = 1
     var island = PeripheralIsland()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Set up interface
         cultivateButton.layer.cornerRadius = 10
         self.displayDrops()
@@ -35,10 +36,20 @@ class CultivateIslandViewController: UIViewController {
     }
     
     func updateHealth() {
-        self.island.currentHealthStatus = 58
-        
+        print("===== ATUALIZANDO SAÚDE =====")
+        self.island.lastHealthStatus = self.island.currentHealthStatus
+        if let currentHealth = self.island.currentHealthStatus {
+            self.island.currentHealthStatus = Double(truncating: currentHealth) * 1.1 as NSNumber
+        }
+
         PeripheralIslandDataServices.updatePeripheralIsland(island: island) { (error) in
-            print(error as Any)
+            if error == nil {
+                PeripheralIslandDataServices.findById(objectID: self.island.islandId ?? UUID()) { (error, island) in
+                    print("Saúde Atualizada com sucesso.")
+                    print("Saúde Atual: \(String(describing: island?.currentHealthStatus))")
+                    print("Saúde Anterior: \(island?.lastHealthStatus ?? 0)")
+                }
+            }
         }
     }
     
