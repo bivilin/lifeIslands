@@ -178,13 +178,16 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
         actionsTableView.deselectRow(at: indexPath, animated: true)
     }
     
+    // Show custom Alert for expanding details of an action and deleting/cultivating it
     func presentConfirmActionCustomAlert(action: Action) {
         
+        // Set up ViewController
         let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "ConfirmAction") as! ActionCustomAlertViewController
-        
         customAlert.delegate = self
-        
         customAlert.action = action
+        customAlert.island = self.peripheralIsland!
+        
+        // Configure custom action presentation style
         customAlert.providesPresentationContextTransitionStyle = true
         customAlert.definesPresentationContext = true
         customAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext

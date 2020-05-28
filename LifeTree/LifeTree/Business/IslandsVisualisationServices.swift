@@ -208,7 +208,7 @@ class IslandsVisualisationServices {
 
         for (uuid, node) in islandDictionary {
             if inputNode == node {
-                island = getPeripheralIslandFromUUID(uuid: uuid)
+                island = self.getPeripheralIslandFromUUID(uuid: uuid)
             }
         }
         return island
@@ -218,7 +218,7 @@ class IslandsVisualisationServices {
     func getPeripheralIslandFromUUID(uuid: UUID) -> PeripheralIsland? {
         var peripheralIsland: PeripheralIsland?
 
-        for island in peripheralIslands {
+        for island in self.peripheralIslands {
             if uuid == island.islandId {
                 peripheralIsland = island
             }

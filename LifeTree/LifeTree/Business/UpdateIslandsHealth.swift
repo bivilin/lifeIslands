@@ -33,4 +33,12 @@ class UpdateIslandsHealth {
             return nil
         }
     }
+    
+    func maximumNumberOfDrops(island: PeripheralIsland) -> Int {
+        
+        // let currentDate = Date()
+        // island.lastActionDate
+        
+        return 3
+    }
 }
