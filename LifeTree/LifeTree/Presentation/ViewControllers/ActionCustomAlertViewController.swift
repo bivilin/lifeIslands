@@ -42,6 +42,9 @@ class ActionCustomAlertViewController: UIViewController {
         // Change the labels do it displays the information for the selected action
         self.actionTitle.text = self.action.name
         self.actionDescription.text = self.action.impactReason
+        // Allowing multiline description text
+        self.actionDescription.numberOfLines = 0
+        self.actionDescription.lineBreakMode = .byWordWrapping
         
         // Display the correct number of drops given by that action
         guard let numberOfDrops = self.action.impactLevel else {return}
