@@ -138,7 +138,7 @@ class CreateActionViewController: UIViewController {
         action.actionId = UUID()
         action.name = actionNameTextField.text
         action.impactLevel = NSNumber(value: impactLevelSlider.value)
-        action.impactReason = impactReasonTextField.text
+        action.impactReason = impactReasonTextView.text
 
         if let relatedIsland = self.island {
             // Persiste ação no banco de dados
