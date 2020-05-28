@@ -13,8 +13,10 @@ class CreateActionViewController: UIViewController {
     var island: PeripheralIsland?
     @IBOutlet weak var actionNameTextField: UITextField!
     @IBOutlet weak var impactReasonTextField: UITextField!
+    @IBOutlet weak var impactReasonTextView: UITextView!
     @IBOutlet weak var impactLevelSlider: UISlider!
     @IBOutlet weak var scrollView: UIScrollView!
+    var isTextFieldSelected: Bool?
     var currentTextField: UITextField?
     var scrolledByKeyboard: Bool = false
 
@@ -28,10 +30,11 @@ class CreateActionViewController: UIViewController {
 
         // Configura delegate para os TextField
         self.actionNameTextField.delegate = self
-        self.impactReasonTextField.delegate = self
+        self.impactReasonTextView.delegate = self
+//        self.impactReasonTextField.delegate = self
 
         // Reconhece quando o usuário inputa algo na textField e gatilha o .keyboardWillShowNotification
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
 
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -44,7 +47,9 @@ class CreateActionViewController: UIViewController {
         customizeSliderThumb()
 
         // Ajuste do campo de descrição
-//        self.impactReasonTextField.
+        self.impactReasonTextView.layer.borderWidth = 1
+        self.impactReasonTextView.layer.borderColor = UIColor.lightGray.cgColor
+        self.impactReasonTextView.layer.cornerRadius = 5
     }
 
     // MARK: Keyboard Handling
@@ -55,8 +60,14 @@ class CreateActionViewController: UIViewController {
         guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
         let keyboardFrame = keyboardSize.cgRectValue
 
-        // Posição Y do TextField selecionado
-        let activeFieldMaxY = self.currentTextField!.frame.maxY - self.scrollView.contentOffset.y
+        var activeFieldMaxY: CGFloat = 0.0
+
+        if isTextFieldSelected! {
+            // Posição Y do TextField selecionado
+            activeFieldMaxY = self.currentTextField!.frame.maxY - self.scrollView.contentOffset.y
+        } else {
+            activeFieldMaxY = self.impactReasonTextView.frame.maxY - self.scrollView.contentOffset.y
+        }
 
         // Valor máximo do Y para que não seja sobreposto pelo teclado
         let maxVisibleY = self.scrollView.frame.height - keyboardFrame.height
@@ -127,7 +138,7 @@ class CreateActionViewController: UIViewController {
         action.actionId = UUID()
         action.name = actionNameTextField.text
         action.impactLevel = NSNumber(value: impactLevelSlider.value)
-        action.impactReason = impactReasonTextField.text
+        action.impactReason = impactReasonTextView.text
 
         if let relatedIsland = self.island {
             // Persiste ação no banco de dados
@@ -153,6 +164,7 @@ extension CreateActionViewController: UITextFieldDelegate {
 
     // Atualiza TextField sendo editado no momento
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.isTextFieldSelected = true
         self.currentTextField = textField
     }
 
@@ -160,5 +172,13 @@ extension CreateActionViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
+    }
+}
+   // MARK: Text View Delegate
+
+extension CreateActionViewController: UITextViewDelegate {
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.isTextFieldSelected = false
     }
 }
