@@ -23,6 +23,8 @@
 		8DC02BF2247585DB00281E2F /* CultivateIslandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC02BF1247585DB00281E2F /* CultivateIslandViewController.swift */; };
 		8DC02BF42478235700281E2F /* DateServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC02BF32478235700281E2F /* DateServices.swift */; };
 		8DC02BF62478295000281E2F /* TimeUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC02BF52478295000281E2F /* TimeUnit.swift */; };
+		8DC02BFA247FE99000281E2F /* CustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC02BF9247FE99000281E2F /* CustomAlertViewController.swift */; };
+		8DC02BFC247FEC3000281E2F /* CustomAlertServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC02BFB247FEC3000281E2F /* CustomAlertServices.swift */; };
 		8DFCE20C24744C820001AB3F /* ActionCustomAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DFCE20B24744C820001AB3F /* ActionCustomAlertViewController.swift */; };
 		B302B5B92460841F00CB5D99 /* InformationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = B302B5B82460841F00CB5D99 /* InformationHandler.swift */; };
 		B30434EA2451EE7E007D6F3C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30434E92451EE7E007D6F3C /* AppDelegate.swift */; };
@@ -81,6 +83,8 @@
 		8DC02BF1247585DB00281E2F /* CultivateIslandViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CultivateIslandViewController.swift; sourceTree = "<group>"; };
 		8DC02BF32478235700281E2F /* DateServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateServices.swift; sourceTree = "<group>"; };
 		8DC02BF52478295000281E2F /* TimeUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeUnit.swift; sourceTree = "<group>"; };
+		8DC02BF9247FE99000281E2F /* CustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CustomAlertViewController.swift; path = "/Users/joysclimaco/Documents/MyApps/Life Islands/lifeIslands/LifeTree/LifeTree/Presentation/ViewControllers/CustomAlertViewController.swift"; sourceTree = "<absolute>"; };
+		8DC02BFB247FEC3000281E2F /* CustomAlertServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertServices.swift; sourceTree = "<group>"; };
 		8DFCE20B24744C820001AB3F /* ActionCustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCustomAlertViewController.swift; sourceTree = "<group>"; };
 		9B5135F91C6AFCA69DC0C8BC /* Pods_LifeTree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B302B5B82460841F00CB5D99 /* InformationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationHandler.swift; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 				B3B1F90A24659CF700778E73 /* PeripheralCardViewController.swift */,
 				8DFCE20B24744C820001AB3F /* ActionCustomAlertViewController.swift */,
 				8DC02BF1247585DB00281E2F /* CultivateIslandViewController.swift */,
+				8DC02BF9247FE99000281E2F /* CustomAlertViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				B302B5B82460841F00CB5D99 /* InformationHandler.swift */,
 				8DAE93592464ABBC0022FE5D /* VectorServices.swift */,
 				8DC02BF32478235700281E2F /* DateServices.swift */,
+				8DC02BFB247FEC3000281E2F /* CustomAlertServices.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -508,6 +514,7 @@
 				B30434EA2451EE7E007D6F3C /* AppDelegate.swift in Sources */,
 				B304351E2451F088007D6F3C /* QueueManager.swift in Sources */,
 				8D687B2724528EEF00F83BB7 /* CreateActionViewController.swift in Sources */,
+				8DC02BFA247FE99000281E2F /* CustomAlertViewController.swift in Sources */,
 				B3B1F90B24659CF700778E73 /* PeripheralCardViewController.swift in Sources */,
 				8D687B342452927200F83BB7 /* UpdateIslandsHealth.swift in Sources */,
 				B3A7DC6B245884BB002AD059 /* PeripheralIslandDataServices.swift in Sources */,
@@ -523,6 +530,7 @@
 				B30435202451F093007D6F3C /* SelfIslandDAO.swift in Sources */,
 				B3E1051A246DFB2B0055E39C /* CreateActionTableViewCell.swift in Sources */,
 				8DC02BF2247585DB00281E2F /* CultivateIslandViewController.swift in Sources */,
+				8DC02BFC247FEC3000281E2F /* CustomAlertServices.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

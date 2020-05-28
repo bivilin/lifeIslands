@@ -174,16 +174,11 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
         customAlert.action = action
         customAlert.island = self.peripheralIsland!
         
-        // Configure custom action presentation style
-        customAlert.providesPresentationContextTransitionStyle = true
-        customAlert.definesPresentationContext = true
-        customAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        customAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        self.present(customAlert, animated: true, completion: nil)
+        CustomAlertServices().presentAsAlert(show: customAlert, over: self)
     }
 }
 
-extension PeripheralCardViewController: CustomAlertViewDelegate {
+extension PeripheralCardViewController: ActionCustomAlertViewDelegate {
     
     func reloadActionsTableView() {
         self.updateDataFromDatabase()
