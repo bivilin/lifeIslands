@@ -14,7 +14,6 @@ class CreateActionViewController: UIViewController {
     @IBOutlet weak var actionNameTextField: UITextField!
     @IBOutlet weak var impactReasonTextField: UITextField!
     @IBOutlet weak var impactLevelSlider: UISlider!
-    @IBOutlet weak var impactLevelLabel: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var deleteActionButton: UIButton!
     var currentTextField: UITextField?

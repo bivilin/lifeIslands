@@ -27,12 +27,10 @@ class CultivateIslandViewController: UIViewController {
         cultivateButton.layer.cornerRadius = 10
         self.displayDrops()
         self.phraseLabel.text = "Ao fazer essa atividade, você ganhou \(self.numberOfDrops) gotas para cultivar essa área"
-        
-        self.updateHealth()
     }
     
     @IBAction func cultivateButtonAction(_ sender: Any) {
-        performSegue(withIdentifier: "unwindToPeriphalIslandAfterActionIsDone", sender: self)
+        self.updateHealth()
     }
     
     func updateHealth() {
@@ -41,6 +39,7 @@ class CultivateIslandViewController: UIViewController {
         if let currentHealth = self.island.currentHealthStatus {
             self.island.currentHealthStatus = Double(truncating: currentHealth) * 1.1 as NSNumber
         }
+        self.island.lastActionDate = Date()
 
         PeripheralIslandDataServices.updatePeripheralIsland(island: island) { (error) in
             if error == nil {
@@ -48,6 +47,7 @@ class CultivateIslandViewController: UIViewController {
                     print("Saúde Atualizada com sucesso.")
                     print("Saúde Atual: \(String(describing: island?.currentHealthStatus))")
                     print("Saúde Anterior: \(island?.lastHealthStatus ?? 0)")
+                    self.performSegue(withIdentifier: "unwindToPeriphalIslandAfterActionIsDone", sender: self)
                 }
             }
         }

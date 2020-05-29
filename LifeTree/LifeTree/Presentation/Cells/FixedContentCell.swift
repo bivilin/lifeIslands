@@ -32,6 +32,7 @@ class FixedContentCell: UITableViewCell {
         let lastHeath = island.lastHealthStatus as! Double
         let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
         self.seasonLabel.text = season?.name
+        self.seasonLabel.textColor = season?.color
 
         // Definindo texto da estação
         self.statusDescriptionLabel.text = season?.description

@@ -86,6 +86,8 @@ class PeripheralCardViewController: UIViewController {
 
     // MARK: Info Handling
     func updateDataFromDatabase() {
+
+        // Recupera ações dessa ilha
         ActionDataServices.getIslandActions(island: peripheralIsland!) { (error, actions) in
             if (error != nil) {
                 print(error.debugDescription)
@@ -99,6 +101,16 @@ class PeripheralCardViewController: UIViewController {
                     for action in islandActions {
                         print("Ação \(action.name!) - Nível de impacto: \(action.impactLevel!)")
                     }
+                }
+            }
+        }
+
+        // Atualiza dados da ilha
+        if let uuid = self.peripheralIsland?.islandId {
+            PeripheralIslandDataServices.findById(objectID: uuid) { (error, island) in
+                if error == nil {
+                    self.peripheralIsland = island
+                    self.updateLabels()
                 }
             }
         }
