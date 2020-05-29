@@ -30,6 +30,9 @@ class CustomAlertViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set up background to mimic the iOS native Alert
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        
         // Update labels
         self.titleLabel.text = self.alertTitle
         self.descriptionLabel.text = self.alertDescription

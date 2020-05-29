@@ -37,6 +37,9 @@ class ActionCustomAlertViewController: UIViewController {
         self.confirmButton.layer.cornerRadius = cornerRadius
         self.deleteActionButton.layer.cornerRadius = cornerRadius
         
+        // Set up background to mimic the iOS native Alert
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        
         // Change the labels do it displays the information for the selected action
         self.actionTitle.text = self.action.name
         self.actionDescription.text = self.action.impactReason

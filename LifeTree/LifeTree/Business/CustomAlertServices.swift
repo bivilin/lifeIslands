@@ -11,10 +11,8 @@ import UIKit
 
 class CustomAlertServices {
     
+    // Não funciona se abrirmos em cima de um modal
     func presentAsAlert(show customAlert: UIViewController, over context: UIViewController) {
-        
-        // Set up background to mimic the iOS native Alert
-        customAlert.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         
         // Set up presentation mode
         customAlert.providesPresentationContextTransitionStyle = true
