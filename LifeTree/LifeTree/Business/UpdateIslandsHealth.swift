@@ -31,6 +31,43 @@ class UpdateIslandsHealth {
         }
     }
     
+    func updateSelfIslandHealth() {
+        PeripheralIslandDataServices.getAllPeripheralIslands { (error, peripheralIslands) in
+            if error != nil {
+                // Treat Error
+                print(error.debugDescription)
+            }
+            else if let allIslands = peripheralIslands {
+                
+                // Get average from every island's health
+                var healthAverage: Float = 0
+                for island in allIslands {
+                    healthAverage += Float(truncating: island.currentHealthStatus ?? 0)
+                }
+                healthAverage = healthAverage/Float(allIslands.count)
+                
+                // Update self island health
+                SelfIslandDataServices.getFirstSelfIsland { (error, selfIsland) in
+                    if error != nil {
+                        // Treat error
+                        print(error.debugDescription)
+                    }
+                    else if let myIsland: SelfIsland = selfIsland {
+                        
+                        myIsland.lastHealthStatus = myIsland.currentHealthStatus
+                        myIsland.currentHealthStatus = NSNumber(value: healthAverage)
+                        
+                        SelfIslandDataServices.updateSelfIsland(island: myIsland) { (error) in
+                            if error != nil {
+                                print(error.debugDescription)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     func getNewHealthFromDrops(island: PeripheralIsland, drops: Int) -> Int {
         
         let currentHealth = Int(truncating: island.currentHealthStatus ?? 50)
