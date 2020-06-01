@@ -116,8 +116,8 @@ class IslandsVisualisationServices {
         if let planeMaterial = planeGeometry.firstMaterial {
             
             // Creates SpriteKit scene as an independent copy of the island scene
-            let newSpriteKitScene = SKScene(fileNamed: "IslandSpriteScene.sks")!.copy() as! SKScene
-            
+            let newSpriteKitScene = IslandSpriteScene(fileNamed: "IslandSpriteScene.sks")!.copy() as! IslandSpriteScene
+
             // Asign scene as material
             planeMaterial.diffuse.contents = newSpriteKitScene
             
@@ -126,6 +126,9 @@ class IslandsVisualisationServices {
             
             // Flips plane material vertically so SKScene is displayed correctly
             planeMaterial.diffuse.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, -1, 1), 0, 1, 0)
+
+            newSpriteKitScene.changeTexture(named: "summerIsland")
+
         }
     }
     

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 enum Season : String {
     case winter
@@ -38,6 +39,19 @@ enum Season : String {
       case .autumn:
         return "A energia ainda está alta, mas está diminuindo com o tempo. Continue cultivando a sua ilha. Não tente ser tão produtivo quanto em outro momento. Encontre o seu próprio ritmo de agora."
       }
+    }
+
+    var color: UIColor {
+        switch self {
+        case .winter:
+            return .winterColor
+        case .spring:
+            return .springColor
+        case .summer:
+            return .summerColor
+        case .autumn:
+            return .autumnColor
+        }
     }
 
 

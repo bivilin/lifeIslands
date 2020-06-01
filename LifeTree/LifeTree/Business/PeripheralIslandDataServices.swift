@@ -225,4 +225,32 @@ class PeripheralIslandDataServices {
         // execute block in background
         QueueManager.sharedInstance.executeBlock(blockForExecutionInBackground, queueType: QueueManager.QueueType.serial)
     }
+
+    static func findById(objectID: UUID , _ completion: ((_ error: Error?, _ island: PeripheralIsland?) -> Void)?) {
+        // block to be executed in background
+        let blockForExecutionInBackground: BlockOperation = BlockOperation(block: {
+            // error to be returned in case of failure
+            var raisedError: Error? = nil
+            var island: PeripheralIsland?
+
+            do {
+                // save information
+                island = try PeripheralIslandDAO.findById(objectID: objectID)
+            }
+            catch let error {
+                raisedError = error
+            }
+
+            // completion block execution
+            if (completion != nil) {
+                let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(raisedError, island)})
+
+                // execute block in main
+                QueueManager.sharedInstance.executeBlock(blockForExecutionInMain, queueType: QueueManager.QueueType.main)
+            }
+        })
+
+        // execute block in background
+        QueueManager.sharedInstance.executeBlock(blockForExecutionInBackground, queueType: QueueManager.QueueType.serial)
+    }
 }

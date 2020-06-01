@@ -40,4 +40,10 @@ extension UIColor {
     static let serenityTertiary = UIColor(red: 0.91, green: 0.95, blue: 1.00, alpha: 1.00)
     static let icyMornTertiary = UIColor(red: 0.87, green: 0.96, blue: 0.96, alpha: 1.00)
 
+    // Season Colors
+
+    static let summerColor = UIColor(red: 0.929, green: 0.761, blue: 0.174, alpha: 1)
+    static let springColor = UIColor(red: 1, green: 0.627, blue: 0.831, alpha: 1)
+    static let winterColor = UIColor(red: 0.267, green: 0.553, blue: 0.796, alpha: 1)
+    static let autumnColor = UIColor(red: 0.945, green: 0.49, blue: 0.039, alpha: 1)
 }

@@ -34,6 +34,12 @@ class PeripheralCardViewController: UIViewController {
 
         // Labels
         updateLabels()
+
+
+        // Debug
+        print("===== ENTRANDO NA ILHA =====")
+        print("Saúde Atual da Ilha: \(self.peripheralIsland?.currentHealthStatus)")
+        print("Saúde Anterior da Ilha: \(self.peripheralIsland?.lastHealthStatus)")
     }
 
     // Atualiza labels de acordo com dados persistidos
@@ -48,6 +54,8 @@ class PeripheralCardViewController: UIViewController {
 
     // MARK: Info Handling
     func updateDataFromDatabase() {
+
+        // Recupera ações dessa ilha
         ActionDataServices.getIslandActions(island: peripheralIsland!) { (error, actions) in
             if (error != nil) {
                 print(error.debugDescription)
@@ -61,6 +69,16 @@ class PeripheralCardViewController: UIViewController {
                     for action in islandActions {
                         print("Ação \(action.name!) - Nível de impacto: \(action.impactLevel!)")
                     }
+                }
+            }
+        }
+
+        // Atualiza dados da ilha
+        if let uuid = self.peripheralIsland?.islandId {
+            PeripheralIslandDataServices.findById(objectID: uuid) { (error, island) in
+                if error == nil {
+                    self.peripheralIsland = island
+                    self.updateLabels()
                 }
             }
         }

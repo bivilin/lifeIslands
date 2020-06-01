@@ -40,6 +40,7 @@
 		B304351E2451F088007D6F3C /* QueueManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435122451EEBC007D6F3C /* QueueManager.swift */; };
 		B304351F2451F091007D6F3C /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435082451EEBB007D6F3C /* DAO.swift */; };
 		B30435202451F093007D6F3C /* SelfIslandDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30435092451EEBB007D6F3C /* SelfIslandDAO.swift */; };
+		B3704B4824815C12007150BD /* IslandSpriteScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3704B4724815C12007150BD /* IslandSpriteScene.swift */; };
 		B3A7DC6924588384002AD059 /* PeripheralIslandDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A7DC6824588384002AD059 /* PeripheralIslandDAO.swift */; };
 		B3A7DC6B245884BB002AD059 /* PeripheralIslandDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */; };
 		B3AE914D2473213300D47129 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AE914C2473213300D47129 /* Colors.swift */; };
@@ -103,6 +104,7 @@
 		B30435112451EEBC007D6F3C /* CoreDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B30435122451EEBC007D6F3C /* QueueManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QueueManager.swift; sourceTree = "<group>"; };
 		B30435142451EEBC007D6F3C /* SelfIslandDataServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelfIslandDataServices.swift; sourceTree = "<group>"; };
+		B3704B4724815C12007150BD /* IslandSpriteScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IslandSpriteScene.swift; sourceTree = "<group>"; };
 		B3A7DC6824588384002AD059 /* PeripheralIslandDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIslandDAO.swift; sourceTree = "<group>"; };
 		B3A7DC6A245884BB002AD059 /* PeripheralIslandDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralIslandDataServices.swift; sourceTree = "<group>"; };
 		B3AE914C2473213300D47129 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 			children = (
 				8D687B1F24528D2C00F83BB7 /* AllIslandsScene.scn */,
 				8D687B2124528D6D00F83BB7 /* IslandSpriteScene.sks */,
+				B3704B4724815C12007150BD /* IslandSpriteScene.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				8D687B2524528E5500F83BB7 /* IslandsViewController.swift in Sources */,
 				B304351C2451F084007D6F3C /* SelfIslandDataServices.swift in Sources */,
 				B304351F2451F091007D6F3C /* DAO.swift in Sources */,
+				B3704B4824815C12007150BD /* IslandSpriteScene.swift in Sources */,
 				8D3BBD07245882690057B5EB /* IslandsVisualisationServices.swift in Sources */,
 				8DAE935A2464ABBC0022FE5D /* VectorServices.swift in Sources */,
 				8D687B3A2452949400F83BB7 /* Mood.swift in Sources */,

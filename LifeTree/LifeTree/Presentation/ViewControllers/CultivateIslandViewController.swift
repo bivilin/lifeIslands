@@ -15,31 +15,38 @@ class CultivateIslandViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var cultivateButton: UIButton!
     @IBOutlet weak var phraseLabel: UILabel!
-    
+    var islandID: UUID?
+
     var numberOfDrops: Int = 1
     var island = PeripheralIsland()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         // Set up interface
         cultivateButton.layer.cornerRadius = 10
         self.displayDrops()
         self.phraseLabel.text = "Ao fazer essa atividade, você ganhou \(self.numberOfDrops) gotas para cultivar essa área"
-        
-        self.updateHealth()
     }
     
     @IBAction func cultivateButtonAction(_ sender: Any) {
-        performSegue(withIdentifier: "unwindToPeriphalIslandAfterActionIsDone", sender: self)
+        self.updateHealth()
     }
     
     func updateHealth() {
-        
+        self.island.lastHealthStatus = self.island.currentHealthStatus
+        self.island.lastActionDate = Date()
         self.island.currentHealthStatus = NSNumber(value: UpdateIslandsHealth().getNewHealthFromDrops(island: self.island, drops: self.numberOfDrops))
         
-        PeripheralIslandDataServices.updatePeripheralIsland(island: self.island) { (error) in
-            print(error as Any)
+        PeripheralIslandDataServices.updatePeripheralIsland(island: island) { (error) in
+            if error == nil {
+                PeripheralIslandDataServices.findById(objectID: self.island.islandId ?? UUID()) { (error, island) in
+                    print("Saúde Atualizada com sucesso.")
+                    print("Saúde Atual: \(String(describing: island?.currentHealthStatus))")
+                    print("Saúde Anterior: \(island?.lastHealthStatus ?? 0)")
+                    self.performSegue(withIdentifier: "unwindToPeriphalIslandAfterActionIsDone", sender: self)
+                }
+            }
         }
     }
     
