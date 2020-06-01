@@ -16,7 +16,7 @@ class PeripheralCardViewController: UIViewController {
     @IBOutlet weak var actionsTableView: UITableView!
     @IBOutlet weak var lastActivityMessageLabel: UILabel!
     var islandScene: SKScene?
-    
+
     var peripheralIsland: PeripheralIsland?
     var islandActions: [Action] = []
 
@@ -40,15 +40,6 @@ class PeripheralCardViewController: UIViewController {
     func updateLabels() {
         // Definindo nome da ilha
         nameIsland.text = peripheralIsland?.name
-
-//        // Definindo estação
-//        let currentHealth = peripheralIsland?.currentHealthStatus as! Double
-//        let lastHeath = peripheralIsland?.lastHealthStatus as! Double
-//        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
-//        self.seasonLabel.text = season?.name
-//
-//        // Definindo texto da estação
-//        self.statusDescriptionLabel.text = season?.description
 
         // Texto com último dia de entrada
         let relativeDate = DateServices().getTimeSinceLastEntry(lastDate: peripheralIsland?.lastActionDate ?? Date())
