@@ -35,9 +35,10 @@ class CultivateIslandViewController: UIViewController {
     }
     
     func updateHealth() {
-        self.island.currentHealthStatus = 58
         
-        PeripheralIslandDataServices.updatePeripheralIsland(island: island) { (error) in
+        self.island.currentHealthStatus = NSNumber(value: UpdateIslandsHealth().getNewHealthFromDrops(island: self.island, drops: self.numberOfDrops))
+        
+        PeripheralIslandDataServices.updatePeripheralIsland(island: self.island) { (error) in
             print(error as Any)
         }
     }

@@ -18,6 +18,7 @@ class FixedContentCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.selectionStyle = .none
     }
 
     // Carrega SKScene e infos das labels

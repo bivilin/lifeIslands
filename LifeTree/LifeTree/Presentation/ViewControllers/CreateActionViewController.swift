@@ -129,32 +129,43 @@ class CreateActionViewController: UIViewController {
     }
 
     // MARK: Buttons
-
+    
     @IBAction func confirmButton(_ sender: Any) {
-
-        // Cria Ação com dados inputados na UI
-        let action = Action()
-
-        action.actionId = UUID()
-        action.name = actionNameTextField.text
-        action.impactLevel = NSNumber(value: impactLevelSlider.value)
-        action.impactReason = impactReasonTextView.text
-
-        if let relatedIsland = self.island {
-            // Persiste ação no banco de dados
-            ActionDataServices.createAction(action: action, relatedIsland: relatedIsland) { (error) in
-                if error != nil {
-                    print(error.debugDescription)
-                } else {
-                    print("Ação criada com sucesso.")
-                }
-            }
-        } else {
-            print("Objeto Ilha Periférica não foi carregado nessa classe")
+        
+        // Chack if action has a title
+        if actionNameTextField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? false {
+            // string contains non-whitespace characters
+            
+            let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlert") as! CustomAlertViewController
+            customAlert.alertTitle = "Ops..."
+            customAlert.alertDescription = "Você deve dar um nome à sua ação antes de salvá-la!"
+            CustomAlertServices().presentAsAlert(show: customAlert, over: self)
         }
-
-        // Retorna para a PeripheralCardViewController
-        self.performSegue(withIdentifier: "unwindToPeriphalIsland", sender: nil)
+        else {
+            // Cria Ação com dados inputados na UI
+            let action = Action()
+            
+            action.actionId = UUID()
+            action.name = actionNameTextField.text
+            action.impactLevel = NSNumber(value: impactLevelSlider.value)
+            action.impactReason = impactReasonTextField.text
+            
+            if let relatedIsland = self.island {
+                // Persiste ação no banco de dados
+                ActionDataServices.createAction(action: action, relatedIsland: relatedIsland) { (error) in
+                    if error != nil {
+                        print(error.debugDescription)
+                    } else {
+                        print("Ação criada com sucesso.")
+                    }
+                }
+            } else {
+                print("Objeto Ilha Periférica não foi carregado nessa classe")
+            }
+            
+            // Retorna para a PeripheralCardViewController
+            self.performSegue(withIdentifier: "unwindToPeriphalIsland", sender: nil)
+        }
     }
 }
 
