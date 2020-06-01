@@ -9,13 +9,13 @@
 import Foundation
 import UIKit
 
-protocol CustomAlertViewDelegate: class {
+protocol ActionCustomAlertViewDelegate {
     func reloadActionsTableView()
 }
 
 class ActionCustomAlertViewController: UIViewController {
     
-    @IBOutlet weak var closeButton: UIButton!
+    @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var actionDetailsView: UIView!
     @IBOutlet weak var actionTitle: UILabel!
     @IBOutlet weak var actionDescription: UILabel!
@@ -25,20 +25,20 @@ class ActionCustomAlertViewController: UIViewController {
     
     var action = Action()
     var island = PeripheralIsland()
-    var delegate: CustomAlertViewDelegate?
+    var delegate: ActionCustomAlertViewDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set up background to mimic the iOS native Alert
-        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        
         // Change corner Radius of major visual elements
+        self.dismissButton.layer.cornerRadius = self.dismissButton.frame.width/2
         let cornerRadius: CGFloat = 10
         self.actionDetailsView.layer.cornerRadius = cornerRadius
         self.confirmButton.layer.cornerRadius = cornerRadius
         self.deleteActionButton.layer.cornerRadius = cornerRadius
-        self.closeButton.layer.cornerRadius = self.closeButton.frame.width/2
+        
+        // Set up background to mimic the iOS native Alert
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         
         // Change the labels do it displays the information for the selected action
         self.actionTitle.text = self.action.name
