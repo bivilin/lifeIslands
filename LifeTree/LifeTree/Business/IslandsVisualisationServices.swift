@@ -49,6 +49,7 @@ class IslandsVisualisationServices {
     
     // Add all peripheral islands to scene
     func addAllPeripheralIslandsToScene(peripheralIslandArray: [PeripheralIsland]) {
+        
         self.peripheralIslands = peripheralIslandArray
         self.updateVariablesForPositioningIslands()
 

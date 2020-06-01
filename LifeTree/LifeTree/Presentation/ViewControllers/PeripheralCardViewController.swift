@@ -16,7 +16,7 @@ class PeripheralCardViewController: UIViewController {
     @IBOutlet weak var actionsTableView: UITableView!
     @IBOutlet weak var lastActivityMessageLabel: UILabel!
     var islandScene: SKScene?
-    
+
     var peripheralIsland: PeripheralIsland?
     var islandActions: [Action] = []
 
@@ -48,31 +48,8 @@ class PeripheralCardViewController: UIViewController {
         nameIsland.text = peripheralIsland?.name
 
         // Texto com último dia de entrada
-        let relativeDate = self.getRelativeDate(lastDate: peripheralIsland?.lastActionDate ?? Date())
+        let relativeDate = DateServices().getTimeSinceLastEntry(lastDate: peripheralIsland?.lastActionDate ?? Date())
         self.lastActivityMessageLabel.text = "Sua última atividade aqui foi \(relativeDate). Fico feliz quando me rega todos os dias!"
-
-    }
-
-    // TODO: Transferir método para outra classe. Qual classe?
-    func getRelativeDate(lastDate: Date) -> String {
-        let periodInSeconds = lastDate.distance(to: Date())
-        let periodInMinutes = Int(periodInSeconds / 60)
-        if periodInMinutes < 60 {
-            return "há \(periodInMinutes) minutos"
-        } else {
-            let periodInHours = Int(periodInMinutes / 60)
-            if periodInHours < 24 {
-                return "há \(periodInHours) horas"
-            } else {
-                let periodInDays = Int(periodInHours / 24)
-                if periodInDays < 7 {
-                    return "há \(periodInDays) dias"
-                } else {
-                    let periodInWeeks = Int(periodInDays / 7)
-                    return "há \(periodInWeeks) semanas"
-                }
-            }
-        }
     }
 
     // MARK: Info Handling
@@ -206,16 +183,11 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
         customAlert.action = action
         customAlert.island = self.peripheralIsland!
         
-        // Configure custom action presentation style
-        customAlert.providesPresentationContextTransitionStyle = true
-        customAlert.definesPresentationContext = true
-        customAlert.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
-        customAlert.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-        self.present(customAlert, animated: true, completion: nil)
+        CustomAlertServices().presentAsAlert(show: customAlert, over: self)
     }
 }
 
-extension PeripheralCardViewController: CustomAlertViewDelegate {
+extension PeripheralCardViewController: ActionCustomAlertViewDelegate {
     
     func reloadActionsTableView() {
         self.updateDataFromDatabase()

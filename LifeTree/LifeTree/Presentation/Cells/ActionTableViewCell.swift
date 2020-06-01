@@ -29,6 +29,7 @@ class ActionTableViewCell: UITableViewCell {
         self.contourView.layer.shadowColor = UIColor.black.cgColor
         self.contourView.layer.shadowOpacity = 0.10
         self.contourView.layer.shadowRadius = 4
+        self.selectionStyle = .none
     }
 
     // Método para popular conteúdos da célula (texto e imagem)

@@ -12,10 +12,10 @@ class CreateActionViewController: UIViewController {
 
     var island: PeripheralIsland?
     @IBOutlet weak var actionNameTextField: UITextField!
-    @IBOutlet weak var impactReasonTextField: UITextField!
+    @IBOutlet weak var impactReasonTextView: UITextView!
     @IBOutlet weak var impactLevelSlider: UISlider!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var deleteActionButton: UIButton!
+    var isTextFieldSelected: Bool?
     var currentTextField: UITextField?
     var scrolledByKeyboard: Bool = false
 
@@ -27,17 +27,13 @@ class CreateActionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Exibe botão de deletar ação caso o usuário esteja no modo de edição
-        if isViewForEditingAction {
-            deleteActionButton.isHidden = false
-        }
-
         // Configura delegate para os TextField
         self.actionNameTextField.delegate = self
-        self.impactReasonTextField.delegate = self
+        self.impactReasonTextView.delegate = self
+//        self.impactReasonTextField.delegate = self
 
         // Reconhece quando o usuário inputa algo na textField e gatilha o .keyboardWillShowNotification
-        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
 
 
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
@@ -48,6 +44,11 @@ class CreateActionViewController: UIViewController {
 
         // Imagem inicial do slider
         customizeSliderThumb()
+
+        // Ajuste do campo de descrição
+        self.impactReasonTextView.layer.borderWidth = 1
+        self.impactReasonTextView.layer.borderColor = UIColor.lightGray.cgColor
+        self.impactReasonTextView.layer.cornerRadius = 5
     }
 
     // MARK: Keyboard Handling
@@ -58,8 +59,14 @@ class CreateActionViewController: UIViewController {
         guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
         let keyboardFrame = keyboardSize.cgRectValue
 
-        // Posição Y do TextField selecionado
-        let activeFieldMaxY = self.currentTextField!.frame.maxY - self.scrollView.contentOffset.y
+        var activeFieldMaxY: CGFloat = 0.0
+
+        if isTextFieldSelected! {
+            // Posição Y do TextField selecionado
+            activeFieldMaxY = self.currentTextField!.frame.maxY - self.scrollView.contentOffset.y
+        } else {
+            activeFieldMaxY = self.impactReasonTextView.frame.maxY - self.scrollView.contentOffset.y
+        }
 
         // Valor máximo do Y para que não seja sobreposto pelo teclado
         let maxVisibleY = self.scrollView.frame.height - keyboardFrame.height
@@ -121,32 +128,43 @@ class CreateActionViewController: UIViewController {
     }
 
     // MARK: Buttons
-
+    
     @IBAction func confirmButton(_ sender: Any) {
-
-        // Cria Ação com dados inputados na UI
-        let action = Action()
-
-        action.actionId = UUID()
-        action.name = actionNameTextField.text
-        action.impactLevel = NSNumber(value: impactLevelSlider.value)
-        action.impactReason = impactReasonTextField.text
-
-        if let relatedIsland = self.island {
-            // Persiste ação no banco de dados
-            ActionDataServices.createAction(action: action, relatedIsland: relatedIsland) { (error) in
-                if error != nil {
-                    print(error.debugDescription)
-                } else {
-                    print("Ação criada com sucesso.")
-                }
-            }
-        } else {
-            print("Objeto Ilha Periférica não foi carregado nessa classe")
+        
+        // Chack if action has a title
+        if actionNameTextField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? false {
+            // string contains non-whitespace characters
+            
+            let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlert") as! CustomAlertViewController
+            customAlert.alertTitle = "Ops..."
+            customAlert.alertDescription = "Você deve dar um nome à sua ação antes de salvá-la!"
+            CustomAlertServices().presentAsAlert(show: customAlert, over: self)
         }
-
-        // Retorna para a PeripheralCardViewController
-        self.performSegue(withIdentifier: "unwindToPeriphalIsland", sender: nil)
+        else {
+            // Cria Ação com dados inputados na UI
+            let action = Action()
+            
+            action.actionId = UUID()
+            action.name = actionNameTextField.text
+            action.impactLevel = NSNumber(value: impactLevelSlider.value)
+            action.impactReason = self.impactReasonTextView.text
+            
+            if let relatedIsland = self.island {
+                // Persiste ação no banco de dados
+                ActionDataServices.createAction(action: action, relatedIsland: relatedIsland) { (error) in
+                    if error != nil {
+                        print(error.debugDescription)
+                    } else {
+                        print("Ação criada com sucesso.")
+                    }
+                }
+            } else {
+                print("Objeto Ilha Periférica não foi carregado nessa classe")
+            }
+            
+            // Retorna para a PeripheralCardViewController
+            self.performSegue(withIdentifier: "unwindToPeriphalIsland", sender: nil)
+        }
     }
 }
 
@@ -156,6 +174,7 @@ extension CreateActionViewController: UITextFieldDelegate {
 
     // Atualiza TextField sendo editado no momento
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.isTextFieldSelected = true
         self.currentTextField = textField
     }
 
@@ -163,5 +182,13 @@ extension CreateActionViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return true
+    }
+}
+   // MARK: Text View Delegate
+
+extension CreateActionViewController: UITextViewDelegate {
+
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        self.isTextFieldSelected = false
     }
 }

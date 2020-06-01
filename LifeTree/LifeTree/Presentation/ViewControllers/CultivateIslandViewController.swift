@@ -34,12 +34,9 @@ class CultivateIslandViewController: UIViewController {
     }
     
     func updateHealth() {
-        print("===== ATUALIZANDO SAÚDE =====")
         self.island.lastHealthStatus = self.island.currentHealthStatus
-        if let currentHealth = self.island.currentHealthStatus {
-            self.island.currentHealthStatus = Double(truncating: currentHealth) * 1.1 as NSNumber
-        }
         self.island.lastActionDate = Date()
+        self.island.currentHealthStatus = NSNumber(value: UpdateIslandsHealth().getNewHealthFromDrops(island: self.island, drops: self.numberOfDrops))
 
         PeripheralIslandDataServices.updatePeripheralIsland(island: island) { (error) in
             if error == nil {
@@ -49,7 +46,6 @@ class CultivateIslandViewController: UIViewController {
                     print("Saúde Anterior: \(island?.lastHealthStatus ?? 0)")
                     self.performSegue(withIdentifier: "unwindToPeriphalIslandAfterActionIsDone", sender: self)
                 }
-            }
         }
     }
     

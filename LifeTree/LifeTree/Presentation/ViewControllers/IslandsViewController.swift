@@ -98,6 +98,10 @@ class IslandsViewController: UIViewController{
         // Set up floating panel (card)
         self.setupFloatingPanel()
         self.showFloatingPanel()
+        
+        // Add a tap gesture recognizer
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        self.islandsSCNView.addGestureRecognizer(tapGesture)
 
         // Add a pan gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
@@ -105,6 +109,33 @@ class IslandsViewController: UIViewController{
     }
     
     // MARK: Gestures
+    
+    // Tap
+    // Moves camera to tapped island node and get its information from CoreData
+    @objc func handleTap(_ gesture: UITapGestureRecognizer){
+
+        if gesture.state == .ended {
+            
+            // Make hit test for the tap
+            let location: CGPoint = gesture.location(in: islandsSCNView)
+            let hits = self.islandsSCNView.hitTest(location, options: nil)
+            
+            // Get node from hit test
+            if let tappednode = hits.first?.node {
+                
+                // Hapitic feedback
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
+                
+                // Changes card content if necessary
+                if tappednode != self.islandInCard {
+                    self.setCardForNode(node: tappednode)
+                }
+                // Expands card
+                self.floatingPanel.move(to: .full, animated: true)
+            }
+        }
+    }
     
     // Pan
     // Rotates camera around center in the SCNScene
@@ -238,19 +269,22 @@ class IslandsViewController: UIViewController{
     func displaySelfIslandInCard() {
         
         if let selfIsland = self.islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true) {
-            
-            // Unblur self island and blur the previous island in display
-            if let blur = self.islandsVisualizationServices!.gaussianBlur {
-                self.islandInCard?.filters = [blur]
-                selfIsland.filters = []
+            if self.islandInCard != selfIsland {
+                
+                // Unblur self island and blur the previous island in display
+                if let blur = self.islandsVisualizationServices!.gaussianBlur {
+                    self.islandInCard?.filters = [blur]
+                    selfIsland.filters = []
+                }
+                
+                // Change card information
+                self.setCardForNode(node: selfIsland)
+                self.islandInCard = selfIsland
+                
+                // Gives hapitic feedback
+                let generator = UIImpactFeedbackGenerator(style: .light)
+                generator.impactOccurred()
             }
-            // Change card information
-            self.setCardForNode(node: selfIsland)
-            self.islandInCard = selfIsland
-            
-            // Gives hapitic feedback
-            let generator = UIImpactFeedbackGenerator(style: .light)
-            generator.impactOccurred()
         }
     }
     
