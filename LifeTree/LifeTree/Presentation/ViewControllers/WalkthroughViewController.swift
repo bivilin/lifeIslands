@@ -36,7 +36,8 @@ class WalkthroughViewController: UIViewController {
     
     func setUpPagedScrollView() {
         
-        self.scrollView.contentSize = CGSize(width: view.frame.width * CGFloat(self.pages.count), height: view.frame.height)
+        self.scrollView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
+        self.scrollView.contentSize = CGSize(width: self.view.frame.width * CGFloat(self.pages.count), height: self.view.frame.height)
         self.scrollView.isPagingEnabled = true
         
         for i in 0 ..< pages.count {
