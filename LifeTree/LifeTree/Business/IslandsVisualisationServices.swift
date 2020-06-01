@@ -25,12 +25,16 @@ class IslandsVisualisationServices {
     var islandDictionary: [UUID: SCNNode] = [:]
     
     var gaussianBlur = CIFilter(name: "CIGaussianBlur")
+
+    var cultivateIslandViewController: CultivateIslandViewController?
     
     init(scnScene: SCNScene) {
         self.islandsSCNScene = scnScene
         
         let blurRadius = 6
         gaussianBlur?.setValue(blurRadius, forKey: kCIInputRadiusKey)
+
+        self.cultivateIslandViewController?.delegate = self
     }
     
     // Add self island to scene
@@ -249,3 +253,19 @@ class IslandsVisualisationServices {
     }
 }
 
+extension IslandsVisualisationServices: UpdateIslandDelegate {
+    // Altera textura de um node específico
+    func updateTextureForIsland(islandID: UUID) {
+        guard let node = islandDictionary[islandID] else {return}
+        let islandSKScene = node.geometry?.firstMaterial?.diffuse.contents as? IslandSpriteScene
+
+        PeripheralIslandDataServices.findById(objectID: islandID) { (error, island) in
+            if error == nil {
+                if let island = island {
+                    let texture = self.getTextureForIsland(island: island)
+                    islandSKScene?.changeTexture(texture: texture)
+                }
+            }
+        }
+    }
+}

@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol UpdateIslandDelegate {
+    func updateTextureForIsland(islandID: UUID)
+}
+
 class CultivateIslandViewController: UIViewController {
     
     @IBOutlet weak var dropsImageView: UIImageView!
@@ -20,6 +24,7 @@ class CultivateIslandViewController: UIViewController {
     var numberOfDrops: Int = 1
     var island = PeripheralIsland()
     
+    var delegate: UpdateIslandDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,6 +49,11 @@ class CultivateIslandViewController: UIViewController {
                     print("Saúde Atualizada com sucesso.")
                     print("Saúde Atual: \(String(describing: island?.currentHealthStatus))")
                     print("Saúde Anterior: \(island?.lastHealthStatus ?? 0)")
+
+                    if let id = island?.islandId {
+                        self.delegate?.updateTextureForIsland(islandID: id)
+                    }
+
                     self.performSegue(withIdentifier: "unwindToPeriphalIslandAfterActionIsDone", sender: self)
                 }
             }
