@@ -74,10 +74,17 @@ class IslandsViewController: UIViewController{
 
         // Inicializando classe que maneja os dados
         self.infoHandler = InformationHandler(sceneServices: islandsVisualizationServices!)
-        
-        // Add self islando do scene
-        self.islandsVisualizationServices!.addSelfIslandToScene(islandsSCNScene: islandsSCNScene)
-        
+
+
+        SelfIslandDataServices.getFirstSelfIsland { (error, island) in
+            if error == nil {
+                if let island = island {
+                    // Add self islando do scene
+                    self.islandsVisualizationServices!.addSelfIslandToScene(islandsSCNScene: self.islandsSCNScene, island: island)
+                }
+            }
+        }
+
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
         
@@ -106,6 +113,16 @@ class IslandsViewController: UIViewController{
         // Add a pan gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         self.islandsSCNView.addGestureRecognizer(panGesture)
+    }
+
+    func setupSelfCard() {
+        // Set up card for self island
+        self.cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
+        let selfIslandSKScene = self.islandsVisualizationServices?.getSelfIslandSKScene()
+        if selfIslandSKScene != nil {
+            self.cardView.islandSKScene = selfIslandSKScene!
+            self.cardView.islandSKScene.scaleMode = .aspectFit
+        }
     }
     
     // MARK: Gestures
