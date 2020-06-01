@@ -12,7 +12,6 @@ class CreateActionViewController: UIViewController {
 
     var island: PeripheralIsland?
     @IBOutlet weak var actionNameTextField: UITextField!
-    @IBOutlet weak var impactReasonTextField: UITextField!
     @IBOutlet weak var impactReasonTextView: UITextView!
     @IBOutlet weak var impactLevelSlider: UISlider!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -148,7 +147,7 @@ class CreateActionViewController: UIViewController {
             action.actionId = UUID()
             action.name = actionNameTextField.text
             action.impactLevel = NSNumber(value: impactLevelSlider.value)
-            action.impactReason = impactReasonTextField.text
+            action.impactReason = self.impactReasonTextView.text
             
             if let relatedIsland = self.island {
                 // Persiste ação no banco de dados
