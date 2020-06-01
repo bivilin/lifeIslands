@@ -114,16 +114,6 @@ class IslandsViewController: UIViewController{
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         self.islandsSCNView.addGestureRecognizer(panGesture)
     }
-
-    func setupSelfCard() {
-        // Set up card for self island
-        self.cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
-        let selfIslandSKScene = self.islandsVisualizationServices?.getSelfIslandSKScene()
-        if selfIslandSKScene != nil {
-            self.cardView.islandSKScene = selfIslandSKScene!
-            self.cardView.islandSKScene.scaleMode = .aspectFit
-        }
-    }
     
     // MARK: Gestures
     
@@ -342,6 +332,7 @@ class IslandsViewController: UIViewController{
         if let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: node) {
             // Atualiza as informações da VC
             self.peripheralCardView.peripheralIsland = islandObject
+            self.peripheralCardView.islandSceneServices = self.islandsVisualizationServices
             // Atualiza o conteúdo do Floating Panel para a nova VC
             self.floatingPanel.set(contentViewController: self.peripheralCardView)
             // Atualiza SKScene do card

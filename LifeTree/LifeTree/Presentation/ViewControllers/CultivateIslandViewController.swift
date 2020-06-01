@@ -23,8 +23,11 @@ class CultivateIslandViewController: UIViewController {
 
     var numberOfDrops: Int = 1
     var island = PeripheralIsland()
-    
+
     var delegate: UpdateIslandDelegate?
+    var islandSceneServices: IslandsVisualisationServices?
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
