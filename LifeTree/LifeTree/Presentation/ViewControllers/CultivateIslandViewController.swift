@@ -54,7 +54,7 @@ class CultivateIslandViewController: UIViewController {
                     print("Saúde Anterior: \(island?.lastHealthStatus ?? 0)")
 
                     if let id = island?.islandId {
-                        self.delegate?.updateTextureForIsland(islandID: id)
+                        self.islandSceneServices?.updateTextureForIsland(islandID: id)
                     }
 
                     self.performSegue(withIdentifier: "unwindToPeriphalIslandAfterActionIsDone", sender: self)
