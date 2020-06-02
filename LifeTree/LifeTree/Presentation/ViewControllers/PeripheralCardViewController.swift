@@ -16,6 +16,7 @@ class PeripheralCardViewController: UIViewController {
     @IBOutlet weak var nameIsland: UILabel!
     @IBOutlet weak var actionsTableView: UITableView!
     @IBOutlet weak var lastActivityMessageLabel: UILabel!
+
     @IBOutlet weak var progressSeasonPeripheral: UICircularProgressRing!
     var islandScene: SKScene?
 
