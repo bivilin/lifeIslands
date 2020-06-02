@@ -38,10 +38,10 @@ class IslandsVisualisationServices {
     }
     
     // Add self island to scene
-    func addSelfIslandToScene(islandsSCNScene: SCNScene, island: SelfIsland) {
+    func addSelfIslandToScene(island: SelfIsland) {
         
         // Set SpriteKit scene as the material for the SceneKit plane
-        if let selfIslandPlane = islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true),
+        if let selfIslandPlane = self.islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true),
             let selfIslandPlaneGeometry = selfIslandPlane.geometry {
 
             let texture = self.getTextureForIsland(island: island)

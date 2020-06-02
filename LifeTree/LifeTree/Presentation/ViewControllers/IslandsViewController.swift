@@ -80,7 +80,7 @@ class IslandsViewController: UIViewController{
             if error == nil {
                 if let island = island {
                     // Add self islando do scene
-                    self.islandsVisualizationServices!.addSelfIslandToScene(islandsSCNScene: self.islandsSCNScene, island: island)
+                    self.islandsVisualizationServices!.addSelfIslandToScene(island: island)
                 }
             }
         }
