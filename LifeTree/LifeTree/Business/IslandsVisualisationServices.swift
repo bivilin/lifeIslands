@@ -38,13 +38,18 @@ class IslandsVisualisationServices {
     }
     
     // Add self island to scene
-    func addSelfIslandToScene(island: SelfIsland) {
+    func addSelfIslandToScene(island: SelfIsland?) {
         
         // Set SpriteKit scene as the material for the SceneKit plane
         if let selfIslandPlane = self.islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true),
             let selfIslandPlaneGeometry = selfIslandPlane.geometry {
 
-            let texture = self.getTextureForIsland(island: island)
+            var texture = SKTexture(imageNamed: "springIsland")
+
+            if let island = island {
+                 texture = self.getTextureForIsland(island: island)
+            }
+
             self.setPlaneMaterialAsIslandSKScene(planeGeometry: selfIslandPlaneGeometry, texture: texture)
 
             // Places billboard constraint so that self plane is always facing the camera
@@ -94,7 +99,7 @@ class IslandsVisualisationServices {
         let lastHeath = (island as AnyObject).lastHealthStatus as! Double
         let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
         
-        let texture = season?.texture ?? SKTexture()
+        let texture = season?.texture ?? SKTexture(imageNamed: "springIsland")
 
         return texture
     }

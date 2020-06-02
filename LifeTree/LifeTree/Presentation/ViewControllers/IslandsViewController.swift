@@ -78,10 +78,7 @@ class IslandsViewController: UIViewController{
 
         SelfIslandDataServices.getFirstSelfIsland { (error, island) in
             if error == nil {
-                if let island = island {
-                    // Add self islando do scene
                     self.islandsVisualizationServices!.addSelfIslandToScene(island: island)
-                }
             }
         }
 
