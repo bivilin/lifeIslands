@@ -15,7 +15,7 @@ class SelfIslandDataServices {
     ///     - island: Island to be saved
     ///     - completion: closure to be executed at the end of this method
     /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
-    static func createSelfIsland(island: SelfIsland, _ completion: ((_ error: Error?) -> Void)?)  {
+    static func createSelfIsland(island: SelfIsland, _ completion: @escaping (_ error: Error?) -> Void)  {
         // block to be executed in background
         let blockForExecutionInBackground: BlockOperation = BlockOperation(block: {
             // error to be returned in case of failure
@@ -25,22 +25,12 @@ class SelfIslandDataServices {
                 if (error != nil) {
                     print(error.debugDescription)
                 } else if (selfIsland == nil) {
-                    do {
-                        try SelfIslandDAO.create(island)
-                    }
-                    catch let error {
-                        raisedError = error
-                    }
+
+                    SelfIslandDAO.create(island, completion: completion)
+
                 } else {
                     raisedError = Errors.CreateLimitExceeded
                     print("Maximum Limit of SelfIsland Exceeded.")
-                }
-                // completion block execution
-                if (completion != nil) {
-                    let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(raisedError)})
-
-                    // execute block in main
-                    QueueManager.sharedInstance.executeBlock(blockForExecutionInMain, queueType: QueueManager.QueueType.main)
                 }
             }
         })

@@ -17,6 +17,16 @@ class CoreDataManager {
     
     /// Database manager singleton
     static let sharedInstance = CoreDataManager()
+
+    lazy var operationQueue:OperationQueue = {
+        let queue = OperationQueue()
+        queue.maxConcurrentOperationCount = 1
+        return queue
+    }()
+
+    lazy var context: NSManagedObjectContext = {
+        return self.persistentContainer.newBackgroundContext()
+    }()
     
     lazy var persistentContainer: NSPersistentContainer = {
         /*

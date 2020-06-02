@@ -14,16 +14,19 @@ class SelfIslandDAO: DAO {
     /// - parameters:
     ///     - objectToBeSaved: island to be saved on database
     /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
-    static func create(_ objectToBeSaved: SelfIsland) throws {
-        do {
-            // add object to be saved to the context
-            CoreDataManager.sharedInstance.persistentContainer.viewContext.insert(objectToBeSaved)
-            
-            // persist changes at the context
-            try CoreDataManager.sharedInstance.persistentContainer.viewContext.save()
-        }
-        catch {
-            throw Errors.DatabaseFailure
+    static func create(_ objectToBeSaved: SelfIsland, completion: @escaping (Error?) -> Void) {
+        CoreDataManager.sharedInstance.operationQueue.addOperation { () -> Void in
+            do {
+                // add object to be saved to the context
+                CoreDataManager.sharedInstance.context.insert(objectToBeSaved)
+
+                // persist changes at the context
+                try CoreDataManager.sharedInstance.context.save()
+                completion(nil)
+            }
+            catch {
+                completion(Errors.DatabaseFailure)
+            }
         }
     }
     
@@ -34,7 +37,7 @@ class SelfIslandDAO: DAO {
     static func update(_ objectToBeUpdated: SelfIsland) throws {
         do {
             // persist changes at the context
-            try CoreDataManager.sharedInstance.persistentContainer.viewContext.save()
+            try CoreDataManager.sharedInstance.context.save()
         }
         catch {
             throw Errors.DatabaseFailure
@@ -48,10 +51,10 @@ class SelfIslandDAO: DAO {
     static func delete(_ objectToBeDeleted: SelfIsland) throws {
         do {
             // delete element from context
-            CoreDataManager.sharedInstance.persistentContainer.viewContext.delete(objectToBeDeleted)
+            CoreDataManager.sharedInstance.context.delete(objectToBeDeleted)
             
             // persist the operation
-            try CoreDataManager.sharedInstance.persistentContainer.viewContext.save()
+            try CoreDataManager.sharedInstance.context.save()
         }
         catch {
             throw Errors.DatabaseFailure
@@ -70,7 +73,7 @@ class SelfIslandDAO: DAO {
             let request:NSFetchRequest<SelfIsland> = fetchRequest()
 
             // perform search
-            selfIslandList = try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(request)
+            selfIslandList = try CoreDataManager.sharedInstance.context.fetch(request)
         }
         catch {
             throw Errors.DatabaseFailure
@@ -95,7 +98,7 @@ class SelfIslandDAO: DAO {
             let request:NSFetchRequest<SelfIsland> = fetchRequest()
 
             // perform search
-            selfIslandList = try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(request)
+            selfIslandList = try CoreDataManager.sharedInstance.context.fetch(request)
         }
         catch {
             throw Errors.DatabaseFailure
@@ -103,5 +106,5 @@ class SelfIslandDAO: DAO {
 
         return selfIslandList
     }
-
+    
 }

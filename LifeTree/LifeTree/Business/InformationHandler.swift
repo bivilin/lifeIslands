@@ -36,19 +36,33 @@ class InformationHandler {
     // MARK: Self Create
     // Cria ilha do Self
     func createSelf(name: String, currentHealth: Double) {
-        // Including default information to CoreData in case of first launch
-        let island = SelfIsland()
-        island.name = name
-        island.currentHealthStatus = NSNumber(value: currentHealth)
-        island.islandId = UUID()
-        island.lastHealthStatus = 0
 
-        SelfIslandDataServices.createSelfIsland(island: island) { (error) in
-            if (error != nil) {
+        SelfIslandDataServices.getFirstSelfIsland { (error, selfIsland) in
+            if error != nil {
                 print(error.debugDescription)
             } else {
-                // Debug Code
-                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.currentHealthStatus!)%")
+                if let island = selfIsland {
+                    self.sceneServices.addSelfIslandToScene(island: island)
+                } else {
+                    // Including default information to CoreData in case of first launch
+                    let island = SelfIsland()
+                    island.name = name
+                    island.currentHealthStatus = NSNumber(value: currentHealth)
+                    island.islandId = UUID()
+                    island.lastHealthStatus = 0
+
+                    SelfIslandDataServices.createSelfIsland(island: island) { (error) in
+                        OperationQueue.main.addOperation {
+                            if (error != nil) {
+                                print(error.debugDescription)
+                            } else {
+                                self.sceneServices.addSelfIslandToScene(island: island)
+                                // Debug Code
+                                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.currentHealthStatus!)%")
+                            }
+                        }
+                    }
+                }
             }
         }
     }

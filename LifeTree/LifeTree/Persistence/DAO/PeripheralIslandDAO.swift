@@ -14,16 +14,19 @@ class PeripheralIslandDAO: DAO {
     /// - parameters:
     ///     - objectToBeSaved: island to be saved on database
     /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
-    static func create(_ objectToBeSaved: PeripheralIsland) throws {
-        do {
-            // add object to be saved to the context
-            CoreDataManager.sharedInstance.persistentContainer.viewContext.insert(objectToBeSaved)
+    static func create(_ objectToBeSaved: PeripheralIsland, completion: @escaping (Error?) -> Void) {
+        CoreDataManager.sharedInstance.operationQueue.addOperation { () -> Void in
+            do {
+                // add object to be saved to the context
+                CoreDataManager.sharedInstance.context.insert(objectToBeSaved)
 
-            // persist changes at the context
-            try CoreDataManager.sharedInstance.persistentContainer.viewContext.save()
-        }
-        catch {
-            throw Errors.DatabaseFailure
+                // persist changes at the context
+                try CoreDataManager.sharedInstance.context.save()
+                completion(nil)
+            }
+            catch {
+                completion(Errors.DatabaseFailure)
+            }
         }
     }
 
@@ -34,7 +37,7 @@ class PeripheralIslandDAO: DAO {
     static func update(_ objectToBeUpdated: PeripheralIsland) throws {
         do {
             // persist changes at the context
-            try CoreDataManager.sharedInstance.persistentContainer.viewContext.save()
+            try CoreDataManager.sharedInstance.context.save()
         }
         catch {
             throw Errors.DatabaseFailure
@@ -48,10 +51,10 @@ class PeripheralIslandDAO: DAO {
     static func delete(_ objectToBeDeleted: PeripheralIsland) throws {
         do {
             // delete element from context
-            CoreDataManager.sharedInstance.persistentContainer.viewContext.delete(objectToBeDeleted)
+            CoreDataManager.sharedInstance.context.delete(objectToBeDeleted)
 
             // persist the operation
-            try CoreDataManager.sharedInstance.persistentContainer.viewContext.save()
+            try CoreDataManager.sharedInstance.context.save()
         }
         catch {
             throw Errors.DatabaseFailure
@@ -70,7 +73,7 @@ class PeripheralIslandDAO: DAO {
             let request:NSFetchRequest<PeripheralIsland> = fetchRequest()
 
             // perform search
-            peripheralIslandList = try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(request)
+            peripheralIslandList = try CoreDataManager.sharedInstance.context.fetch(request)
         }
         catch {
             throw Errors.DatabaseFailure
@@ -95,7 +98,7 @@ class PeripheralIslandDAO: DAO {
             let request:NSFetchRequest<PeripheralIsland> = fetchRequest()
 
             // perform search
-            peripheralIslandList = try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(request)
+            peripheralIslandList = try CoreDataManager.sharedInstance.context.fetch(request)
         }
         catch {
             throw Errors.DatabaseFailure
@@ -115,7 +118,7 @@ class PeripheralIslandDAO: DAO {
             request.predicate = NSPredicate(format: "islandId == %@", objectID as CVarArg)
 
             // perform search
-            island = try CoreDataManager.sharedInstance.persistentContainer.viewContext.fetch(request)
+            island = try CoreDataManager.sharedInstance.context.fetch(request)
         }
         catch {
             throw Errors.DatabaseFailure

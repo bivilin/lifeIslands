@@ -15,7 +15,7 @@ class PeripheralIslandDataServices {
     ///     - island: Island to be saved
     ///     - completion: closure to be executed at the end of this method
     /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
-    static func createAllPeripheralIsland(islands: [PeripheralIsland], _ completion: ((_ error: Error?) -> Void)?)  {
+    static func createAllPeripheralIsland(islands: [PeripheralIsland], _ completion: @escaping ((_ error: Error?) -> Void))  {
         // block to be executed in background
         let blockForExecutionInBackground: BlockOperation = BlockOperation(block: {
             // error to be returned in case of failure
@@ -28,7 +28,7 @@ class PeripheralIslandDataServices {
                     } else if allIslands.count < 6 {
                         do {
                             for island in islands {
-                                try PeripheralIslandDAO.create(island)
+                                try PeripheralIslandDAO.create(island, completion: completion)
                             }
                         }
                         catch let error {
@@ -42,7 +42,7 @@ class PeripheralIslandDataServices {
 
                 // completion block execution
                 if (completion != nil) {
-                    let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(raisedError)})
+                    let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion(raisedError)})
 
                     // execute block in main
                     QueueManager.sharedInstance.executeBlock(blockForExecutionInMain, queueType: QueueManager.QueueType.main)
@@ -60,7 +60,7 @@ class PeripheralIslandDataServices {
     ///     - island: Island to be saved
     ///     - completion: closure to be executed at the end of this method
     /// - throws: if an error occurs during saving an object into database (Errors.DatabaseFailure)
-    static func createPeripheralIsland(island: PeripheralIsland, _ completion: ((_ error: Error?) -> Void)?)  {
+    static func createPeripheralIsland(island: PeripheralIsland, _ completion: @escaping ((_ error: Error?) -> Void))  {
         // block to be executed in background
         let blockForExecutionInBackground: BlockOperation = BlockOperation(block: {
             // error to be returned in case of failure
@@ -72,7 +72,7 @@ class PeripheralIslandDataServices {
                         print(error.debugDescription)
                     } else if allIslands.count < 6 {
                         do {
-                            try PeripheralIslandDAO.create(island)
+                            try PeripheralIslandDAO.create(island, completion: completion)
                         }
                         catch let error {
                             raisedError = error
@@ -85,7 +85,7 @@ class PeripheralIslandDataServices {
 
                 // completion block execution
                 if (completion != nil) {
-                    let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion!(raisedError)})
+                    let blockForExecutionInMain: BlockOperation = BlockOperation(block: {completion(raisedError)})
 
                     // execute block in main
                     QueueManager.sharedInstance.executeBlock(blockForExecutionInMain, queueType: QueueManager.QueueType.main)

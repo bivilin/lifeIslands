@@ -75,16 +75,6 @@ class IslandsViewController: UIViewController{
         // Inicializando classe que maneja os dados
         self.infoHandler = InformationHandler(sceneServices: islandsVisualizationServices!)
 
-
-        SelfIslandDataServices.getFirstSelfIsland { (error, island) in
-            if error == nil {
-                if let island = island {
-                    // Add self islando do scene
-                    self.islandsVisualizationServices!.addSelfIslandToScene(island: island)
-                }
-            }
-        }
-
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
         
