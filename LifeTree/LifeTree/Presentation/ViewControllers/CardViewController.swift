@@ -47,16 +47,17 @@ class CardViewController: UIViewController{
     }
     
     func loadProgress() {
-        
         //carrega dados da saude e define as estaçoes.
-        let currentHealth = selfIsland?.currentHealthStatus as! Double
-        let lastHeath = selfIsland?.lastHealthStatus as! Double
+        guard let island: SelfIsland = self.selfIsland else {return}
+        
+        let currentHealth = island.currentHealthStatus as! Double
+        let lastHeath = island.lastHealthStatus as! Double
+        
         let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
         seasonLabel.text = season?.name
         statusDescriptionLabel.text = season?.description
         
         //random para testar os circulos, substituir o season por : CGFloat(Int.random(in: 0...100))/100
-        
         var progress: CGFloat = 0
         var indicatorImageName = ""
 
