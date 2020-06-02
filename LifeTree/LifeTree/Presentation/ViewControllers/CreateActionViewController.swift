@@ -35,7 +35,6 @@ class CreateActionViewController: UIViewController {
         // Reconhece quando o usuário inputa algo na textField e gatilha o .keyboardWillShowNotification
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
 
-
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         // Adiciona gestos na interface
@@ -132,7 +131,7 @@ class CreateActionViewController: UIViewController {
     @IBAction func confirmButton(_ sender: Any) {
         
         // Chack if action has a title
-        if actionNameTextField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? false {
+        if self.actionNameTextField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? false {
             // string contains non-whitespace characters
             
             let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlert") as! CustomAlertViewController

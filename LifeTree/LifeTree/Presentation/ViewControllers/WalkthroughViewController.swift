@@ -88,7 +88,6 @@ extension WalkthroughViewController: WalkthroughDelegate {
     func didPressStartButton() {
         performSegue(withIdentifier: "fromWalkthroughToNameIsland", sender: self)
     }
-    
 }
 
 // MARK: ScrollView delegate

@@ -22,6 +22,19 @@ class CultivateIslandViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Sets the name label as the person's name
+        SelfIslandDataServices.getFirstSelfIsland { (error, selfIsland) in
+            if error != nil {
+                print(error.debugDescription)
+            } else {
+                if let island: SelfIsland = selfIsland {
+                    self.nameLabel.text = island.name
+                } else {
+                    self.nameLabel.isHidden = true
+                }
+            }
+        }
 
         // Set up interface
         cultivateButton.layer.cornerRadius = 10

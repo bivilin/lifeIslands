@@ -19,6 +19,32 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         self.textField.delegate = self
+        
+        // Reconhece quando o usuário inputa algo na textField e gatilha o .keyboardWillShowNotification
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @IBAction func nexButtonAction(_ sender: Any) {
+        
+        if self.textField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? false {
+            // string contains non-whitespace characters
+            
+            let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlert") as! CustomAlertViewController
+            customAlert.alertTitle = "Ops..."
+            customAlert.alertDescription = "Você deve escrever seu nome - ou a maneira como quer ser chamado - antes de prosseguir!"
+            CustomAlertServices().presentAsAlert(show: customAlert, over: self)
+        } else {
+            
+            // Changes userDefault so that the SceneDelegate knows the user has already done the app's onboarding and therefore change the initial ViewController
+            UserDefaults.standard.set(true, forKey: "notFirstInApp")
+            
+            // GRAVA NOME DO SELF NO COREDATA
+            // FAZ AQUI O CARREGAMENTO INICIAL DAS ILHAS PARA NÃO DAR NIL NO PRÓXIMO VC
+            
+            performSegue(withIdentifier: "fromNameIslandToMainScreen", sender: self)
+        }
     }
     
     func textFieldShouldReturn(_ scoreText: UITextField) -> Bool {
@@ -29,6 +55,7 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
 
     // Ajusta posição da ScrollView quando teclado aparece
     @objc func keyboardWillShow(notification: Notification) {
+        
         guard let userInfo = notification.userInfo else {return}
         guard let keyboardSize = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else {return}
         let keyboardFrame = keyboardSize.cgRectValue
@@ -40,7 +67,7 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
 
         // Se TextField seria coberto, scrolla o conteúdo para cima
         if activeFieldMaxY >= maxVisibleY {
-            self.scrollView.contentOffset.y += keyboardFrame.height
+            self.scrollView.contentOffset.y += maxVisibleY - keyboardFrame.height
             self.scrolledByKeyboard = true
         }
     }
@@ -53,7 +80,7 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
 
         // Se a tela foi scrollada, retorna para a posição anterior
         if self.scrolledByKeyboard {
-            self.scrollView.contentOffset.y -= keyboardFrame.height
+            self.scrollView.contentOffset.y -= (self.scrollView.frame.height - keyboardFrame.height) - keyboardFrame.height
         }
 
         // Atualiza flag para posição padrão, sem scroll
