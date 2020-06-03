@@ -74,10 +74,14 @@ class IslandsViewController: UIViewController{
 
         // Inicializando classe que maneja os dados
         self.infoHandler = InformationHandler(sceneServices: islandsVisualizationServices!)
-        
-        // Add self islando do scene
-        self.islandsVisualizationServices!.addSelfIslandToScene(islandsSCNScene: islandsSCNScene)
-        
+
+
+        SelfIslandDataServices.getFirstSelfIsland { (error, island) in
+            if error == nil {
+                    self.islandsVisualizationServices!.addSelfIslandToScene(island: island)
+            }
+        }
+
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
         
@@ -325,6 +329,7 @@ class IslandsViewController: UIViewController{
         if let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: node) {
             // Atualiza as informações da VC
             self.peripheralCardView.peripheralIsland = islandObject
+            self.peripheralCardView.islandSceneServices = self.islandsVisualizationServices
             // Atualiza o conteúdo do Floating Panel para a nova VC
             self.floatingPanel.set(contentViewController: self.peripheralCardView)
             // Atualiza SKScene do card

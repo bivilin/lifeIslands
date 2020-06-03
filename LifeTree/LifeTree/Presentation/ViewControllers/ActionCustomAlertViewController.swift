@@ -26,6 +26,8 @@ class ActionCustomAlertViewController: UIViewController {
     var action = Action()
     var island = PeripheralIsland()
     var delegate: ActionCustomAlertViewDelegate?
+
+    var islandSceneServices: IslandsVisualisationServices?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +80,7 @@ class ActionCustomAlertViewController: UIViewController {
             guard let numberOfDrops = self.action.impactLevel else {return}
             destination.numberOfDrops = Int(truncating: numberOfDrops)
             destination.island = self.island
+            destination.islandSceneServices = self.islandSceneServices
         }
     }
 }

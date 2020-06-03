@@ -15,6 +15,7 @@ class PeripheralCardViewController: UIViewController {
     @IBOutlet weak var nameIsland: UILabel!
     @IBOutlet weak var actionsTableView: UITableView!
     @IBOutlet weak var lastActivityMessageLabel: UILabel!
+    var islandSceneServices: IslandsVisualisationServices?
     var islandScene: SKScene?
 
     var peripheralIsland: PeripheralIsland?
@@ -182,6 +183,7 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
         customAlert.delegate = self
         customAlert.action = action
         customAlert.island = self.peripheralIsland!
+        customAlert.islandSceneServices = self.islandSceneServices
         
         CustomAlertServices().presentAsAlert(show: customAlert, over: self)
     }

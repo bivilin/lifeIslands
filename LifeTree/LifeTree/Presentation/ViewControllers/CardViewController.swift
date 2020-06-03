@@ -49,7 +49,7 @@ class CardViewController: UIViewController{
     func loadProgress() {
         
         //carrega dados da saude e define as estaçoes.
-        let currentHealth = selfIsland?.currentHealthStatus as! Double
+        guard let currentHealth = selfIsland?.currentHealthStatus as? Double else {return}
         let lastHeath = selfIsland?.lastHealthStatus as! Double
         let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
         seasonLabel.text = season?.name

@@ -12,8 +12,8 @@ import SpriteKit
 class IslandSpriteScene: SKScene {
     var islandNode: SKSpriteNode?
 
-    func changeTexture(named: String) {
+    func changeTexture(texture: SKTexture) {
         islandNode = self.childNode(withName: "islandNode") as? SKSpriteNode
-        islandNode?.texture = SKTexture(imageNamed: named)
+        islandNode?.texture = texture
     }
 }

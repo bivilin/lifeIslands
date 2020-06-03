@@ -24,12 +24,12 @@ class InformationHandler {
     // Os mesmos métodos podem ser utilizados na VC para customização
     func loadData() {
         self.createSelf(name: "Meu Mundo", currentHealth: 50)
-        self.addPeripheralIslandToArray(category: "Trabalho", name: "Trabalho", healthStatus: 90)
-        self.addPeripheralIslandToArray(category: "Faculdade", name: "Faculdade", healthStatus: 55)
-        self.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 20)
-        self.addPeripheralIslandToArray(category: "Saúde", name: "Academia", healthStatus: 50)
-        self.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 60)
-        self.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 80)
+        self.addPeripheralIslandToArray(category: "Trabalho", name: "Trabalho", healthStatus: 66)
+        self.addPeripheralIslandToArray(category: "Faculdade", name: "Faculdade", healthStatus: 66)
+        self.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 32)
+        self.addPeripheralIslandToArray(category: "Saúde", name: "Academia", healthStatus: 66)
+        self.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 32)
+        self.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 32)
         self.plotPeripheralIslandsOnScene(shouldAddToScene: true)
     }
 
