@@ -14,7 +14,6 @@ class FixedContentCell: UITableViewCell {
     var peripheralIsland: PeripheralIsland?
     @IBOutlet weak var seasonLabel: UILabel!
     @IBOutlet weak var statusDescriptionLabel: UILabel!
-    @IBOutlet weak var islandSKView: SKView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,10 +22,6 @@ class FixedContentCell: UITableViewCell {
 
     // Carrega SKScene e infos das labels
     func loadContents(island: PeripheralIsland, scene: SKScene) {
-
-        // Set up the SKView for the island
-        self.islandSKView?.presentScene(scene)
-        self.islandSKView?.allowsTransparency = true
 
         // Definindo estação
         let currentHealth = island.currentHealthStatus as! Double

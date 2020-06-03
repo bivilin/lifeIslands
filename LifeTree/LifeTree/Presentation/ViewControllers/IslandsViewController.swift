@@ -92,8 +92,8 @@ class IslandsViewController: UIViewController{
         self.cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
         let selfIslandSKScene = self.islandsVisualizationServices?.getSelfIslandSKScene()
         if selfIslandSKScene != nil {
-            self.cardView.islandSKScene = selfIslandSKScene!
-            self.cardView.islandSKScene.scaleMode = .aspectFit
+//            self.cardView.islandSKScene = selfIslandSKScene!
+//            self.cardView.islandSKScene.scaleMode = .aspectFit
         }
         
         // Set up card for peripheral islands
@@ -346,6 +346,7 @@ class IslandsViewController: UIViewController{
     func floatingPanelDidEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetPosition: FloatingPanelPosition) {
         // animação do circulo funciona só quando termina de arrastar o card.
         self.cardView.loadProgress()
+        self.peripheralCardView.loadProgressPeripheral()
     }
 
     func setupFloatingPanel() {

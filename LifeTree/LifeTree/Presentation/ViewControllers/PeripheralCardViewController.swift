@@ -9,12 +9,15 @@
 import Foundation
 import UIKit
 import SpriteKit
+import UICircularProgressRing
 
 class PeripheralCardViewController: UIViewController {
 
     @IBOutlet weak var nameIsland: UILabel!
     @IBOutlet weak var actionsTableView: UITableView!
     @IBOutlet weak var lastActivityMessageLabel: UILabel!
+    @IBOutlet weak var progressSeasonPeripheral: UICircularProgressRing!
+    @IBOutlet weak var islandImage: UIImageView!
     var islandSceneServices: IslandsVisualisationServices?
     var islandScene: SKScene?
 
@@ -35,6 +38,9 @@ class PeripheralCardViewController: UIViewController {
 
         // Labels
         updateLabels()
+        
+        // Colocando a linha do pod em cima do circulo imagem
+        progressSeasonPeripheral.style = .ontop
 
 
         // Debug
@@ -45,6 +51,7 @@ class PeripheralCardViewController: UIViewController {
 
     // Atualiza labels de acordo com dados persistidos
     func updateLabels() {
+
         // Definindo nome da ilha
         nameIsland.text = peripheralIsland?.name
 
@@ -80,6 +87,7 @@ class PeripheralCardViewController: UIViewController {
                 if error == nil {
                     self.peripheralIsland = island
                     self.updateLabels()
+                    self.updateImage(island: island)
                 }
             }
         }
@@ -100,6 +108,61 @@ class PeripheralCardViewController: UIViewController {
     // Atualiza dados quando o usuário sai da CreateActionViewController
     @IBAction func unwindToPeriphalIsland(_ unwindSegue: UIStoryboardSegue) {
         self.updateDataFromDatabase()
+    }
+    
+    func loadProgressPeripheral() {
+        
+        guard let currentHealth = peripheralIsland?.currentHealthStatus as? Double else { return }
+        guard let lastHeath = peripheralIsland?.lastHealthStatus as? Double else { return }
+        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
+            
+            var progress: CGFloat = 0
+            var indicatorImageName = ""
+
+            // switch para saber em que ponto do circulo o calculo irá cair
+            switch season {
+            case .autumn:
+                progress = CGFloat(Int.random(in: 45...55))
+                indicatorImageName = "autumn"
+            case .spring:
+                let i = Int.random(in: 1...10)
+                if i % 2 == 0 {
+                    progress = CGFloat(Int.random(in: 1...6))
+                } else {
+                    progress = CGFloat(Int.random(in: 94...100))
+                }
+                indicatorImageName = "spring"
+                break
+            case .summer:
+                progress = CGFloat(Int.random(in: 17...25))
+                indicatorImageName = "summer"
+                break
+            case .winter:
+                progress = CGFloat(Int.random(in: 70...80))
+                indicatorImageName = "winter"
+            case .none:
+                break
+            }
+            
+            // troca de imagem do indicador de acordo com a estação e roda a animação
+            let indicatorSeason = UICircularRingValueKnobStyle(size: 60, color: .clear, image: UIImage(named: indicatorImageName))
+            progressSeasonPeripheral.valueKnobStyle = indicatorSeason
+            progressSeasonPeripheral.startProgress(to: progress, duration: 3)
+        }
+
+    // Atualiza imagem da ilha no card
+    func updateImage(island: PeripheralIsland?) {
+        guard let island = island else {
+            print("Island not found. Image will not be updated.")
+            return
+        }
+        // Definindo estação
+        let currentHealth = island.currentHealthStatus as! Double
+        let lastHeath = island.lastHealthStatus as! Double
+        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
+        if let imageNamed = season?.imageNamed {
+            islandImage.image = UIImage(named: imageNamed)
+        }
     }
 }
 
