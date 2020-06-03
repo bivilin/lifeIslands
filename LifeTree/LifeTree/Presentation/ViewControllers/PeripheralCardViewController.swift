@@ -45,8 +45,8 @@ class PeripheralCardViewController: UIViewController {
 
         // Debug
         print("===== ENTRANDO NA ILHA =====")
-        print("Saúde Atual da Ilha: \(self.peripheralIsland?.currentHealthStatus)")
-        print("Saúde Anterior da Ilha: \(self.peripheralIsland?.lastHealthStatus)")
+        print("Saúde Atual da Ilha: \(String(describing: self.peripheralIsland?.currentHealthStatus))")
+        print("Saúde Anterior da Ilha: \(String(describing: self.peripheralIsland?.lastHealthStatus))")
     }
 
     // Atualiza labels de acordo com dados persistidos

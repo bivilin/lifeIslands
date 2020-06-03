@@ -21,16 +21,10 @@ class CardViewController: UIViewController{
     @IBOutlet weak var progressSeason: UICircularProgressRing!
     @IBOutlet weak var statusDescriptionLabel: UILabel!
 
-    
     var selfIsland: SelfIsland?
-//    var islandSKScene = SKScene()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Set up self island SKScene
-//        self.islandSKView.allowsTransparency = true
-//        self.islandSKView.presentScene(islandSKScene)
         
         // colocando a linha do pod em cima do circulo imagem
         progressSeason.style = .ontop
@@ -69,7 +63,7 @@ class CardViewController: UIViewController{
         var progress: CGFloat = 0
         var indicatorImageName = ""
 
-        // swift para saber em que ponto do circulo o calculo irá cair
+        // switch para saber em que ponto do circulo o calculo irá cair
         switch season {
         case .autumn:
             progress = CGFloat(Int.random(in: 45...55))

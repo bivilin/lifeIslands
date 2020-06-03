@@ -342,6 +342,7 @@ class IslandsViewController: UIViewController{
     }
     
     func floatingPanelDidEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetPosition: FloatingPanelPosition) {
+        
         // animação do circulo funciona só quando termina de arrastar o card.
         self.cardView.loadProgress()
         self.peripheralCardView.loadProgressPeripheral()
