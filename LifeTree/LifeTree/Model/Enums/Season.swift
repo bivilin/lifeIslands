@@ -54,5 +54,22 @@ enum Season : String {
         }
     }
 
+    var imageNamed: String {
+        var label: String = ""
+        switch self {
+        case .winter:
+            label = "winter"
+        case .spring:
+            label = "spring"
+        case .summer:
+            label = "summer"
+        case .autumn:
+            label = "autumn"
+        }
+        label = label + "Island"
+
+        return label
+    }
+
 
 }

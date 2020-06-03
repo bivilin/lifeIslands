@@ -16,7 +16,8 @@ class PeripheralCardViewController: UIViewController {
     @IBOutlet weak var nameIsland: UILabel!
     @IBOutlet weak var actionsTableView: UITableView!
     @IBOutlet weak var lastActivityMessageLabel: UILabel!
-
+    @IBOutlet weak var islandImage: UIImageView!
+    
     @IBOutlet weak var progressSeasonPeripheral: UICircularProgressRing!
     var islandScene: SKScene?
 
@@ -50,6 +51,7 @@ class PeripheralCardViewController: UIViewController {
 
     // Atualiza labels de acordo com dados persistidos
     func updateLabels() {
+
         // Definindo nome da ilha
         nameIsland.text = peripheralIsland?.name
 
@@ -85,6 +87,7 @@ class PeripheralCardViewController: UIViewController {
                 if error == nil {
                     self.peripheralIsland = island
                     self.updateLabels()
+                    self.updateImage(island: island)
                 }
             }
         }
@@ -146,6 +149,21 @@ class PeripheralCardViewController: UIViewController {
             progressSeasonPeripheral.valueKnobStyle = indicatorSeason
             progressSeasonPeripheral.startProgress(to: progress, duration: 3)
         }
+
+    // Atualiza imagem da ilha no card
+    func updateImage(island: PeripheralIsland?) {
+        guard let island = island else {
+            print("Island not found. Image will not be updated.")
+            return
+        }
+        // Definindo estação
+        let currentHealth = island.currentHealthStatus as! Double
+        let lastHeath = island.lastHealthStatus as! Double
+        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
+        if let imageNamed = season?.imageNamed {
+            islandImage.image = UIImage(named: imageNamed)
+        }
+    }
 }
 
 // MARK: Table View - List of Actions

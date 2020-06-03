@@ -15,7 +15,8 @@ class CardViewController: UIViewController{
     
     @IBOutlet weak var nameIsland: UILabel!
     @IBOutlet weak var phrase: UILabel!
-    
+    @IBOutlet weak var islandImage: UIImageView!
+
     @IBOutlet weak var seasonLabel: UILabel!
     @IBOutlet weak var progressSeason: UICircularProgressRing!
     @IBOutlet weak var statusDescriptionLabel: UILabel!
@@ -41,6 +42,7 @@ class CardViewController: UIViewController{
                 if let selfIsland = selfIsland {
                     self.selfIsland = selfIsland
                     self.nameIsland.text = selfIsland.name
+                    self.updateImage(island: self.selfIsland)
                 }
             }
         }
@@ -96,6 +98,21 @@ class CardViewController: UIViewController{
         progressSeason.valueKnobStyle = indicatorSeason
         progressSeason.startProgress(to: progress, duration: 3)
         print(progress)
+    }
+
+    // Atualiza imagem da ilha no card
+    func updateImage(island: SelfIsland?) {
+        guard let island = island else {
+            print("Island not found. Image will not be updated.")
+            return
+        }
+        // Definindo estação
+        let currentHealth = island.currentHealthStatus as! Double
+        let lastHeath = island.lastHealthStatus as! Double
+        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
+        if let imageNamed = season?.imageNamed {
+            islandImage.image = UIImage(named: imageNamed)
+        }
     }
 }
 

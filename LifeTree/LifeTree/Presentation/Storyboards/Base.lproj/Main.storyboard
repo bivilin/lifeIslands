@@ -233,6 +233,7 @@
                     </view>
                     <size key="freeformSize" width="414" height="896"/>
                     <connections>
+                        <outlet property="islandImage" destination="Ec3-Q1-99c" id="8qp-B7-vQM"/>
                         <outlet property="nameIsland" destination="KpB-AV-VyN" id="GJq-ap-hN5"/>
                         <outlet property="phrase" destination="igg-P1-e6f" id="fMW-GR-WRQ"/>
                         <outlet property="progressSeason" destination="VPG-Cc-sn7" id="Sua-wL-N8p"/>
@@ -518,6 +519,7 @@
                     <navigationItem key="navigationItem" id="hjW-8g-arw"/>
                     <connections>
                         <outlet property="actionsTableView" destination="PJ7-YZ-Lav" id="vfW-wu-nLA"/>
+                        <outlet property="islandImage" destination="FIL-FG-oKk" id="464-eA-Cm5"/>
                         <outlet property="lastActivityMessageLabel" destination="V8b-5F-bIf" id="kz5-S5-aOI"/>
                         <outlet property="nameIsland" destination="MLX-U9-79p" id="Zpr-95-AeF"/>
                         <outlet property="progressSeasonPeripheral" destination="Yet-yE-VKL" id="xuf-Vm-s3M"/>
@@ -847,13 +849,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parabéns," textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDu-S4-BIH">
-                                <rect key="frame" x="40" y="184.5" width="334" height="35"/>
+                                <rect key="frame" x="40" y="181" width="334" height="42"/>
                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IhV-Qt-lDQ" userLabel="StyleLine">
-                                <rect key="frame" x="147" y="264.5" width="120" height="3"/>
+                                <rect key="frame" x="147" y="275" width="120" height="3"/>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="3G2-hc-LtQ"/>
@@ -861,7 +863,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amanda!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFI-aM-zsF">
-                                <rect key="frame" x="40" y="219.5" width="334" height="35"/>
+                                <rect key="frame" x="40" y="223" width="334" height="42"/>
                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -888,7 +890,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ao fazer essa atividade você ganhou X gotas para cultivar essa área" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRY-hZ-o30">
-                                <rect key="frame" x="40" y="453" width="334" height="37.5"/>
+                                <rect key="frame" x="40" y="453" width="334" height="39.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
