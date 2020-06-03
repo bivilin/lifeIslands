@@ -88,8 +88,8 @@ class IslandsViewController: UIViewController{
         self.cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
         let selfIslandSKScene = self.islandsVisualizationServices?.getSelfIslandSKScene()
         if selfIslandSKScene != nil {
-            self.cardView.islandSKScene = selfIslandSKScene!
-            self.cardView.islandSKScene.scaleMode = .aspectFit
+//            self.cardView.islandSKScene = selfIslandSKScene!
+//            self.cardView.islandSKScene.scaleMode = .aspectFit
         }
         
         // Set up card for peripheral islands
