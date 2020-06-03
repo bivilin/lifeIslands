@@ -47,13 +47,21 @@ class CardViewController: UIViewController{
     }
     
     func loadProgress() {
-        
-        //carrega dados da saude e define as estaçoes.
-        let currentHealth = selfIsland?.currentHealthStatus as! Double
-        let lastHeath = selfIsland?.lastHealthStatus as! Double
-        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
-        seasonLabel.text = season?.name
-        statusDescriptionLabel.text = season?.description
+
+        // Define uma estação default para caso a ilha ainda não tenha sido carregada
+        var season: Season = .spring
+
+        if let island = selfIsland {
+            //carrega dados da saude e define as estaçoes.
+            let currentHealth = island.currentHealthStatus as! Double
+            let lastHeath = island.lastHealthStatus as! Double
+            if let newSeason = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath) {
+                season = newSeason
+            }
+        }
+
+        self.seasonLabel.text = season.name
+        self.statusDescriptionLabel.text = season.description
         
         //random para testar os circulos, substituir o season por : CGFloat(Int.random(in: 0...100))/100
         
@@ -81,8 +89,6 @@ class CardViewController: UIViewController{
         case .winter:
             progress = CGFloat(Int.random(in: 70...80))
             indicatorImageName = "winter"
-        case .none:
-            break
         }
         
         // troca de imagem do indicador de acordo com a estação e roda a animação.
