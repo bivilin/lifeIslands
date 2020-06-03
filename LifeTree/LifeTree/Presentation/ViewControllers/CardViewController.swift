@@ -19,17 +19,17 @@ class CardViewController: UIViewController{
     @IBOutlet weak var seasonLabel: UILabel!
     @IBOutlet weak var progressSeason: UICircularProgressRing!
     @IBOutlet weak var statusDescriptionLabel: UILabel!
-    @IBOutlet weak var islandSKView: SKView!
+
     
     var selfIsland: SelfIsland?
-    var islandSKScene = SKScene()
+//    var islandSKScene = SKScene()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Set up self island SKScene
-        self.islandSKView.allowsTransparency = true
-        self.islandSKView.presentScene(islandSKScene)
+//        self.islandSKView.allowsTransparency = true
+//        self.islandSKView.presentScene(islandSKScene)
         
         // colocando a linha do pod em cima do circulo imagem
         progressSeason.style = .ontop
