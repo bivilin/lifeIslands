@@ -328,16 +328,14 @@ class IslandsViewController: UIViewController{
         // Utiliza o nó para obter o objeto referente àquela ilha
         if let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: node) {
             // Atualiza as informações da VC
+            
             self.peripheralCardView.peripheralIsland = islandObject
             self.peripheralCardView.islandSceneServices = self.islandsVisualizationServices
+            
             // Atualiza o conteúdo do Floating Panel para a nova VC
             self.floatingPanel.set(contentViewController: self.peripheralCardView)
-            // Atualiza SKScene do card
-            if let scene = self.islandsVisualizationServices?.getIslandSKSceneFromNode(node: node) {
-                scene.scaleMode = .aspectFit
-                self.peripheralCardView.islandScene = scene
-            }
-        } else {
+        }
+        else {
             // Ilha Central
             self.floatingPanel.set(contentViewController: self.cardView)
         }

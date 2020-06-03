@@ -11,6 +11,7 @@ import UIKit
 
 protocol UpdateIslandDelegate {
     func updateTextureForIsland(islandID: UUID)
+    func updateTextureForSelfIsland(selfIsland: SelfIsland)
 }
 
 class CultivateIslandViewController: UIViewController {
@@ -68,6 +69,10 @@ class CultivateIslandViewController: UIViewController {
 
                     if let id = island?.islandId {
                         self.islandSceneServices?.updateTextureForIsland(islandID: id)
+                    }
+                    
+                    UpdateIslandsHealth().updateSelfIslandHealth { (selfIsland) in
+                        self.islandSceneServices?.updateTextureForSelfIsland(selfIsland: selfIsland)
                     }
 
                     self.performSegue(withIdentifier: "unwindToPeriphalIslandAfterActionIsDone", sender: self)
