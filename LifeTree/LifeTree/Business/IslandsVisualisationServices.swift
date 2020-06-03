@@ -25,22 +25,33 @@ class IslandsVisualisationServices {
     var islandDictionary: [UUID: SCNNode] = [:]
     
     var gaussianBlur = CIFilter(name: "CIGaussianBlur")
+
+    var cultivateIslandViewController: CultivateIslandViewController?
     
     init(scnScene: SCNScene) {
         self.islandsSCNScene = scnScene
         
         let blurRadius = 6
         gaussianBlur?.setValue(blurRadius, forKey: kCIInputRadiusKey)
+
+        self.cultivateIslandViewController?.delegate = self
     }
     
     // Add self island to scene
-    func addSelfIslandToScene(islandsSCNScene: SCNScene) {
+    func addSelfIslandToScene(island: SelfIsland?) {
         
         // Set SpriteKit scene as the material for the SceneKit plane
-        if let selfIslandPlane = islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true),
+        if let selfIslandPlane = self.islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true),
             let selfIslandPlaneGeometry = selfIslandPlane.geometry {
-            self.setPlaneMaterialAsIslandSKScene(planeGeometry: selfIslandPlaneGeometry)
-            
+
+            var texture = SKTexture(imageNamed: "springIsland")
+
+            if let island = island {
+                 texture = self.getTextureForIsland(island: island)
+            }
+
+            self.setPlaneMaterialAsIslandSKScene(planeGeometry: selfIslandPlaneGeometry, texture: texture)
+
             // Places billboard constraint so that self plane is always facing the camera
             let constraint = SCNBillboardConstraint()
             selfIslandPlane.constraints = [constraint]
@@ -64,7 +75,10 @@ class IslandsVisualisationServices {
         // Creates plane with island
         var planeGeometry: SCNGeometry
         planeGeometry = SCNPlane(width: self.planeLength, height: self.planeLength)
-        self.setPlaneMaterialAsIslandSKScene(planeGeometry: planeGeometry)
+
+        let island = self.peripheralIslands[n-1]
+        let islandTexture = getTextureForIsland(island: island)
+        self.setPlaneMaterialAsIslandSKScene(planeGeometry: planeGeometry, texture: islandTexture)
         
         // Add plane node to the SCNScene with all islands
         let islandNode = SCNNode(geometry: planeGeometry)
@@ -75,6 +89,19 @@ class IslandsVisualisationServices {
         
         // Positions island in the orbit circle
         self.positionIslandInCircle(islandNode: islandNode, n: n)
+    }
+
+    // Define textura adequada para a ilha
+    // Any foi usado para permitir input tanto de SelfIsland quanto PeripheralIsland
+    func getTextureForIsland(island: Any) -> SKTexture {
+        // Definindo estação
+        let currentHealth = (island as AnyObject).currentHealthStatus as! Double
+        let lastHeath = (island as AnyObject).lastHealthStatus as! Double
+        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
+        
+        let texture = season?.texture ?? SKTexture(imageNamed: "springIsland")
+
+        return texture
     }
     
     // Position a peripheral islands in the ellipse with focus in the self island
@@ -111,7 +138,7 @@ class IslandsVisualisationServices {
     }
     
     // Define the material for a plane as the island SpriteKit scene model
-    func setPlaneMaterialAsIslandSKScene(planeGeometry: SCNGeometry) {
+    func setPlaneMaterialAsIslandSKScene(planeGeometry: SCNGeometry, texture: SKTexture) {
         // Assign a SpriteKit scene as texture to such plane
         if let planeMaterial = planeGeometry.firstMaterial {
             
@@ -127,7 +154,7 @@ class IslandsVisualisationServices {
             // Flips plane material vertically so SKScene is displayed correctly
             planeMaterial.diffuse.contentsTransform = SCNMatrix4Translate(SCNMatrix4MakeScale(1, -1, 1), 0, 1, 0)
 
-            newSpriteKitScene.changeTexture(named: "summerIsland")
+            newSpriteKitScene.changeTexture(texture: texture)
 
         }
     }
@@ -231,3 +258,19 @@ class IslandsVisualisationServices {
     }
 }
 
+extension IslandsVisualisationServices: UpdateIslandDelegate {
+    // Altera textura de um node específico
+    func updateTextureForIsland(islandID: UUID) {
+        guard let node = islandDictionary[islandID] else {return}
+        let islandSKScene = node.geometry?.firstMaterial?.diffuse.contents as? IslandSpriteScene
+
+        PeripheralIslandDataServices.findById(objectID: islandID) { (error, island) in
+            if error == nil {
+                if let island = island {
+                    let texture = self.getTextureForIsland(island: island)
+                    islandSKScene?.changeTexture(texture: texture)
+                }
+            }
+        }
+    }
+}
