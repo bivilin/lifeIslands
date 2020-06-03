@@ -42,8 +42,9 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
             
             // GRAVA NOME DO SELF NO COREDATA
             // FAZ AQUI O CARREGAMENTO INICIAL DAS ILHAS PARA NÃO DAR NIL NO PRÓXIMO VC
-            
-            performSegue(withIdentifier: "fromNameIslandToMainScreen", sender: self)
+            if let userName = textField.text {
+                self.createSelf(name: userName, currentHealth: 50)
+            }
         }
     }
     
@@ -85,5 +86,25 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
 
         // Atualiza flag para posição padrão, sem scroll
         self.scrolledByKeyboard = false
+    }
+
+    // Create Self Island
+    func createSelf(name: String, currentHealth: Double) {
+        // Including default information to CoreData in case of first launch
+        let island = SelfIsland()
+        island.name = name
+        island.currentHealthStatus = NSNumber(value: currentHealth)
+        island.islandId = UUID()
+        island.lastHealthStatus = 0
+
+        SelfIslandDataServices.createSelfIsland(island: island) { (error) in
+            if (error != nil) {
+                print(error.debugDescription)
+            } else {
+                // Debug Code
+                self.performSegue(withIdentifier: "fromNameIslandToMainScreen", sender: self)
+                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.currentHealthStatus!)%")
+            }
+        }
     }
 }

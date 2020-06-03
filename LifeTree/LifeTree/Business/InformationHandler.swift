@@ -23,7 +23,7 @@ class InformationHandler {
     // Os dados estão temporariamente estáticos para MVP
     // Os mesmos métodos podem ser utilizados na VC para customização
     func loadData() {
-        self.createSelf(name: "Meu Mundo", currentHealth: 50)
+        //self.createSelf(name: "Meu Mundo", currentHealth: 50)
         self.addPeripheralIslandToArray(category: "Trabalho", name: "Trabalho", healthStatus: 66)
         self.addPeripheralIslandToArray(category: "Faculdade", name: "Faculdade", healthStatus: 66)
         self.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 32)
@@ -35,23 +35,24 @@ class InformationHandler {
 
     // MARK: Self Create
     // Cria ilha do Self
-    func createSelf(name: String, currentHealth: Double) {
-        // Including default information to CoreData in case of first launch
-        let island = SelfIsland()
-        island.name = name
-        island.currentHealthStatus = NSNumber(value: currentHealth)
-        island.islandId = UUID()
-        island.lastHealthStatus = 0
-
-        SelfIslandDataServices.createSelfIsland(island: island) { (error) in
-            if (error != nil) {
-                print(error.debugDescription)
-            } else {
-                // Debug Code
-                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.currentHealthStatus!)%")
-            }
-        }
-    }
+//    func createSelf(name: String, currentHealth: Double, completion: (() -> Void)) {
+//        // Including default information to CoreData in case of first launch
+//        let island = SelfIsland()
+//        island.name = name
+//        island.currentHealthStatus = NSNumber(value: currentHealth)
+//        island.islandId = UUID()
+//        island.lastHealthStatus = 0
+//
+//        SelfIslandDataServices.createSelfIsland(island: island) { (error) in
+//            if (error != nil) {
+//                print(error.debugDescription)
+//            } else {
+//                // Debug Code
+//                completion()
+//                print("Mundo criado #\(island.islandId!) - \(island.name!) - Saúde de \(island.currentHealthStatus!)%")
+//            }
+//        }
+//    }
 
     // MARK: Single Peripheral
     // Permite a inclusão de uma nova ilha periférica
