@@ -12,7 +12,8 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
-    
+    var infoHandler = InformationHandler()
+
     var scrolledByKeyboard: Bool = false
     
     override func viewDidLoad() {
@@ -42,8 +43,13 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
             
             // GRAVA NOME DO SELF NO COREDATA
             // FAZ AQUI O CARREGAMENTO INICIAL DAS ILHAS PARA NÃO DAR NIL NO PRÓXIMO VC
-            
-            performSegue(withIdentifier: "fromNameIslandToMainScreen", sender: self)
+            if let userName = textField.text {
+                self.loadData(name: userName) { (didAddToDatabase) in
+                    if didAddToDatabase {
+                        performSegue(withIdentifier: "fromNameIslandToMainScreen", sender: self)
+                    }
+                }
+            }
         }
     }
     
@@ -86,4 +92,25 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
         // Atualiza flag para posição padrão, sem scroll
         self.scrolledByKeyboard = false
     }
+
+    // MARK: Create Core Data
+
+    func loadData(name: String, completion: ((Bool) -> Void)) {
+        infoHandler.addPeripheralIslandToArray(category: "Trabalho", name: "Trabalho", healthStatus: 66)
+        infoHandler.addPeripheralIslandToArray(category: "Faculdade", name: "Faculdade", healthStatus: 66)
+        infoHandler.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 32)
+        infoHandler.addPeripheralIslandToArray(category: "Saúde", name: "Academia", healthStatus: 66)
+        infoHandler.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 32)
+        infoHandler.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 32)
+        infoHandler.addAllPeripheralIslandsToDatabase() { (didAddToDatabase) in
+            if didAddToDatabase {
+                self.infoHandler.createSelf(name: name, currentHealth: 50) { (didAddToDatabase) in
+                    if didAddToDatabase {
+                        completion(true)
+                    }
+                }
+            }
+        }
+    }
+
 }
