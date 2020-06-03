@@ -44,10 +44,8 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
             // GRAVA NOME DO SELF NO COREDATA
             // FAZ AQUI O CARREGAMENTO INICIAL DAS ILHAS PARA NÃO DAR NIL NO PRÓXIMO VC
             if let userName = textField.text {
-                self.loadData(name: userName) { (didAddToDatabase) in
-                    if didAddToDatabase {
-                        performSegue(withIdentifier: "fromNameIslandToMainScreen", sender: self)
-                    }
+                self.loadData(name: userName) {
+                    self.performSegue(withIdentifier: "fromNameIslandToMainScreen", sender: self)
                 }
             }
         }
@@ -95,22 +93,17 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
 
     // MARK: Create Core Data
 
-    func loadData(name: String, completion: ((Bool) -> Void)) {
+    func loadData(name: String, completion: @escaping () -> Void) {
         infoHandler.addPeripheralIslandToArray(category: "Trabalho", name: "Trabalho", healthStatus: 66)
         infoHandler.addPeripheralIslandToArray(category: "Faculdade", name: "Faculdade", healthStatus: 66)
         infoHandler.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 32)
         infoHandler.addPeripheralIslandToArray(category: "Saúde", name: "Academia", healthStatus: 66)
         infoHandler.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 32)
         infoHandler.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 32)
-        infoHandler.addAllPeripheralIslandsToDatabase() { (didAddToDatabase) in
-            if didAddToDatabase {
-                self.infoHandler.createSelf(name: name, currentHealth: 50) { (didAddToDatabase) in
-                    if didAddToDatabase {
-                        completion(true)
-                    }
-                }
+        infoHandler.addAllPeripheralIslandsToDatabase() {
+            self.infoHandler.createSelf(name: name, currentHealth: 50) {
+                completion()
             }
         }
     }
-
 }

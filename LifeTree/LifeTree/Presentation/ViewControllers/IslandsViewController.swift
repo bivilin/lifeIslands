@@ -73,18 +73,18 @@ class IslandsViewController: UIViewController{
         self.islandsVisualizationServices = IslandsVisualisationServices(scnScene: islandsSCNScene)
 
         // Inicializando classe que maneja os dados
-        //self.infoHandler = InformationHandler()
+        self.infoHandler = InformationHandler()
 
 
-        SelfIslandDataServices.getFirstSelfIsland { (error, island) in
+        SelfIslandDataServices.getFirstSelfIsland() { (error, island) in
             if error == nil {
                     self.islandsVisualizationServices!.addSelfIslandToScene(island: island)
             }
         }
 
-        self.infoHandler?.plotPeripheralIslandsOnScene(shouldAddToScene: true, completion: { (islands) in
+        self.infoHandler?.retrievePeripheralIslands() { (islands) in
             self.islandsVisualizationServices?.addAllPeripheralIslandsToScene(peripheralIslandArray: islands)
-        })
+        }
 
 
         // Set the scene to the view
