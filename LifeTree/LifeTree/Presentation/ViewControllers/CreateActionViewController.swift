@@ -35,7 +35,6 @@ class CreateActionViewController: UIViewController {
         // Reconhece quando o usuário inputa algo na textField e gatilha o .keyboardWillShowNotification
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
 
-
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         // Adiciona gestos na interface
@@ -61,7 +60,7 @@ class CreateActionViewController: UIViewController {
 
         var activeFieldMaxY: CGFloat = 0.0
 
-        if isTextFieldSelected! {
+        if self.isTextFieldSelected! {
             // Posição Y do TextField selecionado
             activeFieldMaxY = self.currentTextField!.frame.maxY - self.scrollView.contentOffset.y
         } else {
@@ -74,7 +73,7 @@ class CreateActionViewController: UIViewController {
         // Se TextField seria coberto, scrolla o conteúdo para cima
         if activeFieldMaxY >= maxVisibleY {
             self.scrollView.contentOffset.y += keyboardFrame.height
-            scrolledByKeyboard = true
+            self.scrolledByKeyboard = true
         }
     }
 
@@ -85,12 +84,12 @@ class CreateActionViewController: UIViewController {
         let keyboardFrame = keyboardSize.cgRectValue
 
         // Se a tela foi scrollada, retorna para a posição anterior
-        if scrolledByKeyboard {
+        if self.scrolledByKeyboard {
             self.scrollView.contentOffset.y -= keyboardFrame.height
         }
 
         // Atualiza flag para posição padrão, sem scroll
-        scrolledByKeyboard = false
+        self.scrolledByKeyboard = false
     }
 
     // MARK: Gestures
@@ -132,7 +131,7 @@ class CreateActionViewController: UIViewController {
     @IBAction func confirmButton(_ sender: Any) {
         
         // Chack if action has a title
-        if actionNameTextField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? false {
+        if self.actionNameTextField.text?.trimmingCharacters(in: .whitespaces).isEmpty ?? false {
             // string contains non-whitespace characters
             
             let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlert") as! CustomAlertViewController

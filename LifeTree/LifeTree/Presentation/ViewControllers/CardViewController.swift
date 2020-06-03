@@ -66,7 +66,6 @@ class CardViewController: UIViewController{
         self.statusDescriptionLabel.text = season.description
         
         //random para testar os circulos, substituir o season por : CGFloat(Int.random(in: 0...100))/100
-        
         var progress: CGFloat = 0
         var indicatorImageName = ""
 
