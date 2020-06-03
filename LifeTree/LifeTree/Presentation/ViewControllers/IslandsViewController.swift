@@ -74,10 +74,14 @@ class IslandsViewController: UIViewController{
 
         // Inicializando classe que maneja os dados
         self.infoHandler = InformationHandler(sceneServices: islandsVisualizationServices!)
-        
-        // Add self islando do scene
-        self.islandsVisualizationServices!.addSelfIslandToScene(islandsSCNScene: islandsSCNScene)
-        
+
+
+        SelfIslandDataServices.getFirstSelfIsland { (error, island) in
+            if error == nil {
+                    self.islandsVisualizationServices!.addSelfIslandToScene(island: island)
+            }
+        }
+
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
         
@@ -88,8 +92,8 @@ class IslandsViewController: UIViewController{
         self.cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
         let selfIslandSKScene = self.islandsVisualizationServices?.getSelfIslandSKScene()
         if selfIslandSKScene != nil {
-            self.cardView.islandSKScene = selfIslandSKScene!
-            self.cardView.islandSKScene.scaleMode = .aspectFit
+//            self.cardView.islandSKScene = selfIslandSKScene!
+//            self.cardView.islandSKScene.scaleMode = .aspectFit
         }
         
         // Set up card for peripheral islands
@@ -325,6 +329,7 @@ class IslandsViewController: UIViewController{
         if let islandObject = self.islandsVisualizationServices?.getIslandfromNode(inputNode: node) {
             // Atualiza as informações da VC
             self.peripheralCardView.peripheralIsland = islandObject
+            self.peripheralCardView.islandSceneServices = self.islandsVisualizationServices
             // Atualiza o conteúdo do Floating Panel para a nova VC
             self.floatingPanel.set(contentViewController: self.peripheralCardView)
             // Atualiza SKScene do card
@@ -341,6 +346,7 @@ class IslandsViewController: UIViewController{
     func floatingPanelDidEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetPosition: FloatingPanelPosition) {
         // animação do circulo funciona só quando termina de arrastar o card.
         self.cardView.loadProgress()
+        self.peripheralCardView.loadProgressPeripheral()
     }
 
     func setupFloatingPanel() {

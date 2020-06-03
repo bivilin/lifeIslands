@@ -15,21 +15,22 @@ class CardViewController: UIViewController{
     
     @IBOutlet weak var nameIsland: UILabel!
     @IBOutlet weak var phrase: UILabel!
-    
+    @IBOutlet weak var islandImage: UIImageView!
+
     @IBOutlet weak var seasonLabel: UILabel!
     @IBOutlet weak var progressSeason: UICircularProgressRing!
     @IBOutlet weak var statusDescriptionLabel: UILabel!
-    @IBOutlet weak var islandSKView: SKView!
+
     
     var selfIsland: SelfIsland?
-    var islandSKScene = SKScene()
+//    var islandSKScene = SKScene()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Set up self island SKScene
-        self.islandSKView.allowsTransparency = true
-        self.islandSKView.presentScene(islandSKScene)
+//        self.islandSKView.allowsTransparency = true
+//        self.islandSKView.presentScene(islandSKScene)
         
         // colocando a linha do pod em cima do circulo imagem
         progressSeason.style = .ontop
@@ -41,21 +42,28 @@ class CardViewController: UIViewController{
                 if let selfIsland = selfIsland {
                     self.selfIsland = selfIsland
                     self.nameIsland.text = selfIsland.name
+                    self.updateImage(island: self.selfIsland)
                 }
             }
         }
     }
     
     func loadProgress() {
-        //carrega dados da saude e define as estaçoes.
-        guard let island: SelfIsland = self.selfIsland else {return}
-        
-        let currentHealth = island.currentHealthStatus as! Double
-        let lastHeath = island.lastHealthStatus as! Double
-        
-        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
-        seasonLabel.text = season?.name
-        statusDescriptionLabel.text = season?.description
+
+        // Define uma estação default para caso a ilha ainda não tenha sido carregada
+        var season: Season = .spring
+
+        if let island = selfIsland {
+            //carrega dados da saude e define as estaçoes.
+            let currentHealth = island.currentHealthStatus as! Double
+            let lastHeath = island.lastHealthStatus as! Double
+            if let newSeason = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath) {
+                season = newSeason
+            }
+        }
+
+        self.seasonLabel.text = season.name
+        self.statusDescriptionLabel.text = season.description
         
         //random para testar os circulos, substituir o season por : CGFloat(Int.random(in: 0...100))/100
         var progress: CGFloat = 0
@@ -82,8 +90,6 @@ class CardViewController: UIViewController{
         case .winter:
             progress = CGFloat(Int.random(in: 70...80))
             indicatorImageName = "winter"
-        case .none:
-            break
         }
         
         // troca de imagem do indicador de acordo com a estação e roda a animação.
@@ -91,6 +97,21 @@ class CardViewController: UIViewController{
         progressSeason.valueKnobStyle = indicatorSeason
         progressSeason.startProgress(to: progress, duration: 3)
         print(progress)
+    }
+
+    // Atualiza imagem da ilha no card
+    func updateImage(island: SelfIsland?) {
+        guard let island = island else {
+            print("Island not found. Image will not be updated.")
+            return
+        }
+        // Definindo estação
+        let currentHealth = island.currentHealthStatus as! Double
+        let lastHeath = island.lastHealthStatus as! Double
+        let season = UpdateIslandsHealth.getSeason(currentHealth: currentHealth, lastHealth: lastHeath)
+        if let imageNamed = season?.imageNamed {
+            islandImage.image = UIImage(named: imageNamed)
+        }
     }
 }
 
