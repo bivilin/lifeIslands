@@ -31,7 +31,8 @@ class UpdateIslandsHealth {
         }
     }
     
-    func updateSelfIslandHealth() {
+    func updateSelfIslandHealth(_ completion: @escaping (_ selfIsland: SelfIsland) -> Void) {
+        
         PeripheralIslandDataServices.getAllPeripheralIslands { (error, peripheralIslands) in
             if error != nil {
                 // Treat Error
@@ -46,20 +47,26 @@ class UpdateIslandsHealth {
                 }
                 healthAverage = healthAverage/Float(allIslands.count)
                 
-                // Update self island health
+                // Get current selfIsland from CoreData
                 SelfIslandDataServices.getFirstSelfIsland { (error, selfIsland) in
                     if error != nil {
                         // Treat error
                         print(error.debugDescription)
                     }
+                    // Update selfIsland health
                     else if let myIsland: SelfIsland = selfIsland {
                         
                         myIsland.lastHealthStatus = myIsland.currentHealthStatus
                         myIsland.currentHealthStatus = NSNumber(value: healthAverage)
                         
+                        // Save update in Coredata
                         SelfIslandDataServices.updateSelfIsland(island: myIsland) { (error) in
                             if error != nil {
                                 print(error.debugDescription)
+                            }
+                            else {
+                                // Completion to update selfIsland related UI
+                                completion(myIsland)
                             }
                         }
                     }
