@@ -27,7 +27,7 @@ class LifeAreaTableViewCell: UITableViewCell {
         self.contourView.layer.shadowOpacity = 0.10
         self.contourView.layer.shadowRadius = 4
 
-        self.lifeAreaLabel.textColor = UIColor(red: 0.31, green: 0.31, blue: 0.31, alpha: 1)
+        self.lifeAreaLabel.textColor = .textColor
         self.selectionStyle = .none
     }
 
@@ -42,14 +42,14 @@ class LifeAreaTableViewCell: UITableViewCell {
 
         // Diferenciação visual de célula selecionada e não selecionada
         if island.selected {
-            self.contourView.backgroundColor = UIColor(red: 0.569, green: 0.659, blue: 0.831, alpha: 1)
+            self.contourView.backgroundColor = .selectionColor
             self.lifeAreaLabel.textColor = .white
             self.lifeAreaIcon.tintColor = .white
         }
         else {
             self.contourView.backgroundColor = .white
-            self.lifeAreaLabel.textColor = UIColor(red: 0.31, green: 0.31, blue: 0.31, alpha: 1)
-            self.lifeAreaIcon.tintColor = UIColor(red: 0.569, green: 0.659, blue: 0.831, alpha: 1)
+            self.lifeAreaLabel.textColor = .textColor
+            self.lifeAreaIcon.tintColor = .selectionColor
         }
     }
 }

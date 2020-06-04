@@ -95,6 +95,8 @@ class IslandsViewController: UIViewController{
         
         // Set up card for self island
         self.cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
+
+        // Podemos apagar? Não usamos mais o SKScene \/
         let selfIslandSKScene = self.islandsVisualizationServices?.getSelfIslandSKScene()
         if selfIslandSKScene != nil {
 //            self.cardView.islandSKScene = selfIslandSKScene!

@@ -30,7 +30,6 @@ class CreateActionViewController: UIViewController {
         // Configura delegate para os TextField
         self.actionNameTextField.delegate = self
         self.impactReasonTextView.delegate = self
-//        self.impactReasonTextField.delegate = self
 
         // Reconhece quando o usuário inputa algo na textField e gatilha o .keyboardWillShowNotification
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow), name: UIResponder.keyboardDidShowNotification, object: nil)
