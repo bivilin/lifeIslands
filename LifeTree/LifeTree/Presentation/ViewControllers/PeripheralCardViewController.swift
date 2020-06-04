@@ -88,6 +88,7 @@ class PeripheralCardViewController: UIViewController {
                     self.peripheralIsland = island
                     self.updateLabels()
                     self.updateImage(island: island)
+                    self.loadProgressPeripheral()
                 }
             }
         }
