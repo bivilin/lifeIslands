@@ -45,8 +45,8 @@ class PeripheralCardViewController: UIViewController {
 
         // Debug
         print("===== ENTRANDO NA ILHA =====")
-        print("Saúde Atual da Ilha: \(self.peripheralIsland?.currentHealthStatus)")
-        print("Saúde Anterior da Ilha: \(self.peripheralIsland?.lastHealthStatus)")
+        print("Saúde Atual da Ilha: \(String(describing: self.peripheralIsland?.currentHealthStatus))")
+        print("Saúde Anterior da Ilha: \(String(describing: self.peripheralIsland?.lastHealthStatus))")
     }
 
     // Atualiza labels de acordo com dados persistidos
@@ -88,6 +88,7 @@ class PeripheralCardViewController: UIViewController {
                     self.peripheralIsland = island
                     self.updateLabels()
                     self.updateImage(island: island)
+                    self.loadProgressPeripheral()
                 }
             }
         }
@@ -145,7 +146,7 @@ class PeripheralCardViewController: UIViewController {
             }
             
             // troca de imagem do indicador de acordo com a estação e roda a animação
-            let indicatorSeason = UICircularRingValueKnobStyle(size: 60, color: .clear, image: UIImage(named: indicatorImageName))
+            let indicatorSeason = UICircularRingValueKnobStyle(size: 50, color: .clear, image: UIImage(named: indicatorImageName))
             progressSeasonPeripheral.valueKnobStyle = indicatorSeason
             progressSeasonPeripheral.startProgress(to: progress, duration: 3)
         }
@@ -190,8 +191,8 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
         // Célula única de conteúdo fixo acima da lista de ações
         case 0:
             let newFixedContentCell = actionsTableView.dequeueReusableCell(withIdentifier: "fixedContentCell", for: indexPath) as! FixedContentCell
-            if let scene = self.islandScene, let island = self.peripheralIsland {
-                newFixedContentCell.loadContents(island: island, scene: scene)
+            if let island = self.peripheralIsland {
+                newFixedContentCell.loadContents(island: island)
             }
             return newFixedContentCell
         case 1:

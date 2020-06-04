@@ -645,7 +645,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="247"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Primavera" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOf-Sk-K2t">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Primavera" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOf-Sk-K2t">
                                                     <rect key="frame" x="121.5" y="30" width="139" height="36.5"/>
                                                     <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="26"/>
                                                     <color key="textColor" red="0.94055992359999996" green="0.64077860119999996" blue="0.81570893529999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -869,9 +869,9 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="366" height="31"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUl-uh-BBo">
-                                                                <rect key="frame" x="0.0" y="0.0" width="57" height="31"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="45" height="31"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
-                                                                <state key="normal" title="&lt; Voltar">
+                                                                <state key="normal" title="Voltar">
                                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                                                 </state>
                                                                 <connections>
@@ -1251,19 +1251,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y45-aU-R2U" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="298.5" width="414" height="218.5"/>
+                                <rect key="frame" x="0.0" y="299.5" width="414" height="216"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PAe-iu-zCq" userLabel="MessageView">
-                                        <rect key="frame" x="25" y="51" width="364" height="101.5"/>
+                                        <rect key="frame" x="25" y="51" width="364" height="99"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLJ-46-2Dn">
-                                                <rect key="frame" x="25" y="25" width="314" height="26"/>
+                                                <rect key="frame" x="25" y="25" width="314" height="24.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="21"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4j-i5-Aus">
-                                                <rect key="frame" x="25" y="59" width="314" height="17.5"/>
+                                                <rect key="frame" x="25" y="57.5" width="314" height="16.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1281,7 +1281,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="im1-Rj-3zX">
-                                        <rect key="frame" x="25" y="160.5" width="364" height="50"/>
+                                        <rect key="frame" x="25" y="158" width="364" height="50"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="MJV-6a-rPy"/>

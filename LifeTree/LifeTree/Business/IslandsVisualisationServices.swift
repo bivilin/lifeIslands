@@ -139,6 +139,7 @@ class IslandsVisualisationServices {
     
     // Define the material for a plane as the island SpriteKit scene model
     func setPlaneMaterialAsIslandSKScene(planeGeometry: SCNGeometry, texture: SKTexture) {
+        
         // Assign a SpriteKit scene as texture to such plane
         if let planeMaterial = planeGeometry.firstMaterial {
             
@@ -160,33 +161,26 @@ class IslandsVisualisationServices {
     }
     
     // Get the SKScene of the self island
-    func getSelfIslandSKScene() -> SKScene? {
-        var selfIslandSKScene: SKScene? = nil
+    func getSelfIslandSKScene() -> IslandSpriteScene? {
+        var selfIslandSKScene: IslandSpriteScene? = nil
         if let selfIslandPlane = islandsSCNScene.rootNode.childNode(withName: "selfIslandPlane", recursively: true) {
-            selfIslandSKScene = selfIslandPlane.geometry!.firstMaterial!.diffuse.contents as? SKScene
+            selfIslandSKScene = selfIslandPlane.geometry!.firstMaterial!.diffuse.contents as? IslandSpriteScene
         }
         return selfIslandSKScene
     }
     
     // Get the SKScene of a peripheral island from its id
-    func getPeripheralIslandSKScene(islandId: UUID) -> SKScene? {
-        var sceneForIsland: SKScene? = nil
+    func getPeripheralIslandSKScene(islandId: UUID) -> IslandSpriteScene? {
+        var sceneForIsland: IslandSpriteScene? = nil
         if let nodeForIsland: SCNNode = self.islandDictionary[islandId] {
-            sceneForIsland = nodeForIsland.geometry!.firstMaterial!.diffuse.contents as? SKScene
+            sceneForIsland = nodeForIsland.geometry!.firstMaterial!.diffuse.contents as? IslandSpriteScene
         }
         return sceneForIsland
     }
     
-    // Get SKScene of given node
-    func getIslandSKSceneFromNode(node: SCNNode) -> SKScene? {
-        var scene: SKScene? = nil
-        if let material = node.geometry!.firstMaterial {
-            scene = material.diffuse.contents as? SKScene
-        }
-        return scene
-    }
-    
+    // Add rope connecting peripheral islando to central one
     func makeRope(angle: Float) {
+        
         // Width of the parabole, which corresponds to the coordinate x of its ending point
         let width = self.radius * 100
         
@@ -259,10 +253,23 @@ class IslandsVisualisationServices {
 }
 
 extension IslandsVisualisationServices: UpdateIslandDelegate {
+    
+    func updateTextureForSelfIsland(selfIsland: SelfIsland) {
+        
+        guard let selfIslandScene: IslandSpriteScene = self.getSelfIslandSKScene() else {return}
+        
+        // TESTE
+        // let testIsland = selfIsland
+        // testIsland.currentHealthStatus = 1
+        // let texture = self.getTextureForIsland(island: testIsland)
+        
+        let texture = self.getTextureForIsland(island: selfIsland)
+        selfIslandScene.changeTexture(texture: texture)
+    }
+    
     // Altera textura de um node específico
     func updateTextureForIsland(islandID: UUID) {
-        guard let node = islandDictionary[islandID] else {return}
-        let islandSKScene = node.geometry?.firstMaterial?.diffuse.contents as? IslandSpriteScene
+        let islandSKScene = self.getPeripheralIslandSKScene(islandId: islandID)
 
         PeripheralIslandDataServices.findById(objectID: islandID) { (error, island) in
             if error == nil {
