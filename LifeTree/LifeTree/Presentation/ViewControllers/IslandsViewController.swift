@@ -74,18 +74,61 @@ class IslandsViewController: UIViewController{
 
         // Inicializando classe que maneja os dados
         self.infoHandler = InformationHandler()
-
-
-        SelfIslandDataServices.getFirstSelfIsland() { (error, island) in
-            if error == nil {
+        
+        if !UserDefaults.standard.bool(forKey: "didUpdateDataAfterLaunch") {
+            
+            self.infoHandler?.retrievePeripheralIslands(completion: { (islands) in
+                
+                var averageHealth: Int = 0
+                var updatedIslandsArray: [PeripheralIsland] = []
+                
+                for island in islands {
+                    
+                    var updatedIsland: PeripheralIsland = island
+                    UpdateIslandsHealth().updatePeripheralIslandByInactiveTime(&updatedIsland)
+                    updatedIslandsArray.append(updatedIsland)
+                    
+                    averageHealth += Int(truncating: updatedIsland.currentHealthStatus ?? 0)
+                    
+                    PeripheralIslandDataServices.updatePeripheralIsland(island: updatedIsland) { (error) in
+                        print("PeripheralIsland was updated")
+                    }
+                }
+                
+                self.islandsVisualizationServices?.addAllPeripheralIslandsToScene(peripheralIslandArray: updatedIslandsArray)
+                
+                averageHealth = averageHealth/updatedIslandsArray.count
+                
+                SelfIslandDataServices.getFirstSelfIsland { (error, myIsland) in
+                    if error == nil, let centralIsland: SelfIsland = myIsland {
+                        
+                        centralIsland.lastHealthStatus = centralIsland.currentHealthStatus
+                        centralIsland.currentHealthStatus = NSNumber(value: averageHealth)
+                        
+                        self.islandsVisualizationServices?.addSelfIslandToScene(island: centralIsland)
+                        
+                        SelfIslandDataServices.updateSelfIsland(island: centralIsland) { (error) in
+                            print("SelfIsland was updated")
+                        }
+                    }
+                }
+                
+            })
+            
+            UserDefaults.standard.set(true, forKey: "didUpdateDataAfterLaunch")
+            
+        } else {
+            
+            SelfIslandDataServices.getFirstSelfIsland() { (error, island) in
+                if error == nil {
                     self.islandsVisualizationServices!.addSelfIslandToScene(island: island)
+                }
+            }
+            
+            self.infoHandler?.retrievePeripheralIslands() { (islands) in
+                self.islandsVisualizationServices?.addAllPeripheralIslandsToScene(peripheralIslandArray: islands)
             }
         }
-
-        self.infoHandler?.retrievePeripheralIslands() { (islands) in
-            self.islandsVisualizationServices?.addAllPeripheralIslandsToScene(peripheralIslandArray: islands)
-        }
-
 
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
