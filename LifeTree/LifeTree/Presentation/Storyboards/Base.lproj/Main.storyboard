@@ -30,7 +30,6 @@
         <!--Select Islands View Controller-->
         <scene sceneID="FfE-YF-Ffe">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="i2k-Za-vEE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="V5g-Ee-zqk" customClass="SelectIslandsViewController" customModule="LifeTree" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oiu-UK-YQ4">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
@@ -66,10 +65,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyh-9t-ycJ" userLabel="StyleLine">
-                                                    <rect key="frame" x="25" y="65" width="110" height="3"/>
+                                                    <rect key="frame" x="25" y="65" width="180" height="3"/>
                                                     <color key="backgroundColor" red="0.7026378512" green="0.81954497100000001" blue="0.81961703299999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="110" id="57o-CT-3Zc"/>
+                                                        <constraint firstAttribute="width" constant="180" id="57o-CT-3Zc"/>
                                                         <constraint firstAttribute="height" constant="3" id="liw-hC-auh"/>
                                                     </constraints>
                                                 </view>
@@ -97,52 +96,63 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="lifeAreaCell" id="7X0-rD-h4P" customClass="LifeAreaTableViewCell" customModule="LifeTree" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="186" width="414" height="66.5"/>
+                                        <rect key="frame" x="0.0" y="186" width="414" height="64.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7X0-rD-h4P" id="qYU-fb-yoE">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="66.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nof-DX-q0o" userLabel="Base View">
-                                                    <rect key="frame" x="8" y="8" width="398" height="50.5"/>
+                                                    <rect key="frame" x="24" y="8" width="366" height="48.5"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iV-YA-UVE" userLabel="Contour View">
-                                                            <rect key="frame" x="8" y="8" width="382" height="34.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="366" height="48.5"/>
                                                             <subviews>
-                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3iU-uU-ocm">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="382" height="34.5"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSd-ac-0kq">
+                                                                    <rect key="frame" x="20" y="15.5" width="38.5" height="17.5"/>
+                                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3iU-uU-ocm">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="366" height="48.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits"/>
                                                                 </textField>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NSd-ac-0kq" secondAttribute="trailing" constant="20" id="6AW-Ol-Cwm"/>
                                                                 <constraint firstItem="3iU-uU-ocm" firstAttribute="top" secondItem="5iV-YA-UVE" secondAttribute="top" id="BGi-U7-qcu"/>
                                                                 <constraint firstAttribute="trailing" secondItem="3iU-uU-ocm" secondAttribute="trailing" id="VIB-ce-EMc"/>
+                                                                <constraint firstAttribute="height" constant="48" id="Z6M-YX-jDe"/>
                                                                 <constraint firstItem="3iU-uU-ocm" firstAttribute="leading" secondItem="5iV-YA-UVE" secondAttribute="leading" id="hlT-6y-jdW"/>
+                                                                <constraint firstItem="NSd-ac-0kq" firstAttribute="centerY" secondItem="5iV-YA-UVE" secondAttribute="centerY" id="nDx-zH-dCk"/>
+                                                                <constraint firstItem="NSd-ac-0kq" firstAttribute="leading" secondItem="5iV-YA-UVE" secondAttribute="leading" constant="20" id="sNg-5O-hFE"/>
                                                                 <constraint firstAttribute="bottom" secondItem="3iU-uU-ocm" secondAttribute="bottom" id="xKq-mE-X6E"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="5iV-YA-UVE" firstAttribute="top" secondItem="nof-DX-q0o" secondAttribute="top" constant="8" id="2qH-JN-c8N"/>
-                                                        <constraint firstAttribute="bottom" secondItem="5iV-YA-UVE" secondAttribute="bottom" constant="8" id="5Tm-uD-yks"/>
-                                                        <constraint firstAttribute="trailing" secondItem="5iV-YA-UVE" secondAttribute="trailing" constant="8" id="EFh-UF-a6R"/>
-                                                        <constraint firstItem="5iV-YA-UVE" firstAttribute="leading" secondItem="nof-DX-q0o" secondAttribute="leading" constant="8" id="km8-Bz-I9X"/>
+                                                        <constraint firstItem="5iV-YA-UVE" firstAttribute="top" secondItem="nof-DX-q0o" secondAttribute="top" id="2qH-JN-c8N"/>
+                                                        <constraint firstAttribute="bottom" secondItem="5iV-YA-UVE" secondAttribute="bottom" id="5Tm-uD-yks"/>
+                                                        <constraint firstAttribute="trailing" secondItem="5iV-YA-UVE" secondAttribute="trailing" id="EFh-UF-a6R"/>
+                                                        <constraint firstItem="5iV-YA-UVE" firstAttribute="leading" secondItem="nof-DX-q0o" secondAttribute="leading" id="km8-Bz-I9X"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="nof-DX-q0o" firstAttribute="top" secondItem="qYU-fb-yoE" secondAttribute="top" constant="8" id="Mbe-sz-gjd"/>
                                                 <constraint firstAttribute="bottom" secondItem="nof-DX-q0o" secondAttribute="bottom" constant="8" id="Voc-5p-ZQ5"/>
-                                                <constraint firstAttribute="trailing" secondItem="nof-DX-q0o" secondAttribute="trailing" constant="8" id="YIf-bc-62C"/>
-                                                <constraint firstItem="nof-DX-q0o" firstAttribute="leading" secondItem="qYU-fb-yoE" secondAttribute="leading" constant="8" id="lh3-61-8G7"/>
+                                                <constraint firstAttribute="trailing" secondItem="nof-DX-q0o" secondAttribute="trailing" constant="24" id="YIf-bc-62C"/>
+                                                <constraint firstItem="nof-DX-q0o" firstAttribute="leading" secondItem="qYU-fb-yoE" secondAttribute="leading" constant="24" id="lh3-61-8G7"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="contourView" destination="5iV-YA-UVE" id="dhB-Zx-3Ar"/>
                                             <outlet property="islandTextField" destination="3iU-uU-ocm" id="ywX-dF-uYz"/>
+                                            <outlet property="lifeAreaLabel" destination="NSd-ac-0kq" id="2tJ-ny-SKI"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -162,6 +172,7 @@
                         <segue destination="t6l-cS-ylc" kind="presentation" identifier="fromSelectIslandToNameIsland" id="nsr-5v-2PO"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="i2k-Za-vEE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1248" y="130"/>
         </scene>
@@ -1160,13 +1171,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parabéns" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDu-S4-BIH">
-                                <rect key="frame" x="40" y="184.5" width="334" height="35"/>
+                                <rect key="frame" x="40" y="181" width="334" height="42"/>
                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IhV-Qt-lDQ" userLabel="StyleLine">
-                                <rect key="frame" x="147" y="264.5" width="120" height="3"/>
+                                <rect key="frame" x="147" y="275" width="120" height="3"/>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="3G2-hc-LtQ"/>
@@ -1174,7 +1185,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amanda!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFI-aM-zsF">
-                                <rect key="frame" x="40" y="219.5" width="334" height="35"/>
+                                <rect key="frame" x="40" y="223" width="334" height="42"/>
                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1201,7 +1212,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ao fazer essa atividade você ganhou X gotas para cultivar essa área" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRY-hZ-o30">
-                                <rect key="frame" x="40" y="453" width="334" height="37.5"/>
+                                <rect key="frame" x="40" y="453" width="334" height="39.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1251,19 +1262,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y45-aU-R2U" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="299.5" width="414" height="216"/>
+                                <rect key="frame" x="0.0" y="298.5" width="414" height="218.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PAe-iu-zCq" userLabel="MessageView">
-                                        <rect key="frame" x="25" y="51" width="364" height="99"/>
+                                        <rect key="frame" x="25" y="51" width="364" height="101.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLJ-46-2Dn">
-                                                <rect key="frame" x="25" y="25" width="314" height="24.5"/>
+                                                <rect key="frame" x="25" y="25" width="314" height="26"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="21"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4j-i5-Aus">
-                                                <rect key="frame" x="25" y="57.5" width="314" height="16.5"/>
+                                                <rect key="frame" x="25" y="59" width="314" height="17.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1281,7 +1292,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="im1-Rj-3zX">
-                                        <rect key="frame" x="25" y="158" width="364" height="50"/>
+                                        <rect key="frame" x="25" y="160.5" width="364" height="50"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="MJV-6a-rPy"/>
