@@ -21,7 +21,7 @@ class FixedContentCell: UITableViewCell {
     }
 
     // Carrega SKScene e infos das labels
-    func loadContents(island: PeripheralIsland, scene: SKScene) {
+    func loadContents(island: PeripheralIsland) {
 
         // Definindo estação
         let currentHealth = island.currentHealthStatus as! Double
