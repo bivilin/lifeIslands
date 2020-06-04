@@ -45,7 +45,9 @@ class SelectIslandsViewController: UIViewController {
     }
     @IBAction func nextButton(_ sender: Any) {
         for lifeArea in lifeAreas {
-            infoHandler.addPeripheralIslandToArray(category: lifeArea.name, name: lifeArea.name, healthStatus: 50)
+            if lifeArea.selected {
+                infoHandler.addPeripheralIslandToArray(category: lifeArea.name, name: lifeArea.name, healthStatus: 50)
+            }
         }
         infoHandler.addAllPeripheralIslandsToDatabase {
             self.performSegue(withIdentifier: "fromSelectIslandToNameIsland", sender: self)
