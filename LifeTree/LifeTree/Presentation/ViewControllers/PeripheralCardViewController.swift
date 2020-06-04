@@ -191,8 +191,8 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
         // Célula única de conteúdo fixo acima da lista de ações
         case 0:
             let newFixedContentCell = actionsTableView.dequeueReusableCell(withIdentifier: "fixedContentCell", for: indexPath) as! FixedContentCell
-            if let scene = self.islandScene, let island = self.peripheralIsland {
-                newFixedContentCell.loadContents(island: island, scene: scene)
+            if let island = self.peripheralIsland {
+                newFixedContentCell.loadContents(island: island)
             }
             return newFixedContentCell
         case 1:
