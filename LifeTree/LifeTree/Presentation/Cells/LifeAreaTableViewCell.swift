@@ -14,7 +14,7 @@ class LifeAreaTableViewCell: UITableViewCell {
     @IBOutlet weak var contourView: UIView!
     @IBOutlet weak var islandTextField: UITextField!
     @IBOutlet weak var lifeAreaLabel: UILabel!
-
+    @IBOutlet weak var lifeAreaIcon: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,8 +32,16 @@ class LifeAreaTableViewCell: UITableViewCell {
     }
 
     // Método para popular conteúdos da célula (texto e imagem)
-    func loadContents(islandName: String) {
+    func loadContents(island: LifeArea) {
         //self.islandTextField.placeholder = islandName
-        self.lifeAreaLabel.text = islandName
+        self.lifeAreaLabel.text = island.name
+        self.lifeAreaIcon.image = island.icon
+        if island.selected {
+            self.contourView.backgroundColor = UIColor(red: 0.569, green: 0.659, blue: 0.831, alpha: 1)
+            self.lifeAreaLabel.textColor = .white
+        } else {
+            self.contourView.backgroundColor = .white
+            self.lifeAreaLabel.textColor = UIColor(red: 0.31, green: 0.31, blue: 0.31, alpha: 1)
+        }
     }
 }

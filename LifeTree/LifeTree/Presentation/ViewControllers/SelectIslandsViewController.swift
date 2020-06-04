@@ -9,10 +9,30 @@
 import Foundation
 import UIKit
 
+struct LifeArea {
+    var name: String
+    var icon: UIImage {
+        get {
+            return UIImage(named: self.name) ?? UIImage()
+        }
+    }
+    var selected: Bool = false
+}
+
 class SelectIslandsViewController: UIViewController {
     
     @IBOutlet weak var lifeAreasTableView: UITableView!
-    var lifeAreas:[String] = ["Autocuidado", "Família", "Amigos", "Relacionamento", "Trabalho", "Estudos", "Finanças", "Lazer", "Espiritual"]
+    var lifeAreas:[LifeArea] = [
+        LifeArea(name: "Autocuidado"),
+        LifeArea(name: "Família"),
+        LifeArea(name: "Amigos"),
+        LifeArea(name: "Relacionamento"),
+        LifeArea(name: "Trabalho"),
+        LifeArea(name: "Estudos"),
+        LifeArea(name: "Finanças"),
+        LifeArea(name: "Lazer"),
+        LifeArea(name: "Espiritual")]
+
     var infoHandler = InformationHandler()
 
     override func viewDidLoad() {
@@ -25,7 +45,7 @@ class SelectIslandsViewController: UIViewController {
     }
     @IBAction func nextButton(_ sender: Any) {
         for lifeArea in lifeAreas {
-            infoHandler.addPeripheralIslandToArray(category: lifeArea, name: lifeArea, healthStatus: 50)
+            infoHandler.addPeripheralIslandToArray(category: lifeArea.name, name: lifeArea.name, healthStatus: 50)
         }
         infoHandler.addAllPeripheralIslandsToDatabase {
             self.performSegue(withIdentifier: "fromSelectIslandToNameIsland", sender: self)
@@ -61,10 +81,17 @@ extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSourc
             // Lista de ações
             let lifeAreaTableCell = self.lifeAreasTableView.dequeueReusableCell(withIdentifier: "lifeAreaCell", for: indexPath) as! LifeAreaTableViewCell
             let lifeArea = lifeAreas[indexPath.row]
-            lifeAreaTableCell.loadContents(islandName: lifeArea)
+            lifeAreaTableCell.loadContents(island: lifeArea)
             return lifeAreaTableCell
         default:
             return UITableViewCell()
+        }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            lifeAreas[indexPath.row].selected = !lifeAreas[indexPath.row].selected
+            //tableView.reloadData()
         }
     }
 

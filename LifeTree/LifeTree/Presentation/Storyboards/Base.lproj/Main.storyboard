@@ -108,8 +108,20 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5iV-YA-UVE" userLabel="Contour View">
                                                             <rect key="frame" x="0.0" y="0.0" width="366" height="48.5"/>
                                                             <subviews>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hnk-Wo-Wsq">
+                                                                    <rect key="frame" x="10" y="12" width="24.5" height="24.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="hnk-Wo-Wsq" secondAttribute="height" id="2De-Xd-41C"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Check" translatesAutoresizingMaskIntoConstraints="NO" id="S70-Tc-qXw">
+                                                                    <rect key="frame" x="332" y="12" width="24" height="24.5"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="S70-Tc-qXw" secondAttribute="height" id="qkc-eU-L9c"/>
+                                                                    </constraints>
+                                                                </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSd-ac-0kq">
-                                                                    <rect key="frame" x="20" y="15.5" width="38.5" height="17.5"/>
+                                                                    <rect key="frame" x="50.5" y="15.5" width="38.5" height="17.5"/>
                                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -122,13 +134,20 @@
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="S70-Tc-qXw" secondAttribute="trailing" constant="10" id="3ZQ-Vx-FEc"/>
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NSd-ac-0kq" secondAttribute="trailing" constant="20" id="6AW-Ol-Cwm"/>
                                                                 <constraint firstItem="3iU-uU-ocm" firstAttribute="top" secondItem="5iV-YA-UVE" secondAttribute="top" id="BGi-U7-qcu"/>
+                                                                <constraint firstItem="hnk-Wo-Wsq" firstAttribute="leading" secondItem="5iV-YA-UVE" secondAttribute="leading" constant="10" id="DCV-Dx-SBr"/>
+                                                                <constraint firstItem="S70-Tc-qXw" firstAttribute="height" secondItem="5iV-YA-UVE" secondAttribute="height" multiplier="0.5" id="Fzk-Tc-Z6w"/>
+                                                                <constraint firstItem="NSd-ac-0kq" firstAttribute="leading" secondItem="hnk-Wo-Wsq" secondAttribute="trailing" constant="16" id="PYx-dZ-rda"/>
+                                                                <constraint firstItem="S70-Tc-qXw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NSd-ac-0kq" secondAttribute="trailing" constant="10" id="USc-o2-OuL"/>
                                                                 <constraint firstAttribute="trailing" secondItem="3iU-uU-ocm" secondAttribute="trailing" id="VIB-ce-EMc"/>
                                                                 <constraint firstAttribute="height" constant="48" id="Z6M-YX-jDe"/>
+                                                                <constraint firstItem="S70-Tc-qXw" firstAttribute="centerY" secondItem="5iV-YA-UVE" secondAttribute="centerY" id="dZ3-kG-hTu"/>
+                                                                <constraint firstItem="hnk-Wo-Wsq" firstAttribute="height" secondItem="5iV-YA-UVE" secondAttribute="height" multiplier="0.5" id="en7-DU-3QG"/>
                                                                 <constraint firstItem="3iU-uU-ocm" firstAttribute="leading" secondItem="5iV-YA-UVE" secondAttribute="leading" id="hlT-6y-jdW"/>
                                                                 <constraint firstItem="NSd-ac-0kq" firstAttribute="centerY" secondItem="5iV-YA-UVE" secondAttribute="centerY" id="nDx-zH-dCk"/>
-                                                                <constraint firstItem="NSd-ac-0kq" firstAttribute="leading" secondItem="5iV-YA-UVE" secondAttribute="leading" constant="20" id="sNg-5O-hFE"/>
+                                                                <constraint firstItem="hnk-Wo-Wsq" firstAttribute="centerY" secondItem="5iV-YA-UVE" secondAttribute="centerY" id="qM1-Qo-HqS"/>
                                                                 <constraint firstAttribute="bottom" secondItem="3iU-uU-ocm" secondAttribute="bottom" id="xKq-mE-X6E"/>
                                                             </constraints>
                                                         </view>
@@ -152,6 +171,7 @@
                                         <connections>
                                             <outlet property="contourView" destination="5iV-YA-UVE" id="dhB-Zx-3Ar"/>
                                             <outlet property="islandTextField" destination="3iU-uU-ocm" id="ywX-dF-uYz"/>
+                                            <outlet property="lifeAreaIcon" destination="hnk-Wo-Wsq" id="88t-se-Y72"/>
                                             <outlet property="lifeAreaLabel" destination="NSd-ac-0kq" id="2tJ-ny-SKI"/>
                                         </connections>
                                     </tableViewCell>
@@ -1171,13 +1191,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parabéns" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDu-S4-BIH">
-                                <rect key="frame" x="40" y="181" width="334" height="42"/>
+                                <rect key="frame" x="40" y="184.5" width="334" height="35"/>
                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IhV-Qt-lDQ" userLabel="StyleLine">
-                                <rect key="frame" x="147" y="275" width="120" height="3"/>
+                                <rect key="frame" x="147" y="264.5" width="120" height="3"/>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="3G2-hc-LtQ"/>
@@ -1185,7 +1205,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amanda!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFI-aM-zsF">
-                                <rect key="frame" x="40" y="223" width="334" height="42"/>
+                                <rect key="frame" x="40" y="219.5" width="334" height="35"/>
                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1212,7 +1232,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ao fazer essa atividade você ganhou X gotas para cultivar essa área" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRY-hZ-o30">
-                                <rect key="frame" x="40" y="453" width="334" height="39.5"/>
+                                <rect key="frame" x="40" y="453" width="334" height="37.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1355,6 +1375,7 @@
     <resources>
         <image name="5drops" width="956" height="266"/>
         <image name="Asset1_onboarding" width="320" height="320"/>
+        <image name="Check" width="14" height="11"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <image name="ring" width="722" height="722"/>
         <image name="simple-drop" width="33.5" height="41"/>
