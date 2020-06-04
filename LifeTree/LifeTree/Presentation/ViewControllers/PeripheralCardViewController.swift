@@ -146,7 +146,7 @@ class PeripheralCardViewController: UIViewController {
             }
             
             // troca de imagem do indicador de acordo com a estação e roda a animação
-            let indicatorSeason = UICircularRingValueKnobStyle(size: 60, color: .clear, image: UIImage(named: indicatorImageName))
+            let indicatorSeason = UICircularRingValueKnobStyle(size: 50, color: .clear, image: UIImage(named: indicatorImageName))
             progressSeasonPeripheral.valueKnobStyle = indicatorSeason
             progressSeasonPeripheral.startProgress(to: progress, duration: 3)
         }
