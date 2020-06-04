@@ -94,16 +94,16 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
     // MARK: Create Core Data
 
     func loadData(name: String, completion: @escaping () -> Void) {
-        infoHandler.addPeripheralIslandToArray(category: "Trabalho", name: "Trabalho", healthStatus: 66)
-        infoHandler.addPeripheralIslandToArray(category: "Faculdade", name: "Faculdade", healthStatus: 66)
-        infoHandler.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 32)
-        infoHandler.addPeripheralIslandToArray(category: "Saúde", name: "Academia", healthStatus: 66)
-        infoHandler.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 32)
-        infoHandler.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 32)
-        infoHandler.addAllPeripheralIslandsToDatabase() {
+//        infoHandler.addPeripheralIslandToArray(category: "Trabalho", name: "Trabalho", healthStatus: 66)
+//        infoHandler.addPeripheralIslandToArray(category: "Faculdade", name: "Faculdade", healthStatus: 66)
+//        infoHandler.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 32)
+//        infoHandler.addPeripheralIslandToArray(category: "Saúde", name: "Academia", healthStatus: 66)
+//        infoHandler.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 32)
+//        infoHandler.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 32)
+//        infoHandler.addAllPeripheralIslandsToDatabase() {
             self.infoHandler.createSelf(name: name, currentHealth: 50) {
                 completion()
             }
-        }
+//        }
     }
 }
