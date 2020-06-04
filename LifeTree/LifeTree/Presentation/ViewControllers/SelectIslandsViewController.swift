@@ -91,9 +91,7 @@ extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
             lifeAreas[indexPath.row].selected = !lifeAreas[indexPath.row].selected
-            //tableView.reloadData()
+            lifeAreasTableView.reloadData()
         }
     }
-
-
 }

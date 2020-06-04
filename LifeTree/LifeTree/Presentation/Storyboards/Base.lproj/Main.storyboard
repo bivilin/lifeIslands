@@ -115,7 +115,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Check" translatesAutoresizingMaskIntoConstraints="NO" id="S70-Tc-qXw">
-                                                                    <rect key="frame" x="332" y="12" width="24" height="24.5"/>
+                                                                    <rect key="frame" x="341.5" y="17" width="14.5" height="14.5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="S70-Tc-qXw" secondAttribute="height" id="qkc-eU-L9c"/>
                                                                     </constraints>
@@ -138,7 +138,7 @@
                                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NSd-ac-0kq" secondAttribute="trailing" constant="20" id="6AW-Ol-Cwm"/>
                                                                 <constraint firstItem="3iU-uU-ocm" firstAttribute="top" secondItem="5iV-YA-UVE" secondAttribute="top" id="BGi-U7-qcu"/>
                                                                 <constraint firstItem="hnk-Wo-Wsq" firstAttribute="leading" secondItem="5iV-YA-UVE" secondAttribute="leading" constant="10" id="DCV-Dx-SBr"/>
-                                                                <constraint firstItem="S70-Tc-qXw" firstAttribute="height" secondItem="5iV-YA-UVE" secondAttribute="height" multiplier="0.5" id="Fzk-Tc-Z6w"/>
+                                                                <constraint firstItem="S70-Tc-qXw" firstAttribute="height" secondItem="5iV-YA-UVE" secondAttribute="height" multiplier="0.3" id="Fzk-Tc-Z6w"/>
                                                                 <constraint firstItem="NSd-ac-0kq" firstAttribute="leading" secondItem="hnk-Wo-Wsq" secondAttribute="trailing" constant="16" id="PYx-dZ-rda"/>
                                                                 <constraint firstItem="S70-Tc-qXw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NSd-ac-0kq" secondAttribute="trailing" constant="10" id="USc-o2-OuL"/>
                                                                 <constraint firstAttribute="trailing" secondItem="3iU-uU-ocm" secondAttribute="trailing" id="VIB-ce-EMc"/>

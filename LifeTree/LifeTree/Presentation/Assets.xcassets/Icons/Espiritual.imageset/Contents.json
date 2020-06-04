@@ -1,16 +1,15 @@
 {
   "images" : [
     {
+      "filename" : "Espiritual.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Espiritual@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Espiritual@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

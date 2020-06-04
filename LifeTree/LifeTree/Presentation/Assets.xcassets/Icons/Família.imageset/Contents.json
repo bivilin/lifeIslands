@@ -1,16 +1,15 @@
 {
   "images" : [
     {
+      "filename" : "Familia.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Familia@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Familia@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

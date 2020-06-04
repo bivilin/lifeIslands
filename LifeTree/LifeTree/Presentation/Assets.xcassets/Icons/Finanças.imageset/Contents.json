@@ -1,16 +1,15 @@
 {
   "images" : [
     {
+      "filename" : "Finanças.pdf",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Finanças@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Finanças@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

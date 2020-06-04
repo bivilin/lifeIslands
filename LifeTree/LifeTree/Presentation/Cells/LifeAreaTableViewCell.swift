@@ -33,15 +33,23 @@ class LifeAreaTableViewCell: UITableViewCell {
 
     // Método para popular conteúdos da célula (texto e imagem)
     func loadContents(island: LifeArea) {
-        //self.islandTextField.placeholder = islandName
+        // Nome da ilha
         self.lifeAreaLabel.text = island.name
-        self.lifeAreaIcon.image = island.icon
+
+        // Config para usar pdf como imagem
+        let tintableImage = island.icon.withRenderingMode(.alwaysTemplate)
+        lifeAreaIcon.image = tintableImage
+
+        // Diferenciação visual de célula selecionada e não selecionada
         if island.selected {
             self.contourView.backgroundColor = UIColor(red: 0.569, green: 0.659, blue: 0.831, alpha: 1)
             self.lifeAreaLabel.textColor = .white
-        } else {
+            self.lifeAreaIcon.tintColor = .white
+        }
+        else {
             self.contourView.backgroundColor = .white
             self.lifeAreaLabel.textColor = UIColor(red: 0.31, green: 0.31, blue: 0.31, alpha: 1)
+            self.lifeAreaIcon.tintColor = UIColor(red: 0.569, green: 0.659, blue: 0.831, alpha: 1)
         }
     }
 }
