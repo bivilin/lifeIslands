@@ -706,14 +706,15 @@
 				CODE_SIGN_ENTITLEMENTS = LifeTree/LifeTree.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 54KAL6GMBX;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 76DX35F6T7;
 				INFOPLIST_FILE = LifeTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = bivilin.LifeTree;
 				PRODUCT_NAME = Lifetree;
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -730,14 +731,15 @@
 				CODE_SIGN_ENTITLEMENTS = LifeTree/LifeTree.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 54KAL6GMBX;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = 76DX35F6T7;
 				INFOPLIST_FILE = LifeTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = bivilin.LifeTree;
 				PRODUCT_NAME = Lifetree;
 				PROVISIONING_PROFILE_SPECIFIER = "";
