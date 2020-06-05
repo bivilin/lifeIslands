@@ -47,23 +47,30 @@ class SelectIslandsViewController: UIViewController {
         self.lifeAreasTableView.separatorStyle = .none
     }
 
-    // Ao clicar no botão, as ilhas selecionadas são criadas no banco
+    // MARK: Segue
+
     @IBAction func nextButton(_ sender: Any) {
+        self.performSegue(withIdentifier: "fromSelectIslandToNameIsland", sender: self)
+    }
 
-        // Somente as ilha selecionadas são incluídas no vetor que será persistido
-        for lifeArea in lifeAreas {
-            if lifeArea.selected {
-                infoHandler.addPeripheralIslandToArray(category: lifeArea.name, name: lifeArea.name, healthStatus: 50)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if segue.identifier == "fromSelectIslandToNameIsland" {
+            if let destination = segue.destination as? NameIslandViewController {
+                destination.selectedIslands = [LifeArea]()
+
+                // Somente as ilha selecionadas são incluídas no vetor que será persistido
+                for lifeArea in self.lifeAreas {
+                    if lifeArea.selected {
+                        destination.selectedIslands?.append(lifeArea)
+                    }
+                }
             }
-        }
-
-        // O segue só é feito depois que a ilha é adicionada com sucesso no banco
-        infoHandler.addAllPeripheralIslandsToDatabase {
-            self.performSegue(withIdentifier: "fromSelectIslandToNameIsland", sender: self)
         }
     }
 }
 
+    // MARK: Table View Setup
 extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

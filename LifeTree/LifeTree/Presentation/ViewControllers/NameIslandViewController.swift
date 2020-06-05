@@ -12,6 +12,7 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
+    var selectedIslands: [LifeArea]?
     var infoHandler = InformationHandler()
 
     var scrolledByKeyboard: Bool = false
@@ -94,8 +95,17 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
     // MARK: Create Core Data
 
     func loadData(name: String, completion: @escaping () -> Void) {
+        if let selectedIslands = selectedIslands {
+            for selectedIsland in selectedIslands {
+                    infoHandler.addPeripheralIslandToArray(category: selectedIsland.name, name: selectedIsland.name, healthStatus: 50)
+            }
+        }
+
+        // O segue só é feito depois que a ilha é adicionada com sucesso no banco
+        infoHandler.addAllPeripheralIslandsToDatabase {
             self.infoHandler.createSelf(name: name, currentHealth: 50) {
                 completion()
             }
+        }
     }
 }
