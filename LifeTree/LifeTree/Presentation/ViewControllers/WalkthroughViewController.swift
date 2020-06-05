@@ -50,31 +50,31 @@ class WalkthroughViewController: UIViewController {
         let page1: WalkthroughPage = Bundle.main.loadNibNamed("WalkthroughPageView", owner: self, options: nil)?.first as! WalkthroughPage
         page1.imageView.image = UIImage(named: "Asset1_onboarding")
         page1.titleLabel.text = "Separe as áreas de sua vida"
-        page1.descriptionLabel.text = "Cada área da sua vida está representada por uma ilha, para que você possa dar atenção individual à cada uma delas"
+        page1.descriptionLabel.text = "Organize áreas da sua vida separando-as em ilhas para dar a devida atenção a cada uma individualmente."
         page1.startButton.isHidden = true
         
         let page2: WalkthroughPage = Bundle.main.loadNibNamed("WalkthroughPageView", owner: self, options: nil)?.first as! WalkthroughPage
         page2.imageView.image = UIImage(named: "Asset2_onboarding")
-        page2.titleLabel.text = "Lorem ipsum"
-        page2.descriptionLabel.text = "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+        page2.titleLabel.text = "Adicione atividades para cuidar da sua ilha"
+        page2.descriptionLabel.text = "Suas atividades servirão de parâmetro para acompanhar seu progresso e de estímulo para cuidar das áreas sua vida."
         page2.startButton.isHidden = true
         
         let page3: WalkthroughPage = Bundle.main.loadNibNamed("WalkthroughPageView", owner: self, options: nil)?.first as! WalkthroughPage
         page3.imageView.image = UIImage(named: "Asset3_onboarding")
-        page3.titleLabel.text = "Lorem ipsum"
-        page3.descriptionLabel.text = "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+        page3.titleLabel.text = "Ganhe recompensas e cultive sua ilha"
+        page3.descriptionLabel.text = "Ao realizar tarefas, você ganhará gotas para regar sua ilha. Quanto mais você regar, mais saudável ela ficará."
         page3.startButton.isHidden = true
         
         let page4: WalkthroughPage = Bundle.main.loadNibNamed("WalkthroughPageView", owner: self, options: nil)?.first as! WalkthroughPage
         page4.imageView.image = UIImage(named: "Asset4_onboarding")
-        page4.titleLabel.text = "Lorem ipsum"
-        page4.descriptionLabel.text = "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+        page4.titleLabel.text = "Você está no centro"
+        page4.descriptionLabel.text = "A ilha central representa VOCÊ e é afetada pela saúde de todas as outras ilhas. Portanto, acompanhe a saúde da sua ilha"
         page4.startButton.isHidden = true
         
         let page5: WalkthroughPage = Bundle.main.loadNibNamed("WalkthroughPageView", owner: self, options: nil)?.first as! WalkthroughPage
         page5.imageView.image = UIImage(named: "Asset5_onboarding")
-        page5.titleLabel.text = "Lorem ipsum"
-        page5.descriptionLabel.text = "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+        page5.titleLabel.text = "As estações são seu guia"
+        page5.descriptionLabel.text = "Visualize facilmente todas as áreas da sua vida e quão saudáveis estão. Se alguma precisar de mais atenção, você saberá."
         page5.startButton.layer.cornerRadius = 10
         page5.walkthroughDelegate = self
         
