@@ -196,7 +196,7 @@ class IslandsVisualisationServices {
         
         // Creates 3D shape by filling the space between the paraboles
         let shape = SCNShape(path: path, extrusionDepth: 2)
-        shape.firstMaterial?.diffuse.contents = UIColor(red: 0.37, green: 0.18, blue: 0.03, alpha: 1.0)
+        shape.firstMaterial?.diffuse.contents = UIColor.ropeColor
         
         // Put geometry into node
         let shapeNode = SCNNode(geometry: shape)
