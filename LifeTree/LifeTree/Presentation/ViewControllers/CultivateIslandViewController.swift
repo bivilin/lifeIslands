@@ -73,6 +73,9 @@ class CultivateIslandViewController: UIViewController {
                     
                     UpdateIslandsHealth().updateSelfIslandHealth { (selfIsland) in
                         self.islandSceneServices?.updateTextureForSelfIsland(selfIsland: selfIsland)
+                        print("Saúde da Ilha Central Atualizada com sucesso.")
+                        print("Saúde Atual: \(String(describing: selfIsland.currentHealthStatus))")
+                        print("Saúde Anterior: \(selfIsland.lastHealthStatus ?? 0)")
                     }
 
                     self.performSegue(withIdentifier: "unwindToPeriphalIslandAfterActionIsDone", sender: self)

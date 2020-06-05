@@ -14,13 +14,14 @@ class InformationHandler {
 
     // MARK: Self Create
     // Cria ilha do Self
-    func createSelf(name: String, currentHealth: Double, completion: @escaping () -> Void) {
+    func createSelf(name: String, healthStatus: Double, completion: @escaping () -> Void) {
+        
         // Including default information to CoreData in case of first launch
         let island = SelfIsland()
         island.name = name
-        island.currentHealthStatus = NSNumber(value: currentHealth)
+        island.currentHealthStatus = NSNumber(value: healthStatus)
+        island.lastHealthStatus = NSNumber(value: healthStatus)
         island.islandId = UUID()
-        island.lastHealthStatus = 0
 
         SelfIslandDataServices.createSelfIsland(island: island) { (error) in
             if (error != nil) {
@@ -43,8 +44,8 @@ class InformationHandler {
         peripheralIsland.category = category
         peripheralIsland.name = name
         peripheralIsland.currentHealthStatus = NSNumber(value: healthStatus)
+        peripheralIsland.lastHealthStatus = NSNumber(value: healthStatus)
         peripheralIsland.islandId = UUID()
-        peripheralIsland.lastHealthStatus = 0
         peripheralIsland.lastActionDate = Date()
 
         self.peripheralIslandsToPersist.append(peripheralIsland)

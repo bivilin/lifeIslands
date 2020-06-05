@@ -11,6 +11,7 @@ import Foundation
 class UpdateIslandsHealth {
     
     let dropToHealthConversionFactor: Double = 0.5
+    let inactiveTimeToHealthDropConversionFactor: Double = 0.3
 
     static func getSeason(currentHealth: Double, lastHealth: Double) -> Season? {
 
@@ -29,6 +30,28 @@ class UpdateIslandsHealth {
             print("Season not found. Check if HealthStatus is between 0-100")
             return nil
         }
+    }
+    
+    func updatePeripheralIslandByInactiveTime(_ island: inout PeripheralIsland) {
+        var timeDistance: Int = 0
+        
+        // Calculate hours since island was updated last
+        if let lastDate: Date = island.lastActionDate {
+            timeDistance = DateServices().timeDistanceFromDate(date: lastDate, timeUnit: .hour)
+        }
+        // Decrease health due to inactive time
+        var newHealth = Int(truncating: island.currentHealthStatus ?? 50) - Int(Double(timeDistance) * self.inactiveTimeToHealthDropConversionFactor)
+        
+        // Make sure new health is within boundaries
+        if newHealth < 0 {
+            newHealth = 0
+        } else if newHealth > 100 {
+            newHealth = 100
+        }
+        // Update island health and
+        island.lastActionDate = Date()
+        island.lastHealthStatus = island.currentHealthStatus
+        island.currentHealthStatus = NSNumber(value: newHealth)
     }
     
     func updateSelfIslandHealth(_ completion: @escaping (_ selfIsland: SelfIsland) -> Void) {
