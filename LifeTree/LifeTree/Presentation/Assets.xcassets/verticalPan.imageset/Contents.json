@@ -1,8 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "verticalPan.png",
-      "idiom" : "universal"
+      "filename" : "Group 164@1x.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "Group 164@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "Group 164@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
     }
   ],
   "info" : {
