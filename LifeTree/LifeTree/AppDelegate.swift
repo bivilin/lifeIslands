@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         return true
     }
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        
+        UserDefaults.standard.set(false, forKey: "didUpdateDataAfterLaunch")
+        return true
+    }
 
     // MARK: UISceneSession Lifecycle
 

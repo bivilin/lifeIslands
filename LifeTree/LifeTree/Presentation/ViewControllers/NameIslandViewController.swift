@@ -101,7 +101,7 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
         infoHandler.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 32)
         infoHandler.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 32)
         infoHandler.addAllPeripheralIslandsToDatabase() {
-            self.infoHandler.createSelf(name: name, currentHealth: 50) {
+            self.infoHandler.createSelf(name: name, healthStatus: 50) {
                 completion()
             }
         }
