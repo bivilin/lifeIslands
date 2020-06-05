@@ -31,7 +31,7 @@ class SelectIslandsViewController: UIViewController {
         LifeArea(name: "Relacionamento"),
         LifeArea(name: "Trabalho"),
         LifeArea(name: "Estudos"),
-        LifeArea(name: "Finanças"),
+        LifeArea(name: "Financeiro"),
         LifeArea(name: "Lazer"),
         LifeArea(name: "Espiritual")]
 
