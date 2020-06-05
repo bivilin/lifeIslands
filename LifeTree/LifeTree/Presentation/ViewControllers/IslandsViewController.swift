@@ -74,18 +74,9 @@ class IslandsViewController: UIViewController{
 
         // Inicializando classe que maneja os dados
         self.infoHandler = InformationHandler()
-
-
-        SelfIslandDataServices.getFirstSelfIsland() { (error, island) in
-            if error == nil {
-                    self.islandsVisualizationServices!.addSelfIslandToScene(island: island)
-            }
-        }
-
-        self.infoHandler?.retrievePeripheralIslands() { (islands) in
-            self.islandsVisualizationServices?.addAllPeripheralIslandsToScene(peripheralIslandArray: islands)
-        }
-
+        
+        // Update islands health due to inactive time (only after launch) and add them all to scene
+        self.updateAndAddAllIslandsToScene()
 
         // Set the scene to the view
         self.islandsSCNView.scene = islandsSCNScene
@@ -95,13 +86,6 @@ class IslandsViewController: UIViewController{
         
         // Set up card for self island
         self.cardView = storyboard?.instantiateViewController(withIdentifier: "Card") as? CardViewController
-
-        // Podemos apagar? Não usamos mais o SKScene \/
-        let selfIslandSKScene = self.islandsVisualizationServices?.getSelfIslandSKScene()
-        if selfIslandSKScene != nil {
-//            self.cardView.islandSKScene = selfIslandSKScene!
-//            self.cardView.islandSKScene.scaleMode = .aspectFit
-        }
         
         // Set up card for peripheral islands
         self.peripheralCardView = storyboard?.instantiateViewController(withIdentifier: "PeripheralCard") as? PeripheralCardViewController
@@ -117,6 +101,74 @@ class IslandsViewController: UIViewController{
         // Add a pan gesture recognizer
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         self.islandsSCNView.addGestureRecognizer(panGesture)
+    }
+    
+    // MARK: Scene set up
+    
+    func updateAndAddAllIslandsToScene() {
+        // Obs: for this function to work as expected, when creating islands for the first time we need to have currentHelth = lastHealth so there is no drop in health due to inactive time
+        
+        // Check if an update has already been made since app was launched
+        if !UserDefaults.standard.bool(forKey: "didUpdateDataAfterLaunch") {
+            
+            // Get peripheral islands from Database
+            self.infoHandler?.retrievePeripheralIslands(completion: { (islands) in
+                
+                var averageHealth: Int = 0 // mean health of all peripheral islands (to be updated)
+                var updatedIslandsArray: [PeripheralIsland] = []
+                
+                for island in islands {
+                    // Update health by inactive time
+                    var updatedIsland: PeripheralIsland = island
+                    UpdateIslandsHealth().updatePeripheralIslandByInactiveTime(&updatedIsland)
+                    updatedIslandsArray.append(updatedIsland)
+                    
+                    // Save the updated peripheral island in database
+                    PeripheralIslandDataServices.updatePeripheralIsland(island: updatedIsland) { (error) in
+                        print("PeripheralIsland was updated")
+                    }
+                    // Update mean health
+                    averageHealth += Int(truncating: updatedIsland.currentHealthStatus ?? 0)
+                }
+                
+                // Add updated islands to the scene
+                self.islandsVisualizationServices?.addAllPeripheralIslandsToScene(peripheralIslandArray: updatedIslandsArray)
+                
+                // Finish calculation of mean health
+                averageHealth = averageHealth/updatedIslandsArray.count
+                
+                // Retrieve and update self island
+                SelfIslandDataServices.getFirstSelfIsland { (error, myIsland) in
+                    if error == nil, let centralIsland: SelfIsland = myIsland {
+                        
+                        // Set current self island health as the average health of the peripheral islands
+                        centralIsland.currentHealthStatus = NSNumber(value: averageHealth)
+                        centralIsland.lastHealthStatus = centralIsland.currentHealthStatus
+                        
+                        // Add self island to scene
+                        self.islandsVisualizationServices?.addSelfIslandToScene(island: centralIsland)
+                        
+                        // Update self island in database
+                        SelfIslandDataServices.updateSelfIsland(island: centralIsland) { (error) in
+                            print("SelfIsland was updated")
+                        }
+                    }
+                }
+            })
+            // Update key used to inform if data was updated since lanching app
+            UserDefaults.standard.set(true, forKey: "didUpdateDataAfterLaunch")
+        }
+        else {
+            // If update has already been made since launch, add existing islands from database to scene
+            SelfIslandDataServices.getFirstSelfIsland() { (error, island) in
+                if error == nil {
+                    self.islandsVisualizationServices!.addSelfIslandToScene(island: island)
+                }
+            }
+            self.infoHandler?.retrievePeripheralIslands() { (islands) in
+                self.islandsVisualizationServices?.addAllPeripheralIslandsToScene(peripheralIslandArray: islands)
+            }
+        }
     }
     
     // MARK: Gestures
@@ -347,10 +399,8 @@ class IslandsViewController: UIViewController{
             self.floatingPanel.set(contentViewController: self.cardView)
         }
     }
-    
-    func floatingPanelDidEndDragging(_ vc: FloatingPanelController, withVelocity velocity: CGPoint, targetPosition: FloatingPanelPosition) {
-        
-        // animação do circulo funciona só quando termina de arrastar o card.
+
+    func floatingPanelDidChangePosition(_ vc: FloatingPanelController) {
         self.cardView.loadProgress()
         self.peripheralCardView.loadProgressPeripheral()
     }

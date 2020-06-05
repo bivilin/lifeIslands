@@ -94,7 +94,7 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
     // MARK: Create Core Data
 
     func loadData(name: String, completion: @escaping () -> Void) {
-            self.infoHandler.createSelf(name: name, currentHealth: 50) {
+            self.infoHandler.createSelf(name: name, healthStatus: 50) {
                 completion()
             }
     }

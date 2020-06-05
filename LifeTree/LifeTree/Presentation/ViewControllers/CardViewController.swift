@@ -56,7 +56,10 @@ class CardViewController: UIViewController{
             }
         }
 
+        // Atualiza UI para a nova estação
         self.seasonLabel.text = season.name
+        self.seasonLabel.textColor = season.color
+        self.islandImage.image = UIImage(named: season.imageNamed)
         self.statusDescriptionLabel.text = season.description
         
         //random para testar os circulos, substituir o season por : CGFloat(Int.random(in: 0...100))/100
