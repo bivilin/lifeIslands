@@ -277,7 +277,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xir-Q6-ymP" userLabel="underlineTextField">
-                                                <rect key="frame" x="25" y="648" width="364" height="1"/>
+                                                <rect key="frame" x="25" y="650" width="364" height="1"/>
                                                 <color key="backgroundColor" red="0.56862745098039214" green="0.6588235294117647" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="z1A-wT-85r"/>
@@ -348,7 +348,7 @@
                             <constraint firstItem="rUY-VV-zpu" firstAttribute="top" secondItem="JfL-XR-tv1" secondAttribute="top" id="Bx0-cR-jUX"/>
                             <constraint firstItem="zMg-ID-aHp" firstAttribute="trailing" secondItem="QfZ-dp-wmN" secondAttribute="trailing" id="D85-zW-dbK"/>
                             <constraint firstItem="zMg-ID-aHp" firstAttribute="leading" secondItem="QfZ-dp-wmN" secondAttribute="leading" id="D88-e2-1XY"/>
-                            <constraint firstItem="xir-Q6-ymP" firstAttribute="top" secondItem="zMg-ID-aHp" secondAttribute="bottom" id="GLR-Go-diP"/>
+                            <constraint firstItem="xir-Q6-ymP" firstAttribute="top" secondItem="zMg-ID-aHp" secondAttribute="bottom" constant="2" id="GLR-Go-diP"/>
                             <constraint firstItem="Bbu-Xx-Aux" firstAttribute="width" secondItem="zOO-Pj-2fD" secondAttribute="width" id="aQk-iN-qGf"/>
                             <constraint firstItem="rUY-VV-zpu" firstAttribute="leading" secondItem="JfL-XR-tv1" secondAttribute="leading" id="gDk-ib-VWD"/>
                             <constraint firstItem="Bbu-Xx-Aux" firstAttribute="height" secondItem="rUY-VV-zpu" secondAttribute="height" priority="750" id="hCb-Vt-RGG"/>
@@ -1381,6 +1381,6 @@
         <image name="multiply" catalog="system" width="128" height="111"/>
         <image name="ring" width="722" height="722"/>
         <image name="simple-drop" width="33.5" height="41"/>
-        <image name="verticalPan" width="54.5" height="68.5"/>
+        <image name="verticalPan" width="55" height="64.5"/>
     </resources>
 </document>
