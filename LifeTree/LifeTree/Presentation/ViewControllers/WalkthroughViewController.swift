@@ -86,7 +86,7 @@ class WalkthroughViewController: UIViewController {
 
 extension WalkthroughViewController: WalkthroughDelegate {
     func didPressStartButton() {
-        performSegue(withIdentifier: "fromWalkthroughToNameIsland", sender: self)
+        performSegue(withIdentifier: "fromWalkthroughToSelectIsland", sender: self)
     }
 }
 

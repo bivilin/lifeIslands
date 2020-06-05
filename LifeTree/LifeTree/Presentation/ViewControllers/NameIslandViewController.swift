@@ -41,9 +41,9 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
             // Changes userDefault so that the SceneDelegate knows the user has already done the app's onboarding and therefore change the initial ViewController
             UserDefaults.standard.set(true, forKey: "notFirstInApp")
             
-            // GRAVA NOME DO SELF NO COREDATA
-            // FAZ AQUI O CARREGAMENTO INICIAL DAS ILHAS PARA NÃO DAR NIL NO PRÓXIMO VC
+            // Nome do usuário é persistido na ilha central
             if let userName = textField.text {
+                // O segue para a próxima tela só é feito após a criação do dado ter sido feita com sucesso.
                 self.loadData(name: userName) {
                     self.performSegue(withIdentifier: "fromNameIslandToMainScreen", sender: self)
                 }
@@ -94,16 +94,8 @@ class NameIslandViewController: UIViewController, UITextFieldDelegate {
     // MARK: Create Core Data
 
     func loadData(name: String, completion: @escaping () -> Void) {
-        infoHandler.addPeripheralIslandToArray(category: "Trabalho", name: "Trabalho", healthStatus: 66)
-        infoHandler.addPeripheralIslandToArray(category: "Faculdade", name: "Faculdade", healthStatus: 66)
-        infoHandler.addPeripheralIslandToArray(category: "Família", name: "Família", healthStatus: 32)
-        infoHandler.addPeripheralIslandToArray(category: "Saúde", name: "Academia", healthStatus: 66)
-        infoHandler.addPeripheralIslandToArray(category: "Casa", name: "Casa", healthStatus: 32)
-        infoHandler.addPeripheralIslandToArray(category: "Finanças", name: "Finanças", healthStatus: 32)
-        infoHandler.addAllPeripheralIslandsToDatabase() {
             self.infoHandler.createSelf(name: name, healthStatus: 50) {
                 completion()
             }
-        }
     }
 }
