@@ -37,13 +37,13 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVg-y8-vjt">
-                    <rect key="frame" x="40" y="649" width="334" height="21"/>
-                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
-                    <nil key="textColor"/>
+                    <rect key="frame" x="40" y="649" width="334" height="20"/>
+                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tlu-lN-wNs">
-                    <rect key="frame" x="40" y="700" width="334" height="50"/>
+                    <rect key="frame" x="40" y="699" width="334" height="50"/>
                     <color key="backgroundColor" red="0.41176470590000003" green="0.47450980390000003" blue="0.97254901959999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="334" id="j50-0f-fVI"/>
@@ -61,14 +61,18 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
                 <constraint firstItem="Tlu-lN-wNs" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="6iS-pb-K3m"/>
+                <constraint firstItem="HVg-y8-vjt" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="CyU-7G-dRy"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="mcV-ud-TAk" secondAttribute="trailing" constant="40" id="CzY-Nu-xMt"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Tlu-lN-wNs" secondAttribute="bottom" constant="60" id="Fwc-PG-eKf"/>
                 <constraint firstItem="mcV-ud-TAk" firstAttribute="leading" secondItem="Tlu-lN-wNs" secondAttribute="leading" id="MJp-vB-wrJ"/>
                 <constraint firstItem="yfe-JJ-6Yh" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="MiH-Z8-B7w"/>
                 <constraint firstItem="Tlu-lN-wNs" firstAttribute="top" secondItem="HVg-y8-vjt" secondAttribute="bottom" constant="30" id="Onu-39-6dK"/>
                 <constraint firstItem="HVg-y8-vjt" firstAttribute="leading" secondItem="Tlu-lN-wNs" secondAttribute="leading" id="TCN-sF-qIX"/>
                 <constraint firstItem="mcV-ud-TAk" firstAttribute="top" secondItem="yfe-JJ-6Yh" secondAttribute="bottom" constant="30" id="Usx-MP-lKx"/>
+                <constraint firstItem="mcV-ud-TAk" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="WHF-gU-eQ8"/>
                 <constraint firstItem="HVg-y8-vjt" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="WiW-pv-b7H"/>
                 <constraint firstItem="HVg-y8-vjt" firstAttribute="top" secondItem="mcV-ud-TAk" secondAttribute="bottom" constant="24" id="Xe1-1E-bIi"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="HVg-y8-vjt" secondAttribute="trailing" constant="40" id="a1e-X5-B5E"/>
                 <constraint firstItem="yfe-JJ-6Yh" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" priority="700" id="eLa-Q7-1oG"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HVg-y8-vjt" secondAttribute="bottom" constant="90" id="fB0-ya-8Y5"/>
                 <constraint firstItem="yfe-JJ-6Yh" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" multiplier="0.8" priority="500" id="h4i-ig-W5P"/>
