@@ -49,32 +49,32 @@ class WalkthroughViewController: UIViewController {
     func createPages() -> [WalkthroughPage] {
         let page1: WalkthroughPage = Bundle.main.loadNibNamed("WalkthroughPageView", owner: self, options: nil)?.first as! WalkthroughPage
         page1.imageView.image = UIImage(named: "Asset1_onboarding")
-        page1.titleLabel.text = "Separe as áreas de sua vida"
-        page1.descriptionLabel.text = "Cada área da sua vida está representada por uma ilha, para que você possa dar atenção individual à cada uma delas"
+        page1.titleLabel.text = "Visualize as áreas da sua vida"
+        page1.descriptionLabel.text = "Você terá uma ilha para área da sua vida e conseguirá navegar entre elas arrastando a tela vertical e horizontalmente"
         page1.startButton.isHidden = true
         
         let page2: WalkthroughPage = Bundle.main.loadNibNamed("WalkthroughPageView", owner: self, options: nil)?.first as! WalkthroughPage
-        page2.imageView.image = UIImage(named: "Asset2_onboarding")
-        page2.titleLabel.text = "Lorem ipsum"
-        page2.descriptionLabel.text = "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+        page2.imageView.image = UIImage(named: "Asset6_onboarding")
+        page2.titleLabel.text = "Adicione atividades para cuidar da sua ilha"
+        page2.descriptionLabel.text = "Suas atividades servirão de parâmetro para acompanhar seu progresso e de estímulo para cuidar das áreas da sua vida."
         page2.startButton.isHidden = true
         
         let page3: WalkthroughPage = Bundle.main.loadNibNamed("WalkthroughPageView", owner: self, options: nil)?.first as! WalkthroughPage
-        page3.imageView.image = UIImage(named: "Asset3_onboarding")
-        page3.titleLabel.text = "Lorem ipsum"
-        page3.descriptionLabel.text = "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+        page3.imageView.image = UIImage(named: "Asset7_onboarding")
+        page3.titleLabel.text = "Ganhe recompensas e cultive sua ilha"
+        page3.descriptionLabel.text = "Ao realizar tarefas, você ganhará gotas para regar sua ilha. Quanto mais você regar, mais saudável ela ficará."
         page3.startButton.isHidden = true
         
         let page4: WalkthroughPage = Bundle.main.loadNibNamed("WalkthroughPageView", owner: self, options: nil)?.first as! WalkthroughPage
-        page4.imageView.image = UIImage(named: "Asset4_onboarding")
-        page4.titleLabel.text = "Lorem ipsum"
-        page4.descriptionLabel.text = "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+        page4.imageView.image = UIImage(named: "Asset8_onboarding")
+        page4.titleLabel.text = "Você está no centro"
+        page4.descriptionLabel.text = "A ilha central representa VOCÊ, e a saúde dela é o reflexo de todas as outras ilhas. Portanto, não esqueça nenhuma delas."
         page4.startButton.isHidden = true
         
         let page5: WalkthroughPage = Bundle.main.loadNibNamed("WalkthroughPageView", owner: self, options: nil)?.first as! WalkthroughPage
-        page5.imageView.image = UIImage(named: "Asset5_onboarding")
-        page5.titleLabel.text = "Lorem ipsum"
-        page5.descriptionLabel.text = "Lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum"
+        page5.imageView.image = UIImage(named: "Asset2_onboarding")
+        page5.titleLabel.text = "As estações são seu guia"
+        page5.descriptionLabel.text = "Acompanhe a saúde de cada ilha e saiba qual priorizar. O verão representa o estado mais saudável, mas não se esqueça que mesmo o inverno faz parte do ciclo natural da vida!"
         page5.startButton.layer.cornerRadius = 10
         page5.walkthroughDelegate = self
         

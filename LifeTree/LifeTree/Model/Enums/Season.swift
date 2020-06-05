@@ -32,13 +32,13 @@ enum Season : String {
     var description : String {
       switch self {
       case .winter:
-        return "No inverno, a energia é mais baixa e tudo pode parecer mais lento e difícil. Não desista, continue cultivando a sua ilha. Pense em passos pequenos e não se cobre tanto."
+        return "Assim como as estações, nós também temos ciclos. Agora as coisas podem estar mais difíceis, mas vá um passo de cada vez logo irá florescer de novo ;)"
       case .spring:
-        return "Você acaba de sair de um período frio, mas está ganhando energia. O ritmo aumenta, suas folhas estão se espalhando e suas flores começam a florir. Continue assim para chegar no verão."
+        return "Você superou um momento mais frio, e suas folhas e flores já estão crescendo de novo! continue cultivando para deixar tudo ainda mais vivo"
       case .summer:
-        return "Parabéns! Você chegou no verão! O ritmo é alto e tudo se movimenta a todo tempo. Aproveite esse momento para cultivar outras ilhas que estão mais frias."
+        return "Uau, sua árvore está em seu ápice! Continue o cultivo para a manter linda assim, e que tal aproveitar para cuidar de outros mundos também?"
       case .autumn:
-        return "A energia ainda está alta, mas está diminuindo com o tempo. Continue cultivando a sua ilha. Não tente ser tão produtivo quanto em outro momento. Encontre o seu próprio ritmo de agora."
+        return "Sua ilha está linda, mas parece que sua energia vem caindo. A natureza é cíclica e nós também! Respeite seu ritmo e tente cultivar aquilo que te faz bem ;)"
       }
     }
 

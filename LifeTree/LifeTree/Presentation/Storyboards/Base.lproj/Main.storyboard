@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="erS-Mo-dkd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="erS-Mo-dkd">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -16,8 +16,8 @@
         <array key="Montserrat-SemiBold.ttf">
             <string>Montserrat-SemiBold</string>
         </array>
-        <array key="Poppins-Light.ttf">
-            <string>Poppins-Light</string>
+        <array key="Poppins-Medium.ttf">
+            <string>Poppins-Medium</string>
         </array>
         <array key="Poppins-Regular.ttf">
             <string>Poppins-Regular</string>
@@ -81,41 +81,41 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bbu-Xx-Aux" userLabel="ContentView">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="852"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sua ilha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfZ-dp-wmN">
-                                                <rect key="frame" x="25" y="36" width="364" height="35"/>
-                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="30"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ilha Central" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QfZ-dp-wmN">
+                                                <rect key="frame" x="25" y="40" width="364" height="42"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="30"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Mc-MW-sOa" userLabel="StyleLine">
-                                                <rect key="frame" x="25" y="76" width="110" height="3"/>
+                                                <rect key="frame" x="25" y="87" width="110" height="3"/>
                                                 <color key="backgroundColor" red="0.7026378512" green="0.81954497100000001" blue="0.81961703299999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="110" id="BEx-OF-Cgo"/>
                                                     <constraint firstAttribute="height" constant="3" id="IZ5-I0-UGG"/>
                                                 </constraints>
                                             </view>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Asset1_onboarding" translatesAutoresizingMaskIntoConstraints="NO" id="rLd-ea-US0">
-                                                <rect key="frame" x="25" y="152" width="364" height="364"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Asset4_onboarding" translatesAutoresizingMaskIntoConstraints="NO" id="rLd-ea-US0">
+                                                <rect key="frame" x="25" y="168.5" width="364" height="364"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="rLd-ea-US0" secondAttribute="height" id="RU1-49-c4g"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" text="Lorem ipsum lorem  ipsum lorem  ipsum lorem  ipsum lorem  ipsum" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T5d-iD-Wyl">
-                                                <rect key="frame" x="25" y="541" width="340.5" height="33"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                                <nil key="textColor"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="800" verticalHuggingPriority="251" text="Qual nome você daria a esta ilha?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T5d-iD-Wyl">
+                                                <rect key="frame" x="25" y="572.5" width="238.5" height="20"/>
+                                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xir-Q6-ymP" userLabel="underlineTextField">
-                                                <rect key="frame" x="25" y="630.5" width="340.5" height="1"/>
+                                                <rect key="frame" x="25" y="648" width="364" height="1"/>
                                                 <color key="backgroundColor" red="0.56862745098039214" green="0.6588235294117647" blue="0.83137254901960778" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="1" id="z1A-wT-85r"/>
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vmv-Fw-2FK">
-                                                <rect key="frame" x="329" y="10" width="60" height="31"/>
+                                                <rect key="frame" x="318" y="10" width="71" height="35"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="yLm-rl-E30"/>
                                                 </constraints>
@@ -131,24 +131,25 @@
                                             <constraint firstItem="rLd-ea-US0" firstAttribute="leading" secondItem="QfZ-dp-wmN" secondAttribute="leading" id="473-0A-T0b"/>
                                             <constraint firstItem="T5d-iD-Wyl" firstAttribute="leading" secondItem="QfZ-dp-wmN" secondAttribute="leading" id="4IU-2W-abh"/>
                                             <constraint firstItem="Vmv-Fw-2FK" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Bbu-Xx-Aux" secondAttribute="leading" constant="25" id="E18-0G-RIZ"/>
+                                            <constraint firstItem="QfZ-dp-wmN" firstAttribute="top" secondItem="Bbu-Xx-Aux" secondAttribute="top" constant="40" id="EU6-uM-Xrr"/>
                                             <constraint firstItem="9Mc-MW-sOa" firstAttribute="top" secondItem="QfZ-dp-wmN" secondAttribute="bottom" constant="5" id="MWX-Xn-W79"/>
-                                            <constraint firstItem="T5d-iD-Wyl" firstAttribute="top" secondItem="rLd-ea-US0" secondAttribute="bottom" constant="25" id="RvL-r4-opl"/>
+                                            <constraint firstItem="T5d-iD-Wyl" firstAttribute="top" secondItem="rLd-ea-US0" secondAttribute="bottom" constant="40" id="RvL-r4-opl"/>
                                             <constraint firstItem="QfZ-dp-wmN" firstAttribute="leading" secondItem="Bbu-Xx-Aux" secondAttribute="leading" constant="25" id="UOR-1B-l58"/>
                                             <constraint firstAttribute="trailing" secondItem="QfZ-dp-wmN" secondAttribute="trailing" constant="25" id="URU-6b-Umk"/>
                                             <constraint firstAttribute="trailing" secondItem="Vmv-Fw-2FK" secondAttribute="trailing" constant="25" id="WGs-gf-MGw"/>
                                             <constraint firstItem="9Mc-MW-sOa" firstAttribute="leading" secondItem="QfZ-dp-wmN" secondAttribute="leading" id="ace-XM-8Si"/>
                                             <constraint firstItem="xir-Q6-ymP" firstAttribute="leading" secondItem="QfZ-dp-wmN" secondAttribute="leading" id="gmm-O6-qyY"/>
-                                            <constraint firstItem="xir-Q6-ymP" firstAttribute="trailing" secondItem="T5d-iD-Wyl" secondAttribute="trailing" id="m48-Qj-R3J"/>
+                                            <constraint firstItem="xir-Q6-ymP" firstAttribute="trailing" secondItem="QfZ-dp-wmN" secondAttribute="trailing" id="jwF-Tg-eBI"/>
                                             <constraint firstItem="Vmv-Fw-2FK" firstAttribute="top" secondItem="Bbu-Xx-Aux" secondAttribute="top" constant="10" id="n4V-1V-0bc"/>
                                             <constraint firstItem="QfZ-dp-wmN" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="T5d-iD-Wyl" secondAttribute="trailing" id="qnf-cp-pUZ"/>
                                             <constraint firstItem="Vmv-Fw-2FK" firstAttribute="bottom" secondItem="QfZ-dp-wmN" secondAttribute="top" constant="5" id="rCN-Yd-UTL"/>
                                             <constraint firstItem="rLd-ea-US0" firstAttribute="trailing" secondItem="QfZ-dp-wmN" secondAttribute="trailing" id="rqZ-Vg-nSD"/>
                                         </constraints>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Lorem ipsum lorem  ipsum lorem  ipsum lorem  ipsum lorem  ipsum" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ea-QI-xKu">
-                                        <rect key="frame" x="25" y="94" width="364" height="33"/>
-                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                        <nil key="textColor"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Você sempre será o centro de sua vida. Portanto, você verá uma ilha central que representará você." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ea-QI-xKu">
+                                        <rect key="frame" x="25" y="105" width="364" height="39.5"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -156,7 +157,7 @@
                                     <constraint firstItem="6Ea-QI-xKu" firstAttribute="leading" secondItem="QfZ-dp-wmN" secondAttribute="leading" id="15g-ri-Of6"/>
                                     <constraint firstItem="6Ea-QI-xKu" firstAttribute="top" secondItem="9Mc-MW-sOa" secondAttribute="bottom" constant="15" id="IVq-bv-Icn"/>
                                     <constraint firstAttribute="trailing" secondItem="Bbu-Xx-Aux" secondAttribute="trailing" id="MIl-Ja-4z5"/>
-                                    <constraint firstItem="rLd-ea-US0" firstAttribute="top" secondItem="6Ea-QI-xKu" secondAttribute="bottom" constant="25" id="djf-Db-5G1"/>
+                                    <constraint firstItem="rLd-ea-US0" firstAttribute="top" secondItem="6Ea-QI-xKu" secondAttribute="bottom" constant="24" id="djf-Db-5G1"/>
                                     <constraint firstItem="Bbu-Xx-Aux" firstAttribute="leading" secondItem="rUY-VV-zpu" secondAttribute="leading" id="dv5-Uq-epR"/>
                                     <constraint firstItem="Bbu-Xx-Aux" firstAttribute="top" secondItem="rUY-VV-zpu" secondAttribute="top" id="fLx-Ve-dTH"/>
                                     <constraint firstAttribute="bottom" secondItem="Bbu-Xx-Aux" secondAttribute="bottom" id="jnn-ff-b8t"/>
@@ -166,7 +167,7 @@
                                 <viewLayoutGuide key="frameLayoutGuide" id="J8f-Kq-MM8"/>
                             </scrollView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Seu nome" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zMg-ID-aHp">
-                                <rect key="frame" x="25" y="638" width="364" height="36.5"/>
+                                <rect key="frame" x="25" y="648.5" width="364" height="43.5"/>
                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="30"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -183,7 +184,7 @@
                             <constraint firstItem="rUY-VV-zpu" firstAttribute="leading" secondItem="JfL-XR-tv1" secondAttribute="leading" id="gDk-ib-VWD"/>
                             <constraint firstItem="Bbu-Xx-Aux" firstAttribute="height" secondItem="rUY-VV-zpu" secondAttribute="height" priority="750" id="hCb-Vt-RGG"/>
                             <constraint firstItem="Bbu-Xx-Aux" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="zMg-ID-aHp" secondAttribute="bottom" constant="40" id="ykI-ew-rMc"/>
-                            <constraint firstItem="zMg-ID-aHp" firstAttribute="top" secondItem="T5d-iD-Wyl" secondAttribute="bottom" constant="20" id="z7k-5n-720"/>
+                            <constraint firstItem="zMg-ID-aHp" firstAttribute="top" secondItem="T5d-iD-Wyl" secondAttribute="bottom" constant="12" id="z7k-5n-720"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="JfL-XR-tv1"/>
                     </view>
@@ -247,16 +248,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qhn-5i-rjG" userLabel="TitleView">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="170"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="161.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amanda" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KpB-AV-VyN">
-                                        <rect key="frame" x="25" y="60" width="364" height="39.5"/>
-                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="28"/>
+                                        <rect key="frame" x="25" y="60" width="364" height="42"/>
+                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qN2-UI-iGx" userLabel="StyleLine">
-                                        <rect key="frame" x="143.5" y="104.5" width="127" height="3"/>
+                                        <rect key="frame" x="143.5" y="107" width="127" height="3"/>
                                         <color key="backgroundColor" red="0.62865293030000002" green="0.71221178770000004" blue="0.81962937120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="3" id="CoC-x4-64T"/>
@@ -264,9 +265,9 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fico feliz quando vem aqui todos os dias!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="igg-P1-e6f">
-                                        <rect key="frame" x="41.5" y="123.5" width="331" height="22.5"/>
-                                        <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins" pointSize="16"/>
-                                        <nil key="textColor"/>
+                                        <rect key="frame" x="41.5" y="126" width="331" height="17.5"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -276,15 +277,15 @@
                                     <constraint firstItem="qN2-UI-iGx" firstAttribute="top" secondItem="KpB-AV-VyN" secondAttribute="bottom" constant="5" id="Bc8-yy-MSV"/>
                                     <constraint firstItem="igg-P1-e6f" firstAttribute="top" secondItem="qN2-UI-iGx" secondAttribute="bottom" constant="16" id="P5n-fw-dpy"/>
                                     <constraint firstItem="KpB-AV-VyN" firstAttribute="centerX" secondItem="Qhn-5i-rjG" secondAttribute="centerX" id="sV9-1c-qKy"/>
-                                    <constraint firstAttribute="bottom" secondItem="igg-P1-e6f" secondAttribute="bottom" constant="24" id="yVk-1s-zci"/>
+                                    <constraint firstAttribute="bottom" secondItem="igg-P1-e6f" secondAttribute="bottom" constant="18" id="yVk-1s-zci"/>
                                     <constraint firstAttribute="trailing" secondItem="KpB-AV-VyN" secondAttribute="trailing" constant="25" id="zeq-OB-cef"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A3i-Wj-Sn7">
-                                <rect key="frame" x="0.0" y="170" width="414" height="692"/>
+                                <rect key="frame" x="0.0" y="161.5" width="414" height="700.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hd4-sR-SZJ" userLabel="scrollContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="598"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="606.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YJC-dn-sRN">
                                                 <rect key="frame" x="41.5" y="10" width="331" height="331"/>
@@ -342,32 +343,32 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Primavera" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ycs-SD-ZyJ">
-                                                <rect key="frame" x="137.5" y="381" width="139" height="36.5"/>
-                                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="26"/>
+                                                <rect key="frame" x="132.5" y="370" width="149.5" height="39.5"/>
+                                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="28"/>
                                                 <color key="textColor" red="0.94117647059999998" green="0.63921568630000003" blue="0.81568627449999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Saúde da Ilha" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9p-fp-KNA">
-                                                <rect key="frame" x="20" y="351" width="374" height="22"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z9p-fp-KNA">
+                                                <rect key="frame" x="20" y="351" width="374" height="20"/>
+                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você se sente razoavelmente satisfeito de maneira geral, porém em algumas áreas gostaria que melhorasse." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cz-zO-3Iu">
-                                                <rect key="frame" x="20" y="425.5" width="374" height="51.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem ipsum" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cz-zO-3Iu">
+                                                <rect key="frame" x="20" y="419.5" width="374" height="17.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstItem="2cz-zO-3Iu" firstAttribute="top" secondItem="Ycs-SD-ZyJ" secondAttribute="bottom" constant="8" id="0yb-CQ-NTp"/>
+                                            <constraint firstItem="2cz-zO-3Iu" firstAttribute="top" secondItem="Ycs-SD-ZyJ" secondAttribute="bottom" constant="10" id="0yb-CQ-NTp"/>
                                             <constraint firstItem="2cz-zO-3Iu" firstAttribute="leading" secondItem="Hd4-sR-SZJ" secondAttribute="leading" constant="20" id="18a-I4-wRc"/>
                                             <constraint firstItem="YJC-dn-sRN" firstAttribute="top" secondItem="Hd4-sR-SZJ" secondAttribute="top" constant="10" id="3D5-v4-tE1"/>
                                             <constraint firstItem="YJC-dn-sRN" firstAttribute="width" secondItem="Hd4-sR-SZJ" secondAttribute="width" multiplier="0.8" id="3yl-fG-VXk"/>
                                             <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="2cz-zO-3Iu" secondAttribute="bottom" constant="10" id="4C6-Al-t33"/>
-                                            <constraint firstItem="Ycs-SD-ZyJ" firstAttribute="top" secondItem="z9p-fp-KNA" secondAttribute="bottom" constant="8" id="Gzj-tD-bNa"/>
+                                            <constraint firstItem="Ycs-SD-ZyJ" firstAttribute="top" secondItem="z9p-fp-KNA" secondAttribute="bottom" constant="-1" id="Gzj-tD-bNa"/>
                                             <constraint firstAttribute="trailing" secondItem="2cz-zO-3Iu" secondAttribute="trailing" constant="20" id="HnL-wQ-SzU"/>
                                             <constraint firstAttribute="trailing" secondItem="z9p-fp-KNA" secondAttribute="trailing" constant="20" id="JVb-sZ-XA3"/>
                                             <constraint firstItem="z9p-fp-KNA" firstAttribute="top" secondItem="YJC-dn-sRN" secondAttribute="bottom" constant="10" id="ZA0-da-HIP"/>
@@ -426,26 +427,26 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profissional" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLX-U9-79p">
-                                <rect key="frame" x="128" y="60" width="158.5" height="39.5"/>
-                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="28"/>
+                                <rect key="frame" x="120.5" y="60" width="173" height="42"/>
+                                <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clh-Kz-790" userLabel="StyleLine">
-                                <rect key="frame" x="143.5" y="104.5" width="127" height="3"/>
+                                <rect key="frame" x="138" y="108" width="138" height="3"/>
                                 <color key="backgroundColor" red="0.62865293030000002" green="0.71221178770000004" blue="0.81962937120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="ZkP-vt-Mhh"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sua última ação na ilha foi ontem. Fico feliz quando vem aqui todos os dias!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8b-5F-bIf">
-                                <rect key="frame" x="41.5" y="121.5" width="331" height="34.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sua última ação na ilha foi ontem. " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V8b-5F-bIf">
+                                <rect key="frame" x="20" y="127" width="374" height="17.5"/>
                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="J7D-fz-4iD" userLabel="IslandStatusView">
-                                <rect key="frame" x="93" y="166" width="228" height="227.5"/>
+                                <rect key="frame" x="93" y="174.5" width="228" height="227.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FIL-FG-oKk">
                                         <rect key="frame" x="28.5" y="28.5" width="171" height="170.5"/>
@@ -497,7 +498,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PJ7-YZ-Lav">
-                                <rect key="frame" x="17" y="393.5" width="382" height="456.5"/>
+                                <rect key="frame" x="17" y="422" width="382" height="428"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="fixedContentCell" rowHeight="247" id="J6y-NZ-1Cv" customClass="FixedContentCell" customModule="LifeTree" customModuleProvider="target">
@@ -507,42 +508,42 @@
                                             <rect key="frame" x="0.0" y="0.0" width="382" height="247"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Primavera" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOf-Sk-K2t">
-                                                    <rect key="frame" x="121.5" y="30" width="139" height="36.5"/>
-                                                    <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="26"/>
-                                                    <color key="textColor" red="0.94055992359999996" green="0.64077860119999996" blue="0.81570893529999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Você se sente razoavelmente satisfeito de maneira geral, porém em algumas áreas gostaria que melhorasse." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="guG-eQ-nrz">
-                                                    <rect key="frame" x="0.0" y="86" width="382" height="59"/>
+                                                    <rect key="frame" x="0.0" y="77.5" width="382" height="76"/>
                                                     <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
-                                                    <nil key="textColor"/>
+                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Me conte quais foram as suas últimas atividades nessa área" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZGU-HR-PT4">
-                                                    <rect key="frame" x="0.0" y="180" width="382" height="59"/>
-                                                    <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="21"/>
+                                                    <rect key="frame" x="0.0" y="188.5" width="382" height="50.5"/>
+                                                    <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Saúde da Ilha" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mB0-a9-wcw">
-                                                    <rect key="frame" x="130" y="10" width="122.5" height="22"/>
-                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="18"/>
+                                                    <rect key="frame" x="136.5" y="12" width="109" height="20"/>
+                                                    <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
                                                     <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Primavera" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dOf-Sk-K2t">
+                                                    <rect key="frame" x="116.5" y="28" width="149.5" height="39.5"/>
+                                                    <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="28"/>
+                                                    <color key="textColor" red="0.94055992359999996" green="0.64077860119999996" blue="0.81570893529999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="dOf-Sk-K2t" firstAttribute="top" secondItem="mB0-a9-wcw" secondAttribute="bottom" constant="-2" id="1SB-u0-cX9"/>
+                                                <constraint firstItem="dOf-Sk-K2t" firstAttribute="top" secondItem="mB0-a9-wcw" secondAttribute="bottom" constant="-4" id="1SB-u0-cX9"/>
                                                 <constraint firstItem="dOf-Sk-K2t" firstAttribute="centerX" secondItem="xDe-ss-7Az" secondAttribute="centerX" id="BQC-E8-r7A"/>
                                                 <constraint firstItem="guG-eQ-nrz" firstAttribute="width" secondItem="xDe-ss-7Az" secondAttribute="width" id="CJT-mF-YKC"/>
                                                 <constraint firstAttribute="bottom" secondItem="ZGU-HR-PT4" secondAttribute="bottom" constant="8" id="Ndx-gW-n7d"/>
                                                 <constraint firstItem="mB0-a9-wcw" firstAttribute="centerX" secondItem="dOf-Sk-K2t" secondAttribute="centerX" id="XLI-uN-983"/>
                                                 <constraint firstItem="ZGU-HR-PT4" firstAttribute="centerX" secondItem="xDe-ss-7Az" secondAttribute="centerX" id="Zbr-dV-4hw"/>
                                                 <constraint firstItem="ZGU-HR-PT4" firstAttribute="top" secondItem="guG-eQ-nrz" secondAttribute="bottom" constant="35" id="h8z-Z4-pxa"/>
-                                                <constraint firstItem="mB0-a9-wcw" firstAttribute="top" secondItem="xDe-ss-7Az" secondAttribute="top" constant="10" id="iD6-9v-3cM"/>
+                                                <constraint firstItem="mB0-a9-wcw" firstAttribute="top" secondItem="xDe-ss-7Az" secondAttribute="top" constant="12" id="iD6-9v-3cM"/>
                                                 <constraint firstItem="ZGU-HR-PT4" firstAttribute="width" secondItem="xDe-ss-7Az" secondAttribute="width" id="kVz-TI-FD2"/>
-                                                <constraint firstItem="guG-eQ-nrz" firstAttribute="top" secondItem="dOf-Sk-K2t" secondAttribute="bottom" constant="19.5" id="ohf-fg-gIV"/>
+                                                <constraint firstItem="guG-eQ-nrz" firstAttribute="top" secondItem="dOf-Sk-K2t" secondAttribute="bottom" constant="10" id="ohf-fg-gIV"/>
                                                 <constraint firstItem="guG-eQ-nrz" firstAttribute="centerX" secondItem="xDe-ss-7Az" secondAttribute="centerX" id="tck-ax-p8l"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -671,8 +672,8 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="Clh-Kz-790" firstAttribute="top" secondItem="MLX-U9-79p" secondAttribute="bottom" constant="5" id="5Ld-gS-Ish"/>
-                            <constraint firstItem="J7D-fz-4iD" firstAttribute="bottom" secondItem="PJ7-YZ-Lav" secondAttribute="top" id="9TN-6E-2ay"/>
+                            <constraint firstItem="Clh-Kz-790" firstAttribute="top" secondItem="MLX-U9-79p" secondAttribute="bottom" constant="6" id="5Ld-gS-Ish"/>
+                            <constraint firstItem="J7D-fz-4iD" firstAttribute="bottom" secondItem="PJ7-YZ-Lav" secondAttribute="top" constant="-20" id="9TN-6E-2ay"/>
                             <constraint firstItem="V8b-5F-bIf" firstAttribute="centerX" secondItem="2jl-GS-PBI" secondAttribute="centerX" id="CC3-6v-cDM"/>
                             <constraint firstItem="J7D-fz-4iD" firstAttribute="width" secondItem="cx6-qD-uZa" secondAttribute="width" multiplier="0.55" id="H4p-Qe-Hfj"/>
                             <constraint firstItem="Clh-Kz-790" firstAttribute="centerX" secondItem="2jl-GS-PBI" secondAttribute="centerX" id="Ift-co-xFl"/>
@@ -682,10 +683,10 @@
                             <constraint firstItem="2jl-GS-PBI" firstAttribute="bottom" secondItem="PJ7-YZ-Lav" secondAttribute="bottom" constant="12" id="bDX-dW-6Hu"/>
                             <constraint firstItem="MLX-U9-79p" firstAttribute="top" secondItem="2jl-GS-PBI" secondAttribute="top" constant="16" id="mJx-tz-8eo"/>
                             <constraint firstItem="MLX-U9-79p" firstAttribute="centerX" secondItem="2jl-GS-PBI" secondAttribute="centerX" id="sEf-AW-Xse"/>
-                            <constraint firstItem="V8b-5F-bIf" firstAttribute="width" secondItem="cx6-qD-uZa" secondAttribute="width" multiplier="0.8" id="twT-Ab-BBe"/>
-                            <constraint firstItem="J7D-fz-4iD" firstAttribute="top" secondItem="V8b-5F-bIf" secondAttribute="bottom" constant="10" id="u3N-Wt-gvr"/>
+                            <constraint firstItem="V8b-5F-bIf" firstAttribute="width" secondItem="cx6-qD-uZa" secondAttribute="width" multiplier="0.8" constant="42.799999999999955" id="twT-Ab-BBe"/>
+                            <constraint firstItem="J7D-fz-4iD" firstAttribute="top" secondItem="V8b-5F-bIf" secondAttribute="bottom" constant="30" id="u3N-Wt-gvr"/>
                             <constraint firstItem="PJ7-YZ-Lav" firstAttribute="leading" secondItem="2jl-GS-PBI" secondAttribute="leading" constant="17" id="uai-cX-TqL"/>
-                            <constraint firstItem="V8b-5F-bIf" firstAttribute="top" secondItem="Clh-Kz-790" secondAttribute="bottom" constant="14" id="yV0-eM-q3f"/>
+                            <constraint firstItem="V8b-5F-bIf" firstAttribute="top" secondItem="Clh-Kz-790" secondAttribute="bottom" constant="16" id="yV0-eM-q3f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2jl-GS-PBI"/>
                     </view>
@@ -715,23 +716,23 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UqV-E0-g5a">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="477.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="562"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="coA-M2-8Tw" userLabel="StyleLine">
-                                                <rect key="frame" x="24" y="122" width="110" height="3"/>
+                                                <rect key="frame" x="24" y="129" width="110" height="3"/>
                                                 <color key="backgroundColor" red="0.7026378512" green="0.81954497100000001" blue="0.81961703299999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="3" id="7Ua-XF-gBg"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="TLP-T8-Ofa">
-                                                <rect key="frame" x="24" y="24" width="366" height="429.5"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="26" translatesAutoresizingMaskIntoConstraints="NO" id="TLP-T8-Ofa">
+                                                <rect key="frame" x="24" y="24" width="366" height="480"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="rY5-J5-lB4">
-                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="31"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="366" height="32"/>
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUl-uh-BBo">
-                                                                <rect key="frame" x="0.0" y="0.0" width="45" height="31"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="45" height="32"/>
                                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
                                                                 <state key="normal" title="Voltar">
                                                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -741,10 +742,10 @@
                                                                 </connections>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9x2-xn-6tM">
-                                                                <rect key="frame" x="289" y="0.0" width="77" height="31"/>
-                                                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="15"/>
+                                                                <rect key="frame" x="280" y="0.0" width="86" height="32"/>
+                                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
                                                                 <state key="normal" title="Confirmar">
-                                                                    <color key="titleColor" red="0.08449531347" green="0.19317728279999999" blue="0.32601839300000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                    <color key="titleColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 </state>
                                                                 <connections>
                                                                     <action selector="confirmButton:" destination="1de-Dz-avu" eventType="touchUpInside" id="SNB-qq-8Uo"/>
@@ -753,43 +754,43 @@
                                                         </subviews>
                                                     </stackView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Atividade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRJ-9i-cVm">
-                                                        <rect key="frame" x="0.0" y="51" width="366" height="42"/>
-                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="30"/>
+                                                        <rect key="frame" x="0.0" y="58" width="366" height="42"/>
+                                                        <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="30"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dê um nome para a atividade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4QN-rr-uW4">
-                                                        <rect key="frame" x="0.0" y="113" width="366" height="17.5"/>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                                        <nil key="textColor"/>
+                                                        <rect key="frame" x="0.0" y="126" width="366" height="20"/>
+                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-sH-w1U">
-                                                        <rect key="frame" x="0.0" y="150.5" width="366" height="34"/>
+                                                        <rect key="frame" x="0.0" y="172" width="366" height="34"/>
                                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Como se sentiu ao fazer essa atividade?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JGN-QG-1NA">
-                                                        <rect key="frame" x="0.0" y="204.5" width="366" height="17.5"/>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                                        <nil key="textColor"/>
+                                                        <rect key="frame" x="0.0" y="232" width="366" height="20"/>
+                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <slider opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="1" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="HNY-xu-LwH">
-                                                        <rect key="frame" x="-2" y="242" width="370" height="31"/>
+                                                        <rect key="frame" x="-2" y="278" width="370" height="31"/>
                                                         <color key="tintColor" red="0.62865293030000002" green="0.71221178770000004" blue="0.81962937120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                         <connections>
                                                             <action selector="impactLevelChanged:" destination="1de-Dz-avu" eventType="valueChanged" id="2C1-7x-gOe"/>
                                                         </connections>
                                                     </slider>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Me conte o motivo de se sentir assim" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S5i-zK-xyD">
-                                                        <rect key="frame" x="0.0" y="292" width="366" height="17.5"/>
-                                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                                        <nil key="textColor"/>
+                                                        <rect key="frame" x="0.0" y="334" width="366" height="20"/>
+                                                        <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
+                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sNz-Cf-MGv">
-                                                        <rect key="frame" x="0.0" y="329.5" width="366" height="100"/>
+                                                        <rect key="frame" x="0.0" y="380" width="366" height="100"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="w1F-9l-H98"/>
@@ -803,7 +804,7 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="TLP-T8-Ofa" secondAttribute="bottom" constant="24" id="8Js-zV-tky"/>
+                                            <constraint firstAttribute="bottom" secondItem="TLP-T8-Ofa" secondAttribute="bottom" constant="58" id="8Js-zV-tky"/>
                                             <constraint firstItem="coA-M2-8Tw" firstAttribute="leading" secondItem="qRJ-9i-cVm" secondAttribute="leading" id="8xj-aC-dju"/>
                                             <constraint firstItem="TLP-T8-Ofa" firstAttribute="leading" secondItem="UqV-E0-g5a" secondAttribute="leading" constant="24" id="MTF-bh-nk3"/>
                                             <constraint firstAttribute="trailing" secondItem="TLP-T8-Ofa" secondAttribute="trailing" constant="24" id="UHQ-P3-nbC"/>
@@ -814,7 +815,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="UqV-E0-g5a" firstAttribute="bottom" secondItem="FfT-BU-gCT" secondAttribute="bottom" id="Oep-8y-ne3"/>
+                                    <constraint firstItem="UqV-E0-g5a" firstAttribute="bottom" secondItem="FfT-BU-gCT" secondAttribute="bottom" constant="-2" id="Oep-8y-ne3"/>
                                     <constraint firstItem="UqV-E0-g5a" firstAttribute="trailing" secondItem="FfT-BU-gCT" secondAttribute="trailing" id="QYI-Zl-s5s"/>
                                     <constraint firstItem="UqV-E0-g5a" firstAttribute="top" secondItem="FfT-BU-gCT" secondAttribute="top" id="VYB-LC-yO4"/>
                                     <constraint firstItem="UqV-E0-g5a" firstAttribute="width" secondItem="sZk-U9-qhM" secondAttribute="width" id="ptg-7a-gOX"/>
@@ -845,7 +846,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sXp-i6-K4m" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="ljH-3K-eXP" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1768" y="599"/>
+            <point key="canvasLocation" x="1766.6666666666667" y="598.66071428571422"/>
         </scene>
         <!--Action Custom Alert View Controller-->
         <scene sceneID="HPG-n2-Wpm">
@@ -856,47 +857,47 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WGs-Kx-XCg" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="239.5" width="414" height="336.5"/>
+                                <rect key="frame" x="0.0" y="237.5" width="414" height="340"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3V6-q3-ngJ" userLabel="MessageView">
-                                        <rect key="frame" x="25" y="51" width="364" height="161.5"/>
+                                        <rect key="frame" x="25" y="51" width="364" height="165"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título da ação" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVY-1o-1FM">
-                                                <rect key="frame" x="25" y="25" width="314" height="26"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="21"/>
+                                                <rect key="frame" x="25" y="25" width="314" height="29.5"/>
+                                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="21"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PCm-G1-BQ9">
-                                                <rect key="frame" x="25" y="59" width="314" height="17.5"/>
+                                                <rect key="frame" x="25" y="62.5" width="314" height="17.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RECOMPENSA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNW-od-gis">
-                                                <rect key="frame" x="25" y="96.5" width="314" height="15"/>
+                                                <rect key="frame" x="25" y="100" width="314" height="15"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simple-drop" translatesAutoresizingMaskIntoConstraints="NO" id="G3f-dy-ZOh" userLabel="drop1">
-                                                <rect key="frame" x="25" y="116.5" width="20" height="20"/>
+                                                <rect key="frame" x="25" y="120" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="Q7t-zg-CuW"/>
                                                     <constraint firstAttribute="width" secondItem="G3f-dy-ZOh" secondAttribute="height" id="y6M-kt-CPF"/>
                                                 </constraints>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simple-drop" translatesAutoresizingMaskIntoConstraints="NO" id="7qn-gC-ufN" userLabel="drop2">
-                                                <rect key="frame" x="45" y="116.5" width="20" height="20"/>
+                                                <rect key="frame" x="45" y="120" width="20" height="20"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simple-drop" translatesAutoresizingMaskIntoConstraints="NO" id="XyF-Or-grs" userLabel="drop3">
-                                                <rect key="frame" x="65" y="116.5" width="20" height="20"/>
+                                                <rect key="frame" x="65" y="120" width="20" height="20"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simple-drop" translatesAutoresizingMaskIntoConstraints="NO" id="THP-wT-ghO" userLabel="drop4">
-                                                <rect key="frame" x="84" y="116.5" width="20" height="20"/>
+                                                <rect key="frame" x="84" y="120" width="20" height="20"/>
                                             </imageView>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="simple-drop" translatesAutoresizingMaskIntoConstraints="NO" id="wYd-dR-b1P" userLabel="drop5">
-                                                <rect key="frame" x="103" y="116.5" width="20" height="20"/>
+                                                <rect key="frame" x="103" y="120" width="20" height="20"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -932,13 +933,13 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QOt-MQ-uy4">
-                                        <rect key="frame" x="25" y="220.5" width="364" height="50"/>
+                                        <rect key="frame" x="25" y="224" width="364" height="50"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="LBl-Pw-x96"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
-                                        <state key="normal" title="Confirmar"/>
+                                        <state key="normal" title="CONFIRMAR"/>
                                         <connections>
                                             <action selector="confirmAction:" destination="9gp-xG-Mop" eventType="touchUpInside" id="tV1-kv-dE3"/>
                                         </connections>
@@ -957,10 +958,10 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EgE-Dc-lba">
-                                        <rect key="frame" x="25" y="278.5" width="364" height="50"/>
+                                        <rect key="frame" x="25" y="282" width="364" height="50"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
-                                        <state key="normal" title="Deletar ação">
+                                        <state key="normal" title="DELETAR AÇÃO">
                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -1022,13 +1023,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parabéns" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDu-S4-BIH">
-                                <rect key="frame" x="40" y="184.5" width="334" height="35"/>
+                                <rect key="frame" x="40" y="181" width="334" height="42"/>
                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IhV-Qt-lDQ" userLabel="StyleLine">
-                                <rect key="frame" x="147" y="264.5" width="120" height="3"/>
+                                <rect key="frame" x="147" y="275" width="120" height="3"/>
                                 <color key="backgroundColor" red="0.97647058823529409" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="3" id="3G2-hc-LtQ"/>
@@ -1036,7 +1037,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amanda!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFI-aM-zsF">
-                                <rect key="frame" x="40" y="219.5" width="334" height="35"/>
+                                <rect key="frame" x="40" y="223" width="334" height="42"/>
                                 <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1063,8 +1064,8 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ao fazer essa atividade você ganhou X gotas para cultivar essa área" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRY-hZ-o30">
-                                <rect key="frame" x="40" y="453" width="334" height="37.5"/>
-                                <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="16"/>
+                                <rect key="frame" x="40" y="453" width="334" height="39.5"/>
+                                <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1113,19 +1114,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y45-aU-R2U" userLabel="Content View">
-                                <rect key="frame" x="0.0" y="299.5" width="414" height="216"/>
+                                <rect key="frame" x="0.0" y="296.5" width="414" height="222"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PAe-iu-zCq" userLabel="MessageView">
-                                        <rect key="frame" x="25" y="51" width="364" height="99"/>
+                                        <rect key="frame" x="25" y="51" width="364" height="105"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLJ-46-2Dn">
-                                                <rect key="frame" x="25" y="25" width="314" height="24.5"/>
-                                                <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="21"/>
+                                                <rect key="frame" x="25" y="25" width="314" height="29.5"/>
+                                                <fontDescription key="fontDescription" name="Poppins-SemiBold" family="Poppins" pointSize="21"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descrição" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q4j-i5-Aus">
-                                                <rect key="frame" x="25" y="57.5" width="314" height="16.5"/>
+                                                <rect key="frame" x="25" y="62.5" width="314" height="17.5"/>
                                                 <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="14"/>
                                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -1143,13 +1144,13 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="im1-Rj-3zX">
-                                        <rect key="frame" x="25" y="158" width="364" height="50"/>
+                                        <rect key="frame" x="25" y="164" width="364" height="50"/>
                                         <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="MJV-6a-rPy"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="14"/>
-                                        <state key="normal" title="Ok"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Bold" family="Montserrat" pointSize="16"/>
+                                        <state key="normal" title="OK"/>
                                         <connections>
                                             <action selector="bottomButtonActionWithSender:" destination="s3M-n5-aMg" eventType="touchUpInside" id="zHv-nm-b7L"/>
                                         </connections>
@@ -1205,7 +1206,7 @@
     </scenes>
     <resources>
         <image name="5drops" width="956" height="266"/>
-        <image name="Asset1_onboarding" width="320" height="320"/>
+        <image name="Asset4_onboarding" width="320" height="320"/>
         <image name="multiply" catalog="system" width="128" height="111"/>
         <image name="ring" width="722" height="722"/>
         <image name="simple-drop" width="33.5" height="41"/>

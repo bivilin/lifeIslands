@@ -57,7 +57,7 @@ class PeripheralCardViewController: UIViewController {
 
         // Texto com último dia de entrada
         let relativeDate = DateServices().getTimeSinceLastEntry(lastDate: peripheralIsland?.lastActionDate ?? Date())
-        self.lastActivityMessageLabel.text = "Sua última atividade aqui foi \(relativeDate). Fico feliz quando me rega todos os dias!"
+        self.lastActivityMessageLabel.text = "Sua última atividade aqui foi \(relativeDate)."
     }
 
     // MARK: Info Handling
