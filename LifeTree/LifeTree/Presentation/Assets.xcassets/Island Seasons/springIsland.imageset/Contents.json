@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Primavera.png",
+      "filename" : "springIsland.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Primavera@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Primavera@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

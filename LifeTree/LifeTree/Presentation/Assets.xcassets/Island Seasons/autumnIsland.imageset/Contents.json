@@ -1,17 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "Outono.png",
+      "filename" : "autumnIsland.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Outono@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Outono@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

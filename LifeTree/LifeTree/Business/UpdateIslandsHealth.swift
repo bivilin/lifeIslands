@@ -19,7 +19,7 @@ class UpdateIslandsHealth {
         case 0...33:
             return .winter
         case 34...67:
-            if currentHealth > lastHealth {
+            if currentHealth >= lastHealth {
                 return .spring
             } else {
                 return .autumn
