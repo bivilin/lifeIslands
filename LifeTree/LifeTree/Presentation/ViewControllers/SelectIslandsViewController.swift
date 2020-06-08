@@ -50,16 +50,27 @@ class SelectIslandsViewController: UIViewController {
     // Ao clicar no botão, as ilhas selecionadas são criadas no banco
     @IBAction func nextButton(_ sender: Any) {
 
+        var numberOfSelectedAreas: Int = 0
+
         // Somente as ilha selecionadas são incluídas no vetor que será persistido
         for lifeArea in lifeAreas {
             if lifeArea.selected {
                 infoHandler.addPeripheralIslandToArray(category: lifeArea.name, name: lifeArea.name, healthStatus: 50)
+                numberOfSelectedAreas += 1
             }
         }
 
-        // O segue só é feito depois que a ilha é adicionada com sucesso no banco
-        infoHandler.addAllPeripheralIslandsToDatabase {
-            self.performSegue(withIdentifier: "fromSelectIslandToNameIsland", sender: self)
+        if numberOfSelectedAreas > 2 {
+            // O segue só é feito depois que a ilha é adicionada com sucesso no banco
+            infoHandler.addAllPeripheralIslandsToDatabase {
+                self.performSegue(withIdentifier: "fromSelectIslandToNameIsland", sender: self)
+            }
+        } else {
+            // Alerta
+            let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlert") as! CustomAlertViewController
+            customAlert.alertTitle = "Ops..."
+            customAlert.alertDescription = "Você precisa selecionar pelo menos três ilhas para continuar!"
+            CustomAlertServices().presentAsAlert(show: customAlert, over: self)
         }
     }
 }
