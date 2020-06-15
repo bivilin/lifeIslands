@@ -37,10 +37,11 @@ class UpdateIslandsHealth {
         
         // Calculate hours since island was updated last
         if let lastDate: Date = island.lastActionDate {
+            // TimeDistance is given in negative units
             timeDistance = DateServices().timeDistanceFromDate(date: lastDate, timeUnit: .hour)
         }
         // Decrease health due to inactive time
-        var newHealth = Int(truncating: island.currentHealthStatus ?? 50) - Int(Double(timeDistance) * self.inactiveTimeToHealthDropConversionFactor)
+        var newHealth = Int(truncating: island.currentHealthStatus ?? 50) + Int(Double(timeDistance) * self.inactiveTimeToHealthDropConversionFactor)
         
         // Make sure new health is within boundaries
         if newHealth < 0 {
