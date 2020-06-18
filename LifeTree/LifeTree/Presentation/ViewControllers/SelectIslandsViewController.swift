@@ -25,6 +25,7 @@ class SelectIslandsViewController: UIViewController {
 
     var easterEggMode: Bool = false
     @IBOutlet weak var lifeAreasTableView: UITableView!
+    var currentLifeAreasArray: [LifeArea] = []
     var lifeAreas:[LifeArea] = [
         LifeArea(name: "Autocuidado"),
         LifeArea(name: "Família"),
@@ -52,6 +53,12 @@ class SelectIslandsViewController: UIViewController {
         // Implements easter egg gesture for customizing islands
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handleEasterEggPanGesture(_:)))
         self.view.addGestureRecognizer(panGesture)
+
+        if easterEggMode {
+            currentLifeAreasArray = customizedLifeAreas
+        } else {
+            currentLifeAreasArray = lifeAreas
+        }
     }
 
     @objc func handleEasterEggPanGesture(_ gesture: UIPanGestureRecognizer) {
@@ -74,7 +81,7 @@ class SelectIslandsViewController: UIViewController {
         var numberOfSelectedAreas: Int = 0
 
         // Somente as ilha selecionadas são incluídas no vetor que será persistido
-        for lifeArea in lifeAreas {
+        for lifeArea in currentLifeAreasArray {
             if lifeArea.selected {
                 if lifeArea.name == "Trabalho" {
                     infoHandler.addPeripheralIslandToArray(category: lifeArea.name, name: lifeArea.name, healthStatus: 33)
@@ -108,11 +115,7 @@ extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSourc
         case 0:
             return 1
         case 1:
-            if easterEggMode {
-                return customizedLifeAreas.count
-            } else {
-                return lifeAreas.count
-            }
+            return currentLifeAreasArray.count
         default:
             return 1
         }
@@ -132,11 +135,7 @@ extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSourc
         case 1:
             // Lista de Áreas da Vida Padrão
             let lifeAreaTableCell = self.lifeAreasTableView.dequeueReusableCell(withIdentifier: "lifeAreaCell", for: indexPath) as! LifeAreaTableViewCell
-            var lifeArea = lifeAreas[indexPath.row]
-            // Muda conteúdo no caso de easterEgg
-            if easterEggMode {
-                lifeArea = customizedLifeAreas[indexPath.row]
-            }
+            var lifeArea = currentLifeAreasArray[indexPath.row]
             lifeAreaTableCell.loadContents(island: lifeArea)
             return lifeAreaTableCell
         default:
@@ -147,7 +146,7 @@ extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSourc
     // Seleção da célula troca o estado dela entre selecionado/deselecionado
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            lifeAreas[indexPath.row].selected = !lifeAreas[indexPath.row].selected
+            currentLifeAreasArray[indexPath.row].selected = !currentLifeAreasArray[indexPath.row].selected
 
             // Reload é necessário para carregar modificações visuais do novo estado
             lifeAreasTableView.reloadData()
@@ -168,6 +167,7 @@ extension SelectIslandsViewController: CustomAlertViewDelegate {
 
     func dismisButtonAction(alert: CustomAlertViewController) {
         if easterEggMode == true {
+            currentLifeAreasArray = customizedLifeAreas
             lifeAreasTableView.reloadData()
         }
     }

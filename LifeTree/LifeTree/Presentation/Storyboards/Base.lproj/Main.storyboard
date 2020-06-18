@@ -601,6 +601,10 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="MuW-co-EjR">
+                                <rect key="frame" x="16" y="118" width="382" height="2"/>
+                                <color key="tintColor" red="0.99784201380000004" green="0.84350776670000005" blue="0.2900175452" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </progressView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Clh-Kz-790" userLabel="StyleLine">
                                 <rect key="frame" x="138" y="108" width="138" height="3"/>
                                 <color key="backgroundColor" red="0.62865293030000002" green="0.71221178770000004" blue="0.81962937120000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -852,10 +856,13 @@
                             <constraint firstItem="Clh-Kz-790" firstAttribute="width" secondItem="MLX-U9-79p" secondAttribute="width" multiplier="0.8" id="WDV-AS-r7u"/>
                             <constraint firstItem="2jl-GS-PBI" firstAttribute="bottom" secondItem="PJ7-YZ-Lav" secondAttribute="bottom" constant="12" id="bDX-dW-6Hu"/>
                             <constraint firstItem="MLX-U9-79p" firstAttribute="top" secondItem="2jl-GS-PBI" secondAttribute="top" constant="16" id="mJx-tz-8eo"/>
+                            <constraint firstItem="2jl-GS-PBI" firstAttribute="trailing" secondItem="MuW-co-EjR" secondAttribute="trailing" constant="16" id="nzb-0E-vaI"/>
+                            <constraint firstItem="MuW-co-EjR" firstAttribute="leading" secondItem="2jl-GS-PBI" secondAttribute="leading" constant="16" id="pxM-r0-WDY"/>
                             <constraint firstItem="MLX-U9-79p" firstAttribute="centerX" secondItem="2jl-GS-PBI" secondAttribute="centerX" id="sEf-AW-Xse"/>
                             <constraint firstItem="V8b-5F-bIf" firstAttribute="width" secondItem="cx6-qD-uZa" secondAttribute="width" multiplier="0.8" constant="42.799999999999955" id="twT-Ab-BBe"/>
                             <constraint firstItem="J7D-fz-4iD" firstAttribute="top" secondItem="V8b-5F-bIf" secondAttribute="bottom" constant="30" id="u3N-Wt-gvr"/>
                             <constraint firstItem="PJ7-YZ-Lav" firstAttribute="leading" secondItem="2jl-GS-PBI" secondAttribute="leading" constant="17" id="uai-cX-TqL"/>
+                            <constraint firstItem="MuW-co-EjR" firstAttribute="top" secondItem="Clh-Kz-790" secondAttribute="top" constant="10" id="xud-XZ-wp4"/>
                             <constraint firstItem="V8b-5F-bIf" firstAttribute="top" secondItem="Clh-Kz-790" secondAttribute="bottom" constant="16" id="yV0-eM-q3f"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2jl-GS-PBI"/>
@@ -867,6 +874,7 @@
                         <outlet property="lastActivityMessageLabel" destination="V8b-5F-bIf" id="kz5-S5-aOI"/>
                         <outlet property="nameIsland" destination="MLX-U9-79p" id="Zpr-95-AeF"/>
                         <outlet property="progressSeasonPeripheral" destination="Yet-yE-VKL" id="xuf-Vm-s3M"/>
+                        <outlet property="progressView" destination="MuW-co-EjR" id="N4l-g2-EeP"/>
                         <segue destination="1de-Dz-avu" kind="presentation" identifier="NewAction" id="MGx-m6-X9K"/>
                     </connections>
                 </viewController>
