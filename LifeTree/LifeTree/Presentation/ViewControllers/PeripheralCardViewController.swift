@@ -222,7 +222,7 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
             }
             // Células para adicionar uma nova ação
             else {
-                let newActionCell = actionsTableView.dequeueReusableCell(withIdentifier: "createActionCell", for: indexPath) as! CreateActionTableViewCell
+                let newActionCell = actionsTableView.dequeueReusableCell(withIdentifier: "createActionCell", for: indexPath) as! AddNewItemTableViewCell
                 return newActionCell
             }
         default:

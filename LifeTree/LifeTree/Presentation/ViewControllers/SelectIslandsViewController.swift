@@ -23,9 +23,8 @@ struct LifeArea {
 
 class SelectIslandsViewController: UIViewController {
 
-    var easterEggMode: Bool = false
     @IBOutlet weak var lifeAreasTableView: UITableView!
-    var currentLifeAreasArray: [LifeArea] = []
+    // Áreas da vida predefinidas
     var lifeAreas:[LifeArea] = [
         LifeArea(name: "Autocuidado"),
         LifeArea(name: "Família"),
@@ -36,7 +35,6 @@ class SelectIslandsViewController: UIViewController {
         LifeArea(name: "Financeiro"),
         LifeArea(name: "Lazer"),
         LifeArea(name: "Espiritual")]
-    var customizedLifeAreas: [LifeArea] = []
 
     // Manejo dos dados a serem incluídos
     var infoHandler = InformationHandler()
@@ -48,29 +46,15 @@ class SelectIslandsViewController: UIViewController {
         self.lifeAreasTableView.delegate = self
         self.lifeAreasTableView.dataSource = self
         self.lifeAreasTableView.separatorStyle = .none
-
-
-        // Implements easter egg gesture for customizing islands
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handleEasterEggPanGesture(_:)))
-        self.view.addGestureRecognizer(panGesture)
-
-        if easterEggMode {
-            currentLifeAreasArray = customizedLifeAreas
-        } else {
-            currentLifeAreasArray = lifeAreas
-        }
     }
 
-    @objc func handleEasterEggPanGesture(_ gesture: UIPanGestureRecognizer) {
-        if gesture.numberOfTouches == 3 {
-            let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlert") as! CustomAlertViewController
-            customAlert.alertTitle = "Ilhas Customizadas! Você descobriu nosso segredo!"
-            customAlert.alertDescription = "Dê o nome da sua ilha e clique em OK. Você pode repetir esse processo para até 12 ilhas. Para concluir, clique X."
-            customAlert.hasTextField = true
-            customAlert.hasBottomButton = true
-            customAlert.delegate = self
-            CustomAlertServices().presentAsAlert(show: customAlert, over: self)
-        }
+    func createCustomIslandAlert() {
+        let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlert") as! CustomAlertViewController
+        customAlert.alertTitle = "Adicionar área da vida"
+        customAlert.hasTextField = true
+        customAlert.hasBottomButton = true
+        customAlert.delegate = self
+        CustomAlertServices().presentAsAlert(show: customAlert, over: self)
     }
 
 
@@ -81,7 +65,7 @@ class SelectIslandsViewController: UIViewController {
         var numberOfSelectedAreas: Int = 0
 
         // Somente as ilha selecionadas são incluídas no vetor que será persistido
-        for lifeArea in currentLifeAreasArray {
+        for lifeArea in lifeAreas {
             if lifeArea.selected {
                 if lifeArea.name == "Trabalho" {
                     infoHandler.addPeripheralIslandToArray(category: lifeArea.name, name: lifeArea.name, healthStatus: 33)
@@ -115,7 +99,7 @@ extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSourc
         case 0:
             return 1
         case 1:
-            return currentLifeAreasArray.count
+            return lifeAreas.count + 1
         default:
             return 1
         }
@@ -133,11 +117,16 @@ extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSourc
             newFixedContentCell.selectionStyle = .none
             return newFixedContentCell
         case 1:
-            // Lista de Áreas da Vida Padrão
-            let lifeAreaTableCell = self.lifeAreasTableView.dequeueReusableCell(withIdentifier: "lifeAreaCell", for: indexPath) as! LifeAreaTableViewCell
-            var lifeArea = currentLifeAreasArray[indexPath.row]
-            lifeAreaTableCell.loadContents(island: lifeArea)
-            return lifeAreaTableCell
+            if indexPath.row == 0 {
+                // Tratamento da primeira célula-botão de adicionar uma ilha cus
+                let newIslandCell = self.lifeAreasTableView.dequeueReusableCell(withIdentifier: "newIslandCell", for: indexPath) as! AddNewItemTableViewCell
+                return newIslandCell
+            } else {
+                // Lista de Áreas da Vida Padrão
+                let lifeAreaTableCell = self.lifeAreasTableView.dequeueReusableCell(withIdentifier: "lifeAreaCell", for: indexPath) as! LifeAreaTableViewCell
+                var lifeArea = lifeAreas[indexPath.row - 1]
+                lifeAreaTableCell.loadContents(island: lifeArea)
+                return lifeAreaTableCell            }
         default:
             return UITableViewCell()
         }
@@ -146,29 +135,30 @@ extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSourc
     // Seleção da célula troca o estado dela entre selecionado/deselecionado
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            currentLifeAreasArray[indexPath.row].selected = !currentLifeAreasArray[indexPath.row].selected
-
-            // Reload é necessário para carregar modificações visuais do novo estado
-            lifeAreasTableView.reloadData()
+            if indexPath.row == 0 {
+                // Abre um popup para incluir o nome da nova ilha
+                createCustomIslandAlert()
+            } else {
+                // Altera o estado on/off da ilha
+                lifeAreas[indexPath.row - 1].selected = !lifeAreas[indexPath.row - 1].selected
+                lifeAreasTableView.reloadData()
+            }
         }
     }
 }
 
 extension SelectIslandsViewController: CustomAlertViewDelegate {
     func bottomButtonAction(alert: CustomAlertViewController) {
-        easterEggMode = true
         if let islandName = alert.inputTextField.text {
+            // Adiciona nova ilha com o nomem inputado
             let newLifeArea = LifeArea(name: islandName)
-            customizedLifeAreas.append(newLifeArea)
-            print("Ilha \(islandName) adicionada com sucesso. Clique em OK para adicionar mais uma ilha. Clique em X para concluir")
-            alert.inputTextField.text = ""
+            lifeAreas.append(newLifeArea)
+            alert.dismiss(animated: true, completion: nil)
+            lifeAreasTableView.reloadData()
         }
     }
 
     func dismisButtonAction(alert: CustomAlertViewController) {
-        if easterEggMode == true {
-            currentLifeAreasArray = customizedLifeAreas
-            lifeAreasTableView.reloadData()
-        }
+        lifeAreasTableView.reloadData()
     }
 }

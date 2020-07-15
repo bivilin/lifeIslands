@@ -55,7 +55,7 @@
 		B3E10505246997230055E39C /* ActionDAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E10504246997230055E39C /* ActionDAO.swift */; };
 		B3E10507246998B90055E39C /* ActionDataServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E10506246998B90055E39C /* ActionDataServices.swift */; };
 		B3E1050C2469D77B0055E39C /* ActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1050B2469D77B0055E39C /* ActionTableViewCell.swift */; };
-		B3E1051A246DFB2B0055E39C /* CreateActionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E10519246DFB2B0055E39C /* CreateActionTableViewCell.swift */; };
+		B3E1051A246DFB2B0055E39C /* AddNewItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E10519246DFB2B0055E39C /* AddNewItemTableViewCell.swift */; };
 		B3E1051C246F47D20055E39C /* Season.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3E1051B246F47D20055E39C /* Season.swift */; };
 		E29D233E246B8DE200BD34A0 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E29D2338246B8DE200BD34A0 /* Poppins-Thin.ttf */; };
 		E29D233F246B8DE200BD34A0 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E29D2339246B8DE200BD34A0 /* Poppins-Regular.ttf */; };
@@ -125,7 +125,7 @@
 		B3E10504246997230055E39C /* ActionDAO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDAO.swift; sourceTree = "<group>"; };
 		B3E10506246998B90055E39C /* ActionDataServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionDataServices.swift; sourceTree = "<group>"; };
 		B3E1050B2469D77B0055E39C /* ActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionTableViewCell.swift; sourceTree = "<group>"; };
-		B3E10519246DFB2B0055E39C /* CreateActionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateActionTableViewCell.swift; sourceTree = "<group>"; };
+		B3E10519246DFB2B0055E39C /* AddNewItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewItemTableViewCell.swift; sourceTree = "<group>"; };
 		B3E1051B246F47D20055E39C /* Season.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Season.swift; sourceTree = "<group>"; };
 		D1719F49DE69D292E3DFD21C /* Pods-LifeTree.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LifeTree.debug.xcconfig"; path = "Target Support Files/Pods-LifeTree/Pods-LifeTree.debug.xcconfig"; sourceTree = "<group>"; };
 		E29C5F07246456CD002B1D7F /* LifeTree.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LifeTree.entitlements; sourceTree = "<group>"; };
@@ -323,7 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				B3E1050B2469D77B0055E39C /* ActionTableViewCell.swift */,
-				B3E10519246DFB2B0055E39C /* CreateActionTableViewCell.swift */,
+				B3E10519246DFB2B0055E39C /* AddNewItemTableViewCell.swift */,
 				B3AE914E247569EF00D47129 /* FixedContentCell.swift */,
 				8D29DE1E24854E7A00D2423B /* WalkthroughPageView.xib */,
 				B36F827624888AF100F81FD5 /* LifeAreaTableViewCell.swift */,
@@ -555,7 +555,7 @@
 				8D687B382452944900F83BB7 /* PeripheralIsland.swift in Sources */,
 				8D29DE2124854EC200D2423B /* WalkthroughPage.swift in Sources */,
 				B30435202451F093007D6F3C /* SelfIslandDAO.swift in Sources */,
-				B3E1051A246DFB2B0055E39C /* CreateActionTableViewCell.swift in Sources */,
+				B3E1051A246DFB2B0055E39C /* AddNewItemTableViewCell.swift in Sources */,
 				8DC02BF2247585DB00281E2F /* CultivateIslandViewController.swift in Sources */,
 				B36F82752488775500F81FD5 /* SelectIslandsViewController.swift in Sources */,
 				8DC02BFC247FEC3000281E2F /* CustomAlertServices.swift in Sources */,
