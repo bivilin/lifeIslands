@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CreateActionTableViewCell: UITableViewCell {
+class AddNewItemTableViewCell: UITableViewCell {
 
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var contourView: UIView!
