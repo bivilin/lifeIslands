@@ -10,7 +10,8 @@ import Foundation
 import UIKit
 
 protocol CustomAlertViewDelegate {
-    func bottomButtonAction()
+    func bottomButtonAction(alert: CustomAlertViewController)
+    func dismisButtonAction(alert: CustomAlertViewController)
 }
 
 class CustomAlertViewController: UIViewController {
@@ -20,11 +21,13 @@ class CustomAlertViewController: UIViewController {
     @IBOutlet weak var bottomButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
     @IBOutlet weak var alertDetailsView: UIView!
+    @IBOutlet weak var inputTextField: UITextField!
 
     var alertTitle: String = ""
     var alertDescription: String = ""
     var hasBottomButton: Bool = false
     var hasDismissButton: Bool = true
+    var hasTextField: Bool = false
 
     var delegate: CustomAlertViewDelegate?
 
@@ -47,14 +50,16 @@ class CustomAlertViewController: UIViewController {
         // Hide or show bottom buttons
         self.bottomButton.isHidden = !self.hasBottomButton
         self.dismissButton.isHidden = !self.hasDismissButton
+        self.inputTextField.isHidden = !self.hasTextField
     }
 
     @IBAction func bottomButtonAction( sender: Any) {
-        self.delegate?.bottomButtonAction()
+        self.delegate?.bottomButtonAction(alert: self)
     }
 
     @IBAction func dismissButtonAction( sender: Any) {
         self.dismiss(animated: true, completion: nil)
+        self.delegate?.dismisButtonAction(alert: self)
     }
 
 }

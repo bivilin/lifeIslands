@@ -13,6 +13,7 @@ import UICircularProgressRing
 
 class PeripheralCardViewController: UIViewController {
 
+    @IBOutlet weak var progressView: UIProgressView!
     @IBOutlet weak var nameIsland: UILabel!
     @IBOutlet weak var actionsTableView: UITableView!
     @IBOutlet weak var lastActivityMessageLabel: UILabel!
@@ -42,11 +43,22 @@ class PeripheralCardViewController: UIViewController {
         // Colocando a linha do pod em cima do circulo imagem
         progressSeasonPeripheral.style = .ontop
 
+        // Easter Egg
+        progressView.isHidden = true
+        let superTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleEasterEggTapGesture(_:)))
+        superTapGesture.numberOfTapsRequired = 5
+        self.view.addGestureRecognizer(superTapGesture)
 
         // Debug
         print("===== ENTRANDO NA ILHA =====")
         print("Saúde Atual da Ilha: \(String(describing: self.peripheralIsland?.currentHealthStatus))")
         print("Saúde Anterior da Ilha: \(String(describing: self.peripheralIsland?.lastHealthStatus))")
+    }
+
+    @objc func handleEasterEggTapGesture(_ gesture: UIPanGestureRecognizer) {
+        progressView.isHidden = false
+        let healthStatus = (peripheralIsland?.currentHealthStatus as! Float) / 100
+        progressView.setProgress(healthStatus, animated: true)
     }
 
     // Atualiza labels de acordo com dados persistidos
@@ -119,6 +131,11 @@ class PeripheralCardViewController: UIViewController {
             
             var progress: CGFloat = 0
             var indicatorImageName = ""
+
+            // Progress Bar
+            let progressIndex = Float(currentHealth / 100)
+            progressView.setProgress(progressIndex, animated: true)
+            progressView.tintColor = season?.color
 
             // switch para saber em que ponto do circulo o calculo irá cair
             switch season {
@@ -205,7 +222,7 @@ extension PeripheralCardViewController: UITableViewDataSource, UITableViewDelega
             }
             // Células para adicionar uma nova ação
             else {
-                let newActionCell = actionsTableView.dequeueReusableCell(withIdentifier: "createActionCell", for: indexPath) as! CreateActionTableViewCell
+                let newActionCell = actionsTableView.dequeueReusableCell(withIdentifier: "createActionCell", for: indexPath) as! AddNewItemTableViewCell
                 return newActionCell
             }
         default:

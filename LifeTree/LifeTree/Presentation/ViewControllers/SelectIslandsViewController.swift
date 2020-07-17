@@ -22,8 +22,9 @@ struct LifeArea {
 }
 
 class SelectIslandsViewController: UIViewController {
-    
+
     @IBOutlet weak var lifeAreasTableView: UITableView!
+    // Áreas da vida predefinidas
     var lifeAreas:[LifeArea] = [
         LifeArea(name: "Autocuidado"),
         LifeArea(name: "Família"),
@@ -47,6 +48,17 @@ class SelectIslandsViewController: UIViewController {
         self.lifeAreasTableView.separatorStyle = .none
     }
 
+    func createCustomIslandAlert() {
+        let customAlert = self.storyboard?.instantiateViewController(withIdentifier: "CustomAlert") as! CustomAlertViewController
+        customAlert.alertTitle = "Adicionar área da vida"
+        customAlert.hasTextField = true
+        customAlert.hasBottomButton = true
+        customAlert.delegate = self
+        CustomAlertServices().presentAsAlert(show: customAlert, over: self)
+    }
+
+
+
     // Ao clicar no botão, as ilhas selecionadas são criadas no banco
     @IBAction func nextButton(_ sender: Any) {
 
@@ -55,7 +67,12 @@ class SelectIslandsViewController: UIViewController {
         // Somente as ilha selecionadas são incluídas no vetor que será persistido
         for lifeArea in lifeAreas {
             if lifeArea.selected {
-                infoHandler.addPeripheralIslandToArray(category: lifeArea.name, name: lifeArea.name, healthStatus: 50)
+                if lifeArea.name == "Trabalho" {
+                    infoHandler.addPeripheralIslandToArray(category: lifeArea.name, name: lifeArea.name, healthStatus: 33)
+                } else {
+                    infoHandler.addPeripheralIslandToArray(category: lifeArea.name, name: lifeArea.name, healthStatus: 50)
+                }
+
                 numberOfSelectedAreas += 1
             }
         }
@@ -82,7 +99,7 @@ extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSourc
         case 0:
             return 1
         case 1:
-            return lifeAreas.count
+            return lifeAreas.count + 1
         default:
             return 1
         }
@@ -100,11 +117,16 @@ extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSourc
             newFixedContentCell.selectionStyle = .none
             return newFixedContentCell
         case 1:
-            // Lista de Áreas da Vida Padrão
-            let lifeAreaTableCell = self.lifeAreasTableView.dequeueReusableCell(withIdentifier: "lifeAreaCell", for: indexPath) as! LifeAreaTableViewCell
-            let lifeArea = lifeAreas[indexPath.row]
-            lifeAreaTableCell.loadContents(island: lifeArea)
-            return lifeAreaTableCell
+            if indexPath.row == 0 {
+                // Tratamento da primeira célula-botão de adicionar uma ilha cus
+                let newIslandCell = self.lifeAreasTableView.dequeueReusableCell(withIdentifier: "newIslandCell", for: indexPath) as! AddNewItemTableViewCell
+                return newIslandCell
+            } else {
+                // Lista de Áreas da Vida Padrão
+                let lifeAreaTableCell = self.lifeAreasTableView.dequeueReusableCell(withIdentifier: "lifeAreaCell", for: indexPath) as! LifeAreaTableViewCell
+                var lifeArea = lifeAreas[indexPath.row - 1]
+                lifeAreaTableCell.loadContents(island: lifeArea)
+                return lifeAreaTableCell            }
         default:
             return UITableViewCell()
         }
@@ -113,10 +135,30 @@ extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSourc
     // Seleção da célula troca o estado dela entre selecionado/deselecionado
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            lifeAreas[indexPath.row].selected = !lifeAreas[indexPath.row].selected
+            if indexPath.row == 0 {
+                // Abre um popup para incluir o nome da nova ilha
+                createCustomIslandAlert()
+            } else {
+                // Altera o estado on/off da ilha
+                lifeAreas[indexPath.row - 1].selected = !lifeAreas[indexPath.row - 1].selected
+                lifeAreasTableView.reloadData()
+            }
+        }
+    }
+}
 
-            // Reload é necessário para carregar modificações visuais do novo estado
+extension SelectIslandsViewController: CustomAlertViewDelegate {
+    func bottomButtonAction(alert: CustomAlertViewController) {
+        if let islandName = alert.inputTextField.text {
+            // Adiciona nova ilha com o nomem inputado
+            let newLifeArea = LifeArea(name: islandName)
+            lifeAreas.append(newLifeArea)
+            alert.dismiss(animated: true, completion: nil)
             lifeAreasTableView.reloadData()
         }
+    }
+
+    func dismisButtonAction(alert: CustomAlertViewController) {
+        lifeAreasTableView.reloadData()
     }
 }
