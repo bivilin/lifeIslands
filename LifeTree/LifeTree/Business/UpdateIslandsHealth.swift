@@ -10,8 +10,8 @@ import Foundation
 
 class UpdateIslandsHealth {
     
-    let dropToHealthConversionFactor: Double = 0.5
-    let inactiveTimeToHealthDropConversionFactor: Double = 0.3
+    let dropToHealthConversionFactor: Double = 4
+    let inactiveTimeToHealthDropConversionFactor: Double = 1
 
     static func getSeason(currentHealth: Double, lastHealth: Double) -> Season? {
 
