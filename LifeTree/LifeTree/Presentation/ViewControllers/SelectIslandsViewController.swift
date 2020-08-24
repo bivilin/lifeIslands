@@ -124,7 +124,7 @@ extension SelectIslandsViewController: UITableViewDelegate, UITableViewDataSourc
             } else {
                 // Lista de Áreas da Vida Padrão
                 let lifeAreaTableCell = self.lifeAreasTableView.dequeueReusableCell(withIdentifier: "lifeAreaCell", for: indexPath) as! LifeAreaTableViewCell
-                var lifeArea = lifeAreas[indexPath.row - 1]
+                let lifeArea = lifeAreas[indexPath.row - 1]
                 lifeAreaTableCell.loadContents(island: lifeArea)
                 return lifeAreaTableCell            }
         default:
