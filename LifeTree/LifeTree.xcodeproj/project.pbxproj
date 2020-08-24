@@ -99,7 +99,7 @@
 		8DFCE20B24744C820001AB3F /* ActionCustomAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCustomAlertViewController.swift; sourceTree = "<group>"; };
 		9B5135F91C6AFCA69DC0C8BC /* Pods_LifeTree.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LifeTree.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B302B5B82460841F00CB5D99 /* InformationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationHandler.swift; sourceTree = "<group>"; };
-		B30434E62451EE7E007D6F3C /* Lifetree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lifetree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B30434E62451EE7E007D6F3C /* GardeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GardeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30434E92451EE7E007D6F3C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B30434EB2451EE7E007D6F3C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B30434F02451EE7E007D6F3C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -229,7 +229,7 @@
 		B30434E72451EE7E007D6F3C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B30434E62451EE7E007D6F3C /* Lifetree.app */,
+				B30434E62451EE7E007D6F3C /* GardeMe.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -403,7 +403,7 @@
 			);
 			name = LifeTree;
 			productName = LifeTree;
-			productReference = B30434E62451EE7E007D6F3C /* Lifetree.app */;
+			productReference = B30434E62451EE7E007D6F3C /* GardeMe.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -707,7 +707,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 76DX35F6T7;
+				DEVELOPMENT_TEAM = 54KAL6GMBX;
 				INFOPLIST_FILE = LifeTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -716,7 +716,7 @@
 				);
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = bivilin.LifeTree;
-				PRODUCT_NAME = Lifetree;
+				PRODUCT_NAME = GardeMe;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -732,7 +732,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 76DX35F6T7;
+				DEVELOPMENT_TEAM = 54KAL6GMBX;
 				INFOPLIST_FILE = LifeTree/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -741,7 +741,7 @@
 				);
 				MARKETING_VERSION = 2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = bivilin.LifeTree;
-				PRODUCT_NAME = Lifetree;
+				PRODUCT_NAME = GardeMe;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
