@@ -68,8 +68,18 @@ class PeripheralCardViewController: UIViewController {
         nameIsland.text = peripheralIsland?.name
 
         // Texto com último dia de entrada
-        let relativeDate = DateServices().getTimeSinceLastEntry(lastDate: peripheralIsland?.lastActionDate ?? Date())
-        self.lastActivityMessageLabel.text = "Sua última atividade aqui foi \(relativeDate)."
+        
+        // NÃO ESTÁ FUNCIONANDO - SEMPRE QUE FECHA E ABRE O APP APARECE QUE FAZ 0MIN DESDE A ÚLTIMA AÇÃO
+        // Com o app aberto, o app faz a contagem normal de tempo
+        // Ex: entrei no app - todas as ilhas aparecem com 0min desde a última ação feita (mesmo que vc já tenha feito ações lá antes, e depois fechado o app)
+        //     - passaram 2min - fiz uma ação em Autocuidado - passaram mais 2 min - Autocuidado com último registro faz 2min, e as demais ilhas de 4min
+        
+        // Código antigo:
+        // let relativeDate = DateServices().getTimeSinceLastEntry(lastDate: peripheralIsland?.lastActionDate ?? Date())
+        // self.lastActivityMessageLabel.text = "Sua última atividade aqui foi \(relativeDate)."
+        
+        // Temporário: até consertar a questão do tempo
+        self.lastActivityMessageLabel.text = ""
     }
 
     // MARK: Info Handling
