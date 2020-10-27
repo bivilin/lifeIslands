@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19H2" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
     <entity name="Action" representedClassName=".Action" syncable="YES">
         <attribute name="actionId" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="impactLevel" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="impactReason" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="has_peripheralIsland" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PeripheralIsland"/>
+        <relationship name="has_peripheralIsland" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PeripheralIsland" inverseName="has_action" inverseEntity="PeripheralIsland"/>
     </entity>
     <entity name="PeripheralIsland" representedClassName=".PeripheralIsland" syncable="YES">
         <attribute name="category" optional="YES" attributeType="String"/>
@@ -14,6 +14,7 @@
         <attribute name="lastActionDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="lastHealthStatus" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="has_action" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Action" inverseName="has_peripheralIsland" inverseEntity="Action"/>
     </entity>
     <entity name="SelfIsland" representedClassName=".SelfIsland" syncable="YES">
         <attribute name="currentHealthStatus" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -23,7 +24,7 @@
     </entity>
     <elements>
         <element name="Action" positionX="-18" positionY="81" width="128" height="118"/>
-        <element name="PeripheralIsland" positionX="0" positionY="72" width="128" height="133"/>
+        <element name="PeripheralIsland" positionX="0" positionY="72" width="128" height="148"/>
         <element name="SelfIsland" positionX="-36" positionY="9" width="128" height="103"/>
     </elements>
 </model>

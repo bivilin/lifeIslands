@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
         */
-        let container = NSPersistentContainer(name: "LifeTree")
+        let container = NSPersistentCloudKitContainer(name: "LifeTree")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -70,6 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func saveContext () {
         let context = persistentContainer.viewContext
+        // referente ao tutorial: https://medium.com/apple-developer-academy-federico-ii/syncing-data-on-ios-devices-with-coredata-and-cloudkit-bed296fc26e0
+        // context.automaticallyMergesChangesFromParent = true
         if context.hasChanges {
             do {
                 try context.save()

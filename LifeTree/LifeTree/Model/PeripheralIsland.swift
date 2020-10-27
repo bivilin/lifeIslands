@@ -16,6 +16,7 @@ class PeripheralIsland: NSManagedObject {
     @NSManaged public var currentHealthStatus: NSNumber?
     @NSManaged public var lastHealthStatus: NSNumber?
     @NSManaged public var lastActionDate: Date?
+    @NSManaged public var has_action: Action?
 
     convenience init() {
         // get context
