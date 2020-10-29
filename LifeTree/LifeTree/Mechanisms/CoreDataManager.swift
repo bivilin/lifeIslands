@@ -27,6 +27,20 @@ class CoreDataManager {
          error conditions that could cause the creation of the store to fail.
          */
         let container = NSPersistentCloudKitContainer(name: "LifeTree")
+
+        guard let description = container.persistentStoreDescriptions.first else {
+            fatalError("###\(#function): Failed to retrieve a persistent store description.")
+        }
+
+        description.setOption(true as NSNumber, forKey: NSPersistentHistoryTrackingKey)
+        description.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+        if #available(iOS 14.0, *) {
+            description.cloudKitContainerOptions?.databaseScope = .public
+        } else {
+            // Fallback on earlier versions
+            print("You need to update your iOS version to save to the public database.")
+        }
+
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
